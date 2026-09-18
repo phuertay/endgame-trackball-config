@@ -1,0 +1,4 @@
+{
+  "name": "endgame-trackball-config",
+  "install": "bash .cursor/install.sh"
+}
