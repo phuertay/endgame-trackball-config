@@ -1,0 +1,34 @@
+/*
+ * Custom behavior for the scroll-layer button.
+ *
+ * `cdcl` ("click / double-click / hold") replaces the stock `cdch` on the
+ * default layer. It keeps the original hold-to-scroll and single-click-copy,
+ * but turns a *double-click* into a lock (toggle) of the scroll layer:
+ *
+ *   hold          -> momentary scroll layer   (&mo, param 1 = the layer)
+ *   single click  -> OS-aware copy            (&bst_copy)
+ *   double click  -> lock/unlock scroll layer (&tog LAYER_SCROLL)
+ *
+ * `LAYER_SCROLL` must be defined (in the keymap) before this file is included.
+ */
+
+/ {
+	behaviors {
+		cdcl: click-double-click-lock {
+			compatible = "zmk,behavior-hold-tap";
+			display-name = "Copy / lock-scroll / scroll (click/double-click/hold)";
+			#binding-cells = <2>;
+			flavor = "balanced";
+			tapping-term-ms = <250>;
+			bindings = <&mo>, <&cdl>;
+		};
+
+		cdl: copy-double-lock {
+			compatible = "zmk,behavior-tap-dance";
+			display-name = "Copy / lock scroll (click/double-click)";
+			#binding-cells = <0>;
+			tapping-term-ms = <250>;
+			bindings = <&bst_copy>, <&tog LAYER_SCROLL>;
+		};
+	};
+};

@@ -1,0 +1,39 @@
+/*
+ * OS-dependent copy/paste key overrides for custom Windows keyboard layouts.
+ *
+ * These layouts remap the letter positions, so the usual Ctrl+C / Ctrl+V
+ * (which ZMK sends from the physical QWERTY C / V positions) no longer land on
+ * the "C" / "V" virtual keys. To keep copy/paste working we instead press the
+ * physical key that produces the C / V *character* under each layout.
+ *
+ * The mapping below is derived from each layout's `scancode_to_vk` table:
+ * we find the PC Set-1 scancode that maps to VK 'C' / VK 'V', then translate
+ * that scancode back to the US-QWERTY physical key (= the ZMK keycode).
+ *
+ * Windows/Linux -> "Terminator" layout (kbdterm):
+ *   VK 'C' is at scancode 0x2F  -> physical US-QWERTY  V   (ZMK: V)
+ *   VK 'V' is at scancode 0x35  -> physical US-QWERTY  /   (ZMK: FSLH)
+ *
+ * macOS -> "Neu" layout (kbdneu):
+ *   VK 'C' is at scancode 0x2D  -> physical US-QWERTY  X   (ZMK: X)
+ *   VK 'V' is at scancode 0x35  -> physical US-QWERTY  /   (ZMK: FSLH)
+ *
+ * These amend the macro nodes declared in the board's behaviors_macros.dtsi,
+ * which the bistable `bst_copy` / `bst_paste` behaviors dispatch to.
+ */
+
+&winlin_copy {
+	bindings = <&kp LC(V)>;
+};
+
+&winlin_paste {
+	bindings = <&kp LC(FSLH)>;
+};
+
+&macos_copy {
+	bindings = <&kp LG(X)>;
+};
+
+&macos_paste {
+	bindings = <&kp LG(FSLH)>;
+};
