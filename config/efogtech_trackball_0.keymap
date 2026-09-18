@@ -16,6 +16,11 @@
 #define LAYER_USER         5
 #endif
 
+// Clipboard keys (copy/paste/cut/undo) remapped for the Terminator and Neu layouts.
+#include "clipboard_layouts.dtsi"
+// `ltlk`: Escape button that locks the scroll layer on double-tap (needs LAYER_SCROLL above).
+#include "scroll_lock.dtsi"
+
 / {
 	keymap {
 		compatible = "zmk,keymap";
@@ -25,7 +30,7 @@
 			DECLARE_ENCODERS;
 			bindings = <
 			    // buttons
-			    &ltmkp LAYER_SNIPE ENTER  &ltmkp LAYER_SCROLL ESC
+			    &ltmkp LAYER_SNIPE ENTER  &ltlk LAYER_SCROLL 0
 			    &mkp MCLK                 &cdch LAYER_SCROLL 0
 			    &mkp LCLK                 &mkp RCLK
 			    &ltm LAYER_EXTRAS MB4     &ltm LAYER_DEVICE MB5

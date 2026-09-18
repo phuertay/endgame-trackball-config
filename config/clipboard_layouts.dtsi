@@ -1,0 +1,74 @@
+/*
+ * Layout-aware clipboard/edit keys for two custom Windows keyboard layouts.
+ *
+ * The board ships these as "OS-dependent" (Windows/Linux vs macOS) bistable
+ * behaviors, but in practice both slots use the same Ctrl modifier and only the
+ * physical key positions differ -- because they target two different keyboard
+ * *layouts* used on different physical keyboards, not two operating systems.
+ * `bst_tog` (ZBS_TOG) flips between them.
+ *
+ *   slot 0  (label winlin_*) -> "Terminator" layout (kbdterm)
+ *   slot 1  (label macos_*)  -> "Neu" layout (kbdneu)
+ *
+ * These layouts remap the letters, so plain Ctrl+C/V/X/Z (which ZMK sends from
+ * the physical QWERTY positions) miss the C/V/X/Z virtual keys. We instead press
+ * the physical key that produces the target character under each layout. The
+ * mapping is read off each layout's `scancode_to_vk` table, then the PC Set-1
+ * scancode is translated back to its US-QWERTY physical key (= the ZMK keycode):
+ *
+ *   Terminator (slot 0):  C@0x2F->V   V@0x35->/   X@0x2C->Z   Z@0x2D->X
+ *   Neu        (slot 1):  C@0x2D->X   V@0x35->/   X@0x2C->Z   Z@0x19->P
+ *
+ * We amend the macro nodes declared in the board's behaviors_macros.dtsi (which
+ * the bst_copy/paste/cut/undo behaviors dispatch to) and relabel their
+ * display-names from "OS" wording to the actual layout names.
+ */
+
+/* --- slot 0: Terminator layout (Ctrl modifier) --- */
+&winlin_copy {
+	display-name = "Copy (Terminator)";
+	bindings = <&kp LC(V)>;
+};
+
+&winlin_paste {
+	display-name = "Paste (Terminator)";
+	bindings = <&kp LC(FSLH)>;
+};
+
+&winlin_cut {
+	display-name = "Cut (Terminator)";
+	bindings = <&kp LC(Z)>;
+};
+
+&winlin_undo {
+	display-name = "Undo (Terminator)";
+	bindings = <&kp LC(X)>;
+};
+
+/* --- slot 1: Neu layout (Ctrl modifier) --- */
+&macos_copy {
+	display-name = "Copy (Neu)";
+	bindings = <&kp LC(X)>;
+};
+
+&macos_paste {
+	display-name = "Paste (Neu)";
+	bindings = <&kp LC(FSLH)>;
+};
+
+&macos_cut {
+	display-name = "Cut (Neu)";
+	bindings = <&kp LC(Z)>;
+};
+
+&macos_undo {
+	display-name = "Undo (Neu)";
+	bindings = <&kp LC(P)>;
+};
+
+/* --- selector display-names: it's a layout switch, not an OS switch --- */
+&bst_copy  { display-name = "Copy (layout)"; };
+&bst_paste { display-name = "Paste (layout)"; };
+&bst_cut   { display-name = "Cut (layout)"; };
+&bst_undo  { display-name = "Undo (layout)"; };
+&bst_tog   { display-name = "Toggle layout (Term/Neu)"; };
