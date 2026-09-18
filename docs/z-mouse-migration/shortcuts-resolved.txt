@@ -1,0 +1,125 @@
+Term checks: HID A-> ('R', True)   V-> ('C', True)   X-> ('Z', True)   /-> ('V', True)   P-> (':', True)
+Neu checks: HID A-> ('R', True)   V-> ('D', True)   X-> ('C', True)   /-> ('V', True)   P-> ('Z', True)
+
+############ Term  (layout: kbdterm) ############
+BUTTON          | RESOLVED OUTPUT           | MEANING
+------------------------------------------------------------------------------
+L-trigger push  | Alt+Tab                   | Switch window
+Tilt left       | Shift+Tab                 | Back-tab
+Tilt right      | Tab                       | Tab
+R-trigger push  | Ctrl+Tab                  | Next tab
+Fingertip L     | (release) Ctrl+Insert     | Copy
+Fingertip R     | Enter                     | Enter
+Right click     | MouseM                    | 
+Middle click    | Space                     | Space
+Left click      | MouseL , Shift(hold)      | 
+Right click     | MouseR                    | 
+Fingertip R     | (release) Shift+Insert    | Paste
+Fingertip L     | Esc                       | Escape
+Left click      | Bksp                      | Backspace
+L-trigger push  | Del                       | Delete
+Right click     | (release) PrtSc           | 
+Edge Front      | Shift+Alt+7               | 
+Fingertip R     | Shift+1                   | 
+Fingertip R     | Shift+Alt+5               | 
+Left click      | Ctrl+Alt + V V E Enter    | 
+Right click     | Ctrl+R                    | Reload
+Scroll down     | Media:Vol-                | 
+Scroll up       | Media:Vol+                | 
+Thumb Bottom    | Alt+Right                 | Fwd (browser)
+Thumb Top       | Ctrl+Shift+T              | 
+Middle click    | Media:Mute                | 
+Left click      | Ctrl+Shift+9              | 
+R-trigger push  | Media:Next                | 
+L-trigger push  | Media:Prev                | 
+Fingertip R     | Ctrl + D V Enter          | 
+Tilt right      | Ctrl+PgDn                 | Next tab
+Tilt left       | Ctrl+PgUp                 | Prev tab
+Edge Rear       | Media:Play/Pause          | 
+Fingertip R     | Gui+F13                   | 
+Fingertip L     | Shift + 6 Down Enter      | 
+Thumb Bottom    | Ctrl+:                    | 
+Scroll down     | Scroll-down , Ctrl(hold)  | 
+Middle click    | Ctrl + 0 1                | 
+Edge Front      | Ctrl+Alt + V V E Enter    | 
+Scroll up       | Scroll-up , Ctrl(hold)    | 
+Right click     | Tab                       | Tab
+L-trigger pull  | Ctrl+X                    | Cut
+Thumb Top       | →Term                     | 
+Ball press      | →Side T                   | 
+Right click     | Ctrl+Z                    | Undo
+Fingertip R     | Ctrl+Alt + V F Enter      | 
+Fingertip R     | Shift+Alt+1               | 
+R-trigger push  | F2                        | Rename
+
+############ Ergo  (layout: kbdneu/Neu) ############
+BUTTON          | RESOLVED OUTPUT           | MEANING
+------------------------------------------------------------------------------
+L-trigger push  | Alt+Tab                   | Switch window
+Tilt left       | Shift+Tab                 | Back-tab
+Tilt right      | Tab                       | Tab
+R-trigger push  | Ctrl+Tab                  | Next tab
+Fingertip L     | (release) Ctrl+Insert     | Copy
+Fingertip R     | Enter                     | Enter
+Right click     | MouseM                    | 
+Middle click    | Space                     | Space
+Left click      | MouseL , Shift(hold)      | 
+Right click     | MouseR                    | 
+Fingertip R     | (release) Shift+Insert    | Paste
+Fingertip L     | Esc                       | Escape
+Left click      | Bksp                      | Backspace
+L-trigger push  | Del                       | Delete
+Right click     | (release) PrtSc           | 
+Edge Front      | Shift+Alt+7               | 
+Fingertip R     | Alt+1                     | 
+Fingertip R     | Shift+Alt+5               | 
+Right click     | Ctrl+R                    | Reload
+Scroll down     | Media:Vol-                | 
+Scroll up       | Media:Vol+                | 
+Thumb Bottom    | Alt+Right                 | Fwd (browser)
+Thumb Top       | Ctrl+Shift+T              | 
+Middle click    | Media:Mute                | 
+Left click      | Ctrl+Shift+9              | 
+R-trigger push  | Media:Next                | 
+L-trigger push  | Media:Prev                | 
+Fingertip R     | Ctrl + T V Enter          | 
+Tilt right      | Ctrl+PgDn                 | Next tab
+Tilt left       | Ctrl+PgUp                 | Prev tab
+Edge Rear       | Media:Play/Pause          | 
+Fingertip R     | Gui+F13                   | 
+Fingertip L     | Alt + 6 Down Enter        | 
+Thumb Bottom    | Ctrl+Z                    | Undo
+Scroll down     | Scroll-down , Ctrl(hold)  | 
+Middle click    | Ctrl + 0 1                | 
+Edge Front      | Ctrl+Alt + V V E Enter    | 
+Scroll up       | Scroll-up , Ctrl(hold)    | 
+Right click     | Tab                       | Tab
+L-trigger pull  | Ctrl+X                    | Cut
+Thumb Top       | →Ergo                     | 
+Ball press      | →Side E                   | 
+Right click     | Ctrl+Z                    | Undo
+Fingertip R     | Ctrl+Alt + V F Enter      | 
+Fingertip R     | Shift+Alt+1               | 
+R-trigger push  | F2                        | Rename
+
+
+================ UNIFIED (resolved) : Term vs Neu ================
+BUTTON          | Term (kbdterm)              | Neu (kbdneu)                | SAME?
+-----------------------------------------------------------------------------------------------
+Left click      | MouseL , Shift(hold) ; Bksp ; Ctrl+Alt + V V E Enter ; Ctrl+Shift+9| MouseL , Shift(hold) ; Bksp ; Ctrl+Shift+9| NO
+Right click     | MouseM ; MouseR ; (rel) PrtSc ; Ctrl+R ; Tab ; Ctrl+Z| MouseM ; MouseR ; (rel) PrtSc ; Ctrl+R ; Tab ; Ctrl+Z| yes
+Middle click    | Space ; Media:Mute ; Ctrl + 0 1| Space ; Media:Mute ; Ctrl + 0 1| yes
+L-trigger push  | Alt+Tab ; Del ; Media:Prev  | Alt+Tab ; Del ; Media:Prev  | yes
+L-trigger pull  | Ctrl+X                      | Ctrl+X                      | yes
+R-trigger push  | Ctrl+Tab ; Media:Next ; F2  | Ctrl+Tab ; Media:Next ; F2  | yes
+Fingertip L     | (rel) Ctrl+Insert ; Esc ; Shift + 6 Down Enter| (rel) Ctrl+Insert ; Esc ; Alt + 6 Down Enter| NO
+Fingertip R     | Enter ; (rel) Shift+Insert ; Shift+1 ; Shift+Alt+5 ; Ctrl + D V Enter ; Gui+F13 ; Ctrl+Alt + V F Enter ; Shift+Alt+1| Enter ; (rel) Shift+Insert ; Alt+1 ; Shift+Alt+5 ; Ctrl + T V Enter ; Gui+F13 ; Ctrl+Alt + V F Enter ; Shift+Alt+1| NO
+Thumb Top       | Ctrl+Shift+T ; →Term        | Ctrl+Shift+T ; →Ergo        | NO
+Thumb Bottom    | Alt+Right ; Ctrl+:          | Alt+Right ; Ctrl+Z          | NO
+Edge Front      | Shift+Alt+7 ; Ctrl+Alt + V V E Enter| Shift+Alt+7 ; Ctrl+Alt + V V E Enter| yes
+Edge Rear       | Media:Play/Pause            | Media:Play/Pause            | yes
+Tilt left       | Shift+Tab ; Ctrl+PgUp       | Shift+Tab ; Ctrl+PgUp       | yes
+Tilt right      | Tab ; Ctrl+PgDn             | Tab ; Ctrl+PgDn             | yes
+Scroll up       | Media:Vol+ ; Scroll-up , Ctrl(hold)| Media:Vol+ ; Scroll-up , Ctrl(hold)| yes
+Scroll down     | Media:Vol- ; Scroll-down , Ctrl(hold)| Media:Vol- ; Scroll-down , Ctrl(hold)| yes
+Ball press      | →Side T                     | →Side E                     | NO
