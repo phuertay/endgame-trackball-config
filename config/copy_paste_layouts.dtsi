@@ -17,7 +17,8 @@
  *   VK 'X' @ scancode 0x2C -> physical US-QWERTY  Z  (ZMK: Z)
  *   VK 'Z' @ scancode 0x2D -> physical US-QWERTY  X  (ZMK: X)
  *
- * macOS -> "Neu" layout (kbdneu):
+ * macOS slot -> "Neu" layout (kbdneu). Note: uses the Ctrl (LC) modifier too,
+ * per request -- no Cmd/GUI -- only the physical key positions differ:
  *   VK 'C' @ scancode 0x2D -> physical US-QWERTY  X  (ZMK: X)
  *   VK 'V' @ scancode 0x35 -> physical US-QWERTY  /  (ZMK: FSLH)
  *   VK 'X' @ scancode 0x2C -> physical US-QWERTY  Z  (ZMK: Z)
@@ -44,17 +45,17 @@
 };
 
 &macos_copy {
-	bindings = <&kp LG(X)>;
+	bindings = <&kp LC(X)>;
 };
 
 &macos_paste {
-	bindings = <&kp LG(FSLH)>;
+	bindings = <&kp LC(FSLH)>;
 };
 
 &macos_cut {
-	bindings = <&kp LG(Z)>;
+	bindings = <&kp LC(Z)>;
 };
 
 &macos_undo {
-	bindings = <&kp LG(P)>;
+	bindings = <&kp LC(P)>;
 };
