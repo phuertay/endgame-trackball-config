@@ -18,7 +18,7 @@
 
 // Copy/paste keys remapped for the custom Terminator (win/linux) and Neu (mac) layouts.
 #include "copy_paste_layouts.dtsi"
-// `cdcl`: scroll button that locks the scroll layer on double-click (needs LAYER_SCROLL above).
+// `ltlk`: Escape button that locks the scroll layer on double-tap (needs LAYER_SCROLL above).
 #include "scroll_lock.dtsi"
 
 / {
@@ -30,8 +30,8 @@
 			DECLARE_ENCODERS;
 			bindings = <
 			    // buttons
-			    &ltmkp LAYER_SNIPE ENTER  &ltmkp LAYER_SCROLL ESC
-			    &mkp MCLK                 &cdcl LAYER_SCROLL 0
+			    &ltmkp LAYER_SNIPE ENTER  &ltlk LAYER_SCROLL 0
+			    &mkp MCLK                 &cdch LAYER_SCROLL 0
 			    &mkp LCLK                 &mkp RCLK
 			    &ltm LAYER_EXTRAS MB4     &ltm LAYER_DEVICE MB5
 

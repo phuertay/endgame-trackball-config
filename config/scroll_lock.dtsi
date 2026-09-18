@@ -1,34 +1,35 @@
 /*
- * Custom behavior for the scroll-layer button.
+ * Custom behavior for the Escape / scroll-layer button.
  *
- * `cdcl` ("click / double-click / hold") replaces the stock `cdch` on the
- * default layer. It keeps the original hold-to-scroll and single-click-copy,
- * but turns a *double-click* into a lock (toggle) of the scroll layer:
+ * `ltlk` ("layer-tap-lock") replaces the stock `&ltmkp LAYER_SCROLL ESC` on the
+ * default layer. It keeps the original hold-to-scroll and tap-for-Escape, and
+ * adds a *double-tap* that locks (toggles) the scroll layer:
  *
  *   hold          -> momentary scroll layer   (&mo, param 1 = the layer)
- *   single click  -> OS-aware copy            (&bst_copy)
- *   double click  -> lock/unlock scroll layer (&tog LAYER_SCROLL)
+ *   single tap    -> Escape                    (&kp ESC)
+ *   double tap    -> lock/unlock scroll layer  (&tog LAYER_SCROLL)
  *
  * `LAYER_SCROLL` must be defined (in the keymap) before this file is included.
  */
 
 / {
 	behaviors {
-		cdcl: click-double-click-lock {
-			compatible = "zmk,behavior-hold-tap";
-			display-name = "Copy / lock-scroll / scroll (click/double-click/hold)";
-			#binding-cells = <2>;
-			flavor = "balanced";
-			tapping-term-ms = <250>;
-			bindings = <&mo>, <&cdl>;
-		};
-
-		cdl: copy-double-lock {
+		esc_lock: escape-lock {
 			compatible = "zmk,behavior-tap-dance";
-			display-name = "Copy / lock scroll (click/double-click)";
+			display-name = "Escape / lock scroll (tap/double-tap)";
 			#binding-cells = <0>;
 			tapping-term-ms = <250>;
-			bindings = <&bst_copy>, <&tog LAYER_SCROLL>;
+			bindings = <&kp ESC>, <&tog LAYER_SCROLL>;
+		};
+
+		ltlk: layer-tap-lock {
+			compatible = "zmk,behavior-hold-tap";
+			display-name = "Escape / lock-scroll / scroll (tap/double-tap/hold)";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <200>;
+			hold-while-undecided;
+			bindings = <&mo>, <&esc_lock>;
 		};
 	};
 };
