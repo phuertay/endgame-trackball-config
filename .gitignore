@@ -7,3 +7,5 @@ zmk-pmw3610-driver
 .vscode
 zmk-input-processor-mixer
 zmk-pointer-2s-mixer
+
+firmware.uf2
