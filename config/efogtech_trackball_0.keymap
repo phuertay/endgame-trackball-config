@@ -16,8 +16,8 @@
 #define LAYER_USER         5
 #endif
 
-// Copy/paste keys remapped for the custom Terminator (win/linux) and Neu (mac) layouts.
-#include "copy_paste_layouts.dtsi"
+// Clipboard keys (copy/paste/cut/undo) remapped for the Terminator and Neu layouts.
+#include "clipboard_layouts.dtsi"
 // `ltlk`: Escape button that locks the scroll layer on double-tap (needs LAYER_SCROLL above).
 #include "scroll_lock.dtsi"
 
