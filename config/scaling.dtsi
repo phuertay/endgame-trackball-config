@@ -1,0 +1,35 @@
+/*
+ * "Advanced scaling" (bistable per-slot scaler) defaults.
+ *
+ * Force both bistable slots (both "OS"/layout slots, toggled by bst_tog) to use
+ * the same divisor, so the pointer/scroll scaling no longer differs between the
+ * two slots:
+ *   snipe pointer      -> 1/4   (0.25x)
+ *   twist (wheel)      -> 1/10  (0.1x)
+ *   dragscroll (x/y)   -> 3/4   (0.75x)
+ *
+ * The board sets slot 1 differently (twist 1/40, dragscroll 1/30); these
+ * overrides make slot 1 match slot 0.
+ *
+ * NOTE: these scalers use ZBS_RUNTIME slots, so this only changes the *default*
+ * that gets registered when there's no stored value. A value already saved on
+ * the device (runtime-config / ZMK Studio) takes precedence until settings are
+ * reset (Restore Stock Settings).
+ */
+
+#include <dt-bindings/zmk/bistable_behavior.h>
+
+&zip_bistable_snipe_scaler {
+	default-coef-slot0 = <ZBS_SCALE(1, 4)>;
+	default-coef-slot1 = <ZBS_SCALE(1, 4)>;
+};
+
+&zip_bistable_twist_scaler {
+	default-coef-slot0 = <ZBS_SCALE(1, 10)>;
+	default-coef-slot1 = <ZBS_SCALE(1, 10)>;
+};
+
+&zip_bistable_scroll_xy_scaler {
+	default-coef-slot0 = <ZBS_SCALE(3, 4)>;
+	default-coef-slot1 = <ZBS_SCALE(3, 4)>;
+};
