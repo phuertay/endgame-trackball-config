@@ -20,6 +20,8 @@
 #include "clipboard_layouts.dtsi"
 // `ltlk`: Escape button that locks the scroll layer on double-tap (needs LAYER_SCROLL above).
 #include "scroll_lock.dtsi"
+// `at`: left-encoder Alt-Tab app switcher (default layer only).
+#include "alt_tab.dtsi"
 
 / {
 	keymap {
@@ -35,9 +37,9 @@
 			    &mkp LCLK                 &mkp RCLK
 			    &ltm LAYER_EXTRAS MB4     &ltm LAYER_DEVICE MB5
 
-			    // rotary encoders
-			    &kp C_VOL_UP              &kp RC(TAB)
-			    &kp C_VOL_DN              &kp RC(LS(TAB))
+			    // rotary encoders (left = Alt-Tab app switch, right = tab switch)
+			    &at TAB                   &kp RC(TAB)
+			    &at LS(TAB)               &kp RC(LS(TAB))
 		    >;
 		};
 

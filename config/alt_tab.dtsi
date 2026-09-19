@@ -1,0 +1,25 @@
+/*
+ * Alt-tab "swapper" for the left encoder (default layer only).
+ *
+ * `&at TAB`      -> Alt+Tab       (next app)
+ * `&at LS(TAB)`  -> Alt+Shift+Tab (previous app)
+ *
+ * Holds Left Alt while you keep spinning the wheel and releases it after
+ * `release-after-ms` of no ticks, so the OS app switcher stays open and cycles,
+ * then commits. Behavior implemented in
+ * boards/arm/efogtech_trackball_0/behavior_alt_tab.c.
+ */
+
+#include <dt-bindings/zmk/keys.h>
+
+/ {
+	behaviors {
+		at: alt_tab {
+			compatible = "zmk,behavior-alt-tab";
+			display-name = "Alt-Tab (app switch)";
+			#binding-cells = <1>;
+			hold-key = <LEFT_ALT>;
+			release-after-ms = <500>;
+		};
+	};
+};
