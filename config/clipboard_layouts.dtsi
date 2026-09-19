@@ -2,10 +2,13 @@
  * Layout-aware clipboard/edit keys for two custom Windows keyboard layouts.
  *
  * The board ships these as "OS-dependent" (Windows/Linux vs macOS) bistable
- * behaviors, but in practice both slots use the same Ctrl modifier and only the
+ * behaviors, but in practice both slots use the same modifier and only the
  * physical key positions differ -- because they target two different keyboard
  * *layouts* used on different physical keyboards, not two operating systems.
  * `bst_tog` (ZBS_TOG) flips between them.
+ *
+ * Modifier: RIGHT Ctrl (RC). The Neu layout remaps LEFT Ctrl, so LC(...) does
+ * not produce a clean Ctrl chord there; Right Ctrl is untouched in both layouts.
  *
  *   slot 0  (label winlin_*) -> "Terminator" layout (kbdterm)
  *   slot 1  (label macos_*)  -> "Neu" layout (kbdneu)
@@ -24,46 +27,46 @@
  * display-names from "OS" wording to the actual layout names.
  */
 
-/* --- slot 0: Terminator layout (Ctrl modifier) --- */
+/* --- slot 0: Terminator layout (Right Ctrl modifier) --- */
 &winlin_copy {
 	display-name = "Copy (Terminator)";
-	bindings = <&kp LC(V)>;
+	bindings = <&kp RC(V)>;
 };
 
 &winlin_paste {
 	display-name = "Paste (Terminator)";
-	bindings = <&kp LC(FSLH)>;
+	bindings = <&kp RC(FSLH)>;
 };
 
 &winlin_cut {
 	display-name = "Cut (Terminator)";
-	bindings = <&kp LC(Z)>;
+	bindings = <&kp RC(Z)>;
 };
 
 &winlin_undo {
 	display-name = "Undo (Terminator)";
-	bindings = <&kp LC(X)>;
+	bindings = <&kp RC(X)>;
 };
 
-/* --- slot 1: Neu layout (Ctrl modifier) --- */
+/* --- slot 1: Neu layout (Right Ctrl modifier) --- */
 &macos_copy {
 	display-name = "Copy (Neu)";
-	bindings = <&kp LC(X)>;
+	bindings = <&kp RC(X)>;
 };
 
 &macos_paste {
 	display-name = "Paste (Neu)";
-	bindings = <&kp LC(FSLH)>;
+	bindings = <&kp RC(FSLH)>;
 };
 
 &macos_cut {
 	display-name = "Cut (Neu)";
-	bindings = <&kp LC(Z)>;
+	bindings = <&kp RC(Z)>;
 };
 
 &macos_undo {
 	display-name = "Undo (Neu)";
-	bindings = <&kp LC(P)>;
+	bindings = <&kp RC(P)>;
 };
 
 /* --- selector display-names: it's a layout switch, not an OS switch --- */
