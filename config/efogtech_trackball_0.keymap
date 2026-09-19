@@ -20,6 +20,8 @@
 #include "clipboard_layouts.dtsi"
 // `ltlk`: Escape button that locks the scroll layer on double-tap (needs LAYER_SCROLL above).
 #include "scroll_lock.dtsi"
+// Advanced scaling: make both bistable "OS" slots use the same snipe/twist/dragscroll divisors.
+#include "scaling.dtsi"
 
 / {
 	keymap {
