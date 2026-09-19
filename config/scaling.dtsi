@@ -4,9 +4,9 @@
  * Force both bistable slots (both "OS"/layout slots, toggled by bst_tog) to use
  * the same divisor, so the pointer/scroll scaling no longer differs between the
  * two slots:
- *   snipe pointer      -> 1/4
- *   twist (wheel)      -> 1/10
- *   dragscroll (x/y)   -> 1/3
+ *   snipe pointer      -> 1/4   (0.25x)
+ *   twist (wheel)      -> 1/10  (0.1x)
+ *   dragscroll (x/y)   -> 3/4   (0.75x)
  *
  * The board sets slot 1 differently (twist 1/40, dragscroll 1/30); these
  * overrides make slot 1 match slot 0.
@@ -30,6 +30,6 @@
 };
 
 &zip_bistable_scroll_xy_scaler {
-	default-coef-slot0 = <ZBS_SCALE(1, 3)>;
-	default-coef-slot1 = <ZBS_SCALE(1, 3)>;
+	default-coef-slot0 = <ZBS_SCALE(3, 4)>;
+	default-coef-slot1 = <ZBS_SCALE(3, 4)>;
 };
