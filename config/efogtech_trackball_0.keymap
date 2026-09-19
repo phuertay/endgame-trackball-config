@@ -22,6 +22,8 @@
 #include "scroll_lock.dtsi"
 // Advanced scaling: make both bistable "OS" slots use the same snipe/twist/dragscroll divisors.
 #include "scaling.dtsi"
+// `at`: left-encoder Alt-Tab app switcher (default layer only).
+#include "alt_tab.dtsi"
 
 / {
 	keymap {
@@ -37,9 +39,9 @@
 			    &mkp LCLK                 &mkp RCLK
 			    &ltm LAYER_EXTRAS MB4     &ltm LAYER_DEVICE MB5
 
-			    // rotary encoders
-			    &kp C_VOL_UP              &kp RC(TAB)
-			    &kp C_VOL_DN              &kp RC(LS(TAB))
+			    // rotary encoders (left = Alt-Tab app switch, right = tab switch)
+			    &at TAB                   &kp RC(TAB)
+			    &at LS(TAB)               &kp RC(LS(TAB))
 		    >;
 		};
 
