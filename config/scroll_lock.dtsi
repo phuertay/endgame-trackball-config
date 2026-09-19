@@ -1,35 +1,43 @@
 /*
  * Custom behavior for the Escape / scroll-layer button.
  *
- * `ltlk` ("layer-tap-lock") replaces the stock `&ltmkp LAYER_SCROLL ESC` on the
- * default layer. It keeps the original hold-to-scroll and tap-for-Escape, and
- * adds a *double-tap* that locks (toggles) the scroll layer:
+ * `ltlk` gives three actions on one key:
+ *   tap         -> Escape
+ *   hold        -> momentary scroll layer   (&mo LAYER_SCROLL)
+ *   double-tap  -> lock/unlock scroll layer (&tog LAYER_SCROLL)
  *
- *   hold          -> momentary scroll layer   (&mo, param 1 = the layer)
- *   single tap    -> Escape                    (&kp ESC)
- *   double tap    -> lock/unlock scroll layer  (&tog LAYER_SCROLL)
+ * IMPORTANT ordering: this is a tap-dance (outer) that wraps a hold-tap
+ * (inner). The reverse -- a hold-tap wrapping a tap-dance -- does NOT work:
+ * each tap resolves through the hold-tap separately, so the inner tap-dance
+ * never counts to two and the double-tap lock never fires. With the tap-dance
+ * on the outside it owns the tap counting, and its timer passes a held press
+ * straight through to the inner hold-tap (so hold still reaches the layer).
  *
- * `LAYER_SCROLL` must be defined (in the keymap) before this file is included.
+ * Trade-off: because the same key must wait to see whether a second tap is
+ * coming, the momentary-scroll hold has some added latency. (The copy button,
+ * `&cdch LAYER_SCROLL 0`, still gives instant hold-to-scroll if you want it.)
+ *
+ * Bound in the keymap as `&ltlk` (0 cells; the layer is baked in below).
+ * LAYER_SCROLL must be defined (in the keymap) before this file is included.
  */
 
 / {
 	behaviors {
-		esc_lock: escape-lock {
-			compatible = "zmk,behavior-tap-dance";
-			display-name = "Escape / lock scroll (tap/double-tap)";
-			#binding-cells = <0>;
-			tapping-term-ms = <250>;
-			bindings = <&kp ESC>, <&tog LAYER_SCROLL>;
-		};
-
-		ltlk: layer-tap-lock {
+		ltlk_ht: ltlk_ht {
 			compatible = "zmk,behavior-hold-tap";
-			display-name = "Escape / lock-scroll / scroll (tap/double-tap/hold)";
+			display-name = "Escape / momentary scroll (tap/hold)";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
+			tapping-term-ms = <150>;
+			bindings = <&mo>, <&kp>;
+		};
+
+		ltlk: ltlk {
+			compatible = "zmk,behavior-tap-dance";
+			display-name = "Escape / scroll / lock (tap/hold/double-tap)";
+			#binding-cells = <0>;
 			tapping-term-ms = <200>;
-			hold-while-undecided;
-			bindings = <&mo>, <&esc_lock>;
+			bindings = <&ltlk_ht LAYER_SCROLL ESC>, <&tog LAYER_SCROLL>;
 		};
 	};
 };
