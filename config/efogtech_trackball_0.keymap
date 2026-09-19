@@ -78,9 +78,9 @@
 			    &rrl 1              &scrlsens P2SM_DEC 1
 			    &sens P2SM_DEC 1    &sens P2SM_INC 1
 
-			    // encoders: arrows (same as the Snipe layer)
-			    &kp LEFT            &kp RIGHT
-			    &kp RIGHT           &kp LEFT
+			    // encoders (arrows): left = Left/Right, right = Up/Down
+			    &kp LEFT            &kp UP
+			    &kp RIGHT           &kp DOWN
 		  	>;
 		};
 
