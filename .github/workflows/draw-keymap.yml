@@ -1,0 +1,52 @@
+name: Draw keymap
+
+on:
+  push:
+    paths:
+      - "config/efogtech_trackball_0.keymap"
+      - "config/*.dtsi"
+      - "boards/arm/efogtech_trackball_0/buttons.dtsi"
+      - "keymap_drawer.config.yaml"
+      - ".github/workflows/draw-keymap.yml"
+  workflow_dispatch:
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install keymap-drawer
+        run: python -m pip install keymap-drawer
+
+      - name: Parse and draw keymap
+        run: |
+          mkdir -p keymap-drawer
+          keymap -c keymap_drawer.config.yaml parse \
+            -z config/efogtech_trackball_0.keymap \
+            > keymap-drawer/keymap.yaml
+          keymap -c keymap_drawer.config.yaml draw \
+            -d boards/arm/efogtech_trackball_0/buttons.dtsi \
+            -l physical_layout0 \
+            keymap-drawer/keymap.yaml \
+            > keymap-drawer/keymap.svg
+
+      - name: Upload diagram artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: keymap-diagram
+          path: keymap-drawer/keymap.svg
+
+      - name: Commit updated diagram
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update keymap diagram"
+          file_pattern: "keymap-drawer/keymap.svg keymap-drawer/keymap.yaml"

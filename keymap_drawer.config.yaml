@@ -1,0 +1,30 @@
+parse_config:
+  raw_binding_map:
+    "&ltmkp 4 ENTER": {t: "ENTER", h: "snipe"}
+    "&ltlk": {t: "ESC", h: "scroll"}
+    "&cdch 3 0": {t: "COPY / PASTE", h: "scroll"}
+    "&mkp MCLK": "MIDDLE\nCLICK"
+    "&mkp LCLK": "LEFT\nCLICK"
+    "&mkp RCLK": "RIGHT\nCLICK"
+    "&ltm 1 MB4": {t: "BACK", h: "extras"}
+    "&ltm 2 MB5": {t: "CLOSE", h: "device"}
+    "&at TAB": "APP\nCYCLE >"
+    "&at LS(TAB)": "APP\nCYCLE <"
+    "&bst_copy": "COPY"
+    "&bst_paste": "PASTE"
+    "&bst_cut": "CUT"
+    "&bst_undo": "UNDO"
+    "&mui_or_dgl": "MUI /\nDONGLE"
+    "&bst_tog ZBS_TOG": "SWITCH\nLAYOUT"
+    "&af_toggle AF_TOG": "TOGGLE\nEFFECTS"
+    "&studio_unlock": "UNLOCK\nZMK"
+    "&scrlsens P2SM_INC 1": "SCROLL\nSENS +"
+    "&scrlsens P2SM_DEC 1": "SCROLL\nSENS -"
+    "&sens P2SM_INC 1": "PTR\nSENS +"
+    "&sens P2SM_DEC 1": "PTR\nSENS -"
+    "&rrl 1": "POLLING\nRATE"
+    "&soft_off": "POWER\nOFF"
+    "&tog 3": {t: "SCROLL\nLOCK"}
+draw_config:
+  n_columns: 2
+  append_colon_to_layer_header: false
