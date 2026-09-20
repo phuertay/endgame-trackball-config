@@ -1,0 +1,19 @@
+/*
+ * Combos for entering the "concentrated use" layers without spending a button.
+ *
+ * Excel is used in bursts, so it's a toggle-lock reached by pressing the two
+ * top buttons (positions 0 and 1) together; tap the Back key on the layer
+ * (&to LAYER_DEFAULT) to leave. LAYER_EXCEL must be defined before include.
+ */
+
+/ {
+	combos {
+		compatible = "zmk,combos";
+
+		combo_excel {
+			timeout-ms = <50>;
+			key-positions = <0 1>;
+			bindings = <&tog LAYER_EXCEL>;
+		};
+	};
+};
