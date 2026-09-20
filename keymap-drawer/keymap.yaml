@@ -1,0 +1,112 @@
+layout: {zmk_keyboard: efogtech_trackball_0}
+layers:
+  Default:
+  - {t: ENTER, h: snipe}
+  - {t: ESC, h: scroll}
+  - 'MIDDLE
+
+    CLICK'
+  - {t: COPY / PASTE, h: scroll}
+  - 'LEFT
+
+    CLICK'
+  - 'RIGHT
+
+    CLICK'
+  - {t: BACK, h: extras}
+  - {t: CLOSE, h: device}
+  - 'APP
+
+    CYCLE >'
+  - Ctl+TAB
+  - 'APP
+
+    CYCLE <'
+  - Ctl+Sft+TAB
+  Extras:
+  - COPY
+  - PASTE
+  - CUT
+  - UNDO
+  - UNDO
+  - COPY
+  - {t: ▽, type: trans}
+  - PASTE
+  - VOL UP
+  - Ctl+TAB
+  - VOL DN
+  - Ctl+Sft+TAB
+  Device:
+  - 'MUI /
+
+    DONGLE'
+  - BT CLR
+  - 'SWITCH
+
+    LAYOUT'
+  - BT NXT
+  - 'TOGGLE
+
+    EFFECTS'
+  - BT PRV
+  - 'UNLOCK
+
+    ZMK'
+  - {t: ▽, type: trans}
+  - VOL UP
+  - Ctl+TAB
+  - VOL DN
+  - Ctl+Sft+TAB
+  Scroll:
+  - {t: ▽, type: trans}
+  - 'SCROLL
+
+    LOCK'
+  - {t: ▽, type: trans}
+  - 'SCROLL
+
+    SENS +'
+  - 'POLLING
+
+    RATE'
+  - 'SCROLL
+
+    SENS -'
+  - 'PTR
+
+    SENS -'
+  - 'PTR
+
+    SENS +'
+  - LEFT
+  - UP
+  - RIGHT
+  - DOWN
+  Snipe:
+  - {t: ▽, type: trans}
+  - 'POWER
+
+    OFF'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - LEFT
+  - RIGHT
+  - RIGHT
+  - LEFT
+  User:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - VOL UP
+  - Ctl+TAB
+  - VOL DN
+  - Ctl+Sft+TAB
