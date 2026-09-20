@@ -62,12 +62,12 @@ layers:
   - 'TOGGLE
 
     EFFECTS'
-  - 'POWER
-
-    OFF'
   - 'BT
 
     PREV'
+  - 'POWER
+
+    OFF'
   - {t: ▽, type: trans}
   - SENS -
   - 'SCROLL

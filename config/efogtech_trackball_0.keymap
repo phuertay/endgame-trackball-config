@@ -77,8 +77,8 @@
 			bindings = <
 			    &mui_or_dgl          &bt BT_CLR
 			    &bst_tog ZBS_TOG     &bt BT_NXT
-			    &af_toggle AF_TOG    &soft_off
-			    &bt BT_PRV           &trans
+			    &af_toggle AF_TOG    &bt BT_PRV
+			    &soft_off            &trans
 
 			    // encoders: left = pointer sensitivity, right = scroll sensitivity
 			    &sens P2SM_DEC 1     &scrlsens P2SM_INC 1
