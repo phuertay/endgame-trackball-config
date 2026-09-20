@@ -1,31 +1,35 @@
 /*
- * Custom behavior for the Escape / scroll-layer button.
+ * Custom lock behaviors for the two trackball layers (Scroll + Snipe).
  *
- * `ltlk` gives three actions on one key:
- *   tap         -> Escape
- *   hold        -> momentary scroll layer   (&mo LAYER_SCROLL)
- *   double-tap  -> lock/unlock scroll layer (&tog LAYER_SCROLL)
+ * Both are "trackball" layers, so they're sticky: you engage them and they
+ * stay put, leaving the ball hand free. Each button gives three actions:
+ *   tap         -> its key            (Escape for scroll, Enter for snipe)
+ *   hold        -> momentary layer     (&mo LAYER_*)
+ *   double-tap  -> lock/unlock layer   (&tog LAYER_*)
+ * Once locked, a single tap of the layer's own button (bound to &tog on that
+ * layer) drops back out.
  *
- * IMPORTANT ordering: this is a tap-dance (outer) that wraps a hold-tap
- * (inner). The reverse -- a hold-tap wrapping a tap-dance -- does NOT work:
- * each tap resolves through the hold-tap separately, so the inner tap-dance
- * never counts to two and the double-tap lock never fires. With the tap-dance
- * on the outside it owns the tap counting, and its timer passes a held press
- * straight through to the inner hold-tap (so hold still reaches the layer).
+ * IMPORTANT ordering: each is a tap-dance (outer) wrapping a hold-tap (inner).
+ * The reverse -- a hold-tap wrapping a tap-dance -- does NOT work: each tap
+ * resolves through the hold-tap separately, so the inner tap-dance never counts
+ * to two and the double-tap lock never fires. With the tap-dance on the outside
+ * it owns the tap counting, and its timer passes a held press straight through
+ * to the inner hold-tap (so hold still reaches the layer).
  *
  * Trade-off: because the same key must wait to see whether a second tap is
- * coming, the momentary-scroll hold has some added latency. (The copy button,
- * `&cdch LAYER_SCROLL 0`, still gives instant hold-to-scroll if you want it.)
+ * coming, the momentary-layer hold has some added latency.
  *
- * Bound in the keymap as `&ltlk` (0 cells; the layer is baked in below).
- * LAYER_SCROLL must be defined (in the keymap) before this file is included.
+ * Bound in the keymap as `&ltlk` (scroll) and `&snlk` (snipe); both are 0-cell
+ * (the layer + tap key are baked in below). LAYER_SCROLL / LAYER_SNIPE must be
+ * defined (in the keymap) before this file is included.
  */
 
 / {
 	behaviors {
-		ltlk_ht: ltlk_ht {
+		// Shared inner hold-tap: hold -> &mo <layer>, tap -> &kp <key>.
+		lk_ht: lk_ht {
 			compatible = "zmk,behavior-hold-tap";
-			display-name = "Escape / momentary scroll (tap/hold)";
+			display-name = "Momentary layer / key (hold/tap)";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
 			tapping-term-ms = <150>;
@@ -37,7 +41,15 @@
 			display-name = "Escape / scroll / lock (tap/hold/double-tap)";
 			#binding-cells = <0>;
 			tapping-term-ms = <200>;
-			bindings = <&ltlk_ht LAYER_SCROLL ESC>, <&tog LAYER_SCROLL>;
+			bindings = <&lk_ht LAYER_SCROLL ESC>, <&tog LAYER_SCROLL>;
+		};
+
+		snlk: snlk {
+			compatible = "zmk,behavior-tap-dance";
+			display-name = "Enter / snipe / lock (tap/hold/double-tap)";
+			#binding-cells = <0>;
+			tapping-term-ms = <200>;
+			bindings = <&lk_ht LAYER_SNIPE ENTER>, <&tog LAYER_SNIPE>;
 		};
 	};
 };

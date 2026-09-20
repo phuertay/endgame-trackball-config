@@ -34,13 +34,16 @@
 	keymap {
 		compatible = "zmk,keymap";
 
-		// hold pos0 -> Snipe, hold pos1 -> Scroll, hold pos3 -> Edit,
-		// hold pos6 -> Media, hold pos7 -> System; combo 0+1 -> Excel.
+		// pos0 -> Snipe (tap Enter / hold momentary / double-tap lock),
+		// pos1 -> Scroll (tap Esc / hold momentary / double-tap lock),
+		// hold pos3 -> Edit, hold pos6 -> Media, hold pos7 -> System;
+		// combo 0+1 -> Excel. Trackball layers (Scroll/Snipe) are sticky;
+		// shortcut layers (Edit/Media/System) are momentary (only while held).
 		default_layer {
 			display-name = "Default";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &ltmkp LAYER_SNIPE ENTER  &ltlk
+			    &snlk                     &ltlk
 			    &mkp MCLK                 &cdch LAYER_EDIT 0
 			    &mkp LCLK                 &mkp RCLK
 			    &ltm LAYER_MEDIA MB4      &ltm LAYER_SYSTEM MB5
@@ -97,11 +100,12 @@
 		    >;
 		};
 
+		// Snipe: sticky trackball layer. pos0 single-tap unlocks (drops out).
 		snipe_layer {
 			display-name = "Snipe";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &trans     &trans
+			    &tog LAYER_SNIPE  &trans
 			    &trans     &trans
 			    &trans     &trans
 			    &trans     &trans
@@ -112,15 +116,23 @@
 		};
 
 		// Excel: reached by combo (top two buttons); tap Back (pos7) to leave.
-		// TODO: fill in the 4 Excel paste macros (need exact per-app key sequences).
+		// These fire Quick-Access-Toolbar buttons via Alt+<position>. Digits
+		// aren't remapped by the Terminator/Neu layouts, so a single &kp works
+		// for both (no bistable macro needed). Confirm the numbers by tapping
+		// Alt in Excel -- keytips appear over each QAT button:
+		//   Alt+1 Paste Formatting, Alt+3 Paste Formulas, Alt+6 Copy as Picture
+		//   Alt+7 Paste & Reverse Transpose  (position after the AutoSave
+		//         toggle -- verify; may be Alt+8 if AutoSave takes a number)
+		// pos3 (Paste & Transpose Values) has no QAT button yet -> add one in
+		// an early slot, then bind &kp LA(N<slot>) here.
 		excel_layer {
 			display-name = "Excel";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &trans     &trans
-			    &trans     &trans
-			    &trans     &trans
-			    &pv        &to LAYER_DEFAULT
+			    &kp LA(N1)   &kp LA(N3)
+			    &kp LA(N7)   &trans
+			    &kp LA(N6)   &trans
+			    &trans       &to LAYER_DEFAULT
 
 			    &trans   &trans
 			    &trans   &trans

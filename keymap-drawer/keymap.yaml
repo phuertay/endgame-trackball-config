@@ -81,7 +81,9 @@ layers:
   - RIGHT
   - DOWN
   Snipe:
-  - {t: ▽, type: trans}
+  - 'SNIPE
+
+    UNLOCK'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -94,15 +96,21 @@ layers:
   - RIGHT
   - LEFT
   Excel:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - 'PASTE
 
-    VALUES'
+    FORMAT'
+  - 'PASTE
+
+    FORMULAS'
+  - 'REV
+
+    TRANSPOSE'
+  - {t: ▽, type: trans}
+  - 'COPY AS
+
+    PICTURE'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - BACK
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}

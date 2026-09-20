@@ -1,6 +1,6 @@
 parse_config:
   raw_binding_map:
-    "&ltmkp 4 ENTER": {t: "ENTER", h: "snipe"}
+    "&snlk": {t: "ENTER", h: "snipe"}
     "&ltlk": {t: "ESC", h: "scroll"}
     "&cdch 1 0": {t: "COPY / PASTE", h: "edit"}
     "&mkp MCLK": "MIDDLE\nCLICK"
@@ -26,11 +26,16 @@ parse_config:
     "&af_toggle AF_TOG": "TOGGLE\nEFFECTS"
     "&soft_off": "POWER\nOFF"
     "&tog 3": {t: "SCROLL\nLOCK"}
+    "&tog 4": {t: "SNIPE\nUNLOCK"}
     "&kp RCTRL": "ZOOM\n(hold)"
     "&to 0": "BACK"
     "&kp C_PP": "PLAY /\nPAUSE"
     "&kp C_PREV": "PREV"
     "&kp C_NEXT": "NEXT"
+    "&kp LA(N1)": "PASTE\nFORMAT"
+    "&kp LA(N3)": "PASTE\nFORMULAS"
+    "&kp LA(N6)": "COPY AS\nPICTURE"
+    "&kp LA(N7)": "REV\nTRANSPOSE"
 draw_config:
   n_columns: 2
   append_colon_to_layer_header: false
