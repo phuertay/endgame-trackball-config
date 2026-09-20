@@ -111,9 +111,9 @@
 			    &trans     &trans
 			    &trans     &trans
 
-			    // encoders: left = change app, right = change tab
-			    &at TAB        &kp RC(TAB)
-			    &at LS(TAB)    &kp RC(LS(TAB))
+			    // encoders (arrows): left = Left/Right, right = Up/Down
+			    &kp LEFT   &kp UP
+			    &kp RIGHT  &kp DOWN
 		    >;
 		};
 

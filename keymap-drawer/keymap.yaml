@@ -105,14 +105,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - 'APP
-
-    CYCLE >'
-  - Ctl+TAB
-  - 'APP
-
-    CYCLE <'
-  - Ctl+Sft+TAB
+  - LEFT
+  - UP
+  - RIGHT
+  - DOWN
   Excel:
   - 'PASTE
 
