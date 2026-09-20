@@ -2,11 +2,12 @@
 
 #ifndef LAYER_DEFAULT
 #define LAYER_DEFAULT      0
-#define LAYER_EXTRAS       1
-#define LAYER_DEVICE       2
+#define LAYER_EDIT         1
+#define LAYER_SYSTEM       2
 #define LAYER_SCROLL       3
 #define LAYER_SNIPE        4
-#define LAYER_USER         5
+#define LAYER_EXCEL        5
+#define LAYER_MEDIA        6
 #endif
 
 / {
@@ -40,16 +41,16 @@
 			persistent;
 		};
 
-		layer_extras {
+		layer_edit {
 			event-type = "layer";
-			layer-index = <LAYER_EXTRAS>;
+			layer-index = <LAYER_EDIT>;
 			colors = [00 00 00];
 			persistent;
 		};
 
-		layer_device {
+		layer_system {
 			event-type = "layer";
-			layer-index = <LAYER_DEVICE>;
+			layer-index = <LAYER_SYSTEM>;
 			colors = [80 00 FF];
 			animation = "flash";
 			flash-duration-ms = <30000>;
@@ -72,9 +73,16 @@
 			persistent;
 		};
 
-		layer_user {
+		layer_excel {
 			event-type = "layer";
-			layer-index = <LAYER_USER>;
+			layer-index = <LAYER_EXCEL>;
+			colors = [00 80 20];
+			persistent;
+		};
+
+		layer_media {
+			event-type = "layer";
+			layer-index = <LAYER_MEDIA>;
 			colors = [00 00 00];
 			persistent;
 		};
@@ -85,25 +93,6 @@
 			colors = [00 00 00];
 			animation = "flash";
 			headless;
-		};
-
-		studio_locked {
-			label = "Studio locked";
-			event-type = "studio-lock";
-			colors = [00 00 00];
-			animation = "flash";
-			headless;
-		};
-
-		studio_unlocked {
-			label = "Studio unlocked";
-			event-type = "studio-unlock";
-			colors = [ff 00 00];
-			animation = "flash";
-			flash-duration-ms = <1000>;
-			flash-ease-in-ms = <150>;
-			flash-ease-out-ms = <150>;
-			feedback-pattern = <65>;
 		};
 
 		evt_usb_conn {

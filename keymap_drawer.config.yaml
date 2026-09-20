@@ -1,30 +1,48 @@
 parse_config:
   raw_binding_map:
-    "&ltmkp 4 ENTER": {t: "ENTER", h: "snipe"}
+    "&snlk": {t: "ENTER", h: "snipe"}
     "&ltlk": {t: "ESC", h: "scroll"}
-    "&cdch 3 0": {t: "COPY / PASTE", h: "scroll"}
+    "&cdch 1 0": {t: "COPY / PASTE", h: "edit"}
     "&mkp MCLK": "MIDDLE\nCLICK"
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
-    "&ltm 1 MB4": {t: "BACK", h: "extras"}
-    "&ltm 2 MB5": {t: "CLOSE", h: "device"}
+    "&ltm 6 MB4": {t: "BACK", h: "media"}
+    "&ltm 2 MB5": {t: "CLOSE", h: "system"}
     "&at TAB": "APP\nCYCLE >"
     "&at LS(TAB)": "APP\nCYCLE <"
     "&bst_copy": "COPY"
     "&bst_paste": "PASTE"
     "&bst_cut": "CUT"
     "&bst_undo": "UNDO"
+    "&pv": "PASTE\nVALUES"
+    "&unclose": "REOPEN\nTAB"
+    "&kp RC(A)": "RELOAD"
+    "&kp PSCRN": "SCREEN\nSHOT"
+    "&kp BSPC": "BKSP"
+    "&kp DEL": "DEL"
+    "&kp SPACE": "SPACE"
     "&mui_or_dgl": "MUI /\nDONGLE"
     "&bst_tog ZBS_TOG": "SWITCH\nLAYOUT"
     "&af_toggle AF_TOG": "TOGGLE\nEFFECTS"
-    "&studio_unlock": "UNLOCK\nZMK"
+    "&soft_off": "POWER\nOFF"
+    "&bt BT_CLR": "BT\nCLEAR"
+    "&bt BT_NXT": "BT\nNEXT"
+    "&bt BT_PRV": "BT\nPREV"
+    "&sens P2SM_INC 1": "SENS +"
+    "&sens P2SM_DEC 1": "SENS -"
     "&scrlsens P2SM_INC 1": "SCROLL\nSENS +"
     "&scrlsens P2SM_DEC 1": "SCROLL\nSENS -"
-    "&sens P2SM_INC 1": "PTR\nSENS +"
-    "&sens P2SM_DEC 1": "PTR\nSENS -"
-    "&rrl 1": "POLLING\nRATE"
-    "&soft_off": "POWER\nOFF"
     "&tog 3": {t: "SCROLL\nLOCK"}
+    "&tog 4": {t: "SNIPE\nUNLOCK"}
+    "&kp RCTRL": "ZOOM\n(hold)"
+    "&to 0": "BACK"
+    "&kp C_PP": "PLAY /\nPAUSE"
+    "&kp C_PREV": "PREV"
+    "&kp C_NEXT": "NEXT"
+    "&kp LA(N1)": "PASTE\nFORMAT"
+    "&kp LA(N3)": "PASTE\nFORMULAS"
+    "&kp LA(N6)": "COPY AS\nPICTURE"
+    "&kp LA(N7)": "REV\nTRANSPOSE"
 draw_config:
   n_columns: 2
   append_colon_to_layer_header: false

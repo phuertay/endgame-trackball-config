@@ -1,5 +1,6 @@
 /*
- * Alt-tab "swapper" for the left encoder (default layer only).
+ * Alt-tab "swapper" for the left encoder (bound on every layer whose left
+ * encoder is "change app" -- i.e. all except Scroll/Snipe/Media/System).
  *
  * `&at TAB`      -> Alt+Tab       (next app)
  * `&at LS(TAB)`  -> Alt+Shift+Tab (previous app)

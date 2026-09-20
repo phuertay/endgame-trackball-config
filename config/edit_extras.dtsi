@@ -1,0 +1,67 @@
+/*
+ * Extra layout-aware (bistable) shortcuts for the Edit layer.
+ *
+ * Same idea as clipboard_layouts.dtsi: slot 0 = Terminator (kbdterm),
+ * slot 1 = Neu (kbdneu); `bst_tog` flips both. All use Right Ctrl (Neu remaps
+ * Left Ctrl).
+ *
+ * paste-values:
+ *   Terminator -> Win+F13 (dacman)         : LG(F13)   (F13 is layout-independent)
+ *   Neu        -> Win+V (clipboard manager): V is at physical "/" on Neu -> LG(FSLH)
+ *
+ * unclose-tab = Ctrl+Shift+T:
+ *   Terminator -> T is at physical "`" (grave) -> RC(LS(GRAVE))
+ *   Neu        -> T is at physical "F"          -> RC(LS(F))
+ *
+ * (Reload = Ctrl+R is layout-independent here: R sits on physical "A" in both
+ * layouts, so it's just &kp RC(A) in the keymap.)
+ */
+
+/ {
+	macros {
+		winlin_pv: winlin_pv {
+			compatible = "zmk,behavior-macro";
+			display-name = "Paste values (Terminator)";
+			#binding-cells = <0>;
+			wait-ms = <10>;
+			bindings = <&kp LG(F13)>;
+		};
+		macos_pv: macos_pv {
+			compatible = "zmk,behavior-macro";
+			display-name = "Paste values (Neu)";
+			#binding-cells = <0>;
+			wait-ms = <10>;
+			bindings = <&kp LG(FSLH)>;
+		};
+
+		winlin_unclose: winlin_unclose {
+			compatible = "zmk,behavior-macro";
+			display-name = "Reopen tab (Terminator)";
+			#binding-cells = <0>;
+			wait-ms = <10>;
+			bindings = <&kp RC(LS(GRAVE))>;
+		};
+		macos_unclose: macos_unclose {
+			compatible = "zmk,behavior-macro";
+			display-name = "Reopen tab (Neu)";
+			#binding-cells = <0>;
+			wait-ms = <10>;
+			bindings = <&kp RC(LS(F))>;
+		};
+	};
+
+	behaviors {
+		pv: pv {
+			compatible = "zmk,behavior-bistable";
+			display-name = "Paste values (layout)";
+			#binding-cells = <0>;
+			bindings = <&winlin_pv>, <&macos_pv>;
+		};
+		unclose: unclose {
+			compatible = "zmk,behavior-bistable";
+			display-name = "Reopen tab (layout)";
+			#binding-cells = <0>;
+			bindings = <&winlin_unclose>, <&macos_unclose>;
+		};
+	};
+};

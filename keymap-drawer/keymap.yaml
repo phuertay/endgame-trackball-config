@@ -6,15 +6,15 @@ layers:
   - 'MIDDLE
 
     CLICK'
-  - {t: COPY / PASTE, h: scroll}
+  - {t: COPY / PASTE, h: edit}
   - 'LEFT
 
     CLICK'
   - 'RIGHT
 
     CLICK'
-  - {t: BACK, h: extras}
-  - {t: CLOSE, h: device}
+  - {t: BACK, h: media}
+  - {t: CLOSE, h: system}
   - 'APP
 
     CYCLE >'
@@ -23,70 +23,82 @@ layers:
 
     CYCLE <'
   - Ctl+Sft+TAB
-  Extras:
-  - COPY
-  - PASTE
+  Edit:
+  - BKSP
+  - UNDO
   - CUT
-  - UNDO
-  - UNDO
-  - COPY
   - {t: ▽, type: trans}
-  - PASTE
-  - VOL UP
+  - 'PASTE
+
+    VALUES'
+  - 'SCREEN
+
+    SHOT'
+  - RELOAD
+  - 'REOPEN
+
+    TAB'
+  - 'APP
+
+    CYCLE >'
   - Ctl+TAB
-  - VOL DN
+  - 'APP
+
+    CYCLE <'
   - Ctl+Sft+TAB
-  Device:
+  System:
   - 'MUI /
 
     DONGLE'
-  - BT CLR
+  - 'BT
+
+    CLEAR'
   - 'SWITCH
 
     LAYOUT'
-  - BT NXT
+  - 'BT
+
+    NEXT'
   - 'TOGGLE
 
     EFFECTS'
-  - BT PRV
-  - 'UNLOCK
+  - 'BT
 
-    ZMK'
+    PREV'
+  - 'POWER
+
+    OFF'
   - {t: ▽, type: trans}
-  - VOL UP
-  - Ctl+TAB
-  - VOL DN
-  - Ctl+Sft+TAB
+  - SENS -
+  - 'SCROLL
+
+    SENS +'
+  - SENS +
+  - 'SCROLL
+
+    SENS -'
   Scroll:
   - {t: ▽, type: trans}
   - 'SCROLL
 
     LOCK'
   - {t: ▽, type: trans}
-  - 'SCROLL
+  - 'ZOOM
 
-    SENS +'
-  - 'POLLING
-
-    RATE'
-  - 'SCROLL
-
-    SENS -'
-  - 'PTR
-
-    SENS -'
-  - 'PTR
-
-    SENS +'
+    (hold)'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - LEFT
   - UP
   - RIGHT
   - DOWN
   Snipe:
-  - {t: ▽, type: trans}
-  - 'POWER
+  - 'SNIPE
 
-    OFF'
+    UNLOCK'
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -94,19 +106,49 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - LEFT
+  - UP
   - RIGHT
-  - RIGHT
-  - LEFT
-  User:
+  - DOWN
+  Excel:
+  - 'PASTE
+
+    FORMAT'
+  - 'PASTE
+
+    FORMULAS'
+  - 'REV
+
+    TRANSPOSE'
+  - {t: ▽, type: trans}
+  - 'COPY AS
+
+    PICTURE'
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - VOL UP
+  - BACK
+  - 'APP
+
+    CYCLE >'
   - Ctl+TAB
-  - VOL DN
+  - 'APP
+
+    CYCLE <'
   - Ctl+Sft+TAB
+  Media:
+  - 'PLAY /
+
+    PAUSE'
+  - {t: ▽, type: trans}
+  - PREV
+  - NEXT
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - BACK
+  - VOL DN
+  - Ctl+TAB
+  - VOL UP
+  - Ctl+Sft+TAB
+combos:
+- p: [0, 1]
+  k: {t: Excel, h: toggle}

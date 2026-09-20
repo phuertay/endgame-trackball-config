@@ -25,7 +25,9 @@
 #include "zmk/endpoints.h"
 #include "zmk/settings.h"
 #include "zmk/keymap.h"
+#if IS_ENABLED(CONFIG_ZMK_STUDIO)
 #include "zmk/studio/core.h"
+#endif
 #include "zmk_adaptive_feedback/adaptive_feedback.h"
 #include "zmk_esb/endpoint.h"
 
@@ -195,11 +197,13 @@ static int cmd_restore(const struct shell *sh, const size_t argc, char **argv) {
     }
 
     if (argc >= 3 && strcmp(argv[1], "BACKUP") == 0 && strcmp(argv[2], "START") == 0) {
+#if IS_ENABLED(CONFIG_ZMK_STUDIO)
         const enum zmk_studio_core_lock_state lock_state = zmk_studio_core_get_lock_state();
         if (lock_state == ZMK_STUDIO_CORE_LOCK_STATE_LOCKED) {
             shprint(sh, "Unlock ZMK Studio to allow restoration.");
             return -EPERM;
         }
+#endif
 
         if (argc < 5) {
             shprint(sh, "Invalid BACKUP START format: need addr and size");
@@ -398,11 +402,13 @@ static int cmd_check_rgb(const struct shell *sh, const size_t argc, char **argv)
  *   BACKUP END
  */
 static int cmd_backup(const struct shell *sh, const size_t argc, char **argv) {
+#if IS_ENABLED(CONFIG_ZMK_STUDIO)
     const enum zmk_studio_core_lock_state lock_state = zmk_studio_core_get_lock_state();
     if (lock_state == ZMK_STUDIO_CORE_LOCK_STATE_LOCKED) {
         shprint(sh, "Unlock ZMK Studio to allow backup.");
         return -EPERM;
     }
+#endif
     
     const uint32_t storage_addr = 0x0006c000;
     const uint32_t storage_size = 0x00008000;
