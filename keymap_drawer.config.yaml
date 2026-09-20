@@ -24,7 +24,6 @@ parse_config:
     "&mui_or_dgl": "MUI /\nDONGLE"
     "&bst_tog ZBS_TOG": "SWITCH\nLAYOUT"
     "&af_toggle AF_TOG": "TOGGLE\nEFFECTS"
-    "&studio_unlock": "UNLOCK\nZMK"
     "&soft_off": "POWER\nOFF"
     "&tog 3": {t: "SCROLL\nLOCK"}
     "&kp RCTRL": "ZOOM\n(hold)"

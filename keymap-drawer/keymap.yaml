@@ -57,9 +57,7 @@ layers:
   - 'POWER
 
     OFF'
-  - 'UNLOCK
-
-    ZMK'
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}

@@ -75,7 +75,7 @@
 			    &mui_or_dgl          &bt BT_CLR
 			    &bst_tog ZBS_TOG     &bt BT_NXT
 			    &af_toggle AF_TOG    &soft_off
-			    &studio_unlock       &trans
+			    &trans               &trans
 
 			    &trans   &trans
 			    &trans   &trans
@@ -164,3 +164,7 @@
 		};
 	};
 };
+
+// keymap-shell is disabled (Studio cluster removed); disable its switch-keymap
+// behavior so its keymap_restore/activate_slot references compile out.
+&skmp { status = "disabled"; };

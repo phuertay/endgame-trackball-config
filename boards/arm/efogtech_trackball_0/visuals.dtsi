@@ -95,25 +95,6 @@
 			headless;
 		};
 
-		studio_locked {
-			label = "Studio locked";
-			event-type = "studio-lock";
-			colors = [00 00 00];
-			animation = "flash";
-			headless;
-		};
-
-		studio_unlocked {
-			label = "Studio unlocked";
-			event-type = "studio-unlock";
-			colors = [ff 00 00];
-			animation = "flash";
-			flash-duration-ms = <1000>;
-			flash-ease-in-ms = <150>;
-			flash-ease-out-ms = <150>;
-			feedback-pattern = <65>;
-		};
-
 		evt_usb_conn {
 			label = "USB connected";
 			event-type = "usb-conn";

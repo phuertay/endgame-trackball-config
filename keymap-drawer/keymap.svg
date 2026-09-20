@@ -306,11 +306,9 @@ path.combo {
 <tspan x="0" dy="-0.6em">POWER</tspan><tspan x="0" dy="1.2em">OFF</tspan>
 </text>
 </g>
-<g transform="translate(202, 434)" class="key keypos-6">
-<rect rx="6" ry="6" x="-54" y="-40" width="108" height="80" class="key"/>
-<text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.6em">UNLOCK</tspan><tspan x="0" dy="1.2em">ZMK</tspan>
-</text>
+<g transform="translate(202, 434)" class="key trans keypos-6">
+<rect rx="6" ry="6" x="-54" y="-40" width="108" height="80" class="key trans"/>
+<text x="0" y="0" class="key trans tap">▽</text>
 </g>
 <g transform="translate(342, 434)" class="key trans keypos-7">
 <rect rx="6" ry="6" x="-54" y="-40" width="108" height="80" class="key trans"/>
