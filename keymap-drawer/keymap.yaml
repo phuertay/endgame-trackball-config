@@ -38,31 +38,45 @@ layers:
   - 'REOPEN
 
     TAB'
-  - DEL
-  - TAB
-  - SPACE
-  - TAB
+  - 'APP
+
+    CYCLE >'
+  - Ctl+TAB
+  - 'APP
+
+    CYCLE <'
+  - Ctl+Sft+TAB
   System:
   - 'MUI /
 
     DONGLE'
-  - BT CLR
+  - 'BT
+
+    CLEAR'
   - 'SWITCH
 
     LAYOUT'
-  - BT NXT
+  - 'BT
+
+    NEXT'
   - 'TOGGLE
 
     EFFECTS'
   - 'POWER
 
     OFF'
+  - 'BT
+
+    PREV'
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - SENS -
+  - 'SCROLL
+
+    SENS +'
+  - SENS +
+  - 'SCROLL
+
+    SENS -'
   Scroll:
   - {t: ▽, type: trans}
   - 'SCROLL
@@ -91,10 +105,14 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - LEFT
-  - RIGHT
-  - RIGHT
-  - LEFT
+  - 'APP
+
+    CYCLE >'
+  - Ctl+TAB
+  - 'APP
+
+    CYCLE <'
+  - Ctl+Sft+TAB
   Excel:
   - 'PASTE
 
@@ -112,10 +130,14 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - BACK
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - 'APP
+
+    CYCLE >'
+  - Ctl+TAB
+  - 'APP
+
+    CYCLE <'
+  - Ctl+Sft+TAB
   Media:
   - 'PLAY /
 
@@ -127,10 +149,10 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - BACK
-  - VOL UP
-  - {t: ▽, type: trans}
   - VOL DN
-  - {t: ▽, type: trans}
+  - Ctl+TAB
+  - VOL UP
+  - Ctl+Sft+TAB
 combos:
 - p: [0, 1]
   k: {t: Excel, h: toggle}

@@ -64,9 +64,9 @@
 			    &pv            &kp PSCRN
 			    &kp RC(A)      &unclose
 
-			    // encoders
-			    &kp DEL        &kp TAB
-			    &kp SPACE      &kp TAB
+			    // encoders: left = change app, right = change tab
+			    &at TAB        &kp RC(TAB)
+			    &at LS(TAB)    &kp RC(LS(TAB))
 		    >;
 		};
 
@@ -78,10 +78,11 @@
 			    &mui_or_dgl          &bt BT_CLR
 			    &bst_tog ZBS_TOG     &bt BT_NXT
 			    &af_toggle AF_TOG    &soft_off
-			    &trans               &trans
+			    &bt BT_PRV           &trans
 
-			    &trans   &trans
-			    &trans   &trans
+			    // encoders: left = pointer sensitivity, right = scroll sensitivity
+			    &sens P2SM_DEC 1     &scrlsens P2SM_INC 1
+			    &sens P2SM_INC 1     &scrlsens P2SM_DEC 1
 		    >;
 		};
 
@@ -110,8 +111,9 @@
 			    &trans     &trans
 			    &trans     &trans
 
-			    &kp LEFT   &kp RIGHT
-			    &kp RIGHT  &kp LEFT
+			    // encoders: left = change app, right = change tab
+			    &at TAB        &kp RC(TAB)
+			    &at LS(TAB)    &kp RC(LS(TAB))
 		    >;
 		};
 
@@ -134,8 +136,9 @@
 			    &kp LA(N6)   &trans
 			    &trans       &to LAYER_DEFAULT
 
-			    &trans   &trans
-			    &trans   &trans
+			    // encoders: left = change app, right = change tab
+			    &at TAB        &kp RC(TAB)
+			    &at LS(TAB)    &kp RC(LS(TAB))
 		    >;
 		};
 
@@ -149,9 +152,9 @@
 			    &trans          &trans
 			    &trans          &to LAYER_DEFAULT
 
-			    // encoders: left = volume
-			    &kp C_VOL_UP    &trans
-			    &kp C_VOL_DN    &trans
+			    // encoders: left = volume, right = change tab
+			    &kp C_VOL_DN    &kp RC(TAB)
+			    &kp C_VOL_UP    &kp RC(LS(TAB))
 		    >;
 		};
 	};

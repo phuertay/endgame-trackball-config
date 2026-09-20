@@ -25,6 +25,13 @@ parse_config:
     "&bst_tog ZBS_TOG": "SWITCH\nLAYOUT"
     "&af_toggle AF_TOG": "TOGGLE\nEFFECTS"
     "&soft_off": "POWER\nOFF"
+    "&bt BT_CLR": "BT\nCLEAR"
+    "&bt BT_NXT": "BT\nNEXT"
+    "&bt BT_PRV": "BT\nPREV"
+    "&sens P2SM_INC 1": "SENS +"
+    "&sens P2SM_DEC 1": "SENS -"
+    "&scrlsens P2SM_INC 1": "SCROLL\nSENS +"
+    "&scrlsens P2SM_DEC 1": "SCROLL\nSENS -"
     "&tog 3": {t: "SCROLL\nLOCK"}
     "&tog 4": {t: "SNIPE\nUNLOCK"}
     "&kp RCTRL": "ZOOM\n(hold)"
