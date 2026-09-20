@@ -119,7 +119,9 @@ layers:
   - 'REV
 
     TRANSPOSE'
-  - {t: ▽, type: trans}
+  - 'TRANSPOSE
+
+    VALUES'
   - 'COPY AS
 
     PICTURE'

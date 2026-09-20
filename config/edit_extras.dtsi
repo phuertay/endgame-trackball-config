@@ -48,6 +48,30 @@
 			wait-ms = <10>;
 			bindings = <&kp RC(LS(F))>;
 		};
+
+		/*
+		 * Excel "Paste & Transpose Values" = Ctrl+Alt+V, V, E, Enter.
+		 * Layout-independent across BOTH Terminator and Neu (unlike copy/paste):
+		 * this sequence only uses 'V' and 'E', and in both layouts 'V' sits on
+		 * physical "/" (FSLH) and 'E' on physical "K" -- the same physical keys.
+		 * (Only C/X/Z differ between the layouts.) Right Ctrl + Left Alt opens
+		 * Paste Special (Neu remaps Left Ctrl, so use Right Ctrl); after a pause
+		 * for the dialog, V selects Values, E toggles Transpose, Enter confirms.
+		 * The 200 ms wait is a guess -- bump it if the dialog opens slower.
+		 */
+		ptv: ptv {
+			compatible = "zmk,behavior-macro";
+			display-name = "Paste transpose values (Excel)";
+			#binding-cells = <0>;
+			wait-ms = <30>;
+			tap-ms = <10>;
+			bindings
+				= <&kp RC(LA(FSLH))>
+				, <&macro_wait_time 200>
+				, <&kp FSLH>
+				, <&kp K>
+				, <&kp RET>;
+		};
 	};
 
 	behaviors {
