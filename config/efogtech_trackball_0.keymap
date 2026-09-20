@@ -125,14 +125,14 @@
 		//   Alt+1 Paste Formatting, Alt+3 Paste Formulas, Alt+6 Copy as Picture
 		//   Alt+8 Paste & Reverse Transpose  (it sits after the AutoSave toggle,
 		//         which takes slot 7, so the transpose macro is slot 8)
-		// pos3 (Paste & Transpose Values) has no QAT button yet -> add one in
-		// an early slot, then bind &kp LA(N<slot>) here.
+		// pos3 = &ptv: Paste & Transpose Values via the Ctrl+Alt+V,V,E,Enter
+		//        key sequence (see edit_extras.dtsi) -- no QAT button needed.
 		excel_layer {
 			display-name = "Excel";
 			DECLARE_ENCODERS;
 			bindings = <
 			    &kp LA(N1)   &kp LA(N3)
-			    &kp LA(N8)   &trans
+			    &kp LA(N8)   &ptv
 			    &kp LA(N6)   &trans
 			    &trans       &to LAYER_DEFAULT
 
