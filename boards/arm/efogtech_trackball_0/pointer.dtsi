@@ -83,11 +83,6 @@
 		#input-processor-cells = <0>;
 	};
 
-	zip_mclk_alt: zip_mclk_alt {
-		compatible = "zmk,input-processor-mclk-alt";
-		#input-processor-cells = <0>;
-	};
-
 	trackball {
 		compatible = "zmk,input-listener";
 		device = <&zip_2s_mixer>;

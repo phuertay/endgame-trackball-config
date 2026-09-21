@@ -3,11 +3,9 @@ layers:
   Default:
   - {t: ENTER, h: media}
   - {t: ESC, h: scroll}
-  - {t: 'MIDDLE
+  - 'MIDDLE
 
-      CLICK', h: 'ball=drag
-
-      enc=Alt'}
+    CLICK'
   - {t: COPY / PASTE, h: edit}
   - 'LEFT
 
@@ -44,9 +42,9 @@ layers:
 
     CYCLE >'
   - TAB <
-  - 'SHIFT
+  - 'APP
 
-    TAB'
+    CYCLE <'
   - TAB >
   System:
   - 'MUI /
@@ -140,9 +138,9 @@ layers:
 
     CYCLE >'
   - TAB <
-  - 'SHIFT
+  - 'APP
 
-    TAB'
+    CYCLE <'
   - TAB >
   Media:
   - {t: ▽, type: trans}
