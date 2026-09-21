@@ -7,21 +7,22 @@
  *
  * paste-values:
  *   Terminator -> Win+F13 (dacman)              : LG(F13)
- *   Neu        -> Win+V, wait, Tab, Enter, wait, Enter
+ *   Neu        -> Win+V, wait 200, Tab, Enter, wait 200, Enter
  *                V is physical "/" (FSLH) on Neu.
  *                &macro_wait_time does not pause where it is written; it
  *                sets the delay after the next queued press/release. The
  *                pauses are armed on the Win release and the first Enter.
  *
- * Excel QAT (format / formulas / rev transpose): same as zmk-config numpad
- * `m_las_n*` — tap Alt, wait 15ms, Shift+digit.
+ * Excel QAT: quick Alt tap, then a per-key wait, then Shift+digit.
+ *   Paste format (1)     100ms
+ *   Paste formulas (3)   200ms
+ *   Rev transpose (8)     50ms
  * Paste & transpose values: same as zmk-config `m_paste_transp`.
  * Copy-as-picture stays Shift+Alt+6.
  */
 
-#define MACRO_WAIT_LAS   15
 #define MACRO_WAIT_CHORD 40
-#define MACRO_WAIT_PV    100
+#define MACRO_WAIT_PV    200
 
 / {
 	macros {
@@ -77,28 +78,25 @@
 			bindings = <&kp RC(LA(FSLH)) &kp LA(FSLH) &kp K &kp ENTER>;
 		};
 
-		/* Same as zmk-config m_las_n*: Alt, wait 15ms, Shift+digit. */
+		/* Quick Alt tap, then the per-key wait, then Shift+digit.
+		 * tap-ms is the Alt hold. wait-ms is the gap after Alt is released
+		 * (ZMK attaches that delay to the key, not to a following macro_wait_time).
+		 */
 		qat1: qat1 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 1 (Paste Format)";
 			#binding-cells = <0>;
-			wait-ms = <3>;
-			tap-ms = <1>;
-			bindings
-				= <&kp LALT>
-				, <&macro_wait_time MACRO_WAIT_LAS>
-				, <&kp LS(N1)>;
+			wait-ms = <100>;
+			tap-ms = <10>;
+			bindings = <&kp LALT &kp LS(N1)>;
 		};
 		qat3: qat3 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 3 (Paste Formulas)";
 			#binding-cells = <0>;
-			wait-ms = <3>;
-			tap-ms = <1>;
-			bindings
-				= <&kp LALT>
-				, <&macro_wait_time MACRO_WAIT_LAS>
-				, <&kp LS(N3)>;
+			wait-ms = <200>;
+			tap-ms = <10>;
+			bindings = <&kp LALT &kp LS(N3)>;
 		};
 		qat6: qat6 {
 			compatible = "zmk,behavior-macro";
@@ -115,12 +113,9 @@
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 8 (Rev Transpose)";
 			#binding-cells = <0>;
-			wait-ms = <3>;
-			tap-ms = <1>;
-			bindings
-				= <&kp LALT>
-				, <&macro_wait_time MACRO_WAIT_LAS>
-				, <&kp LS(N8)>;
+			wait-ms = <50>;
+			tap-ms = <10>;
+			bindings = <&kp LALT &kp LS(N8)>;
 		};
 	};
 

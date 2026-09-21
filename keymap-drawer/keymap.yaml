@@ -14,7 +14,7 @@ layers:
 
     CLICK'
   - {t: BACK, h: snipe}
-  - {t: CLOSE, h: system}
+  - {t: CLOSE, h: system, s: 2× RELOAD}
   - 'APP
 
     CYCLE >'

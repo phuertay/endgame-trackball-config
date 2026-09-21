@@ -24,9 +24,10 @@
  * Trade-off: because the same key must wait to see whether a second tap is
  * coming, the momentary-layer hold has some added latency.
  *
- * Bound in the keymap as `&ltlk` (scroll) and `&snlk` (snipe); both are 0-cell
- * (the layer + tap key are baked in below). LAYER_SCROLL / LAYER_SNIPE must be
- * defined (in the keymap) before this file is included.
+ * Bound in the keymap as `&ltlk` (scroll), `&snlk` (snipe), and `&syslk`
+ * (close / system / reload). All are 0-cell (the layer + tap key are baked in
+ * below). LAYER_SCROLL / LAYER_SNIPE / LAYER_SYSTEM must be defined (in the
+ * keymap) before this file is included.
  */
 
 / {
@@ -66,6 +67,18 @@
 			#binding-cells = <0>;
 			tapping-term-ms = <350>;
 			bindings = <&lk_htm LAYER_SNIPE MB4>, <&tog LAYER_SNIPE>;
+		};
+
+		/* Close had no double-tap (tap = MB5, hold = System). Double-tap is
+		 * reload: Right Ctrl+A, same key that used to sit on the Edit layer.
+		 * Tap-dance stays outside the hold-tap, same reason as ltlk/snlk.
+		 */
+		syslk: syslk {
+			compatible = "zmk,behavior-tap-dance";
+			display-name = "Close / system / reload (tap/hold/double-tap)";
+			#binding-cells = <0>;
+			tapping-term-ms = <350>;
+			bindings = <&lk_htm LAYER_SYSTEM MB5>, <&kp RC(A)>;
 		};
 	};
 };

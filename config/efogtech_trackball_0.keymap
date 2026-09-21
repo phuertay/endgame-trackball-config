@@ -30,7 +30,8 @@
 
 		// pos0 -> Media hold / Enter tap, pos1 -> Scroll lock,
 		// pos2 -> middle click, hold pos3 -> Edit,
-		// pos6 -> Snipe sticky / Back tap, hold pos7 -> System.
+		// pos6 -> Snipe sticky / Back tap,
+		// pos7 -> Close tap / System hold / Reload double-tap.
 		default_layer {
 			display-name = "Default";
 			DECLARE_ENCODERS;
@@ -38,7 +39,7 @@
 			    &ltmkp LAYER_MEDIA ENTER  &ltlk
 			    &mkp MCLK                 &cdch LAYER_EDIT 0
 			    &mkp LCLK                 &mkp RCLK
-			    &snlk                     &ltm LAYER_SYSTEM MB5
+			    &snlk                     &syslk
 
 			    // left = Alt-Tab swapper; right = browser tabs
 			    &swap                     &kp RC(PG_UP)
