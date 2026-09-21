@@ -1,7 +1,7 @@
 layout: {zmk_keyboard: efogtech_trackball_0}
 layers:
   Default:
-  - {t: ENTER, h: snipe}
+  - {t: BACK, h: media}
   - {t: ESC, h: scroll}
   - 'MIDDLE
 
@@ -13,39 +13,27 @@ layers:
   - 'RIGHT
 
     CLICK'
-  - {t: BACK, h: media}
+  - {t: ENTER, h: snipe}
   - {t: CLOSE, h: system}
   - 'APP
 
     CYCLE >'
-  - TAB >
+  - TAB <
   - 'APP
 
     CYCLE <'
-  - TAB <
-  Edit:
-  - BKSP
-  - UNDO
-  - CUT
-  - {t: ▽, type: trans}
-  - 'PASTE
-
-    VALUES'
-  - 'SCREEN
-
-    SHOT'
-  - RELOAD
-  - 'REOPEN
-
-    TAB'
-  - 'APP
-
-    CYCLE >'
   - TAB >
-  - 'APP
+  Edit: [BKSP, UNDO, CUT, DEL, 'PASTE
 
-    CYCLE <'
-  - TAB <
+      VALUES', 'SCREEN
+
+      SHOT', RELOAD, 'REOPEN
+
+      TAB', 'APP
+
+      CYCLE >', TAB <, 'APP
+
+      CYCLE <', TAB >]
   System:
   - 'MUI /
 
@@ -82,7 +70,9 @@ layers:
   - 'SCROLL
 
     LOCK'
-  - {t: ▽, type: trans}
+  - 'AXIS
+
+    Y/X'
   - 'ZOOM
 
     (hold)'
@@ -95,15 +85,15 @@ layers:
   - RIGHT
   - DOWN
   Snipe:
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - 'SNIPE
 
     UNLOCK'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - LEFT
   - UP
@@ -133,24 +123,24 @@ layers:
   - 'APP
 
     CYCLE >'
-  - TAB >
+  - TAB <
   - 'APP
 
     CYCLE <'
-  - TAB <
+  - TAB >
   Media:
-  - PLAY
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - PREV
   - NEXT
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - PLAY
   - BACK
   - VOL +
-  - TAB >
-  - VOL -
   - TAB <
+  - VOL -
+  - TAB >
 combos:
 - p: [0, 1]
   k: {t: Excel, h: toggle}

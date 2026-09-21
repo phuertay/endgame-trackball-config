@@ -1,0 +1,6 @@
+description: |
+  Toggle the scroll-layer axis lock between Y-only and X-only.
+
+compatible: "zmk,behavior-axis-lock-toggle"
+
+include: zero_param.yaml

@@ -78,6 +78,11 @@
 		zrc-prefix = "bst/dragscroll";
 	};
 
+	zip_axis_lock: zip_axis_lock {
+		compatible = "zmk,input-processor-axis-lock";
+		#input-processor-cells = <0>;
+	};
+
 	trackball {
 		compatible = "zmk,input-listener";
 		device = <&zip_2s_mixer>;
