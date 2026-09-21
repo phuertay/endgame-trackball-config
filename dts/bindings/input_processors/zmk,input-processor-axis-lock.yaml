@@ -1,0 +1,7 @@
+description: |
+  Hard-locks relative X/Y motion to a single axis (used on the scroll layer).
+  Default is Y-only; pair with zmk,behavior-axis-lock-toggle to switch.
+
+compatible: "zmk,input-processor-axis-lock"
+
+include: ip_zero_param.yaml

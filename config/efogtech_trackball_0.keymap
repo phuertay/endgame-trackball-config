@@ -25,33 +25,46 @@
 #include "scaling.dtsi"
 // `at`: left-encoder Alt-Tab app switcher (default layer only).
 #include "alt_tab.dtsi"
-// `pv` (paste-values) and `unclose` (reopen tab): layout-aware bistable shortcuts.
+// `pv` / `unclose` / Excel QAT macros / `axlk` (scroll axis toggle).
 #include "edit_extras.dtsi"
 // Combos (e.g. top two buttons -> Excel toggle-lock).
 #include "combos.dtsi"
 
 / {
+	behaviors {
+		/* Media hold activates the layer immediately so encoders work without
+		 * waiting out the tap-preferred timer (Snipe stays sticky on pos6). */
+		ltmh: layer-tap-momentary-hold {
+			compatible = "zmk,behavior-hold-tap";
+			display-name = "Hold/tap (layer/mouse key, hold-while-undecided)";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <250>;
+			hold-while-undecided;
+			bindings = <&mo>, <&mkp>;
+		};
+	};
+
 	keymap {
 		compatible = "zmk,keymap";
 
-		// pos0 -> Snipe (tap Enter / hold momentary / double-tap lock),
+		// pos0 -> Media (hold momentary / tap Back) — on top for encoders,
 		// pos1 -> Scroll (tap Esc / hold momentary / double-tap lock),
-		// hold pos3 -> Edit, hold pos6 -> Media, hold pos7 -> System;
-		// combo 0+1 -> Excel. Trackball layers (Scroll/Snipe) are sticky;
-		// shortcut layers (Edit/Media/System) are momentary (only while held).
-		// Media sits above Snipe so volume encoders win while Media is held.
+		// hold pos3 -> Edit, pos6 -> Snipe sticky, hold pos7 -> System;
+		// combo 0+1 -> Excel. Media (6) sits above Snipe (4) so volume
+		// encoders win while Media is held even if Snipe is locked.
 		default_layer {
 			display-name = "Default";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &snlk                     &ltlk
+			    &ltmh LAYER_MEDIA MB4     &ltlk
 			    &mkp MCLK                 &cdch LAYER_EDIT 0
 			    &mkp LCLK                 &mkp RCLK
-			    &ltm LAYER_MEDIA MB4      &ltm LAYER_SYSTEM MB5
+			    &snlk                     &ltm LAYER_SYSTEM MB5
 
-			    // encoders: left = Alt-Tab app switch, right = Ctrl+PgUp/Dn tabs
-			    &at TAB                   &kp RC(PG_DN)
-			    &at LS(TAB)               &kp RC(PG_UP)
+			    // encoders: left = Alt-Tab, right = Ctrl+PgUp/Dn (reversed)
+			    &at TAB                   &kp RC(PG_UP)
+			    &at LS(TAB)               &kp RC(PG_DN)
 		    >;
 		};
 
@@ -61,13 +74,13 @@
 			DECLARE_ENCODERS;
 			bindings = <
 			    &kp BSPC       &bst_undo
-			    &bst_cut       &trans
+			    &bst_cut       &kp DEL
 			    &pv            &kp PSCRN
 			    &kp RC(A)      &unclose
 
 			    // encoders: left = change app, right = Ctrl+PgUp/Dn tabs
-			    &at TAB        &kp RC(PG_DN)
-			    &at LS(TAB)    &kp RC(PG_UP)
+			    &at TAB        &kp RC(PG_UP)
+			    &at LS(TAB)    &kp RC(PG_DN)
 		    >;
 		};
 
@@ -82,7 +95,6 @@
 			    &soft_off            &trans
 
 			    // encoders: left = pointer sensitivity, right = scroll sensitivity
-			    // (pointer INC/DEC swapped — encoder direction was reversed)
 			    &sens P2SM_INC 1     &scrlsens P2SM_INC 1
 			    &sens P2SM_DEC 1     &scrlsens P2SM_DEC 1
 		    >;
@@ -93,7 +105,7 @@
 			DECLARE_ENCODERS;
 			bindings = <
 			    &trans     &tog LAYER_SCROLL
-			    &trans     &kp RCTRL
+			    &axlk      &kp RCTRL
 			    &trans     &trans
 			    &trans     &trans
 
@@ -103,15 +115,15 @@
 		    >;
 		};
 
-		// Snipe: sticky trackball layer. pos0 single-tap unlocks (drops out).
+		// Snipe: sticky on pos6. Single tap of pos6 unlocks.
 		snipe_layer {
 			display-name = "Snipe";
 			DECLARE_ENCODERS;
 			bindings = <
+			    &trans     &trans
+			    &trans     &trans
+			    &trans     &trans
 			    &tog LAYER_SNIPE  &trans
-			    &trans     &trans
-			    &trans     &trans
-			    &trans     &trans
 
 			    // encoders (arrows): left = Left/Right, right = Up/Down
 			    &kp LEFT   &kp UP
@@ -119,46 +131,39 @@
 		    >;
 		};
 
-		// Excel: reached by combo (top two buttons); tap Back (pos7) to leave.
-		// These fire Quick-Access-Toolbar buttons via Alt+<position>. Digits
-		// aren't remapped by the Terminator/Neu layouts, so a single &kp works
-		// for both (no bistable macro needed). Confirm the numbers by tapping
-		// Alt in Excel -- keytips appear over each QAT button:
-		//   Alt+1 Paste Formatting, Alt+3 Paste Formulas, Alt+6 Copy as Picture
-		//   Alt+8 Paste & Reverse Transpose  (it sits after the AutoSave toggle,
-		//         which takes slot 7, so the transpose macro is slot 8)
-		// pos3 = copy/paste (click/double) and pos4 = left click, same as base.
-		// pos5 = &ptv: Paste & Transpose Values via Ctrl+Alt+V,V,E,Enter
-		//        (see edit_extras.dtsi) -- no QAT button needed.
+		// Excel: combo (top two buttons); tap Back (pos7) to leave.
+		// QAT buttons: Alt tap then digit (keytips). Digits aren't remapped by
+		// Terminator/Neu, so plain N1/N3/N6/N8 work for both.
+		// pos3 = copy/paste, pos4 = left click (same as base). pos5 = &ptv.
 		excel_layer {
 			display-name = "Excel";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &kp LA(N1)   &kp LA(N3)
-			    &kp LA(N8)   &cdc
+			    &qat1        &qat3
+			    &qat8        &cdc
 			    &mkp LCLK    &ptv
-			    &kp LA(N6)   &to LAYER_DEFAULT
+			    &qat6        &to LAYER_DEFAULT
 
 			    // encoders: left = change app, right = Ctrl+PgUp/Dn tabs
-			    &at TAB        &kp RC(PG_DN)
-			    &at LS(TAB)    &kp RC(PG_UP)
+			    &at TAB        &kp RC(PG_UP)
+			    &at LS(TAB)    &kp RC(PG_DN)
 		    >;
 		};
 
-		// Media: reached by holding pos6. Momentary; sits above Snipe so volume
-		// encoders win while held even if Snipe is locked.
+		// Media: hold pos0. Momentary; sits above Snipe so volume encoders win
+		// while held even if Snipe is locked.
 		media_layer {
 			display-name = "Media";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &kp C_PLAY      &trans
+			    &trans          &trans
 			    &kp C_PREV      &kp C_NEXT
 			    &trans          &trans
-			    &trans          &to LAYER_DEFAULT
+			    &kp C_PLAY      &to LAYER_DEFAULT
 
-			    // encoders: left = volume (direction matched to sens fix), right = tabs
-			    &kp C_VOL_UP    &kp RC(PG_DN)
-			    &kp C_VOL_DN    &kp RC(PG_UP)
+			    // encoders: left = volume, right = tabs
+			    &kp C_VOL_UP    &kp RC(PG_UP)
+			    &kp C_VOL_DN    &kp RC(PG_DN)
 		    >;
 		};
 	};
@@ -171,6 +176,7 @@
 		scroll {
 			layers = <LAYER_SCROLL>;
 			input-processors = <&zip_bistable_scroll_xy_scaler>, <&zip_axis_clamper>,
+							   <&zip_axis_lock>,
 							   <&zip_xy_to_scroll_mapper>, <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
 							   <&zip_dragscroll_accel>, <&zip_rotate_scroll>,
 							   <&esb_ip>, <&zip_ble_report_rate_limit>;

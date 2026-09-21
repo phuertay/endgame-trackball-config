@@ -49,6 +49,10 @@ static int on_alt_tab_pressed(struct zmk_behavior_binding *binding,
     struct behavior_alt_tab_data *data = dev->data;
     const struct behavior_alt_tab_config *cfg = dev->config;
 
+    /* Always refresh the hold window first so a late release-work can't clear
+     * `active` between Alt-down and Tab-down on a subsequent session. */
+    k_work_reschedule(&data->release_work, K_MSEC(cfg->release_after_ms));
+
     if (!data->active) {
         data->active = true;
         raise_zmk_keycode_state_changed_from_encoded(cfg->hold_key, true, event.timestamp);
@@ -56,7 +60,6 @@ static int on_alt_tab_pressed(struct zmk_behavior_binding *binding,
     }
 
     raise_zmk_keycode_state_changed_from_encoded(binding->param1, true, event.timestamp);
-    k_work_reschedule(&data->release_work, K_MSEC(cfg->release_after_ms));
     return ZMK_BEHAVIOR_OPAQUE;
 }
 
