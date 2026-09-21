@@ -8,6 +8,10 @@
  * paste-values:
  *   Terminator -> Win+F13 (dacman)              : LG(F13)
  *   Neu        -> Win+V, wait, Tab, Enter, wait, Enter
+ *                V is physical "/" (FSLH) on Neu.
+ *                &macro_wait_time does not pause where it is written; it
+ *                sets the delay after the next queued press/release. The
+ *                pauses are armed on the Win release and the first Enter.
  *
  * Excel QAT (format / formulas / rev transpose): same as zmk-config numpad
  * `m_las_n*` — tap Alt, wait 15ms, Shift+digit.
@@ -17,6 +21,7 @@
 
 #define MACRO_WAIT_LAS   15
 #define MACRO_WAIT_CHORD 40
+#define MACRO_WAIT_PV    100
 
 / {
 	macros {
@@ -35,12 +40,15 @@
 			tap-ms = <10>;
 			bindings
 				= <&macro_press &kp LGUI>
-				, <&macro_tap &kp FSLH>
+				, <&macro_press &kp FSLH>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time MACRO_WAIT_PV>
 				, <&macro_release &kp LGUI>
-				, <&macro_wait_time 100>
+				, <&macro_wait_time 10>
 				, <&macro_tap &kp TAB>
+				, <&macro_wait_time MACRO_WAIT_PV>
 				, <&macro_tap &kp RET>
-				, <&macro_wait_time 100>
+				, <&macro_wait_time 10>
 				, <&macro_tap &kp RET>;
 		};
 
