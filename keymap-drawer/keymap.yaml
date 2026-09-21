@@ -3,9 +3,9 @@ layers:
   Default:
   - {t: BACK, h: media}
   - {t: ESC, h: scroll}
-  - 'MIDDLE
+  - {t: 'MIDDLE
 
-    CLICK'
+      CLICK', h: Alt}
   - {t: COPY / PASTE, h: edit}
   - 'LEFT
 
@@ -15,6 +15,27 @@ layers:
     CLICK'
   - {t: ENTER, h: snipe}
   - {t: CLOSE, h: system}
+  - TAB
+  - TAB <
+  - 'SHIFT
+
+    TAB'
+  - TAB >
+  Edit:
+  - BKSP
+  - DEL
+  - CUT
+  - {t: ▽, type: trans}
+  - 'PASTE
+
+    VALUES'
+  - 'SCREEN
+
+    SHOT'
+  - UNDO
+  - 'REOPEN
+
+    TAB'
   - 'APP
 
     CYCLE >'
@@ -23,17 +44,6 @@ layers:
 
     CYCLE <'
   - TAB >
-  Edit: [BKSP, UNDO, CUT, DEL, 'PASTE
-
-      VALUES', 'SCREEN
-
-      SHOT', RELOAD, 'REOPEN
-
-      TAB', 'APP
-
-      CYCLE >', TAB <, 'APP
-
-      CYCLE <', TAB >]
   System:
   - 'MUI /
 
@@ -70,9 +80,11 @@ layers:
   - 'SCROLL
 
     LOCK'
-  - 'AXIS
+  - {t: 'AXIS
 
-    Y/X'
+      TOGGLE', h: 'AXIS
+
+      HOLD'}
   - 'ZOOM
 
     (hold)'

@@ -1,0 +1,13 @@
+description: |
+  Scroll-axis lock control. Tap toggles Y-only ↔ X-only permanently; hold
+  temporarily uses the other axis until release.
+
+compatible: "zmk,behavior-axis-lock"
+
+include: zero_param.yaml
+
+properties:
+  tapping-term-ms:
+    type: int
+    default: 200
+    description: Hold longer than this to momentary-swap instead of toggle.

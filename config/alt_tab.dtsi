@@ -1,14 +1,12 @@
 /*
- * Alt-tab "swapper" for the left encoder (bound on every layer whose left
- * encoder is "change app" -- i.e. all except Scroll/Snipe/Media/System).
+ * App switch: two modes.
  *
- * `&at TAB`      -> Alt+Tab       (next app)
- * `&at LS(TAB)`  -> Alt+Shift+Tab (previous app)
+ * Default layer (main use): hold middle-click for physical Left Alt, spin the
+ * left encoder for Tab / Shift+Tab. No auto-hold timer — Alt can't get "lost"
+ * and commit is instant on release.
  *
- * Holds Left Alt while you keep spinning the wheel and releases it after
- * `release-after-ms` of no ticks, so the OS app switcher stays open and cycles,
- * then commits. Behavior implemented in
- * boards/arm/efogtech_trackball_0/behavior_alt_tab.c.
+ * Edit / Excel: keep the encoder Alt-Tab swapper (`&at`) with a short commit
+ * window; every tick re-asserts Alt so mid-session drops recover.
  */
 
 #include <dt-bindings/zmk/keys.h>
@@ -20,9 +18,20 @@
 			display-name = "Alt-Tab (app switch)";
 			#binding-cells = <1>;
 			hold-key = <LEFT_ALT>;
-			// Long enough that a pause between encoder ticks doesn't drop Alt
-			// (which produces bare Tab and "only works the first time").
-			release-after-ms = <2000>;
+			/* Short so the switcher commits quickly after you stop spinning.
+			 * Alt is re-asserted on every tick (see behavior_alt_tab.c). */
+			release-after-ms = <450>;
+		};
+
+		/* Hold = Left Alt (use with left encoder Tab), tap = middle click. */
+		altht: alt-hold-tap {
+			compatible = "zmk,behavior-hold-tap";
+			display-name = "Hold Alt / tap middle click";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <180>;
+			hold-while-undecided;
+			bindings = <&kp>, <&mkp>;
 		};
 	};
 };

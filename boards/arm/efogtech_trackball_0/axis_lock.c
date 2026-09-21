@@ -1,8 +1,9 @@
 /*
  * Scroll-axis lock: hard-lock ball motion to one axis on the scroll layer.
  *
- * Default: Y only (vertical scroll). Toggle with &axlk to allow X only
- * (horizontal scroll). The other axis is zeroed before xy→scroll mapping.
+ * Default: Y only (vertical scroll).
+ * `&axlk` tap  → permanently toggle Y ↔ X
+ * `&axlk` hold → temporarily use the other axis until release
  */
 
 #define DT_DRV_COMPAT zmk_input_processor_axis_lock
@@ -15,14 +16,22 @@
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-/* 0 = Y-only (default), 1 = X-only */
 static bool axis_lock_horizontal;
+static bool axis_lock_momentary;
 
-bool zmk_axis_lock_is_horizontal(void) { return axis_lock_horizontal; }
+static bool axis_lock_effective_horizontal(void) {
+    return axis_lock_momentary ? !axis_lock_horizontal : axis_lock_horizontal;
+}
 
-void zmk_axis_lock_toggle(void) {
+static void axis_lock_toggle(void) {
     axis_lock_horizontal = !axis_lock_horizontal;
-    LOG_DBG("scroll axis lock: %s only", axis_lock_horizontal ? "X" : "Y");
+    LOG_DBG("scroll axis lock: %s only (persistent)", axis_lock_horizontal ? "X" : "Y");
+}
+
+static void axis_lock_momentary_set(bool pressed) {
+    axis_lock_momentary = pressed;
+    LOG_DBG("scroll axis lock momentary %s -> effective %s only", pressed ? "on" : "off",
+            axis_lock_effective_horizontal() ? "X" : "Y");
 }
 
 static int axis_lock_handle_event(const struct device *dev, struct input_event *event,
@@ -37,7 +46,7 @@ static int axis_lock_handle_event(const struct device *dev, struct input_event *
         return 0;
     }
 
-    if (axis_lock_horizontal) {
+    if (axis_lock_effective_horizontal()) {
         if (event->code == INPUT_REL_Y) {
             event->value = 0;
             event->sync = false;
@@ -54,34 +63,79 @@ static struct zmk_input_processor_driver_api axis_lock_driver_api = {
     .handle_event = axis_lock_handle_event,
 };
 
-static int axis_lock_init(const struct device *dev) {
+static int axis_lock_ip_init(const struct device *dev) {
     ARG_UNUSED(dev);
     axis_lock_horizontal = false;
+    axis_lock_momentary = false;
     return 0;
 }
 
-DEVICE_DT_INST_DEFINE(0, axis_lock_init, NULL, NULL, NULL, POST_KERNEL,
+DEVICE_DT_INST_DEFINE(0, axis_lock_ip_init, NULL, NULL, NULL, POST_KERNEL,
                       CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &axis_lock_driver_api);
 
-/* --- toggle behavior --- */
+/* --- tap=toggle / hold=momentary behavior --- */
 
 #undef DT_DRV_COMPAT
-#define DT_DRV_COMPAT zmk_behavior_axis_lock_toggle
+#define DT_DRV_COMPAT zmk_behavior_axis_lock
 
 #include <drivers/behavior.h>
 #include <zmk/behavior.h>
 
+#ifndef CONFIG_ZMK_AXIS_LOCK_TAPPING_TERM_MS
+#define CONFIG_ZMK_AXIS_LOCK_TAPPING_TERM_MS 200
+#endif
+
+struct behavior_axis_lock_config {
+    int tapping_term_ms;
+};
+
+struct behavior_axis_lock_data {
+    const struct device *dev;
+    bool held;
+    bool decided_hold;
+    int64_t press_time;
+    struct k_work_delayable decide_work;
+};
+
+static void axis_lock_decide(struct k_work *work) {
+    struct k_work_delayable *dwork = k_work_delayable_from_work(work);
+    struct behavior_axis_lock_data *data =
+        CONTAINER_OF(dwork, struct behavior_axis_lock_data, decide_work);
+
+    if (data->held && !data->decided_hold) {
+        data->decided_hold = true;
+        axis_lock_momentary_set(true);
+    }
+}
+
 static int on_axlk_pressed(struct zmk_behavior_binding *binding,
                            struct zmk_behavior_binding_event event) {
-    ARG_UNUSED(binding);
-    ARG_UNUSED(event);
-    zmk_axis_lock_toggle();
+    const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
+    struct behavior_axis_lock_data *data = dev->data;
+    const struct behavior_axis_lock_config *cfg = dev->config;
+
+    data->held = true;
+    data->decided_hold = false;
+    data->press_time = event.timestamp;
+    k_work_reschedule(&data->decide_work, K_MSEC(cfg->tapping_term_ms));
     return ZMK_BEHAVIOR_OPAQUE;
 }
 
 static int on_axlk_released(struct zmk_behavior_binding *binding,
                             struct zmk_behavior_binding_event event) {
     ARG_UNUSED(binding);
+    const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
+    struct behavior_axis_lock_data *data = dev->data;
+
+    k_work_cancel_delayable(&data->decide_work);
+    data->held = false;
+
+    if (data->decided_hold) {
+        axis_lock_momentary_set(false);
+    } else {
+        axis_lock_toggle();
+    }
+    data->decided_hold = false;
     ARG_UNUSED(event);
     return ZMK_BEHAVIOR_OPAQUE;
 }
@@ -92,12 +146,21 @@ static const struct behavior_driver_api axlk_driver_api = {
 };
 
 static int axlk_init(const struct device *dev) {
-    ARG_UNUSED(dev);
+    struct behavior_axis_lock_data *data = dev->data;
+    data->dev = dev;
+    data->held = false;
+    data->decided_hold = false;
+    k_work_init_delayable(&data->decide_work, axis_lock_decide);
     return 0;
 }
 
 #define AXLK_INST(n)                                                                               \
-    BEHAVIOR_DT_INST_DEFINE(n, axlk_init, NULL, NULL, NULL, POST_KERNEL,                          \
+    static struct behavior_axis_lock_data behavior_axis_lock_data_##n = {};                        \
+    static const struct behavior_axis_lock_config behavior_axis_lock_config_##n = {               \
+        .tapping_term_ms = DT_INST_PROP_OR(n, tapping_term_ms, 200),                               \
+    };                                                                                             \
+    BEHAVIOR_DT_INST_DEFINE(n, axlk_init, NULL, &behavior_axis_lock_data_##n,                      \
+                            &behavior_axis_lock_config_##n, POST_KERNEL,                           \
                             CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &axlk_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(AXLK_INST)

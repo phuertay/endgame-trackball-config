@@ -5,19 +5,23 @@ parse_config:
     "&ltmh 6 MB4": {t: "BACK", h: "media"}
     "&cdch 1 0": {t: "COPY / PASTE", h: "edit"}
     "&cdc": {t: "COPY", s: "PASTE"}
+    "&altht 0x700e2 MCLK": {t: "MIDDLE\nCLICK", h: "Alt"}
+    "&altht LALT MCLK": {t: "MIDDLE\nCLICK", h: "Alt"}
     "&mkp MCLK": "MIDDLE\nCLICK"
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
     "&ltm 2 MB5": {t: "CLOSE", h: "system"}
     "&at TAB": "APP\nCYCLE >"
     "&at LS(TAB)": "APP\nCYCLE <"
+    "&kp TAB": "TAB"
+    "&kp LS(TAB)": "SHIFT\nTAB"
     "&bst_copy": "COPY"
     "&bst_paste": "PASTE"
     "&bst_cut": "CUT"
     "&bst_undo": "UNDO"
     "&pv": "PASTE\nVALUES"
     "&unclose": "REOPEN\nTAB"
-    "&axlk": "AXIS\nY/X"
+    "&axlk": {t: "AXIS\nTOGGLE", h: "AXIS\nHOLD"}
     "&kp RC(A)": "RELOAD"
     "&kp PSCRN": "SCREEN\nSHOT"
     "&kp BSPC": "BKSP"
