@@ -37,7 +37,6 @@
 				= <&macro_press &kp LGUI>
 				, <&macro_tap &kp FSLH>
 				, <&macro_release &kp LGUI>
-				, <&macro_wait_time 40>
 				, <&macro_tap &kp TAB>
 				, <&macro_tap &kp RET>
 				, <&macro_wait_time 10>
