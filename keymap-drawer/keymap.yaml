@@ -1,11 +1,13 @@
 layout: {zmk_keyboard: efogtech_trackball_0}
 layers:
   Default:
-  - {t: BACK, h: media}
+  - {t: ENTER, h: media}
   - {t: ESC, h: scroll}
   - {t: 'MIDDLE
 
-      CLICK', h: Alt}
+      CLICK', h: 'ball=drag
+
+      enc=Alt'}
   - {t: COPY / PASTE, h: edit}
   - 'LEFT
 
@@ -13,13 +15,15 @@ layers:
   - 'RIGHT
 
     CLICK'
-  - {t: ENTER, h: snipe}
+  - {t: BACK, h: snipe}
   - {t: CLOSE, h: system}
-  - TAB
-  - TAB <
-  - 'SHIFT
+  - 'APP
 
-    TAB'
+    CYCLE >'
+  - TAB <
+  - 'APP
+
+    CYCLE <'
   - TAB >
   Edit:
   - BKSP

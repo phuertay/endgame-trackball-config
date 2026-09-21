@@ -1,12 +1,12 @@
 /*
  * App switch: two modes.
  *
- * Default layer (main use): hold middle-click for physical Left Alt, spin the
- * left encoder for Tab / Shift+Tab. No auto-hold timer — Alt can't get "lost"
- * and commit is instant on release.
+ * Default layer: middle button stays undecided until you either move the ball
+ * (middle-click hold / drag) or turn the left encoder (`&mea` → Left Alt + Tab).
+ * Release with neither → middle-click tap. No auto-hold timer.
  *
- * Edit / Excel: keep the encoder Alt-Tab swapper (`&at`) with a short commit
- * window; every tick re-asserts Alt so mid-session drops recover.
+ * Edit / Excel: encoder Alt-Tab swapper (`&at`) with a short commit window;
+ * every tick re-asserts Alt so mid-session drops recover.
  */
 
 #include <dt-bindings/zmk/keys.h>
@@ -23,15 +23,17 @@
 			release-after-ms = <450>;
 		};
 
-		/* Hold = Left Alt (use with left encoder Tab), tap = middle click. */
-		altht: alt-hold-tap {
-			compatible = "zmk,behavior-hold-tap";
-			display-name = "Hold Alt / tap middle click";
-			#binding-cells = <2>;
-			flavor = "tap-preferred";
-			tapping-term-ms = <180>;
-			hold-while-undecided;
-			bindings = <&kp>, <&mkp>;
+		mca: mclk-alt {
+			compatible = "zmk,behavior-mclk-alt";
+			display-name = "Middle undecided (ball=MCLK, encoder=Alt)";
+			#binding-cells = <0>;
+			motion-threshold = <2>;
+		};
+
+		mea: middle-encoder-alt {
+			compatible = "zmk,behavior-middle-encoder-alt";
+			display-name = "Encoder Tab (resolves middle to Alt)";
+			#binding-cells = <1>;
 		};
 	};
 };

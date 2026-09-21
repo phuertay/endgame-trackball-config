@@ -1,18 +1,21 @@
 parse_config:
   raw_binding_map:
-    "&snlk": {t: "ENTER", h: "snipe"}
+    "&snlk": {t: "BACK", h: "snipe"}
     "&ltlk": {t: "ESC", h: "scroll"}
-    "&ltmh 6 MB4": {t: "BACK", h: "media"}
+    "&ltmkp 6 0x70028": {t: "ENTER", h: "media"}
+    "&ltmkp 6 ENTER": {t: "ENTER", h: "media"}
     "&cdch 1 0": {t: "COPY / PASTE", h: "edit"}
     "&cdc": {t: "COPY", s: "PASTE"}
-    "&altht 0x700e2 MCLK": {t: "MIDDLE\nCLICK", h: "Alt"}
-    "&altht LALT MCLK": {t: "MIDDLE\nCLICK", h: "Alt"}
+    "&mca": {t: "MIDDLE\nCLICK", h: "ball=drag\nenc=Alt"}
     "&mkp MCLK": "MIDDLE\nCLICK"
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
     "&ltm 2 MB5": {t: "CLOSE", h: "system"}
     "&at TAB": "APP\nCYCLE >"
     "&at LS(TAB)": "APP\nCYCLE <"
+    "&mea TAB": "APP\nCYCLE >"
+    "&mea LS(TAB)": "APP\nCYCLE <"
+    "&mea 0x7002b": "APP\nCYCLE >"
     "&kp TAB": "TAB"
     "&kp LS(TAB)": "SHIFT\nTAB"
     "&bst_copy": "COPY"

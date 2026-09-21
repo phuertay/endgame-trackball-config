@@ -25,38 +25,25 @@
 #include "combos.dtsi"
 
 / {
-	behaviors {
-		/* Media hold activates the layer immediately so encoders work without
-		 * waiting out the tap-preferred timer (Snipe stays sticky on pos6). */
-		ltmh: layer-tap-momentary-hold {
-			compatible = "zmk,behavior-hold-tap";
-			display-name = "Hold/tap (layer/mouse key, hold-while-undecided)";
-			#binding-cells = <2>;
-			flavor = "tap-preferred";
-			tapping-term-ms = <250>;
-			hold-while-undecided;
-			bindings = <&mo>, <&mkp>;
-		};
-	};
-
 	keymap {
 		compatible = "zmk,keymap";
 
-		// pos0 -> Media (hold / tap Back), pos1 -> Scroll lock,
-		// pos2 -> hold Alt (app switch) / tap middle click,
-		// hold pos3 -> Edit, pos6 -> Snipe sticky, hold pos7 -> System.
+		// pos0 -> Media hold / Enter tap (Enter stays on this key),
+		// pos1 -> Scroll lock, pos2 -> middle undecided (ball=MCLK, enc=Alt),
+		// hold pos3 -> Edit, pos6 -> Snipe sticky / Back tap (Back stays here),
+		// hold pos7 -> System. Layers swapped; tap keys did not move.
 		default_layer {
 			display-name = "Default";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &ltmh LAYER_MEDIA MB4     &ltlk
-			    &altht LALT MCLK          &cdch LAYER_EDIT 0
+			    &ltmkp LAYER_MEDIA ENTER  &ltlk
+			    &mca                      &cdch LAYER_EDIT 0
 			    &mkp LCLK                 &mkp RCLK
 			    &snlk                     &ltm LAYER_SYSTEM MB5
 
-			    // left encoder: Tab while holding middle (Alt); right = tabs
-			    &kp TAB                   &kp RC(PG_UP)
-			    &kp LS(TAB)               &kp RC(PG_DN)
+			    // left encoder: resolves middle→Alt then Tab; right = tabs
+			    &mea TAB                  &kp RC(PG_UP)
+			    &mea LS(TAB)              &kp RC(PG_DN)
 		    >;
 		};
 
@@ -148,8 +135,9 @@
 		};
 	};
 
-	trackball {
-		input-processors = <&zip_bistable_twist_scaler>,
+		trackball {
+		input-processors = <&zip_mclk_alt>,
+						   <&zip_bistable_twist_scaler>,
 						   <&zip_pointer_accel>, <&zip_scroll_accel>, <&zip_rotate_pointer>,
 		                   <&esb_ip>, <&zip_ble_report_rate_limit>;
 
