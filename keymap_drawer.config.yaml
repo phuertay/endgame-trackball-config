@@ -9,7 +9,7 @@ parse_config:
     "&mkp MCLK": "MIDDLE\nCLICK"
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
-    "&ltm 2 MB5": {t: "CLOSE", h: "system"}
+    "&syslk": {t: "CLOSE", h: "system", s: "2× RELOAD"}
     "&swap": "APP\nCYCLE >"
     "&kp TAB": "TAB"
     "&kp LS(TAB)": "APP\nCYCLE <"
