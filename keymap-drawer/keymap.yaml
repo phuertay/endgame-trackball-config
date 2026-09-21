@@ -1,11 +1,13 @@
 layout: {zmk_keyboard: efogtech_trackball_0}
 layers:
   Default:
-  - {t: BACK, h: media}
+  - {t: ENTER, h: media}
   - {t: ESC, h: scroll}
-  - 'MIDDLE
+  - {t: 'MIDDLE
 
-    CLICK'
+      CLICK', h: 'ball=drag
+
+      enc=Alt'}
   - {t: COPY / PASTE, h: edit}
   - 'LEFT
 
@@ -13,7 +15,7 @@ layers:
   - 'RIGHT
 
     CLICK'
-  - {t: ENTER, h: snipe}
+  - {t: BACK, h: snipe}
   - {t: CLOSE, h: system}
   - 'APP
 
@@ -23,17 +25,29 @@ layers:
 
     CYCLE <'
   - TAB >
-  Edit: [BKSP, UNDO, CUT, DEL, 'PASTE
+  Edit:
+  - BKSP
+  - DEL
+  - CUT
+  - {t: ▽, type: trans}
+  - 'PASTE
 
-      VALUES', 'SCREEN
+    VALUES'
+  - 'SCREEN
 
-      SHOT', RELOAD, 'REOPEN
+    SHOT'
+  - UNDO
+  - 'REOPEN
 
-      TAB', 'APP
+    TAB'
+  - 'APP
 
-      CYCLE >', TAB <, 'APP
+    CYCLE >'
+  - TAB <
+  - 'APP
 
-      CYCLE <', TAB >]
+    CYCLE <'
+  - TAB >
   System:
   - 'MUI /
 
@@ -70,9 +84,11 @@ layers:
   - 'SCROLL
 
     LOCK'
-  - 'AXIS
+  - {t: 'AXIS
 
-    Y/X'
+      TOGGLE', h: 'AXIS
+
+      HOLD'}
   - 'ZOOM
 
     (hold)'

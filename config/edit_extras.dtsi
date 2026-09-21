@@ -8,14 +8,8 @@
  * paste-values:
  *   Terminator -> Win+F13 (dacman)              : LG(F13)
  *   Neu        -> Win+V clipboard history, then Tab, Enter, wait, Enter
- *                (opens the picker, selects the top item, confirms paste)
  *
- * unclose-tab = Ctrl+Shift+T:
- *   Terminator -> T is at physical "`" (grave) -> RC(LS(GRAVE))
- *   Neu        -> T is at physical "F"          -> RC(LS(F))
- *
- * Excel QAT: tap Alt (keytips), then the digit — simultaneous Alt+digit is
- * unreliable for some Excel builds.
+ * Excel QAT: Shift+Alt+digit (plain Alt+digit / Alt-then-digit were unreliable).
  */
 
 / {
@@ -37,9 +31,10 @@
 				= <&macro_press &kp LGUI>
 				, <&macro_tap &kp FSLH>
 				, <&macro_release &kp LGUI>
+				, <&macro_wait_time 25>
 				, <&macro_tap &kp TAB>
 				, <&macro_tap &kp RET>
-				, <&macro_wait_time 10>
+				, <&macro_wait_time 25>
 				, <&macro_tap &kp RET>;
 		};
 
@@ -61,17 +56,6 @@
 		/*
 		 * Excel "Paste & Transpose Values" -- mirrors the Z mouse macro exactly:
 		 *   RCtrl+LAlt+/ , release Ctrl , Alt+/ , Alt+K , release Alt , Enter
-		 * i.e. Ctrl+Alt+V (Paste Special), then the dialog accelerators Alt+V
-		 * (Values) and Alt+E (Transpose), then OK.
-		 *
-		 * Layout-independent across BOTH Terminator and Neu (unlike copy/paste):
-		 * this sequence only uses 'V' and 'E', and in both layouts 'V' sits on
-		 * physical "/" (FSLH) and 'E' on physical "K" -- the same physical keys
-		 * (only C/X/Z differ). Right Ctrl is used because Neu remaps Left Ctrl.
-		 *
-		 * Alt is held across the V/E taps (the reliable dialog-accelerator form),
-		 * and there's no artificial delay -- the Z config inserts no wait here;
-		 * Windows buffers the keystrokes until the Paste Special dialog appears.
 		 */
 		ptv: ptv {
 			compatible = "zmk,behavior-macro";
@@ -89,38 +73,50 @@
 				, <&macro_tap &kp RET>;
 		};
 
-		/* Excel QAT: Alt tap → digit (keytips), not simultaneous Alt+digit. */
+		/* Excel QAT: Shift+Alt+digit */
 		qat1: qat1 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 1 (Paste Format)";
 			#binding-cells = <0>;
-			wait-ms = <30>;
+			wait-ms = <10>;
 			tap-ms = <10>;
-			bindings = <&macro_tap &kp LALT>, <&macro_tap &kp N1>;
+			bindings
+				= <&macro_press &kp LSHFT &kp LALT>
+				, <&macro_tap &kp N1>
+				, <&macro_release &kp LALT &kp LSHFT>;
 		};
 		qat3: qat3 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 3 (Paste Formulas)";
 			#binding-cells = <0>;
-			wait-ms = <30>;
+			wait-ms = <10>;
 			tap-ms = <10>;
-			bindings = <&macro_tap &kp LALT>, <&macro_tap &kp N3>;
+			bindings
+				= <&macro_press &kp LSHFT &kp LALT>
+				, <&macro_tap &kp N3>
+				, <&macro_release &kp LALT &kp LSHFT>;
 		};
 		qat6: qat6 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 6 (Copy as Picture)";
 			#binding-cells = <0>;
-			wait-ms = <30>;
+			wait-ms = <10>;
 			tap-ms = <10>;
-			bindings = <&macro_tap &kp LALT>, <&macro_tap &kp N6>;
+			bindings
+				= <&macro_press &kp LSHFT &kp LALT>
+				, <&macro_tap &kp N6>
+				, <&macro_release &kp LALT &kp LSHFT>;
 		};
 		qat8: qat8 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 8 (Rev Transpose)";
 			#binding-cells = <0>;
-			wait-ms = <30>;
+			wait-ms = <10>;
 			tap-ms = <10>;
-			bindings = <&macro_tap &kp LALT>, <&macro_tap &kp N8>;
+			bindings
+				= <&macro_press &kp LSHFT &kp LALT>
+				, <&macro_tap &kp N8>
+				, <&macro_release &kp LALT &kp LSHFT>;
 		};
 	};
 
@@ -139,9 +135,10 @@
 		};
 
 		axlk: axlk {
-			compatible = "zmk,behavior-axis-lock-toggle";
-			display-name = "Toggle scroll axis (Y/X)";
+			compatible = "zmk,behavior-axis-lock";
+			display-name = "Scroll axis (tap toggle / hold swap)";
 			#binding-cells = <0>;
+			tapping-term-ms = <200>;
 		};
 	};
 };

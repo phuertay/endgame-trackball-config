@@ -17,74 +17,53 @@
 #define LAYER_MEDIA        6
 #endif
 
-// Clipboard keys (copy/paste/cut/undo) remapped for the Terminator and Neu layouts.
 #include "clipboard_layouts.dtsi"
-// `ltlk` / `snlk`: Escape/Enter buttons that lock Scroll/Snipe on double-tap.
 #include "scroll_lock.dtsi"
-// Advanced scaling: make both bistable "OS" slots use the same snipe/twist/dragscroll divisors.
 #include "scaling.dtsi"
-// `at`: left-encoder Alt-Tab app switcher (default layer only).
 #include "alt_tab.dtsi"
-// `pv` / `unclose` / Excel QAT macros / `axlk` (scroll axis toggle).
 #include "edit_extras.dtsi"
-// Combos (e.g. top two buttons -> Excel toggle-lock).
 #include "combos.dtsi"
 
 / {
-	behaviors {
-		/* Media hold activates the layer immediately so encoders work without
-		 * waiting out the tap-preferred timer (Snipe stays sticky on pos6). */
-		ltmh: layer-tap-momentary-hold {
-			compatible = "zmk,behavior-hold-tap";
-			display-name = "Hold/tap (layer/mouse key, hold-while-undecided)";
-			#binding-cells = <2>;
-			flavor = "tap-preferred";
-			tapping-term-ms = <250>;
-			hold-while-undecided;
-			bindings = <&mo>, <&mkp>;
-		};
-	};
-
 	keymap {
 		compatible = "zmk,keymap";
 
-		// pos0 -> Media (hold momentary / tap Back) — on top for encoders,
-		// pos1 -> Scroll (tap Esc / hold momentary / double-tap lock),
-		// hold pos3 -> Edit, pos6 -> Snipe sticky, hold pos7 -> System;
-		// combo 0+1 -> Excel. Media (6) sits above Snipe (4) so volume
-		// encoders win while Media is held even if Snipe is locked.
+		// pos0 -> Media hold / Enter tap (Enter stays on this key),
+		// pos1 -> Scroll lock, pos2 -> middle undecided (ball=MCLK, enc=Alt),
+		// hold pos3 -> Edit, pos6 -> Snipe sticky / Back tap (Back stays here),
+		// hold pos7 -> System. Layers swapped; tap keys did not move.
 		default_layer {
 			display-name = "Default";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &ltmh LAYER_MEDIA MB4     &ltlk
-			    &mkp MCLK                 &cdch LAYER_EDIT 0
+			    &ltmkp LAYER_MEDIA ENTER  &ltlk
+			    &mca                      &cdch LAYER_EDIT 0
 			    &mkp LCLK                 &mkp RCLK
 			    &snlk                     &ltm LAYER_SYSTEM MB5
 
-			    // encoders: left = Alt-Tab, right = Ctrl+PgUp/Dn (reversed)
-			    &at TAB                   &kp RC(PG_UP)
-			    &at LS(TAB)               &kp RC(PG_DN)
+			    // left encoder: resolves middle→Alt then Tab; right = tabs
+			    &mea TAB                  &kp RC(PG_UP)
+			    &mea LS(TAB)              &kp RC(PG_DN)
 		    >;
 		};
 
-		// Edit: clipboard/text keys. Reached by holding the copy/paste button (pos3).
+		// Edit: hold the copy/paste button (pos3). pos3 itself must be &trans
+		// so the hold key stays usable — Delete lives on pos1 next to Bksp.
 		edit_layer {
 			display-name = "Edit";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &kp BSPC       &bst_undo
-			    &bst_cut       &kp DEL
+			    &kp BSPC       &kp DEL
+			    &bst_cut       &trans
 			    &pv            &kp PSCRN
-			    &kp RC(A)      &unclose
+			    &bst_undo      &unclose
 
-			    // encoders: left = change app, right = Ctrl+PgUp/Dn tabs
+			    // encoders: auto Alt-Tab swapper (short commit) / tabs
 			    &at TAB        &kp RC(PG_UP)
 			    &at LS(TAB)    &kp RC(PG_DN)
 		    >;
 		};
 
-		// System: connectivity / OS / power (infrequent). Reached by holding pos7.
 		system_layer {
 			display-name = "System";
 			DECLARE_ENCODERS;
@@ -94,7 +73,6 @@
 			    &af_toggle AF_TOG    &bt BT_PRV
 			    &soft_off            &trans
 
-			    // encoders: left = pointer sensitivity, right = scroll sensitivity
 			    &sens P2SM_INC 1     &scrlsens P2SM_INC 1
 			    &sens P2SM_DEC 1     &scrlsens P2SM_DEC 1
 		    >;
@@ -109,13 +87,11 @@
 			    &trans     &trans
 			    &trans     &trans
 
-			    // encoders (arrows): left = Left/Right, right = Up/Down
 			    &kp LEFT   &kp UP
 			    &kp RIGHT  &kp DOWN
 		    >;
 		};
 
-		// Snipe: sticky on pos6. Single tap of pos6 unlocks.
 		snipe_layer {
 			display-name = "Snipe";
 			DECLARE_ENCODERS;
@@ -125,16 +101,11 @@
 			    &trans     &trans
 			    &tog LAYER_SNIPE  &trans
 
-			    // encoders (arrows): left = Left/Right, right = Up/Down
 			    &kp LEFT   &kp UP
 			    &kp RIGHT  &kp DOWN
 		    >;
 		};
 
-		// Excel: combo (top two buttons); tap Back (pos7) to leave.
-		// QAT buttons: Alt tap then digit (keytips). Digits aren't remapped by
-		// Terminator/Neu, so plain N1/N3/N6/N8 work for both.
-		// pos3 = copy/paste, pos4 = left click (same as base). pos5 = &ptv.
 		excel_layer {
 			display-name = "Excel";
 			DECLARE_ENCODERS;
@@ -144,14 +115,11 @@
 			    &mkp LCLK    &ptv
 			    &qat6        &to LAYER_DEFAULT
 
-			    // encoders: left = change app, right = Ctrl+PgUp/Dn tabs
 			    &at TAB        &kp RC(PG_UP)
 			    &at LS(TAB)    &kp RC(PG_DN)
 		    >;
 		};
 
-		// Media: hold pos0. Momentary; sits above Snipe so volume encoders win
-		// while held even if Snipe is locked.
 		media_layer {
 			display-name = "Media";
 			DECLARE_ENCODERS;
@@ -161,15 +129,15 @@
 			    &trans          &trans
 			    &kp C_PLAY      &to LAYER_DEFAULT
 
-			    // encoders: left = volume, right = tabs
 			    &kp C_VOL_UP    &kp RC(PG_UP)
 			    &kp C_VOL_DN    &kp RC(PG_DN)
 		    >;
 		};
 	};
 
-	trackball {
-		input-processors = <&zip_bistable_twist_scaler>,
+		trackball {
+		input-processors = <&zip_mclk_alt>,
+						   <&zip_bistable_twist_scaler>,
 						   <&zip_pointer_accel>, <&zip_scroll_accel>, <&zip_rotate_pointer>,
 		                   <&esb_ip>, <&zip_ble_report_rate_limit>;
 
@@ -190,6 +158,4 @@
 	};
 };
 
-// keymap-shell is disabled (Studio cluster removed); disable its switch-keymap
-// behavior so its keymap_restore/activate_slot references compile out.
 &skmp { status = "disabled"; };

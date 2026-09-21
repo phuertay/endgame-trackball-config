@@ -3,14 +3,16 @@
  *
  * Both are sticky: you engage them and they stay put, leaving the ball hand
  * free. Each button gives three actions:
- *   tap         -> its key            (Escape for scroll, Enter for snipe)
+ *   tap         -> its key            (Escape for scroll, Back/MB4 for snipe)
  *   hold        -> momentary layer     (&mo LAYER_*)
  *   double-tap  -> lock/unlock layer   (&tog LAYER_*)
  * Once locked, a single tap of the layer's own button (bound to &tog on that
  * layer) drops back out.
  *
- * Media is momentary (hold pos6) and sits above Snipe in the layer stack so
- * its encoders win while held; it does not use a lock behavior here.
+ * Media is momentary on pos0 (Enter tap / Media hold) and sits above Snipe in
+ * the layer stack so its encoders win while held; it does not use a lock
+ * behavior here. Enter stays on pos0 and Back (MB4) stays on pos6 — only the
+ * layers swapped, not the tap keys.
  *
  * IMPORTANT ordering: each is a tap-dance (outer) wrapping a hold-tap (inner).
  * The reverse -- a hold-tap wrapping a tap-dance -- does NOT work: each tap
@@ -39,6 +41,16 @@
 			bindings = <&mo>, <&kp>;
 		};
 
+		// Same as lk_ht but tap is a mouse button (&mkp), for Back on Snipe.
+		lk_htm: lk_htm {
+			compatible = "zmk,behavior-hold-tap";
+			display-name = "Momentary layer / mouse key (hold/tap)";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <150>;
+			bindings = <&mo>, <&mkp>;
+		};
+
 		ltlk: ltlk {
 			compatible = "zmk,behavior-tap-dance";
 			display-name = "Escape / scroll / lock (tap/hold/double-tap)";
@@ -50,10 +62,10 @@
 
 		snlk: snlk {
 			compatible = "zmk,behavior-tap-dance";
-			display-name = "Enter / snipe / lock (tap/hold/double-tap)";
+			display-name = "Back / snipe / lock (tap/hold/double-tap)";
 			#binding-cells = <0>;
 			tapping-term-ms = <350>;
-			bindings = <&lk_ht LAYER_SNIPE ENTER>, <&tog LAYER_SNIPE>;
+			bindings = <&lk_htm LAYER_SNIPE MB4>, <&tog LAYER_SNIPE>;
 		};
 	};
 };
