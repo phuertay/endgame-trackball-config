@@ -6,8 +6,9 @@
  * Left Ctrl).
  *
  * paste-values:
- *   Terminator -> Win+F13 (dacman)         : LG(F13)   (F13 is layout-independent)
- *   Neu        -> Win+V (clipboard manager): V is at physical "/" on Neu -> LG(FSLH)
+ *   Terminator -> Win+F13 (dacman) : LG(F13)   (F13 is layout-independent)
+ *   Neu        -> Win+F13 (dacman) : LG(F13)   (same as Terminator / Z mouse;
+ *                                Win+/ was popping the Start menu instead)
  *
  * unclose-tab = Ctrl+Shift+T:
  *   Terminator -> T is at physical "`" (grave) -> RC(LS(GRAVE))
@@ -31,7 +32,7 @@
 			display-name = "Paste values (Neu)";
 			#binding-cells = <0>;
 			wait-ms = <10>;
-			bindings = <&kp LG(FSLH)>;
+			bindings = <&kp LG(F13)>;
 		};
 
 		winlin_unclose: winlin_unclose {

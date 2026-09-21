@@ -1,7 +1,7 @@
 layout: {zmk_keyboard: efogtech_trackball_0}
 layers:
   Default:
-  - {t: ENTER, h: snipe}
+  - {t: PLAY, h: media}
   - {t: ESC, h: scroll}
   - 'MIDDLE
 
@@ -13,16 +13,16 @@ layers:
   - 'RIGHT
 
     CLICK'
-  - {t: BACK, h: media}
+  - {t: BACK, h: snipe}
   - {t: CLOSE, h: system}
   - 'APP
 
     CYCLE >'
-  - Ctl+TAB
+  - TAB >
   - 'APP
 
     CYCLE <'
-  - Ctl+Sft+TAB
+  - TAB <
   Edit:
   - BKSP
   - UNDO
@@ -41,11 +41,11 @@ layers:
   - 'APP
 
     CYCLE >'
-  - Ctl+TAB
+  - TAB >
   - 'APP
 
     CYCLE <'
-  - Ctl+Sft+TAB
+  - TAB <
   System:
   - 'MUI /
 
@@ -69,11 +69,11 @@ layers:
 
     OFF'
   - {t: ▽, type: trans}
-  - SENS -
+  - SENS +
   - 'SCROLL
 
     SENS +'
-  - SENS +
+  - SENS -
   - 'SCROLL
 
     SENS -'
@@ -94,10 +94,52 @@ layers:
   - UP
   - RIGHT
   - DOWN
-  Snipe:
-  - 'SNIPE
+  Excel:
+  - 'PASTE
+
+    FORMAT'
+  - 'PASTE
+
+    FORMULAS'
+  - 'REV
+
+    TRANSPOSE'
+  - {t: COPY, s: PASTE}
+  - 'LEFT
+
+    CLICK'
+  - 'TRANSPOSE
+
+    VALUES'
+  - 'COPY AS
+
+    PICTURE'
+  - BACK
+  - 'APP
+
+    CYCLE >'
+  - TAB >
+  - 'APP
+
+    CYCLE <'
+  - TAB <
+  Media:
+  - 'MEDIA
 
     UNLOCK'
+  - {t: ▽, type: trans}
+  - PREV
+  - NEXT
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - BACK
+  - VOL +
+  - TAB >
+  - VOL -
+  - TAB <
+  Snipe:
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
@@ -109,48 +151,6 @@ layers:
   - UP
   - RIGHT
   - DOWN
-  Excel:
-  - 'PASTE
-
-    FORMAT'
-  - 'PASTE
-
-    FORMULAS'
-  - 'REV
-
-    TRANSPOSE'
-  - 'TRANSPOSE
-
-    VALUES'
-  - 'COPY AS
-
-    PICTURE'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - BACK
-  - 'APP
-
-    CYCLE >'
-  - Ctl+TAB
-  - 'APP
-
-    CYCLE <'
-  - Ctl+Sft+TAB
-  Media:
-  - 'PLAY /
-
-    PAUSE'
-  - {t: ▽, type: trans}
-  - PREV
-  - NEXT
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - BACK
-  - VOL DN
-  - Ctl+TAB
-  - VOL UP
-  - Ctl+Sft+TAB
 combos:
 - p: [0, 1]
   k: {t: Excel, h: toggle}

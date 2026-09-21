@@ -20,7 +20,8 @@
 			display-name = "Alt-Tab (app switch)";
 			#binding-cells = <1>;
 			hold-key = <LEFT_ALT>;
-			release-after-ms = <500>;
+			// Was 500 ms — slow encoder ticks dropped the Alt hold and sent bare Tab.
+			release-after-ms = <1200>;
 		};
 	};
 };
