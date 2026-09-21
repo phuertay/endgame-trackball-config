@@ -1,13 +1,16 @@
 /*
- * Custom lock behaviors for the two trackball layers (Scroll + Snipe).
+ * Custom lock behaviors for the two sticky trackball layers (Scroll + Snipe).
  *
- * Both are "trackball" layers, so they're sticky: you engage them and they
- * stay put, leaving the ball hand free. Each button gives three actions:
+ * Both are sticky: you engage them and they stay put, leaving the ball hand
+ * free. Each button gives three actions:
  *   tap         -> its key            (Escape for scroll, Enter for snipe)
  *   hold        -> momentary layer     (&mo LAYER_*)
  *   double-tap  -> lock/unlock layer   (&tog LAYER_*)
  * Once locked, a single tap of the layer's own button (bound to &tog on that
  * layer) drops back out.
+ *
+ * Media is momentary (hold pos6) and sits above Snipe in the layer stack so
+ * its encoders win while held; it does not use a lock behavior here.
  *
  * IMPORTANT ordering: each is a tap-dance (outer) wrapping a hold-tap (inner).
  * The reverse -- a hold-tap wrapping a tap-dance -- does NOT work: each tap
@@ -40,7 +43,8 @@
 			compatible = "zmk,behavior-tap-dance";
 			display-name = "Escape / scroll / lock (tap/hold/double-tap)";
 			#binding-cells = <0>;
-			tapping-term-ms = <200>;
+			// Was 200 ms — too short to reliably double-tap lock.
+			tapping-term-ms = <350>;
 			bindings = <&lk_ht LAYER_SCROLL ESC>, <&tog LAYER_SCROLL>;
 		};
 
@@ -48,7 +52,7 @@
 			compatible = "zmk,behavior-tap-dance";
 			display-name = "Enter / snipe / lock (tap/hold/double-tap)";
 			#binding-cells = <0>;
-			tapping-term-ms = <200>;
+			tapping-term-ms = <350>;
 			bindings = <&lk_ht LAYER_SNIPE ENTER>, <&tog LAYER_SNIPE>;
 		};
 	};

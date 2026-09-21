@@ -3,6 +3,7 @@ parse_config:
     "&snlk": {t: "ENTER", h: "snipe"}
     "&ltlk": {t: "ESC", h: "scroll"}
     "&cdch 1 0": {t: "COPY / PASTE", h: "edit"}
+    "&cdc": {t: "COPY", s: "PASTE"}
     "&mkp MCLK": "MIDDLE\nCLICK"
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
@@ -36,9 +37,13 @@ parse_config:
     "&tog 4": {t: "SNIPE\nUNLOCK"}
     "&kp RCTRL": "ZOOM\n(hold)"
     "&to 0": "BACK"
-    "&kp C_PP": "PLAY /\nPAUSE"
+    "&kp C_PLAY": "PLAY"
     "&kp C_PREV": "PREV"
     "&kp C_NEXT": "NEXT"
+    "&kp C_VOL_UP": "VOL +"
+    "&kp C_VOL_DN": "VOL -"
+    "&kp RC(PG_DN)": "TAB >"
+    "&kp RC(PG_UP)": "TAB <"
     "&kp LA(N1)": "PASTE\nFORMAT"
     "&kp LA(N3)": "PASTE\nFORMULAS"
     "&kp LA(N6)": "COPY AS\nPICTURE"
