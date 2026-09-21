@@ -7,9 +7,10 @@
  *
  * paste-values:
  *   Terminator -> Win+F13 (dacman)              : LG(F13)
- *   Neu        -> Win+V clipboard history, then Tab, Enter, wait, Enter
+ *   Neu        -> Win+V, wait, Tab, Enter, wait, Enter
  *
- * Excel QAT: Shift+Alt+digit (plain Alt+digit / Alt-then-digit were unreliable).
+ * Excel QAT keytips (format / formulas / rev transpose): tap Alt, then Shift+digit.
+ * Copy-as-picture stays Shift+Alt+6.
  */
 
 / {
@@ -31,10 +32,10 @@
 				= <&macro_press &kp LGUI>
 				, <&macro_tap &kp FSLH>
 				, <&macro_release &kp LGUI>
-				, <&macro_wait_time 25>
+				, <&macro_wait_time 100>
 				, <&macro_tap &kp TAB>
 				, <&macro_tap &kp RET>
-				, <&macro_wait_time 25>
+				, <&macro_wait_time 100>
 				, <&macro_tap &kp RET>;
 		};
 
@@ -73,7 +74,7 @@
 				, <&macro_tap &kp RET>;
 		};
 
-		/* Excel QAT: Shift+Alt+digit */
+		/* Excel QAT keytips: tap Alt, then Shift+digit. */
 		qat1: qat1 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 1 (Paste Format)";
@@ -81,9 +82,9 @@
 			wait-ms = <10>;
 			tap-ms = <10>;
 			bindings
-				= <&macro_press &kp LSHFT &kp LALT>
-				, <&macro_tap &kp N1>
-				, <&macro_release &kp LALT &kp LSHFT>;
+				= <&macro_tap &kp LALT>
+				, <&macro_wait_time 50>
+				, <&macro_tap &kp LS(N1)>;
 		};
 		qat3: qat3 {
 			compatible = "zmk,behavior-macro";
@@ -92,9 +93,9 @@
 			wait-ms = <10>;
 			tap-ms = <10>;
 			bindings
-				= <&macro_press &kp LSHFT &kp LALT>
-				, <&macro_tap &kp N3>
-				, <&macro_release &kp LALT &kp LSHFT>;
+				= <&macro_tap &kp LALT>
+				, <&macro_wait_time 50>
+				, <&macro_tap &kp LS(N3)>;
 		};
 		qat6: qat6 {
 			compatible = "zmk,behavior-macro";
@@ -114,9 +115,9 @@
 			wait-ms = <10>;
 			tap-ms = <10>;
 			bindings
-				= <&macro_press &kp LSHFT &kp LALT>
-				, <&macro_tap &kp N8>
-				, <&macro_release &kp LALT &kp LSHFT>;
+				= <&macro_tap &kp LALT>
+				, <&macro_wait_time 50>
+				, <&macro_tap &kp LS(N8)>;
 		};
 	};
 
