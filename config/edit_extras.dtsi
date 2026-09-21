@@ -7,10 +7,16 @@
  *
  * paste-values:
  *   Terminator -> Win+F13 (dacman)              : LG(F13)
- *   Neu        -> Win+V clipboard history, then Tab, Enter, wait, Enter
+ *   Neu        -> Win+V, wait, Tab, Enter, wait, Enter
  *
- * Excel QAT: Shift+Alt+digit (plain Alt+digit / Alt-then-digit were unreliable).
+ * Excel QAT (format / formulas / rev transpose): same as zmk-config numpad
+ * `m_las_n*` — tap Alt, wait 15ms, Shift+digit.
+ * Paste & transpose values: same as zmk-config `m_paste_transp`.
+ * Copy-as-picture stays Shift+Alt+6.
  */
+
+#define MACRO_WAIT_LAS   15
+#define MACRO_WAIT_CHORD 40
 
 / {
 	macros {
@@ -31,10 +37,10 @@
 				= <&macro_press &kp LGUI>
 				, <&macro_tap &kp FSLH>
 				, <&macro_release &kp LGUI>
-				, <&macro_wait_time 25>
+				, <&macro_wait_time 100>
 				, <&macro_tap &kp TAB>
 				, <&macro_tap &kp RET>
-				, <&macro_wait_time 25>
+				, <&macro_wait_time 100>
 				, <&macro_tap &kp RET>;
 		};
 
@@ -53,48 +59,38 @@
 			bindings = <&kp RC(LS(F))>;
 		};
 
-		/*
-		 * Excel "Paste & Transpose Values" -- mirrors the Z mouse macro exactly:
-		 *   RCtrl+LAlt+/ , release Ctrl , Alt+/ , Alt+K , release Alt , Enter
-		 */
+		/* Same as zmk-config m_paste_transp on the numpad layer. */
 		ptv: ptv {
 			compatible = "zmk,behavior-macro";
 			display-name = "Paste transpose values (Excel)";
 			#binding-cells = <0>;
-			wait-ms = <20>;
-			tap-ms = <10>;
-			bindings
-				= <&macro_press &kp RCTRL &kp LALT>
-				, <&macro_tap &kp FSLH>
-				, <&macro_release &kp RCTRL>
-				, <&macro_tap &kp FSLH>
-				, <&macro_tap &kp K>
-				, <&macro_release &kp LALT>
-				, <&macro_tap &kp RET>;
+			wait-ms = <MACRO_WAIT_CHORD>;
+			tap-ms = <1>;
+			bindings = <&kp RC(LA(FSLH)) &kp LA(FSLH) &kp K &kp ENTER>;
 		};
 
-		/* Excel QAT: Shift+Alt+digit */
+		/* Same as zmk-config m_las_n*: Alt, wait 15ms, Shift+digit. */
 		qat1: qat1 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 1 (Paste Format)";
 			#binding-cells = <0>;
-			wait-ms = <10>;
-			tap-ms = <10>;
+			wait-ms = <3>;
+			tap-ms = <1>;
 			bindings
-				= <&macro_press &kp LSHFT &kp LALT>
-				, <&macro_tap &kp N1>
-				, <&macro_release &kp LALT &kp LSHFT>;
+				= <&kp LALT>
+				, <&macro_wait_time MACRO_WAIT_LAS>
+				, <&kp LS(N1)>;
 		};
 		qat3: qat3 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 3 (Paste Formulas)";
 			#binding-cells = <0>;
-			wait-ms = <10>;
-			tap-ms = <10>;
+			wait-ms = <3>;
+			tap-ms = <1>;
 			bindings
-				= <&macro_press &kp LSHFT &kp LALT>
-				, <&macro_tap &kp N3>
-				, <&macro_release &kp LALT &kp LSHFT>;
+				= <&kp LALT>
+				, <&macro_wait_time MACRO_WAIT_LAS>
+				, <&kp LS(N3)>;
 		};
 		qat6: qat6 {
 			compatible = "zmk,behavior-macro";
@@ -111,12 +107,12 @@
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 8 (Rev Transpose)";
 			#binding-cells = <0>;
-			wait-ms = <10>;
-			tap-ms = <10>;
+			wait-ms = <3>;
+			tap-ms = <1>;
 			bindings
-				= <&macro_press &kp LSHFT &kp LALT>
-				, <&macro_tap &kp N8>
-				, <&macro_release &kp LALT &kp LSHFT>;
+				= <&kp LALT>
+				, <&macro_wait_time MACRO_WAIT_LAS>
+				, <&kp LS(N8)>;
 		};
 	};
 
