@@ -6,9 +6,11 @@
  * Left Ctrl).
  *
  * paste-values:
- *   Terminator -> Win+F13 (dacman) : LG(F13)   (F13 is layout-independent)
- *   Neu        -> Win+F13 (dacman) : LG(F13)   (same as Terminator / Z mouse;
- *                                Win+/ was popping the Start menu instead)
+ *   Terminator -> Win+F13 (dacman)              : LG(F13)
+ *   Neu        -> Win+V (Windows clipboard UX)  : V is at physical "/" on Neu
+ *                -> hold LGUI, tap FSLH, release LGUI
+ *                (a plain &kp LG(FSLH) was racing and popping the Start menu;
+ *                 Neu has no dacman, so F13 is useless there)
  *
  * unclose-tab = Ctrl+Shift+T:
  *   Terminator -> T is at physical "`" (grave) -> RC(LS(GRAVE))
@@ -29,10 +31,14 @@
 		};
 		macos_pv: macos_pv {
 			compatible = "zmk,behavior-macro";
-			display-name = "Paste values (Neu)";
+			display-name = "Paste values (Neu, Win+V clipboard)";
 			#binding-cells = <0>;
 			wait-ms = <10>;
-			bindings = <&kp LG(F13)>;
+			tap-ms = <10>;
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_tap &kp FSLH>
+				, <&macro_release &kp LGUI>;
 		};
 
 		winlin_unclose: winlin_unclose {

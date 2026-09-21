@@ -1,7 +1,7 @@
 layout: {zmk_keyboard: efogtech_trackball_0}
 layers:
   Default:
-  - {t: PLAY, h: media}
+  - {t: ENTER, h: snipe}
   - {t: ESC, h: scroll}
   - 'MIDDLE
 
@@ -13,7 +13,7 @@ layers:
   - 'RIGHT
 
     CLICK'
-  - {t: BACK, h: snipe}
+  - {t: BACK, h: media}
   - {t: CLOSE, h: system}
   - 'APP
 
@@ -94,6 +94,21 @@ layers:
   - UP
   - RIGHT
   - DOWN
+  Snipe:
+  - 'SNIPE
+
+    UNLOCK'
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
+  - LEFT
+  - UP
+  - RIGHT
+  - DOWN
   Excel:
   - 'PASTE
 
@@ -124,9 +139,7 @@ layers:
     CYCLE <'
   - TAB <
   Media:
-  - 'MEDIA
-
-    UNLOCK'
+  - PLAY
   - {t: ▽, type: trans}
   - PREV
   - NEXT
@@ -138,19 +151,6 @@ layers:
   - TAB >
   - VOL -
   - TAB <
-  Snipe:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - LEFT
-  - UP
-  - RIGHT
-  - DOWN
 combos:
 - p: [0, 1]
   k: {t: Excel, h: toggle}

@@ -5,9 +5,9 @@
 #define LAYER_EDIT         1
 #define LAYER_SYSTEM       2
 #define LAYER_SCROLL       3
-#define LAYER_EXCEL        4
-#define LAYER_MEDIA        5
-#define LAYER_SNIPE        6
+#define LAYER_SNIPE        4
+#define LAYER_EXCEL        5
+#define LAYER_MEDIA        6
 #endif
 
 / {
@@ -66,6 +66,13 @@
 			persistent;
 		};
 
+		layer_snipe {
+			event-type = "layer";
+			layer-index = <LAYER_SNIPE>;
+			colors = [ff 00 00];
+			persistent;
+		};
+
 		layer_excel {
 			event-type = "layer";
 			layer-index = <LAYER_EXCEL>;
@@ -77,13 +84,6 @@
 			event-type = "layer";
 			layer-index = <LAYER_MEDIA>;
 			colors = [00 00 00];
-			persistent;
-		};
-
-		layer_snipe {
-			event-type = "layer";
-			layer-index = <LAYER_SNIPE>;
-			colors = [ff 00 00];
 			persistent;
 		};
 

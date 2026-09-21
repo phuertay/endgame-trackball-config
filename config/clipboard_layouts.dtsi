@@ -22,6 +22,10 @@
  *   Terminator (slot 0):  C@0x2F->V   V@0x35->/   X@0x2C->Z   Z@0x2D->X
  *   Neu        (slot 1):  C@0x2D->X   V@0x35->/   X@0x2C->Z   Z@0x19->P
  *
+ * Undo/cut/copy/paste use an explicit press/release macro (key up BEFORE Ctrl
+ * up). A plain `&kp RC(...)` was releasing RCtrl while the letter was still
+ * down; AHK then saw a bare Z (Neu) and typed it.
+ *
  * We amend the macro nodes declared in the board's behaviors_macros.dtsi (which
  * the bst_copy/paste/cut/undo behaviors dispatch to) and relabel their
  * display-names from "OS" wording to the actual layout names.
@@ -30,43 +34,91 @@
 /* --- slot 0: Terminator layout (Right Ctrl modifier) --- */
 &winlin_copy {
 	display-name = "Copy (Terminator)";
-	bindings = <&kp RC(V)>;
+	wait-ms = <10>;
+	tap-ms = <10>;
+	bindings
+		= <&macro_press &kp RCTRL>
+		, <&macro_press &kp V>
+		, <&macro_release &kp V>
+		, <&macro_release &kp RCTRL>;
 };
 
 &winlin_paste {
 	display-name = "Paste (Terminator)";
-	bindings = <&kp RC(FSLH)>;
+	wait-ms = <10>;
+	tap-ms = <10>;
+	bindings
+		= <&macro_press &kp RCTRL>
+		, <&macro_press &kp FSLH>
+		, <&macro_release &kp FSLH>
+		, <&macro_release &kp RCTRL>;
 };
 
 &winlin_cut {
 	display-name = "Cut (Terminator)";
-	bindings = <&kp RC(Z)>;
+	wait-ms = <10>;
+	tap-ms = <10>;
+	bindings
+		= <&macro_press &kp RCTRL>
+		, <&macro_press &kp Z>
+		, <&macro_release &kp Z>
+		, <&macro_release &kp RCTRL>;
 };
 
 &winlin_undo {
 	display-name = "Undo (Terminator)";
-	bindings = <&kp RC(X)>;
+	wait-ms = <10>;
+	tap-ms = <10>;
+	bindings
+		= <&macro_press &kp RCTRL>
+		, <&macro_press &kp X>
+		, <&macro_release &kp X>
+		, <&macro_release &kp RCTRL>;
 };
 
 /* --- slot 1: Neu layout (Right Ctrl modifier) --- */
 &macos_copy {
 	display-name = "Copy (Neu)";
-	bindings = <&kp RC(X)>;
+	wait-ms = <10>;
+	tap-ms = <10>;
+	bindings
+		= <&macro_press &kp RCTRL>
+		, <&macro_press &kp X>
+		, <&macro_release &kp X>
+		, <&macro_release &kp RCTRL>;
 };
 
 &macos_paste {
 	display-name = "Paste (Neu)";
-	bindings = <&kp RC(FSLH)>;
+	wait-ms = <10>;
+	tap-ms = <10>;
+	bindings
+		= <&macro_press &kp RCTRL>
+		, <&macro_press &kp FSLH>
+		, <&macro_release &kp FSLH>
+		, <&macro_release &kp RCTRL>;
 };
 
 &macos_cut {
 	display-name = "Cut (Neu)";
-	bindings = <&kp RC(Z)>;
+	wait-ms = <10>;
+	tap-ms = <10>;
+	bindings
+		= <&macro_press &kp RCTRL>
+		, <&macro_press &kp Z>
+		, <&macro_release &kp Z>
+		, <&macro_release &kp RCTRL>;
 };
 
 &macos_undo {
 	display-name = "Undo (Neu)";
-	bindings = <&kp RC(P)>;
+	wait-ms = <10>;
+	tap-ms = <10>;
+	bindings
+		= <&macro_press &kp RCTRL>
+		, <&macro_press &kp P>
+		, <&macro_release &kp P>
+		, <&macro_release &kp RCTRL>;
 };
 
 /* --- selector display-names: it's a layout switch, not an OS switch --- */

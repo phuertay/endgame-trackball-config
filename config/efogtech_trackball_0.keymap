@@ -12,14 +12,14 @@
 #define LAYER_EDIT         1
 #define LAYER_SYSTEM       2
 #define LAYER_SCROLL       3
-#define LAYER_EXCEL        4
-#define LAYER_MEDIA        5
-#define LAYER_SNIPE        6
+#define LAYER_SNIPE        4
+#define LAYER_EXCEL        5
+#define LAYER_MEDIA        6
 #endif
 
 // Clipboard keys (copy/paste/cut/undo) remapped for the Terminator and Neu layouts.
 #include "clipboard_layouts.dtsi"
-// `ltlk` / `mdlk`: Escape/Play buttons that lock Scroll/Media on double-tap.
+// `ltlk` / `snlk`: Escape/Enter buttons that lock Scroll/Snipe on double-tap.
 #include "scroll_lock.dtsi"
 // Advanced scaling: make both bistable "OS" slots use the same snipe/twist/dragscroll divisors.
 #include "scaling.dtsi"
@@ -34,20 +34,20 @@
 	keymap {
 		compatible = "zmk,keymap";
 
-		// pos0 -> Media (tap Play / hold momentary / double-tap lock),
+		// pos0 -> Snipe (tap Enter / hold momentary / double-tap lock),
 		// pos1 -> Scroll (tap Esc / hold momentary / double-tap lock),
-		// hold pos3 -> Edit, hold pos6 -> Snipe, hold pos7 -> System;
-		// combo 0+1 -> Excel. Sticky layers (Scroll/Media) leave hands free for
-		// encoders; Snipe is momentary and sits above Media so it can override
-		// the encoders while held. Shortcut layers (Edit/System) are momentary.
+		// hold pos3 -> Edit, hold pos6 -> Media, hold pos7 -> System;
+		// combo 0+1 -> Excel. Trackball layers (Scroll/Snipe) are sticky;
+		// shortcut layers (Edit/Media/System) are momentary (only while held).
+		// Media sits above Snipe so volume encoders win while Media is held.
 		default_layer {
 			display-name = "Default";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &mdlk                     &ltlk
+			    &snlk                     &ltlk
 			    &mkp MCLK                 &cdch LAYER_EDIT 0
 			    &mkp LCLK                 &mkp RCLK
-			    &ltm LAYER_SNIPE MB4      &ltm LAYER_SYSTEM MB5
+			    &ltm LAYER_MEDIA MB4      &ltm LAYER_SYSTEM MB5
 
 			    // encoders: left = Alt-Tab app switch, right = Ctrl+PgUp/Dn tabs
 			    &at TAB                   &kp RC(PG_DN)
@@ -103,6 +103,22 @@
 		    >;
 		};
 
+		// Snipe: sticky trackball layer. pos0 single-tap unlocks (drops out).
+		snipe_layer {
+			display-name = "Snipe";
+			DECLARE_ENCODERS;
+			bindings = <
+			    &tog LAYER_SNIPE  &trans
+			    &trans     &trans
+			    &trans     &trans
+			    &trans     &trans
+
+			    // encoders (arrows): left = Left/Right, right = Up/Down
+			    &kp LEFT   &kp UP
+			    &kp RIGHT  &kp DOWN
+		    >;
+		};
+
 		// Excel: reached by combo (top two buttons); tap Back (pos7) to leave.
 		// These fire Quick-Access-Toolbar buttons via Alt+<position>. Digits
 		// aren't remapped by the Terminator/Neu layouts, so a single &kp works
@@ -129,36 +145,20 @@
 		    >;
 		};
 
-		// Media: sticky trackball layer (pos0 double-tap lock). pos0 single-tap
-		// unlocks. Encoders usable with hands free once locked.
+		// Media: reached by holding pos6. Momentary; sits above Snipe so volume
+		// encoders win while held even if Snipe is locked.
 		media_layer {
 			display-name = "Media";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &tog LAYER_MEDIA  &trans
-			    &kp C_PREV        &kp C_NEXT
-			    &trans            &trans
-			    &trans            &to LAYER_DEFAULT
+			    &kp C_PLAY      &trans
+			    &kp C_PREV      &kp C_NEXT
+			    &trans          &trans
+			    &trans          &to LAYER_DEFAULT
 
 			    // encoders: left = volume (direction matched to sens fix), right = tabs
-			    &kp C_VOL_UP      &kp RC(PG_DN)
-			    &kp C_VOL_DN      &kp RC(PG_UP)
-		    >;
-		};
-
-		// Snipe: momentary (hold pos6). Sits above Media so its encoders win while held.
-		snipe_layer {
-			display-name = "Snipe";
-			DECLARE_ENCODERS;
-			bindings = <
-			    &trans     &trans
-			    &trans     &trans
-			    &trans     &trans
-			    &trans     &trans
-
-			    // encoders (arrows): left = Left/Right, right = Up/Down
-			    &kp LEFT   &kp UP
-			    &kp RIGHT  &kp DOWN
+			    &kp C_VOL_UP    &kp RC(PG_DN)
+			    &kp C_VOL_DN    &kp RC(PG_UP)
 		    >;
 		};
 	};

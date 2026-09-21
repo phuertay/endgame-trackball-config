@@ -1,13 +1,13 @@
 parse_config:
   raw_binding_map:
-    "&mdlk": {t: "PLAY", h: "media"}
+    "&snlk": {t: "ENTER", h: "snipe"}
     "&ltlk": {t: "ESC", h: "scroll"}
     "&cdch 1 0": {t: "COPY / PASTE", h: "edit"}
     "&cdc": {t: "COPY", s: "PASTE"}
     "&mkp MCLK": "MIDDLE\nCLICK"
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
-    "&ltm 6 MB4": {t: "BACK", h: "snipe"}
+    "&ltm 6 MB4": {t: "BACK", h: "media"}
     "&ltm 2 MB5": {t: "CLOSE", h: "system"}
     "&at TAB": "APP\nCYCLE >"
     "&at LS(TAB)": "APP\nCYCLE <"
@@ -34,7 +34,7 @@ parse_config:
     "&scrlsens P2SM_INC 1": "SCROLL\nSENS +"
     "&scrlsens P2SM_DEC 1": "SCROLL\nSENS -"
     "&tog 3": {t: "SCROLL\nLOCK"}
-    "&tog 5": {t: "MEDIA\nUNLOCK"}
+    "&tog 4": {t: "SNIPE\nUNLOCK"}
     "&kp RCTRL": "ZOOM\n(hold)"
     "&to 0": "BACK"
     "&kp C_PLAY": "PLAY"
