@@ -1,39 +1,22 @@
 /*
- * App switch: two modes.
+ * Alt-Tab via zmk-tri-state (Callum/urob swapper).
+ * https://github.com/dhruvinsh/zmk-tri-state
  *
- * Default layer: middle button stays undecided until you either move the ball
- * (middle-click hold / drag) or turn the left encoder (`&mea` → Left Alt + Tab).
- * Release with neither → middle-click tap. No auto-hold timer.
- *
- * Edit / Excel: encoder Alt-Tab swapper (`&at`) with a short commit window;
- * every tick re-asserts Alt so mid-session drops recover.
+ * First activation: hold Alt + tap Tab. Further activations: Tab only.
+ * Any other key (except ignored positions) releases Alt.
+ * Pos 10 = left-encoder CW bound to LS(TAB) for reverse.
  */
 
 #include <dt-bindings/zmk/keys.h>
 
 / {
 	behaviors {
-		at: alt_tab {
-			compatible = "zmk,behavior-alt-tab";
-			display-name = "Alt-Tab (app switch)";
-			#binding-cells = <1>;
-			hold-key = <LEFT_ALT>;
-			/* Short so the switcher commits quickly after you stop spinning.
-			 * Alt is re-asserted on every tick (see behavior_alt_tab.c). */
-			release-after-ms = <450>;
-		};
-
-		mca: mclk-alt {
-			compatible = "zmk,behavior-mclk-alt";
-			display-name = "Middle undecided (ball=MCLK, encoder=Alt)";
+		swap: swapper {
+			compatible = "zmk,behavior-tri-state";
 			#binding-cells = <0>;
-			motion-threshold = <2>;
-		};
-
-		mea: middle-encoder-alt {
-			compatible = "zmk,behavior-middle-encoder-alt";
-			display-name = "Encoder Tab (resolves middle to Alt)";
-			#binding-cells = <1>;
+			display-name = "Alt-Tab swapper";
+			bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+			ignored-key-positions = <10>;
 		};
 	};
 };

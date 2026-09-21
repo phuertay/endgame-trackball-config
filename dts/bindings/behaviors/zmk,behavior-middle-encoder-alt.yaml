@@ -1,7 +1,0 @@
-description: |
-  Left-encoder binding for middle-undecided Alt-Tab. If middle is undecided,
-  resolves it to Left Alt, then taps param1 (TAB or LS(TAB)).
-
-compatible: "zmk,behavior-middle-encoder-alt"
-
-include: one_param.yaml

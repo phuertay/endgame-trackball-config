@@ -3,11 +3,9 @@ layers:
   Default:
   - {t: ENTER, h: media}
   - {t: ESC, h: scroll}
-  - {t: 'MIDDLE
+  - 'MIDDLE
 
-      CLICK', h: 'ball=drag
-
-      enc=Alt'}
+    CLICK'
   - {t: COPY / PASTE, h: edit}
   - 'LEFT
 

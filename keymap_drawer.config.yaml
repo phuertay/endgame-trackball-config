@@ -6,18 +6,13 @@ parse_config:
     "&ltmkp 6 ENTER": {t: "ENTER", h: "media"}
     "&cdch 1 0": {t: "COPY / PASTE", h: "edit"}
     "&cdc": {t: "COPY", s: "PASTE"}
-    "&mca": {t: "MIDDLE\nCLICK", h: "ball=drag\nenc=Alt"}
     "&mkp MCLK": "MIDDLE\nCLICK"
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
     "&ltm 2 MB5": {t: "CLOSE", h: "system"}
-    "&at TAB": "APP\nCYCLE >"
-    "&at LS(TAB)": "APP\nCYCLE <"
-    "&mea TAB": "APP\nCYCLE >"
-    "&mea LS(TAB)": "APP\nCYCLE <"
-    "&mea 0x7002b": "APP\nCYCLE >"
+    "&swap": "APP\nCYCLE >"
     "&kp TAB": "TAB"
-    "&kp LS(TAB)": "SHIFT\nTAB"
+    "&kp LS(TAB)": "APP\nCYCLE <"
     "&bst_copy": "COPY"
     "&bst_paste": "PASTE"
     "&bst_cut": "CUT"
