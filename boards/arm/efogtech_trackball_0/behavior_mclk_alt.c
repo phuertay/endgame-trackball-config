@@ -7,10 +7,9 @@
  *   Release undecided → tap middle-click.
  *   Release after encoder → release Alt (commit app switch).
  *
- * Alt stays down across encoder detents so Tab cycles the MRU list (3 clicks
- * → third app), not A↔B toggling. Alt is re-asserted every detent (same idea
- * as `&at`) and only released when middle is released. First Alt→Tab waits
- * 25ms so the OS sees Alt held before Tab.
+ * Alt is held with stock ZMK `&kt_on` / `&kt_off` (the same primitive used by
+ * the Callum/urob swapper / zmk-tri-state). That keeps Alt down across Tabs so
+ * the MRU list cycles; middle release turns Alt off.
  */
 
 #define DT_DRV_COMPAT zmk_input_processor_mclk_alt
@@ -45,7 +44,6 @@ enum mclk_alt_mode {
 static enum mclk_alt_mode mclk_alt_mode;
 static int mclk_alt_motion_threshold = 2;
 static bool mclk_alt_alt_down;
-static uint8_t mclk_alt_alt_press_balance;
 
 static const struct device *mclk_alt_mkp_dev(void) {
     return DEVICE_DT_GET(DT_NODELABEL(mkp));
@@ -60,20 +58,35 @@ static void mclk_alt_set_mclk(bool pressed) {
     input_report_key(mkp, INPUT_BTN_0 + 2, pressed ? 1 : 0, true, K_FOREVER);
 }
 
-/* Press Alt (or re-assert). Balance presses so middle-release can drain them. */
+/* Stock key-toggle on/off — same as ZMK docs / tri-state swapper. */
+static void mclk_alt_invoke_kt(bool on, int64_t timestamp) {
+    struct zmk_behavior_binding binding = {
+        .behavior_dev = on ? DEVICE_DT_NAME(DT_NODELABEL(kt_on))
+                           : DEVICE_DT_NAME(DT_NODELABEL(kt_off)),
+        .param1 = LALT,
+    };
+    struct zmk_behavior_binding_event event = {
+        .position = 0,
+        .timestamp = timestamp,
+    };
+    zmk_behavior_invoke_binding(&binding, event, true);
+}
+
 static void mclk_alt_hold_alt(int64_t timestamp) {
-    raise_zmk_keycode_state_changed_from_encoded(LEFT_ALT, true, timestamp);
-    if (mclk_alt_alt_press_balance < 255) {
-        mclk_alt_alt_press_balance++;
+    if (mclk_alt_alt_down) {
+        /* Re-assert like community swappers do on repeat activation. */
+        mclk_alt_invoke_kt(true, timestamp);
+        return;
     }
+    mclk_alt_invoke_kt(true, timestamp);
     mclk_alt_alt_down = true;
 }
 
 static void mclk_alt_release_alt(int64_t timestamp) {
-    while (mclk_alt_alt_press_balance > 0) {
-        raise_zmk_keycode_state_changed_from_encoded(LEFT_ALT, false, timestamp);
-        mclk_alt_alt_press_balance--;
+    if (!mclk_alt_alt_down) {
+        return;
     }
+    mclk_alt_invoke_kt(false, timestamp);
     mclk_alt_alt_down = false;
 }
 
@@ -86,7 +99,6 @@ static void mclk_alt_resolve_mclk(void) {
     LOG_DBG("middle undecided -> MCLK hold");
 }
 
-/* Arm Alt-Tab session (middle was held); do not press Alt yet. */
 static bool mclk_alt_arm_encoder(void) {
     if (mclk_alt_mode == MCLK_ALT_ALT) {
         return true;
@@ -131,7 +143,6 @@ static int mclk_alt_ip_init(const struct device *dev) {
     ARG_UNUSED(dev);
     mclk_alt_mode = MCLK_ALT_IDLE;
     mclk_alt_alt_down = false;
-    mclk_alt_alt_press_balance = 0;
     return 0;
 }
 
@@ -164,7 +175,6 @@ static int on_mca_released(struct zmk_behavior_binding *binding,
 
     switch (mode) {
     case MCLK_ALT_UNDECIDED:
-        /* Quick tap → middle click */
         mclk_alt_set_mclk(true);
         mclk_alt_set_mclk(false);
         LOG_DBG("middle release undecided -> MCLK tap");
@@ -175,7 +185,7 @@ static int on_mca_released(struct zmk_behavior_binding *binding,
         break;
     case MCLK_ALT_ALT:
         mclk_alt_release_alt(event.timestamp);
-        LOG_DBG("middle release -> Alt up (commit switcher)");
+        LOG_DBG("middle release -> Alt off (commit switcher)");
         break;
     default:
         break;
@@ -203,7 +213,7 @@ static int mca_init(const struct device *dev) {
 
 DT_INST_FOREACH_STATUS_OKAY(MCA_INST)
 
-/* --- left-encoder Tab while middle holds Alt for the session --- */
+/* --- left-encoder Tab while middle holds Alt --- */
 
 #undef DT_DRV_COMPAT
 #define DT_DRV_COMPAT zmk_behavior_middle_encoder_alt
@@ -214,13 +224,11 @@ static bool mea_key_down;
 static int on_mea_pressed(struct zmk_behavior_binding *binding,
                           struct zmk_behavior_binding_event event) {
     if (!mclk_alt_arm_encoder()) {
-        /* Middle not held — ignore (no bare Tab / no unsolicited Alt-Tab). */
         mea_key_down = false;
         return ZMK_BEHAVIOR_OPAQUE;
     }
 
     bool first_alt = !mclk_alt_alt_down;
-    /* Re-assert every detent so a mid-session Alt drop does not leave bare Tab. */
     mclk_alt_hold_alt(event.timestamp);
     if (first_alt) {
         k_msleep(CONFIG_ZMK_MCLK_ALT_TAB_DELAY_MS);
@@ -239,7 +247,6 @@ static int on_mea_released(struct zmk_behavior_binding *binding,
         mea_key_down = false;
         raise_zmk_keycode_state_changed_from_encoded(mea_held_keycode, false, event.timestamp);
     }
-    /* Keep Alt down until middle release so further Tabs cycle the list. */
     return ZMK_BEHAVIOR_OPAQUE;
 }
 

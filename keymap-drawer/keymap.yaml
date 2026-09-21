@@ -44,9 +44,9 @@ layers:
 
     CYCLE >'
   - TAB <
-  - 'APP
+  - 'SHIFT
 
-    CYCLE <'
+    TAB'
   - TAB >
   System:
   - 'MUI /
@@ -140,9 +140,9 @@ layers:
 
     CYCLE >'
   - TAB <
-  - 'APP
+  - 'SHIFT
 
-    CYCLE <'
+    TAB'
   - TAB >
   Media:
   - {t: ▽, type: trans}

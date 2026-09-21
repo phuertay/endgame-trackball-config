@@ -1,27 +1,46 @@
 /*
  * App switch: two modes.
  *
- * Default layer: middle button stays undecided until you either move the ball
- * (middle-click hold / drag) or turn the left encoder (`&mea` → hold Alt for
- * the session, Tab each detent; release middle to commit). Release with
- * neither → middle-click tap.
+ * Default (middle-gated): undecided middle — ball = MCLK drag, encoder =
+ * hold Alt for the session + Tab each detent (`&mea`). Alt uses stock
+ * `&kt_on` / `&kt_off` (ZMK's documented Alt-Tab mechanism). Release middle
+ * to commit.
  *
- * Edit / Excel: encoder Alt-Tab swapper (`&at`) with a short commit window;
- * every tick re-asserts Alt so mid-session drops recover.
+ * Edit / Excel: Callum/urob swapper via zmk-tri-state (`&swap` / reverse
+ * with ignored LS(TAB)). Other keys end the session (no timer flake).
  */
 
 #include <dt-bindings/zmk/keys.h>
 
 / {
 	behaviors {
-		at: alt_tab {
-			compatible = "zmk,behavior-alt-tab";
-			display-name = "Alt-Tab (app switch)";
+		/* Stock key-toggle on/off — same primitive the swapper uses. */
+		kt_on: key_toggle_on {
+			compatible = "zmk,behavior-key-toggle";
 			#binding-cells = <1>;
-			hold-key = <LEFT_ALT>;
-			/* Short so the switcher commits quickly after you stop spinning.
-			 * Alt is re-asserted on every tick (see behavior_alt_tab.c). */
-			release-after-ms = <450>;
+			display-name = "Key Toggle On";
+			toggle-mode = "on";
+		};
+
+		kt_off: key_toggle_off {
+			compatible = "zmk,behavior-key-toggle";
+			#binding-cells = <1>;
+			display-name = "Key Toggle Off";
+			toggle-mode = "off";
+		};
+
+		/*
+		 * Classic swapper: start = kt Alt + Tab, continue = Tab,
+		 * interrupt (other key) = kt Alt off.
+		 * https://github.com/dhruvinsh/zmk-tri-state
+		 * Pos 10 = left-encoder CW (LS(TAB)) — ignored so reverse works.
+		 */
+		swap: swapper {
+			compatible = "zmk,behavior-tri-state";
+			#binding-cells = <0>;
+			display-name = "Alt-Tab swapper";
+			bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+			ignored-key-positions = <10>;
 		};
 
 		mca: mclk-alt {

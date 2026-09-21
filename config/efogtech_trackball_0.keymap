@@ -58,9 +58,9 @@
 			    &pv            &kp PSCRN
 			    &bst_undo      &unclose
 
-			    // encoders: auto Alt-Tab swapper (short commit) / tabs
-			    &at TAB        &kp RC(PG_UP)
-			    &at LS(TAB)    &kp RC(PG_DN)
+			    // encoders: tri-state Alt-Tab swapper / tabs
+			    &swap          &kp RC(PG_UP)
+			    &kp LS(TAB)    &kp RC(PG_DN)
 		    >;
 		};
 
@@ -115,8 +115,8 @@
 			    &mkp LCLK    &ptv
 			    &qat6        &to LAYER_DEFAULT
 
-			    &at TAB        &kp RC(PG_UP)
-			    &at LS(TAB)    &kp RC(PG_DN)
+			    &swap          &kp RC(PG_UP)
+			    &kp LS(TAB)    &kp RC(PG_DN)
 		    >;
 		};
 

@@ -11,6 +11,7 @@ parse_config:
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
     "&ltm 2 MB5": {t: "CLOSE", h: "system"}
+    "&swap": "APP\nCYCLE >"
     "&at TAB": "APP\nCYCLE >"
     "&at LS(TAB)": "APP\nCYCLE <"
     "&mea TAB": "APP\nCYCLE >"
