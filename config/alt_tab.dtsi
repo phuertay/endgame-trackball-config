@@ -2,8 +2,8 @@
  * App switch: two modes.
  *
  * Default layer: middle button stays undecided until you either move the ball
- * (middle-click hold / drag) or turn the left encoder (`&mea` → Left Alt + Tab).
- * Release with neither → middle-click tap. No auto-hold timer.
+ * (middle-click hold / drag) or turn the left encoder (`&mea` → one Alt+Tab
+ * chord per detent). Release with neither → middle-click tap.
  *
  * Edit / Excel: encoder Alt-Tab swapper (`&at`) with a short commit window;
  * every tick re-asserts Alt so mid-session drops recover.
@@ -32,7 +32,7 @@
 
 		mea: middle-encoder-alt {
 			compatible = "zmk,behavior-middle-encoder-alt";
-			display-name = "Encoder Tab (resolves middle to Alt)";
+			display-name = "Encoder Alt+Tab chord (while middle held)";
 			#binding-cells = <1>;
 		};
 	};
