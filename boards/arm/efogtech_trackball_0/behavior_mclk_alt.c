@@ -3,14 +3,14 @@
  *
  * Press middle → undecided (emit nothing yet).
  *   Ball moves  → hold middle-click (MMB drag).
- *   Left encoder → one Alt+Tab chord per detent (see `&mea`), marks session
- *                  so middle-release does not tap MCLK.
+ *   Left encoder → hold Left Alt for the session, Tab each detent (`&mea`).
  *   Release undecided → tap middle-click.
+ *   Release after encoder → release Alt (commit app switch).
  *
- * Each encoder detent is a full Alt↓ … Tab … Alt↑ chord (25ms after Alt so
- * Windows sees Alt held first). Keeping Alt down across detents looked right
- * in HID logs but the switcher still died after tick 1 (bare Tab afterward);
- * per-tick chords make every detent switch reliably.
+ * Alt stays down across encoder detents so Tab cycles the MRU list (3 clicks
+ * → third app), not A↔B toggling. Alt is re-asserted every detent (same idea
+ * as `&at`) and only released when middle is released. First Alt→Tab waits
+ * 25ms so the OS sees Alt held before Tab.
  */
 
 #define DT_DRV_COMPAT zmk_input_processor_mclk_alt
@@ -45,6 +45,7 @@ enum mclk_alt_mode {
 static enum mclk_alt_mode mclk_alt_mode;
 static int mclk_alt_motion_threshold = 2;
 static bool mclk_alt_alt_down;
+static uint8_t mclk_alt_alt_press_balance;
 
 static const struct device *mclk_alt_mkp_dev(void) {
     return DEVICE_DT_GET(DT_NODELABEL(mkp));
@@ -59,12 +60,21 @@ static void mclk_alt_set_mclk(bool pressed) {
     input_report_key(mkp, INPUT_BTN_0 + 2, pressed ? 1 : 0, true, K_FOREVER);
 }
 
-static void mclk_alt_set_alt(bool pressed, int64_t timestamp) {
-    if (pressed == mclk_alt_alt_down) {
-        return;
+/* Press Alt (or re-assert). Balance presses so middle-release can drain them. */
+static void mclk_alt_hold_alt(int64_t timestamp) {
+    raise_zmk_keycode_state_changed_from_encoded(LEFT_ALT, true, timestamp);
+    if (mclk_alt_alt_press_balance < 255) {
+        mclk_alt_alt_press_balance++;
     }
-    mclk_alt_alt_down = pressed;
-    raise_zmk_keycode_state_changed_from_encoded(LEFT_ALT, pressed, timestamp);
+    mclk_alt_alt_down = true;
+}
+
+static void mclk_alt_release_alt(int64_t timestamp) {
+    while (mclk_alt_alt_press_balance > 0) {
+        raise_zmk_keycode_state_changed_from_encoded(LEFT_ALT, false, timestamp);
+        mclk_alt_alt_press_balance--;
+    }
+    mclk_alt_alt_down = false;
 }
 
 static void mclk_alt_resolve_mclk(void) {
@@ -121,6 +131,7 @@ static int mclk_alt_ip_init(const struct device *dev) {
     ARG_UNUSED(dev);
     mclk_alt_mode = MCLK_ALT_IDLE;
     mclk_alt_alt_down = false;
+    mclk_alt_alt_press_balance = 0;
     return 0;
 }
 
@@ -163,9 +174,8 @@ static int on_mca_released(struct zmk_behavior_binding *binding,
         LOG_DBG("middle release -> MCLK up");
         break;
     case MCLK_ALT_ALT:
-        /* Encoder chords already release Alt each detent; clear any leftover. */
-        mclk_alt_set_alt(false, event.timestamp);
-        LOG_DBG("middle release -> Alt-Tab session end");
+        mclk_alt_release_alt(event.timestamp);
+        LOG_DBG("middle release -> Alt up (commit switcher)");
         break;
     default:
         break;
@@ -193,7 +203,7 @@ static int mca_init(const struct device *dev) {
 
 DT_INST_FOREACH_STATUS_OKAY(MCA_INST)
 
-/* --- left-encoder: one Alt+Tab chord per detent while middle is held --- */
+/* --- left-encoder Tab while middle holds Alt for the session --- */
 
 #undef DT_DRV_COMPAT
 #define DT_DRV_COMPAT zmk_behavior_middle_encoder_alt
@@ -209,9 +219,12 @@ static int on_mea_pressed(struct zmk_behavior_binding *binding,
         return ZMK_BEHAVIOR_OPAQUE;
     }
 
-    /* Full chord per detent: Alt must be down before Tab for the OS switcher. */
-    mclk_alt_set_alt(true, event.timestamp);
-    k_msleep(CONFIG_ZMK_MCLK_ALT_TAB_DELAY_MS);
+    bool first_alt = !mclk_alt_alt_down;
+    /* Re-assert every detent so a mid-session Alt drop does not leave bare Tab. */
+    mclk_alt_hold_alt(event.timestamp);
+    if (first_alt) {
+        k_msleep(CONFIG_ZMK_MCLK_ALT_TAB_DELAY_MS);
+    }
 
     mea_held_keycode = binding->param1;
     mea_key_down = true;
@@ -226,8 +239,7 @@ static int on_mea_released(struct zmk_behavior_binding *binding,
         mea_key_down = false;
         raise_zmk_keycode_state_changed_from_encoded(mea_held_keycode, false, event.timestamp);
     }
-    /* Finish the chord so this detent commits even if Alt was dropped mid-hold. */
-    mclk_alt_set_alt(false, event.timestamp);
+    /* Keep Alt down until middle release so further Tabs cycle the list. */
     return ZMK_BEHAVIOR_OPAQUE;
 }
 

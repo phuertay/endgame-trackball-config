@@ -41,7 +41,7 @@
 			    &mkp LCLK                 &mkp RCLK
 			    &snlk                     &ltm LAYER_SYSTEM MB5
 
-			    // left encoder: Alt+Tab chord per detent while middle held; right = tabs
+			    // left encoder: hold Alt (via middle) + Tab per detent; right = tabs
 			    &mea TAB                  &kp RC(PG_UP)
 			    &mea LS(TAB)              &kp RC(PG_DN)
 		    >;
