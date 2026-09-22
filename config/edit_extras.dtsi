@@ -19,7 +19,7 @@
  * Excel QAT: quick Alt tap, then a per-key wait, then Shift+digit.
  *   Paste format (1)     100ms
  *   Paste formulas (3)   200ms
- *   Copy as picture (6)  100ms
+ *   Copy as picture (6)  100ms, then 200ms, Down, Enter
  *   Rev transpose (8)     50ms
  *
  * Neu/Terminator remap the number row (base=symbols, Shift=digits), and the
@@ -32,6 +32,7 @@
  * Both layouts mark Shift+Alt as an invalid shift state. A Shift+Alt+N6
  * chord never yields digit 6: AHK names that key ")" because Neu's unshifted
  * glyph for VK 6 (scancode 0x07) is ")". Alt must be released before Shift+N6.
+ * After that digit, wait 200ms for the Copy Picture dialog, then Down, Enter.
  *
  * Paste & transpose values: same as zmk-config `m_paste_transp`.
  */
@@ -120,13 +121,22 @@
 			tap-ms = <10>;
 			bindings = <&kp LALT &kp LS(N2)>;
 		};
+		/* Alt, 100ms, Shift+6, then 200ms for the Copy Picture dialog,
+		 * Down, 50ms, Enter. macro_wait_time sets the delay after the
+		 * next key's release, so the dialog pause is armed on LS(N6).
+		 */
 		qat6: qat6 {
 			compatible = "zmk,behavior-macro";
 			display-name = "QAT 6 (Copy as Picture)";
 			#binding-cells = <0>;
 			wait-ms = <100>;
 			tap-ms = <10>;
-			bindings = <&kp LALT &kp LS(N6)>;
+			bindings
+				= <&kp LALT>
+				, <&macro_wait_time 200>
+				, <&kp LS(N6)>
+				, <&macro_wait_time 50>
+				, <&kp DOWN &kp ENTER>;
 		};
 		qat8: qat8 {
 			compatible = "zmk,behavior-macro";
