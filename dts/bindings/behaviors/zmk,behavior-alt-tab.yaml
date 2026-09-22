@@ -1,0 +1,18 @@
+description: |
+  Encoder Alt-Tab. Each activation ensures Left Alt is down, then taps param1
+  (Tab or Shift+Tab). Alt stays down across activations and is released after
+  release-after-ms of inactivity, which commits the OS app switcher.
+
+compatible: "zmk,behavior-alt-tab"
+
+include: one_param.yaml
+
+properties:
+  hold-key:
+    type: int
+    required: true
+    description: Encoded keycode of the modifier to hold across activations (e.g. LEFT_ALT).
+  release-after-ms:
+    type: int
+    default: 500
+    description: Milliseconds of inactivity after which the held modifier is released.
