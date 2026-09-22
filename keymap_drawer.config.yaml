@@ -10,7 +10,8 @@ parse_config:
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
     "&syslk": {t: "CLOSE", h: "system", s: "2× RELOAD"}
-    "&swap": "APP\nCYCLE >"
+    "&at TAB": "APP\nCYCLE >"
+    "&at LS(TAB)": "APP\nCYCLE <"
     "&kp TAB": "TAB"
     "&kp LS(TAB)": "APP\nCYCLE <"
     "&bst_copy": "COPY"
