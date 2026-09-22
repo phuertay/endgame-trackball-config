@@ -12,6 +12,8 @@
  *                &macro_wait_time does not pause where it is written; it
  *                sets the delay after the next queued press/release. The
  *                pauses are armed on the Win release and the first Enter.
+ *                Each key is held for at least MACRO_HOLD_MS (tap-ms, and
+ *                wait-ms between press and release for the Win+V chord).
  *
  * Excel QAT: quick Alt tap, then a per-key wait, then Shift+digit.
  *   Paste format (1)     100ms
@@ -23,6 +25,7 @@
 
 #define MACRO_WAIT_CHORD 40
 #define MACRO_WAIT_PV    200
+#define MACRO_HOLD_MS    7
 
 / {
 	macros {
@@ -37,19 +40,19 @@
 			compatible = "zmk,behavior-macro";
 			display-name = "Paste values (Neu, Win+V clipboard)";
 			#binding-cells = <0>;
-			wait-ms = <10>;
-			tap-ms = <10>;
+			wait-ms = <MACRO_HOLD_MS>;
+			tap-ms = <MACRO_HOLD_MS>;
 			bindings
 				= <&macro_press &kp LGUI>
 				, <&macro_press &kp FSLH>
 				, <&macro_release &kp FSLH>
 				, <&macro_wait_time MACRO_WAIT_PV>
 				, <&macro_release &kp LGUI>
-				, <&macro_wait_time 10>
+				, <&macro_wait_time MACRO_HOLD_MS>
 				, <&macro_tap &kp TAB>
 				, <&macro_wait_time MACRO_WAIT_PV>
 				, <&macro_tap &kp RET>
-				, <&macro_wait_time 10>
+				, <&macro_wait_time MACRO_HOLD_MS>
 				, <&macro_tap &kp RET>;
 		};
 
