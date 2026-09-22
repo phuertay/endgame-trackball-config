@@ -7,7 +7,7 @@
  *
  * paste-values:
  *   Terminator -> Win+F13 (dacman)              : LG(F13)
- *   Neu        -> Win+V, wait 200, Tab, Enter, wait 200, Enter
+ *   Neu        -> Win+V, wait 500, Tab, Enter, wait 500, Enter
  *                V is physical "/" (FSLH) on Neu.
  *                &macro_wait_time does not pause where it is written; it
  *                sets the delay after the next queued press/release. The
@@ -24,7 +24,7 @@
  */
 
 #define MACRO_WAIT_CHORD 40
-#define MACRO_WAIT_PV    200
+#define MACRO_WAIT_PV    500
 #define MACRO_HOLD_MS    7
 
 / {
