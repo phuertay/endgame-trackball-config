@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import re
 import sys
+from collections import defaultdict
 from pathlib import Path
 
 # Nested <svg> glyph defs from keymap-drawer do not paint under rsvg-convert.
@@ -17,6 +18,14 @@ _BT_PATH = (
 _BT_SYMBOL = (
     f'<symbol id="mdi:bluetooth" viewBox="0 0 24 24">'
     f'<path fill="#1a1d21" d="{_BT_PATH}"/></symbol>'
+)
+
+_LAYER_RE = re.compile(
+    r'<g transform="translate\(([\d.]+),\s*([\d.]+)\)" class="layer-([^"]+)">'
+)
+_KEY_RE = re.compile(
+    r'transform="translate\(([\d.-]+),\s*([\d.-]+)\)" class="key keypos-(\d+)"[^>]*>\s*'
+    r'<rect[^>]*x="([^"]+)"[^>]*y="([^"]+)"[^>]*width="([^"]+)"[^>]*height="([^"]+)"',
 )
 
 
@@ -54,6 +63,89 @@ def _fix_bluetooth_glyphs(svg: str) -> str:
     return svg
 
 
+def _layer_chunks(svg: str) -> list[tuple[str, float, float, str]]:
+    """Return (name, x, y, inner_svg) for each layer group."""
+    starts = list(_LAYER_RE.finditer(svg))
+    out: list[tuple[str, float, float, str]] = []
+    for i, m in enumerate(starts):
+        end = starts[i + 1].start() if i + 1 < len(starts) else len(svg)
+        out.append((m.group(3), float(m.group(1)), float(m.group(2)), svg[m.end() : end]))
+    return out
+
+
+def _key_bounds(chunk: str) -> list[dict[str, float]]:
+    keys: list[dict[str, float]] = []
+    for m in _KEY_RE.finditer(chunk):
+        kx, ky, pos, rx, ry, rw, rh = m.groups()
+        kx, ky, rx, ry, rw, rh = map(float, (kx, ky, rx, ry, rw, rh))
+        keys.append(
+            {
+                "pos": float(pos),
+                "left": kx + rx,
+                "right": kx + rx + rw,
+                "top": ky + ry,
+                "bottom": ky + ry + rh,
+            }
+        )
+    return keys
+
+
+def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
+    """H gutters between layer rows; V through each keyboard's L/R half-gap."""
+    margin = 24.0
+    layers = _layer_chunks(svg)
+    if not layers:
+        return []
+
+    # Per layer: absolute content bottom + relative L/R half-gap midpoint.
+    row_bottoms: dict[float, float] = defaultdict(float)
+    col_gap_x: dict[float, float] = {}
+    for _name, lx, ly, chunk in layers:
+        keys = _key_bounds(chunk)
+        if not keys:
+            continue
+        bottom = max(k["bottom"] for k in keys)
+        row_bottoms[ly] = max(row_bottoms[ly], ly + bottom)
+
+        left = [k for k in keys if int(k["pos"]) % 2 == 0]
+        right = [k for k in keys if int(k["pos"]) % 2 == 1]
+        if left and right:
+            gap_mid = (max(k["right"] for k in left) + min(k["left"] for k in right)) / 2
+            col_gap_x[lx] = lx + gap_mid
+
+    ys = sorted(row_bottoms)
+    layer_ys = sorted({ly for _n, _x, ly, _c in layers})
+
+    lines = [
+        '<g id="layer-dividers" fill="none" stroke="#8b949e" '
+        'stroke-width="2" stroke-linecap="butt">'
+    ]
+
+    # Horizontal: midpoint of the gutter between one row's keys and the next row.
+    if len(layer_ys) >= 2:
+        for i in range(len(layer_ys) - 1):
+            y_top = layer_ys[i]
+            y_next = layer_ys[i + 1]
+            content_bottom = row_bottoms.get(y_top, y_top)
+            y = round((content_bottom + y_next) / 2, 1)
+            lines.append(
+                f'<line class="layer-divider-h" x1="{margin}" y1="{y}" '
+                f'x2="{board_w - margin}" y2="{y}"/>'
+            )
+
+    # Vertical: one line per layer column, through that keyboard's half-gap
+    # (not the page-column midpoint, which cuts through keys).
+    for x in sorted(col_gap_x.values()):
+        x = round(x, 1)
+        lines.append(
+            f'<line class="layer-divider-v" x1="{x}" y1="{margin}" '
+            f'x2="{x}" y2="{board_h - margin}"/>'
+        )
+
+    lines.append("</g>")
+    return lines
+
+
 def postprocess(svg: str) -> str:
     # Strip leftover frames/dividers so re-runs stay idempotent.
     svg = re.sub(r'\n?<rect class="layer-frame"[^/]*/>', "", svg)
@@ -73,49 +165,18 @@ def postprocess(svg: str) -> str:
             count=1,
         )
 
-    layer_re = re.compile(
-        r'<g transform="translate\(([\d.]+),\s*([\d.]+)\)" class="layer-([^"]+)">'
-    )
-    layers = list(layer_re.finditer(svg))
-    if not layers:
-        return svg
-
-    xs = sorted({float(m.group(1)) for m in layers})
-    ys = sorted({float(m.group(2)) for m in layers})
-
     size = re.search(r'<svg[^>]*width="([\d.]+)"[^>]*height="([\d.]+)"', svg)
     board_w = float(size.group(1)) if size else 1000.0
     board_h = float(size.group(2)) if size else 1000.0
-    margin = 24.0
 
-    lines = [
-        '<g id="layer-dividers" fill="none" stroke="#8b949e" '
-        'stroke-width="2" stroke-linecap="butt">'
-    ]
-
-    # Horizontal gutters between stacked layer rows.
-    if len(ys) >= 2:
-        for i in range(len(ys) - 1):
-            y = round(ys[i + 1] - 10, 1)
-            lines.append(
-                f'<line class="layer-divider-h" x1="{margin}" y1="{y}" '
-                f'x2="{board_w - margin}" y2="{y}"/>'
-            )
-
-    # Vertical gutter between the two columns.
-    if len(xs) >= 2:
-        x = round((xs[0] + xs[1]) / 2, 1)
-        lines.append(
-            f'<line class="layer-divider-v" x1="{x}" y1="{margin}" '
-            f'x2="{x}" y2="{board_h - margin}"/>'
-        )
-
-    lines.append("</g>")
+    dividers = _divider_lines(svg, board_w, board_h)
+    if not dividers:
+        return svg
 
     return svg.replace(
         '<rect id="page-bg" width="100%" height="100%" fill="#ffffff"/>',
         '<rect id="page-bg" width="100%" height="100%" fill="#ffffff"/>\n'
-        + "\n".join(lines),
+        + "\n".join(dividers),
         1,
     )
 
