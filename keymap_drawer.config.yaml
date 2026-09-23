@@ -1,9 +1,9 @@
 parse_config:
   # Tap = center, hold (h) = orange, shifted/2× (s) = blue.
-  # Symbols chosen for DejaVu/rsvg coverage (avoid emoji that tofu).
+  # Symbols preferred; remaining words are sentence case (never ALL CAPS).
   raw_binding_map:
     "&snlk": {t: "←", h: "◎", s: "2×🔒"}
-    "&ltlk": {t: "Esc", h: "↕", s: "2×🔒"}
+    "&ltlk": {t: "esc", h: "↕", s: "2×🔒"}
     "&ltmkp 6 0x70028": {t: "⏎", h: "♪"}
     "&ltmkp 6 ENTER": {t: "⏎", h: "♪"}
     "&cdch 1 0": {t: "⎘", h: "✎", s: "2×↓"}
@@ -26,13 +26,13 @@ parse_config:
     "&kp BSPC": "⌫"
     "&kp DEL": "⌦"
     "&kp SPACE": "␣"
-    "&mui_or_dgl": {t: "BLE", s: "2×USB"}
+    "&mui_or_dgl": {t: "ble", s: "2×usb"}
     "&bst_tog ZBS_TOG": "⇄"
     "&af_toggle AF_TOG": "✦"
     "&soft_off": "⏻"
-    "&bt BT_CLR": "BT✕"
-    "&bt BT_NXT": "BT▶"
-    "&bt BT_PRV": "BT◀"
+    "&bt BT_CLR": "bt✕"
+    "&bt BT_NXT": "bt▶"
+    "&bt BT_PRV": "bt◀"
     "&sens P2SM_INC 1": "◉+"
     "&sens P2SM_DEC 1": "◉-"
     "&scrlsens P2SM_INC 1": "↕+"
@@ -80,7 +80,7 @@ draw_config:
     svg.keymap {
       font-family: "DejaVu Sans", "Segoe UI Symbol", sans-serif;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 400;
       fill: #1a1d21;
     }
     rect.layer-frame {
@@ -112,26 +112,26 @@ draw_config:
       fill: #f4f5f6;
     }
     text.label {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.03em;
+      font-size: 20px;
+      font-weight: 400 !important;
+      letter-spacing: 0;
       stroke: #ffffff;
-      stroke-width: 6;
+      stroke-width: 5;
       paint-order: stroke;
     }
     text.footer {
       font-size: 11px;
-      font-weight: 500;
+      font-weight: 400;
       fill: #5c6570;
       stroke: none;
     }
     text.key.tap {
-      font-size: 22px;
-      font-weight: 700;
+      font-size: 20px;
+      font-weight: 400;
     }
     text.hold, text.shifted, text.left, text.right, text.tl, text.tr, text.bl, text.br, text.combo {
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 400;
     }
     text.hold {
       fill: #c05621;
@@ -141,9 +141,11 @@ draw_config:
     }
     text.combo.tap {
       font-size: 12px;
+      font-weight: 400;
     }
     text.combo.hold, text.combo.shifted {
       font-size: 10px;
+      font-weight: 400;
     }
     text.trans {
       fill: #c5c9ce;

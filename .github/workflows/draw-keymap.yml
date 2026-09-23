@@ -48,10 +48,12 @@ jobs:
               combo["d"] = False
               k = combo.get("k")
               if isinstance(k, dict):
-                  k["t"] = "XL"
+                  k["t"] = "xl"
                   k["h"] = "tog"
               elif isinstance(k, str):
-                  combo["k"] = {"t": "XL", "h": "tog"}
+                  combo["k"] = {"t": "xl", "h": "tog"}
+          # Sentence-case layer titles on the diagram (not ALL CAPS).
+          data["layers"] = {name.lower(): keys for name, keys in data["layers"].items()}
           p.write_text(yaml.dump(data, sort_keys=False, allow_unicode=True))
           PY
           keymap -c keymap_drawer.config.yaml draw \

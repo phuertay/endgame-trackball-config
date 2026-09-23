@@ -1,10 +1,10 @@
 layout:
   zmk_keyboard: efogtech_trackball_0
 layers:
-  Default:
+  default:
   - t: ⏎
     h: ♪
-  - t: Esc
+  - t: esc
     h: ↕
     s: 2×🔒
   - ●
@@ -23,7 +23,7 @@ layers:
   - ↹◀
   - ⌘▶
   - ↹▶
-  Edit:
+  edit:
   - ⌫
   - ⌦
   - ✂
@@ -36,21 +36,21 @@ layers:
   - ↹◀
   - ⌘▶
   - ↹▶
-  System:
-  - t: BLE
-    s: 2×USB
-  - BT✕
+  system:
+  - t: ble
+    s: 2×usb
+  - bt✕
   - ⇄
-  - BT▶
+  - bt▶
   - ✦
-  - BT◀
+  - bt◀
   - ⏻
   - ''
   - ◉+
   - ↕+
   - ◉-
   - ↕-
-  Scroll:
+  scroll:
   - ''
   - 🔒↕
   - t: ⟷
@@ -64,7 +64,7 @@ layers:
   - ↑
   - →
   - ↓
-  Snipe:
+  snipe:
   - ''
   - ''
   - ''
@@ -77,7 +77,7 @@ layers:
   - ↑
   - →
   - ↓
-  Excel:
+  excel:
   - ↓fmt
   - ↓ƒx
   - ⇄ᵀ
@@ -91,7 +91,7 @@ layers:
   - ↹◀
   - ⌘▶
   - ↹▶
-  Media:
+  media:
   - ''
   - ''
   - ◀◀
@@ -109,6 +109,6 @@ combos:
   - 0
   - 1
   k:
-    t: XL
+    t: xl
     h: tog
   d: false
