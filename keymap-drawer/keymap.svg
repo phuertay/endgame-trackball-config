@@ -131,11 +131,6 @@ svg.keymap {
   font-weight: 400;
   fill: #1a1d21;
 }
-rect.layer-frame {
-  fill: #fafbfc;
-  stroke: #1a1d21;
-  stroke-width: 2;
-}
 rect.key {
   fill: #ffffff;
   stroke: #1a1d21;
@@ -200,7 +195,6 @@ path.combo {
 }
 </style>
 <g transform="translate(36, 0)" class="layer-default">
-<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
 <text x="0" y="22" class="label" id="default">default</text>
 <g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
@@ -282,7 +276,6 @@ path.combo {
 </g>
 </g>
 <g transform="translate(562, 0)" class="layer-edit">
-<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
 <text x="0" y="22" class="label" id="edit">edit</text>
 <g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
@@ -353,7 +346,6 @@ path.combo {
 </g>
 </g>
 <g transform="translate(36, 281)" class="layer-system">
-<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
 <text x="0" y="22" class="label" id="system">system</text>
 <g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
@@ -427,7 +419,6 @@ path.combo {
 </g>
 </g>
 <g transform="translate(562, 281)" class="layer-scroll">
-<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
 <text x="0" y="22" class="label" id="scroll">scroll</text>
 <g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
@@ -485,7 +476,6 @@ path.combo {
 </g>
 </g>
 <g transform="translate(36, 562)" class="layer-snipe">
-<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
 <text x="0" y="22" class="label" id="snipe">snipe</text>
 <g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
@@ -540,7 +530,6 @@ path.combo {
 </g>
 </g>
 <g transform="translate(562, 562)" class="layer-excel">
-<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
 <text x="0" y="22" class="label" id="excel">excel</text>
 <g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
@@ -619,7 +608,6 @@ path.combo {
 </g>
 </g>
 <g transform="translate(36, 842)" class="layer-media">
-<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
 <text x="0" y="22" class="label" id="media">media</text>
 <g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">

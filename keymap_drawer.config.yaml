@@ -83,11 +83,6 @@ draw_config:
       font-weight: 400;
       fill: #1a1d21;
     }
-    rect.layer-frame {
-      fill: #fafbfc;
-      stroke: #1a1d21;
-      stroke-width: 2;
-    }
     rect.key {
       fill: #ffffff;
       stroke: #1a1d21;
