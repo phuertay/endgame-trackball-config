@@ -21,23 +21,6 @@
 #define PV_CAL_HOLD 12
 #define PV_CAL_GAP  50
 
-/* Shared body: Win+V (/), wait WIN, Tab, wait ENT, Enter, Enter. */
-#define NEU_PV_CAL_BINDINGS(win_ms, ent_ms)                                    \
-	bindings                                                               \
-		= <&macro_press &kp LGUI>                                      \
-		, <&macro_wait_time PV_CAL_HOLD>                               \
-		, <&macro_press &kp FSLH>                                      \
-		, <&macro_wait_time PV_CAL_GAP>                                \
-		, <&macro_release &kp FSLH>                                    \
-		, <&macro_wait_time win_ms>                                    \
-		, <&macro_release &kp LGUI>                                    \
-		, <&macro_wait_time PV_CAL_GAP>                                \
-		, <&macro_tap &kp TAB>                                         \
-		, <&macro_wait_time ent_ms>                                    \
-		, <&macro_tap &kp RET>                                         \
-		, <&macro_wait_time PV_CAL_GAP>                                \
-		, <&macro_tap &kp RET>;
-
 / {
 	macros {
 		/* ENTER sweep (Win = 500) */
@@ -46,28 +29,80 @@
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
 			tap-ms = <PV_CAL_HOLD>;
-			NEU_PV_CAL_BINDINGS(500, 250);
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_wait_time PV_CAL_HOLD>
+				, <&macro_press &kp FSLH>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time 500>
+				, <&macro_release &kp LGUI>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp TAB>
+				, <&macro_wait_time 250>
+				, <&macro_tap &kp RET>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp RET>;
 		};
 		pv_e500: pv_e500 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
 			tap-ms = <PV_CAL_HOLD>;
-			NEU_PV_CAL_BINDINGS(500, 500);
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_wait_time PV_CAL_HOLD>
+				, <&macro_press &kp FSLH>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time 500>
+				, <&macro_release &kp LGUI>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp TAB>
+				, <&macro_wait_time 500>
+				, <&macro_tap &kp RET>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp RET>;
 		};
 		pv_e750: pv_e750 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
 			tap-ms = <PV_CAL_HOLD>;
-			NEU_PV_CAL_BINDINGS(500, 750);
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_wait_time PV_CAL_HOLD>
+				, <&macro_press &kp FSLH>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time 500>
+				, <&macro_release &kp LGUI>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp TAB>
+				, <&macro_wait_time 750>
+				, <&macro_tap &kp RET>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp RET>;
 		};
 		pv_e1000: pv_e1000 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
 			tap-ms = <PV_CAL_HOLD>;
-			NEU_PV_CAL_BINDINGS(500, 1000);
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_wait_time PV_CAL_HOLD>
+				, <&macro_press &kp FSLH>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time 500>
+				, <&macro_release &kp LGUI>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp TAB>
+				, <&macro_wait_time 1000>
+				, <&macro_tap &kp RET>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp RET>;
 		};
 
 		/* Win sweep (Enter = 1000) */
@@ -76,21 +111,60 @@
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
 			tap-ms = <PV_CAL_HOLD>;
-			NEU_PV_CAL_BINDINGS(250, 1000);
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_wait_time PV_CAL_HOLD>
+				, <&macro_press &kp FSLH>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time 250>
+				, <&macro_release &kp LGUI>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp TAB>
+				, <&macro_wait_time 1000>
+				, <&macro_tap &kp RET>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp RET>;
 		};
 		pv_w375: pv_w375 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
 			tap-ms = <PV_CAL_HOLD>;
-			NEU_PV_CAL_BINDINGS(375, 1000);
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_wait_time PV_CAL_HOLD>
+				, <&macro_press &kp FSLH>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time 375>
+				, <&macro_release &kp LGUI>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp TAB>
+				, <&macro_wait_time 1000>
+				, <&macro_tap &kp RET>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp RET>;
 		};
 		pv_w500: pv_w500 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
 			tap-ms = <PV_CAL_HOLD>;
-			NEU_PV_CAL_BINDINGS(500, 1000);
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_wait_time PV_CAL_HOLD>
+				, <&macro_press &kp FSLH>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time 500>
+				, <&macro_release &kp LGUI>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp TAB>
+				, <&macro_wait_time 1000>
+				, <&macro_tap &kp RET>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp RET>;
 		};
 	};
 };
