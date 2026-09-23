@@ -2,56 +2,57 @@ layout:
   zmk_keyboard: efogtech_trackball_0
 layers:
   default:
-  - t: ⏎
+  - t: $$mdi:keyboard-return$$
     h: media
-  - t: esc
+  - t: $$mdi:keyboard-esc$$
     h: scroll
     s: 2× lock
-  - mid
-  - t: copy
+  - mid clk
+  - t: $$mdi:content-copy$$
     h: edit
     s: 2× paste
-  - left
-  - right
+  - left clk
+  - right clk
   - t: back
     h: snipe
     s: 2× lock
   - t: ✕
     h: system
     s: 2× reload
-  - app ←
-  - tab ←
-  - app →
-  - tab →
+  - app
+  - tab
+  - app
+  - tab
   edit:
-  - ⌫
-  - ⌦
-  - cut
+  - $$mdi:keyboard-backspace$$
+  - $$mdi:backspace-reverse$$
+  - $$mdi:content-cut$$
   - ''
-  - 'paste
-
-    values'
-  - shot
-  - undo
+  - t: $$mdi:clipboard-text$$
+    right: val
+  - PrtSc
+  - $$mdi:undo$$
   - 'reopen
 
     tab'
-  - app ←
-  - tab ←
-  - app →
-  - tab →
+  - app
+  - tab
+  - app
+  - tab
   system:
-  - t: ble
-    s: 2× usb
+  - t: ble adv
+    s: 2× dongle
   - t: $$mdi:bluetooth$$
     right: ✕
-  - layout
+  - 'swap
+
+    layout'
   - t: $$mdi:bluetooth$$
-    right: →
+    right: ↓
   - fx
   - t: $$mdi:bluetooth$$
-    right: ←
-  - power
+    right: ↑
+  - $$mdi:power$$
   - ''
   - sens +
   - scrl +
@@ -89,42 +90,39 @@ layers:
   - →
   - ↓
   excel:
-  - 'paste
-
-    format'
-  - 'paste
-
-    formulas'
+  - t: $$mdi:format-paint$$
+    right: fmt
+  - t: $$mdi:content-paste$$
+    right: ƒx
   - 'rev
 
     transpose'
-  - t: copy
+  - t: $$mdi:content-copy$$
     s: 2× paste
-  - left
+  - left clk
   - 'transpose
 
     values'
-  - 'copy
-
-    picture'
-  - ⌂
-  - app ←
-  - tab ←
-  - app →
-  - tab →
+  - t: $$mdi:image$$
+    right: copy
+  - $$mdi:home$$
+  - app
+  - tab
+  - app
+  - tab
   media:
   - ''
   - ''
-  - ◀◀
-  - ▶▶
+  - $$mdi:skip-previous$$
+  - $$mdi:skip-next$$
   - ''
   - ''
-  - ▶
-  - ⌂
-  - ♪ +
-  - tab ←
-  - ♪ -
-  - tab →
+  - $$mdi:play-pause$$
+  - $$mdi:home$$
+  - $$mdi:volume-plus$$
+  - tab
+  - $$mdi:volume-minus$$
+  - tab
 combos:
 - p:
   - 0

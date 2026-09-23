@@ -1,38 +1,38 @@
 parse_config:
   # Tap = center, hold (h) = orange, shifted/2× (s) = blue.
-  # Plain words + common symbols (arrows, media, bluetooth glyph).
+  # Words + MDI glyphs (glyph_tap_size below). No bold / ALL CAPS.
   raw_binding_map:
     "&snlk": {t: "back", h: "snipe", s: "2× lock"}
-    "&ltlk": {t: "esc", h: "scroll", s: "2× lock"}
-    "&ltmkp 6 0x70028": {t: "⏎", h: "media"}
-    "&ltmkp 6 ENTER": {t: "⏎", h: "media"}
-    "&cdch 1 0": {t: "copy", h: "edit", s: "2× paste"}
-    "&cdc": {t: "copy", s: "2× paste"}
-    "&mkp MCLK": "mid"
-    "&mkp LCLK": "left"
-    "&mkp RCLK": "right"
+    "&ltlk": {t: "$$mdi:keyboard-esc$$", h: "scroll", s: "2× lock"}
+    "&ltmkp 6 0x70028": {t: "$$mdi:keyboard-return$$", h: "media"}
+    "&ltmkp 6 ENTER": {t: "$$mdi:keyboard-return$$", h: "media"}
+    "&cdch 1 0": {t: "$$mdi:content-copy$$", h: "edit", s: "2× paste"}
+    "&cdc": {t: "$$mdi:content-copy$$", s: "2× paste"}
+    "&mkp MCLK": "mid clk"
+    "&mkp LCLK": "left clk"
+    "&mkp RCLK": "right clk"
     "&syslk": {t: "✕", h: "system", s: "2× reload"}
-    "&kp LA(ESC)": "app →"
-    "&kp LA(LS(ESC))": "app ←"
-    "&bst_copy": "copy"
-    "&bst_paste": "paste"
-    "&bst_cut": "cut"
-    "&bst_undo": "undo"
-    "&pv": "paste\nvalues"
+    "&kp LA(ESC)": "app"
+    "&kp LA(LS(ESC))": "app"
+    "&bst_copy": "$$mdi:content-copy$$"
+    "&bst_paste": "$$mdi:content-paste$$"
+    "&bst_cut": "$$mdi:content-cut$$"
+    "&bst_undo": "$$mdi:undo$$"
+    "&pv": {t: "$$mdi:clipboard-text$$", right: "val"}
     "&unclose": "reopen\ntab"
     "&axlk": {t: "axis", h: "hold"}
     "&kp RC(A)": "reload"
-    "&kp PSCRN": "shot"
-    "&kp BSPC": "⌫"
-    "&kp DEL": "⌦"
+    "&kp PSCRN": "PrtSc"
+    "&kp BSPC": "$$mdi:keyboard-backspace$$"
+    "&kp DEL": "$$mdi:backspace-reverse$$"
     "&kp SPACE": "␣"
-    "&mui_or_dgl": {t: "ble", s: "2× usb"}
-    "&bst_tog ZBS_TOG": "layout"
+    "&mui_or_dgl": {t: "ble adv", s: "2× dongle"}
+    "&bst_tog ZBS_TOG": "swap\nlayout"
     "&af_toggle AF_TOG": "fx"
-    "&soft_off": "power"
+    "&soft_off": "$$mdi:power$$"
     "&bt BT_CLR": {t: "$$mdi:bluetooth$$", right: "✕"}
-    "&bt BT_NXT": {t: "$$mdi:bluetooth$$", right: "→"}
-    "&bt BT_PRV": {t: "$$mdi:bluetooth$$", right: "←"}
+    "&bt BT_NXT": {t: "$$mdi:bluetooth$$", right: "↓"}
+    "&bt BT_PRV": {t: "$$mdi:bluetooth$$", right: "↑"}
     "&sens P2SM_INC 1": "sens +"
     "&sens P2SM_DEC 1": "sens -"
     "&scrlsens P2SM_INC 1": "scrl +"
@@ -40,21 +40,22 @@ parse_config:
     "&tog 3": {t: "unlock\nscroll"}
     "&tog 4": {t: "unlock\nsnipe"}
     "&kp RCTRL": "zoom"
-    "&to 0": "⌂"
-    "&kp C_PLAY": "▶"
-    "&kp C_PREV": "◀◀"
-    "&kp C_NEXT": "▶▶"
-    "&kp C_VOL_UP": "♪ +"
-    "&kp C_VOL_DN": "♪ -"
-    "&kp RC(PG_DN)": "tab →"
-    "&kp RC(PG_UP)": "tab ←"
+    "&to 0": "$$mdi:home$$"
+    "&kp C_PP": "$$mdi:play-pause$$"
+    "&kp C_PLAY": "$$mdi:play-pause$$"
+    "&kp C_PREV": "$$mdi:skip-previous$$"
+    "&kp C_NEXT": "$$mdi:skip-next$$"
+    "&kp C_VOL_UP": "$$mdi:volume-plus$$"
+    "&kp C_VOL_DN": "$$mdi:volume-minus$$"
+    "&kp RC(PG_DN)": "tab"
+    "&kp RC(PG_UP)": "tab"
     "&kp LEFT": "←"
     "&kp RIGHT": "→"
     "&kp UP": "↑"
     "&kp DOWN": "↓"
-    "&qat1": "paste\nformat"
-    "&qat3": "paste\nformulas"
-    "&qat6": "copy\npicture"
+    "&qat1": {t: "$$mdi:format-paint$$", right: "fmt"}
+    "&qat3": {t: "$$mdi:content-paste$$", right: "ƒx"}
+    "&qat6": {t: "$$mdi:image$$", right: "copy"}
     "&qat8": "rev\ntranspose"
     "&ptv": "transpose\nvalues"
   trans_legend: ""
@@ -62,6 +63,9 @@ parse_config:
 draw_config:
   n_columns: 2
   append_colon_to_layer_header: false
+  glyph_tap_size: 28
+  glyph_hold_size: 24
+  glyph_shifted_size: 20
   key_h: 64
   key_w: 68
   key_rx: 10
