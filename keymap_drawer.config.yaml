@@ -75,6 +75,7 @@ draw_config:
   small_pad: 4
   line_spacing: 1.15
   shrink_wide_legends: 12
+  style_layer_activators: false
   footer_text: "orange = hold · blue = double-tap (2×)"
   svg_extra_style: |
     svg.keymap {
