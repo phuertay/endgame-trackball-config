@@ -176,7 +176,7 @@ path.combo {
 <g transform="translate(10, 448)" class="key keypos-8">
 <rect rx="6" ry="6" x="-8" y="-26" width="16" height="52" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-1.2em">APP</tspan><tspan x="0" dy="1.2em">CYCLE</tspan><tspan x="0" dy="1.2em">&gt;</tspan>
+<tspan x="0" dy="-0.6em">APP</tspan><tspan x="0" dy="1.2em">PREV</tspan>
 </text>
 </g>
 <g transform="translate(533, 448)" class="key keypos-9">
@@ -188,7 +188,7 @@ path.combo {
 <g transform="translate(56, 486)" class="key keypos-10">
 <rect rx="6" ry="6" x="-26" y="-8" width="52" height="16" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-1.2em">APP</tspan><tspan x="0" dy="1.2em">CYCLE</tspan><tspan x="0" dy="1.2em">&lt;</tspan>
+<tspan x="0" dy="-0.6em">APP</tspan><tspan x="0" dy="1.2em">NEXT</tspan>
 </text>
 </g>
 <g transform="translate(487, 486)" class="key keypos-11">
@@ -249,7 +249,7 @@ path.combo {
 <g transform="translate(10, 448)" class="key keypos-8">
 <rect rx="6" ry="6" x="-8" y="-26" width="16" height="52" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-1.2em">APP</tspan><tspan x="0" dy="1.2em">CYCLE</tspan><tspan x="0" dy="1.2em">&gt;</tspan>
+<tspan x="0" dy="-0.6em">APP</tspan><tspan x="0" dy="1.2em">PREV</tspan>
 </text>
 </g>
 <g transform="translate(533, 448)" class="key keypos-9">
@@ -261,7 +261,7 @@ path.combo {
 <g transform="translate(56, 486)" class="key keypos-10">
 <rect rx="6" ry="6" x="-26" y="-8" width="52" height="16" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-1.2em">APP</tspan><tspan x="0" dy="1.2em">CYCLE</tspan><tspan x="0" dy="1.2em">&lt;</tspan>
+<tspan x="0" dy="-0.6em">APP</tspan><tspan x="0" dy="1.2em">NEXT</tspan>
 </text>
 </g>
 <g transform="translate(487, 486)" class="key keypos-11">
@@ -538,7 +538,7 @@ HOLD</tspan></text>
 <g transform="translate(10, 448)" class="key keypos-8">
 <rect rx="6" ry="6" x="-8" y="-26" width="16" height="52" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-1.2em">APP</tspan><tspan x="0" dy="1.2em">CYCLE</tspan><tspan x="0" dy="1.2em">&gt;</tspan>
+<tspan x="0" dy="-0.6em">APP</tspan><tspan x="0" dy="1.2em">PREV</tspan>
 </text>
 </g>
 <g transform="translate(533, 448)" class="key keypos-9">
@@ -550,7 +550,7 @@ HOLD</tspan></text>
 <g transform="translate(56, 486)" class="key keypos-10">
 <rect rx="6" ry="6" x="-26" y="-8" width="52" height="16" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-1.2em">APP</tspan><tspan x="0" dy="1.2em">CYCLE</tspan><tspan x="0" dy="1.2em">&lt;</tspan>
+<tspan x="0" dy="-0.6em">APP</tspan><tspan x="0" dy="1.2em">NEXT</tspan>
 </text>
 </g>
 <g transform="translate(487, 486)" class="key keypos-11">
