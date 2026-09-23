@@ -133,13 +133,13 @@ svg.keymap {
 }
 rect.key {
   fill: #ffffff;
-  stroke: #1a1d21;
-  stroke-width: 1.5;
+  stroke: #b0b6be;
+  stroke-width: 1;
 }
 rect.combo, rect.combo-separate {
-  fill: #d8ebff;
-  stroke: #2b6cb0;
-  stroke-width: 1.5;
+  fill: #e8f2fc;
+  stroke: #7aa3d4;
+  stroke-width: 1;
 }
 rect.held, rect.combo.held {
   fill: #ffe8c8;
