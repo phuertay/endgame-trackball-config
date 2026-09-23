@@ -17,11 +17,11 @@ layers:
   - {t: CLOSE, h: system, s: 2× RELOAD}
   - 'APP
 
-    CYCLE <'
+    PREV'
   - TAB <
   - 'APP
 
-    CYCLE >'
+    NEXT'
   - TAB >
   Edit:
   - BKSP
@@ -40,11 +40,11 @@ layers:
     TAB'
   - 'APP
 
-    CYCLE <'
+    PREV'
   - TAB <
   - 'APP
 
-    CYCLE >'
+    NEXT'
   - TAB >
   System:
   - 'MUI /
@@ -136,11 +136,11 @@ layers:
   - BACK
   - 'APP
 
-    CYCLE <'
+    PREV'
   - TAB <
   - 'APP
 
-    CYCLE >'
+    NEXT'
   - TAB >
   Media:
   - {t: ▽, type: trans}
