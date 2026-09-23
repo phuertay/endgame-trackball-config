@@ -1,62 +1,62 @@
 parse_config:
   # Tap = center, hold (h) = orange, shifted/2× (s) = blue.
-  # Symbols preferred; remaining words are sentence case (never ALL CAPS).
+  # Short words + only common symbols (←→↑↓ ▶ ✕).
   raw_binding_map:
-    "&snlk": {t: "←", h: "◎", s: "2×🔒"}
-    "&ltlk": {t: "esc", h: "↕", s: "2×🔒"}
-    "&ltmkp 6 0x70028": {t: "⏎", h: "♪"}
-    "&ltmkp 6 ENTER": {t: "⏎", h: "♪"}
-    "&cdch 1 0": {t: "⎘", h: "✎", s: "2×↓"}
-    "&cdc": {t: "⎘", s: "2×↓"}
-    "&mkp MCLK": "●"
-    "&mkp LCLK": "◐"
-    "&mkp RCLK": "◑"
-    "&syslk": {t: "✕", h: "⚙", s: "2×↻"}
-    "&kp LA(ESC)": "⌘▶"
-    "&kp LA(LS(ESC))": "⌘◀"
-    "&bst_copy": "⎘"
-    "&bst_paste": "↓"
-    "&bst_cut": "✂"
-    "&bst_undo": "↶"
-    "&pv": "↓123"
-    "&unclose": "↻↹"
-    "&axlk": {t: "⟷", h: "hold"}
-    "&kp RC(A)": "↻"
-    "&kp PSCRN": "▣"
-    "&kp BSPC": "⌫"
-    "&kp DEL": "⌦"
-    "&kp SPACE": "␣"
-    "&mui_or_dgl": {t: "ble", s: "2×usb"}
-    "&bst_tog ZBS_TOG": "⇄"
-    "&af_toggle AF_TOG": "✦"
-    "&soft_off": "⏻"
-    "&bt BT_CLR": "bt✕"
-    "&bt BT_NXT": "bt▶"
-    "&bt BT_PRV": "bt◀"
-    "&sens P2SM_INC 1": "◉+"
-    "&sens P2SM_DEC 1": "◉-"
-    "&scrlsens P2SM_INC 1": "↕+"
-    "&scrlsens P2SM_DEC 1": "↕-"
-    "&tog 3": {t: "🔒↕"}
-    "&tog 4": {t: "🔓"}
-    "&kp RCTRL": "⊕"
-    "&to 0": "⌂"
-    "&kp C_PLAY": "▶"
-    "&kp C_PREV": "◀◀"
-    "&kp C_NEXT": "▶▶"
-    "&kp C_VOL_UP": "♪+"
-    "&kp C_VOL_DN": "♪-"
-    "&kp RC(PG_DN)": "↹▶"
-    "&kp RC(PG_UP)": "↹◀"
+    "&snlk": {t: "back", h: "snipe", s: "2× lock"}
+    "&ltlk": {t: "esc", h: "scroll", s: "2× lock"}
+    "&ltmkp 6 0x70028": {t: "enter", h: "media"}
+    "&ltmkp 6 ENTER": {t: "enter", h: "media"}
+    "&cdch 1 0": {t: "copy", h: "edit", s: "2× paste"}
+    "&cdc": {t: "copy", s: "2× paste"}
+    "&mkp MCLK": "mid"
+    "&mkp LCLK": "left"
+    "&mkp RCLK": "right"
+    "&syslk": {t: "close", h: "system", s: "2× reload"}
+    "&kp LA(ESC)": "app →"
+    "&kp LA(LS(ESC))": "app ←"
+    "&bst_copy": "copy"
+    "&bst_paste": "paste"
+    "&bst_cut": "cut"
+    "&bst_undo": "undo"
+    "&pv": "paste\nvalues"
+    "&unclose": "reopen\ntab"
+    "&axlk": {t: "axis", h: "hold"}
+    "&kp RC(A)": "reload"
+    "&kp PSCRN": "shot"
+    "&kp BSPC": "bksp"
+    "&kp DEL": "del"
+    "&kp SPACE": "space"
+    "&mui_or_dgl": {t: "ble", s: "2× usb"}
+    "&bst_tog ZBS_TOG": "layout"
+    "&af_toggle AF_TOG": "fx"
+    "&soft_off": "power"
+    "&bt BT_CLR": "bt clear"
+    "&bt BT_NXT": "bt →"
+    "&bt BT_PRV": "bt ←"
+    "&sens P2SM_INC 1": "sens +"
+    "&sens P2SM_DEC 1": "sens -"
+    "&scrlsens P2SM_INC 1": "scrl +"
+    "&scrlsens P2SM_DEC 1": "scrl -"
+    "&tog 3": {t: "unlock\nscroll"}
+    "&tog 4": {t: "unlock\nsnipe"}
+    "&kp RCTRL": "zoom"
+    "&to 0": "home"
+    "&kp C_PLAY": "play"
+    "&kp C_PREV": "prev"
+    "&kp C_NEXT": "next"
+    "&kp C_VOL_UP": "vol +"
+    "&kp C_VOL_DN": "vol -"
+    "&kp RC(PG_DN)": "tab →"
+    "&kp RC(PG_UP)": "tab ←"
     "&kp LEFT": "←"
     "&kp RIGHT": "→"
     "&kp UP": "↑"
     "&kp DOWN": "↓"
-    "&qat1": "↓fmt"
-    "&qat3": "↓ƒx"
-    "&qat6": "⎘▣"
-    "&qat8": "⇄ᵀ"
-    "&ptv": "⇄123"
+    "&qat1": "paste\nformat"
+    "&qat3": "paste\nformulas"
+    "&qat6": "copy\npicture"
+    "&qat8": "rev\ntranspose"
+    "&ptv": "transpose\nvalues"
   trans_legend: ""
 
 draw_config:
@@ -70,32 +70,28 @@ draw_config:
   combo_h: 26
   inner_pad_w: 6
   inner_pad_h: 6
-  outer_pad_w: 44
-  outer_pad_h: 52
+  outer_pad_w: 36
+  outer_pad_h: 44
   small_pad: 4
   line_spacing: 1.15
-  shrink_wide_legends: 14
-  footer_text: "● mid  ◐ left  ◑ right  ⎘ copy  ↓ paste  ·  orange=hold  blue=2×"
+  shrink_wide_legends: 12
+  footer_text: "orange = hold · blue = double-tap (2×)"
   svg_extra_style: |
     svg.keymap {
-      font-family: "DejaVu Sans", "Segoe UI Symbol", sans-serif;
-      font-size: 18px;
+      font-family: "DejaVu Sans", "Segoe UI", sans-serif;
+      font-size: 15px;
       font-weight: 400;
       fill: #1a1d21;
     }
     rect.layer-frame {
       fill: #fafbfc;
       stroke: #1a1d21;
-      stroke-width: 2.5;
-    }
-    #layer-dividers line {
-      stroke: #1a1d21;
-      stroke-width: 4;
+      stroke-width: 2;
     }
     rect.key {
       fill: #ffffff;
       stroke: #1a1d21;
-      stroke-width: 1.75;
+      stroke-width: 1.5;
     }
     rect.combo, rect.combo-separate {
       fill: #d8ebff;
@@ -112,7 +108,7 @@ draw_config:
       fill: #f4f5f6;
     }
     text.label {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 400 !important;
       letter-spacing: 0;
       stroke: #ffffff;
@@ -126,11 +122,11 @@ draw_config:
       stroke: none;
     }
     text.key.tap {
-      font-size: 20px;
+      font-size: 14px;
       font-weight: 400;
     }
     text.hold, text.shifted, text.left, text.right, text.tl, text.tr, text.bl, text.br, text.combo {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 400;
     }
     text.hold {
@@ -140,11 +136,11 @@ draw_config:
       fill: #2b6cb0;
     }
     text.combo.tap {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 400;
     }
     text.combo.hold, text.combo.shifted {
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 400;
     }
     text.trans {

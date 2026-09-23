@@ -2,60 +2,66 @@ layout:
   zmk_keyboard: efogtech_trackball_0
 layers:
   default:
-  - t: ⏎
-    h: ♪
+  - t: enter
+    h: media
   - t: esc
-    h: ↕
-    s: 2×🔒
-  - ●
-  - t: ⎘
-    h: ✎
-    s: 2×↓
-  - ◐
-  - ◑
-  - t: ←
-    h: ◎
-    s: 2×🔒
-  - t: ✕
-    h: ⚙
-    s: 2×↻
-  - ⌘◀
-  - ↹◀
-  - ⌘▶
-  - ↹▶
+    h: scroll
+    s: 2× lock
+  - mid
+  - t: copy
+    h: edit
+    s: 2× paste
+  - left
+  - right
+  - t: back
+    h: snipe
+    s: 2× lock
+  - t: close
+    h: system
+    s: 2× reload
+  - app ←
+  - tab ←
+  - app →
+  - tab →
   edit:
-  - ⌫
-  - ⌦
-  - ✂
+  - bksp
+  - del
+  - cut
   - ''
-  - ↓123
-  - ▣
-  - ↶
-  - ↻↹
-  - ⌘◀
-  - ↹◀
-  - ⌘▶
-  - ↹▶
+  - 'paste
+
+    values'
+  - shot
+  - undo
+  - 'reopen
+
+    tab'
+  - app ←
+  - tab ←
+  - app →
+  - tab →
   system:
   - t: ble
-    s: 2×usb
-  - bt✕
-  - ⇄
-  - bt▶
-  - ✦
-  - bt◀
-  - ⏻
+    s: 2× usb
+  - bt clear
+  - layout
+  - bt →
+  - fx
+  - bt ←
+  - power
   - ''
-  - ◉+
-  - ↕+
-  - ◉-
-  - ↕-
+  - sens +
+  - scrl +
+  - sens -
+  - scrl -
   scroll:
   - ''
-  - 🔒↕
-  - t: ⟷
+  - 'unlock
+
+    scroll'
+  - t: axis
     h: hold
-  - ⊕
+  - zoom
   - ''
   - ''
   - ''
@@ -71,44 +77,56 @@ layers:
   - ''
   - ''
   - ''
-  - 🔓
+  - 'unlock
+
+    snipe'
   - ''
   - ←
   - ↑
   - →
   - ↓
   excel:
-  - ↓fmt
-  - ↓ƒx
-  - ⇄ᵀ
-  - t: ⎘
-    s: 2×↓
-  - ◐
-  - ⇄123
-  - ⎘▣
-  - ⌂
-  - ⌘◀
-  - ↹◀
-  - ⌘▶
-  - ↹▶
+  - 'paste
+
+    format'
+  - 'paste
+
+    formulas'
+  - 'rev
+
+    transpose'
+  - t: copy
+    s: 2× paste
+  - left
+  - 'transpose
+
+    values'
+  - 'copy
+
+    picture'
+  - home
+  - app ←
+  - tab ←
+  - app →
+  - tab →
   media:
   - ''
   - ''
-  - ◀◀
-  - ▶▶
+  - prev
+  - next
   - ''
   - ''
-  - ▶
-  - ⌂
-  - ♪+
-  - ↹◀
-  - ♪-
-  - ↹▶
+  - play
+  - home
+  - vol +
+  - tab ←
+  - vol -
+  - tab →
 combos:
 - p:
   - 0
   - 1
   k:
-    t: xl
+    t: excel
     h: tog
   d: false

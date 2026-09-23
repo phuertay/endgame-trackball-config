@@ -1,11 +1,5 @@
-<svg width="1085" height="1207" viewBox="0 0 1085 1207" class="keymap" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="1053" height="1167" viewBox="0 0 1053 1167" class="keymap" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect id="page-bg" width="100%" height="100%" fill="#ffffff"/>
-<g id="layer-dividers" fill="none" stroke="#1a1d21" stroke-width="4" stroke-linecap="square">
-<line class="layer-divider" x1="568.0" y1="12.0" x2="568.0" y2="1195.0"/>
-<line class="layer-divider" x1="12.0" y1="279.0" x2="1073.0" y2="279.0"/>
-<line class="layer-divider" x1="12.0" y1="568.0" x2="1073.0" y2="568.0"/>
-<line class="layer-divider" x1="12.0" y1="857.0" x2="1073.0" y2="857.0"/>
-</g>
 <style>/* inherit to force styles through use tags */
 svg path {
     fill: inherit;
@@ -132,24 +126,20 @@ path.combo {
 /* End Tabler Icons Cleanup */
 
 svg.keymap {
-  font-family: "DejaVu Sans", "Segoe UI Symbol", sans-serif;
-  font-size: 18px;
+  font-family: "DejaVu Sans", "Segoe UI", sans-serif;
+  font-size: 15px;
   font-weight: 400;
   fill: #1a1d21;
 }
 rect.layer-frame {
   fill: #fafbfc;
   stroke: #1a1d21;
-  stroke-width: 2.5;
-}
-#layer-dividers line {
-  stroke: #1a1d21;
-  stroke-width: 4;
+  stroke-width: 2;
 }
 rect.key {
   fill: #ffffff;
   stroke: #1a1d21;
-  stroke-width: 1.75;
+  stroke-width: 1.5;
 }
 rect.combo, rect.combo-separate {
   fill: #d8ebff;
@@ -166,7 +156,7 @@ rect.ghost, rect.combo.ghost {
   fill: #f4f5f6;
 }
 text.label {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400 !important;
   letter-spacing: 0;
   stroke: #ffffff;
@@ -180,11 +170,11 @@ text.footer {
   stroke: none;
 }
 text.key.tap {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 400;
 }
 text.hold, text.shifted, text.left, text.right, text.tl, text.tr, text.bl, text.br, text.combo {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
 }
 text.hold {
@@ -194,11 +184,11 @@ text.shifted {
   fill: #2b6cb0;
 }
 text.combo.tap {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 400;
 }
 text.combo.hold, text.combo.shifted {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 400;
 }
 text.trans {
@@ -209,210 +199,254 @@ path.combo {
   stroke-width: 1.5;
 }
 </style>
-<g transform="translate(44, 0)" class="layer-default">
-<rect class="layer-frame" x="-8" y="-2" width="522.0" height="273.0" rx="12" ry="12"/>
-<text x="0" y="26" class="label" id="default">default</text>
-<g transform="translate(0, 52)">
+<g transform="translate(36, 0)" class="layer-default">
+<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
+<text x="0" y="22" class="label" id="default">default</text>
+<g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⏎</text>
-<text x="0" y="20" class="key hold">♪</text>
-</g>
+<text x="0" y="0" class="key tap">enter</text>
+<a href="#media">
+<text x="0" y="20" class="key hold layer-activator">media</text>
+</a></g>
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <text x="0" y="0" class="key tap">esc</text>
-<text x="0" y="20" class="key hold">↕</text>
-<text x="0" y="-20" class="key shifted">2×🔒</text>
+<a href="#scroll">
+<text x="0" y="20" class="key hold layer-activator">scroll</text>
+</a><text x="0" y="-20" class="key shifted">2× lock</text>
 </g>
 <g transform="translate(45, 30)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">●</text>
+<text x="0" y="0" class="key tap">mid</text>
 </g>
 <g transform="translate(410, 30)" class="key keypos-3">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⎘</text>
-<text x="0" y="20" class="key hold">✎</text>
-<text x="0" y="-20" class="key shifted">2×↓</text>
+<text x="0" y="0" class="key tap">copy</text>
+<a href="#edit">
+<text x="0" y="20" class="key hold layer-activator">edit</text>
+</a><text x="0" y="-20" class="key shifted">2× paste</text>
 </g>
 <g transform="translate(45, 101)" class="key keypos-4">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">◐</text>
+<text x="0" y="0" class="key tap">left</text>
 </g>
 <g transform="translate(410, 101)" class="key keypos-5">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">◑</text>
+<text x="0" y="0" class="key tap">right</text>
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">←</text>
-<text x="0" y="20" class="key hold">◎</text>
-<text x="0" y="-20" class="key shifted">2×🔒</text>
+<text x="0" y="0" class="key tap">back</text>
+<a href="#snipe">
+<text x="0" y="20" class="key hold layer-activator">snipe</text>
+</a><text x="0" y="-20" class="key shifted">2× lock</text>
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">✕</text>
-<text x="0" y="20" class="key hold">⚙</text>
-<text x="0" y="-20" class="key shifted">2×↻</text>
+<text x="0" y="0" class="key tap">close</text>
+<a href="#system">
+<text x="0" y="20" class="key hold layer-activator">system</text>
+</a><text x="0" y="-20" class="key shifted">2× reload</text>
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">⌘◀</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">app</tspan><tspan x="0" dy="1.15em">←</tspan>
+</text>
 </g>
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">↹◀</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">←</tspan>
+</text>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">⌘▶</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">app</tspan><tspan x="0" dy="1.15em">→</tspan>
+</text>
 </g>
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">↹▶</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">→</tspan>
+</text>
 </g>
 <g class="combo combopos-0">
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
-<text x="227" y="30" class="combo tap">xl</text>
-<text x="227" y="39" class="combo hold">tog</text>
+<a href="#excel">
+<text x="227" y="30" class="combo tap layer-activator">excel</text>
+</a><text x="227" y="39" class="combo hold">tog</text>
 </g>
 </g>
 </g>
-<g transform="translate(586, 0)" class="layer-edit">
-<rect class="layer-frame" x="-8" y="-2" width="522.0" height="273.0" rx="12" ry="12"/>
-<text x="0" y="26" class="label" id="edit">edit</text>
-<g transform="translate(0, 52)">
+<g transform="translate(562, 0)" class="layer-edit">
+<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
+<text x="0" y="22" class="label" id="edit">edit</text>
+<g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⌫</text>
+<text x="0" y="0" class="key tap">bksp</text>
 </g>
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⌦</text>
+<text x="0" y="0" class="key tap">del</text>
 </g>
 <g transform="translate(45, 30)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">✂</text>
+<text x="0" y="0" class="key tap">cut</text>
 </g>
 <g transform="translate(410, 30)" class="key keypos-3">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
 </g>
 <g transform="translate(45, 101)" class="key keypos-4">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">↓123</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">paste</tspan><tspan x="0" dy="1.15em">values</tspan>
+</text>
 </g>
 <g transform="translate(410, 101)" class="key keypos-5">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">▣</text>
+<text x="0" y="0" class="key tap">shot</text>
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">↶</text>
+<text x="0" y="0" class="key tap">undo</text>
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">↻↹</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">reopen</tspan><tspan x="0" dy="1.15em">tab</tspan>
+</text>
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">⌘◀</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">app</tspan><tspan x="0" dy="1.15em">←</tspan>
+</text>
 </g>
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">↹◀</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">←</tspan>
+</text>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">⌘▶</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">app</tspan><tspan x="0" dy="1.15em">→</tspan>
+</text>
 </g>
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">↹▶</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">→</tspan>
+</text>
 </g>
 <g class="combo combopos-0">
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
-<text x="227" y="30" class="combo tap">xl</text>
-<text x="227" y="39" class="combo hold">tog</text>
+<a href="#excel">
+<text x="227" y="30" class="combo tap layer-activator">excel</text>
+</a><text x="227" y="39" class="combo hold">tog</text>
 </g>
 </g>
 </g>
-<g transform="translate(44, 289)" class="layer-system">
-<rect class="layer-frame" x="-8" y="-2" width="522.0" height="273.0" rx="12" ry="12"/>
-<text x="0" y="26" class="label" id="system">system</text>
-<g transform="translate(0, 52)">
+<g transform="translate(36, 281)" class="layer-system">
+<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
+<text x="0" y="22" class="label" id="system">system</text>
+<g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <text x="0" y="0" class="key tap">ble</text>
-<text x="0" y="-20" class="key shifted">2×usb</text>
+<text x="0" y="-20" class="key shifted">2× usb</text>
 </g>
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">bt✕</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">bt</tspan><tspan x="0" dy="1.15em">clear</tspan>
+</text>
 </g>
 <g transform="translate(45, 30)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⇄</text>
+<text x="0" y="0" class="key tap">layout</text>
 </g>
 <g transform="translate(410, 30)" class="key keypos-3">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">bt▶</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">bt</tspan><tspan x="0" dy="1.15em">→</tspan>
+</text>
 </g>
 <g transform="translate(45, 101)" class="key keypos-4">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">✦</text>
+<text x="0" y="0" class="key tap">fx</text>
 </g>
 <g transform="translate(410, 101)" class="key keypos-5">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">bt◀</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">bt</tspan><tspan x="0" dy="1.15em">←</tspan>
+</text>
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⏻</text>
+<text x="0" y="0" class="key tap">power</text>
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">◉+</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">sens</tspan><tspan x="0" dy="1.15em">+</tspan>
+</text>
 </g>
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">↕+</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">scrl</tspan><tspan x="0" dy="1.15em">+</tspan>
+</text>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">◉-</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">sens</tspan><tspan x="0" dy="1.15em">-</tspan>
+</text>
 </g>
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">↕-</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">scrl</tspan><tspan x="0" dy="1.15em">-</tspan>
+</text>
 </g>
 <g class="combo combopos-0">
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
-<text x="227" y="30" class="combo tap">xl</text>
-<text x="227" y="39" class="combo hold">tog</text>
+<a href="#excel">
+<text x="227" y="30" class="combo tap layer-activator">excel</text>
+</a><text x="227" y="39" class="combo hold">tog</text>
 </g>
 </g>
 </g>
-<g transform="translate(586, 289)" class="layer-scroll">
-<rect class="layer-frame" x="-8" y="-2" width="522.0" height="273.0" rx="12" ry="12"/>
-<text x="0" y="26" class="label" id="scroll">scroll</text>
-<g transform="translate(0, 52)">
+<g transform="translate(562, 281)" class="layer-scroll">
+<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
+<text x="0" y="22" class="label" id="scroll">scroll</text>
+<g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 </g>
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">🔒↕</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">unlock</tspan><tspan x="0" dy="1.15em">scroll</tspan>
+</text>
 </g>
 <g transform="translate(45, 30)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⟷</text>
+<text x="0" y="0" class="key tap">axis</text>
 <text x="0" y="20" class="key hold">hold</text>
 </g>
 <g transform="translate(410, 30)" class="key keypos-3">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⊕</text>
+<text x="0" y="0" class="key tap">zoom</text>
 </g>
 <g transform="translate(45, 101)" class="key keypos-4">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
@@ -444,15 +478,16 @@ path.combo {
 </g>
 <g class="combo combopos-0">
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
-<text x="227" y="30" class="combo tap">xl</text>
-<text x="227" y="39" class="combo hold">tog</text>
+<a href="#excel">
+<text x="227" y="30" class="combo tap layer-activator">excel</text>
+</a><text x="227" y="39" class="combo hold">tog</text>
 </g>
 </g>
 </g>
-<g transform="translate(44, 578)" class="layer-snipe">
-<rect class="layer-frame" x="-8" y="-2" width="522.0" height="273.0" rx="12" ry="12"/>
-<text x="0" y="26" class="label" id="snipe">snipe</text>
-<g transform="translate(0, 52)">
+<g transform="translate(36, 562)" class="layer-snipe">
+<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
+<text x="0" y="22" class="label" id="snipe">snipe</text>
+<g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 </g>
@@ -473,7 +508,9 @@ path.combo {
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">🔓</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">unlock</tspan><tspan x="0" dy="1.15em">snipe</tspan>
+</text>
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
@@ -496,75 +533,95 @@ path.combo {
 </g>
 <g class="combo combopos-0">
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
-<text x="227" y="30" class="combo tap">xl</text>
-<text x="227" y="39" class="combo hold">tog</text>
+<a href="#excel">
+<text x="227" y="30" class="combo tap layer-activator">excel</text>
+</a><text x="227" y="39" class="combo hold">tog</text>
 </g>
 </g>
 </g>
-<g transform="translate(586, 578)" class="layer-excel">
-<rect class="layer-frame" x="-8" y="-2" width="522.0" height="273.0" rx="12" ry="12"/>
-<text x="0" y="26" class="label" id="excel">excel</text>
-<g transform="translate(0, 52)">
+<g transform="translate(562, 562)" class="layer-excel">
+<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
+<text x="0" y="22" class="label" id="excel">excel</text>
+<g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">↓fmt</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">paste</tspan><tspan x="0" dy="1.15em">format</tspan>
+</text>
 </g>
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">↓ƒx</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">paste</tspan><tspan x="0" dy="1.15em">formulas</tspan>
+</text>
 </g>
 <g transform="translate(45, 30)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⇄ᵀ</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">rev</tspan><tspan x="0" dy="1.15em">transpose</tspan>
+</text>
 </g>
 <g transform="translate(410, 30)" class="key keypos-3">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⎘</text>
-<text x="0" y="-20" class="key shifted">2×↓</text>
+<text x="0" y="0" class="key tap">copy</text>
+<text x="0" y="-20" class="key shifted">2× paste</text>
 </g>
 <g transform="translate(45, 101)" class="key keypos-4">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">◐</text>
+<text x="0" y="0" class="key tap">left</text>
 </g>
 <g transform="translate(410, 101)" class="key keypos-5">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⇄123</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">transpose</tspan><tspan x="0" dy="1.15em">values</tspan>
+</text>
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⎘▣</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">copy</tspan><tspan x="0" dy="1.15em">picture</tspan>
+</text>
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⌂</text>
+<text x="0" y="0" class="key tap">home</text>
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">⌘◀</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">app</tspan><tspan x="0" dy="1.15em">←</tspan>
+</text>
 </g>
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">↹◀</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">←</tspan>
+</text>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">⌘▶</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">app</tspan><tspan x="0" dy="1.15em">→</tspan>
+</text>
 </g>
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">↹▶</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">→</tspan>
+</text>
 </g>
 <g class="combo combopos-0">
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
-<text x="227" y="30" class="combo tap">xl</text>
-<text x="227" y="39" class="combo hold">tog</text>
+<a href="#excel">
+<text x="227" y="30" class="combo tap layer-activator">excel</text>
+</a><text x="227" y="39" class="combo hold">tog</text>
 </g>
 </g>
 </g>
-<g transform="translate(44, 866)" class="layer-media">
-<rect class="layer-frame" x="-8" y="-2" width="522.0" height="273.0" rx="12" ry="12"/>
-<text x="0" y="26" class="label" id="media">media</text>
-<g transform="translate(0, 52)">
+<g transform="translate(36, 842)" class="layer-media">
+<rect class="layer-frame" x="-8" y="-2" width="506.0" height="265.0" rx="12" ry="12"/>
+<text x="0" y="22" class="label" id="media">media</text>
+<g transform="translate(0, 44)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 </g>
@@ -573,11 +630,11 @@ path.combo {
 </g>
 <g transform="translate(45, 30)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">◀◀</text>
+<text x="0" y="0" class="key tap">prev</text>
 </g>
 <g transform="translate(410, 30)" class="key keypos-3">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">▶▶</text>
+<text x="0" y="0" class="key tap">next</text>
 </g>
 <g transform="translate(45, 101)" class="key keypos-4">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
@@ -587,33 +644,42 @@ path.combo {
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">▶</text>
+<text x="0" y="0" class="key tap">play</text>
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">⌂</text>
+<text x="0" y="0" class="key tap">home</text>
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">♪+</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">vol</tspan><tspan x="0" dy="1.15em">+</tspan>
+</text>
 </g>
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">↹◀</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">←</tspan>
+</text>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">♪-</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">vol</tspan><tspan x="0" dy="1.15em">-</tspan>
+</text>
 </g>
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">↹▶</text>
+<text x="0" y="0" class="key tap">
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">→</tspan>
+</text>
 </g>
 <g class="combo combopos-0">
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
-<text x="227" y="30" class="combo tap">xl</text>
-<text x="227" y="39" class="combo hold">tog</text>
+<a href="#excel">
+<text x="227" y="30" class="combo tap layer-activator">excel</text>
+</a><text x="227" y="39" class="combo hold">tog</text>
 </g>
 </g>
 </g>
-<text x="1041.0" y="1181.0" class="footer">● mid  ◐ left  ◑ right  ⎘ copy  ↓ paste  ·  orange=hold  blue=2×</text></svg>
+<text x="1017.0" y="1145.0" class="footer">orange = hold · blue = double-tap (2×)</text></svg>

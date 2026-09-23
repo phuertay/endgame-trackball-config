@@ -48,10 +48,10 @@ jobs:
               combo["d"] = False
               k = combo.get("k")
               if isinstance(k, dict):
-                  k["t"] = "xl"
+                  k["t"] = "excel"
                   k["h"] = "tog"
               elif isinstance(k, str):
-                  combo["k"] = {"t": "xl", "h": "tog"}
+                  combo["k"] = {"t": "excel", "h": "tog"}
           # Sentence-case layer titles on the diagram (not ALL CAPS).
           data["layers"] = {name.lower(): keys for name, keys in data["layers"].items()}
           p.write_text(yaml.dump(data, sort_keys=False, allow_unicode=True))
