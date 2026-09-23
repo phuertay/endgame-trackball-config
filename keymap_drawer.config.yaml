@@ -1,92 +1,96 @@
 parse_config:
-  # Shorter legends so large fonts fit without shrinking.
-  # Tap = center, hold (h) = orange bottom, shifted/2× (s) = blue top.
+  # Tap = center, hold (h) = orange, shifted/2× (s) = blue.
+  # Symbols chosen for DejaVu/rsvg coverage (avoid emoji that tofu).
   raw_binding_map:
-    "&snlk": {t: "BACK", h: "snipe", s: "2× LOCK"}
-    "&ltlk": {t: "ESC", h: "scroll", s: "2× LOCK"}
-    "&ltmkp 6 0x70028": {t: "ENTER", h: "media"}
-    "&ltmkp 6 ENTER": {t: "ENTER", h: "media"}
-    "&cdch 1 0": {t: "COPY", h: "edit", s: "2× PASTE"}
-    "&cdc": {t: "COPY", s: "2× PASTE"}
-    "&mkp MCLK": "MID\nCLICK"
-    "&mkp LCLK": "LEFT\nCLICK"
-    "&mkp RCLK": "RIGHT\nCLICK"
-    "&syslk": {t: "CLOSE", h: "system", s: "2× RELOAD"}
-    "&kp LA(ESC)": "APP▶"
-    "&kp LA(LS(ESC))": "APP◀"
-    "&bst_copy": "COPY"
-    "&bst_paste": "PASTE"
-    "&bst_cut": "CUT"
-    "&bst_undo": "UNDO"
-    "&pv": "PASTE\nVALUES"
-    "&unclose": "REOPEN\nTAB"
-    "&axlk": {t: "AXIS", h: "hold"}
-    "&kp RC(A)": "RELOAD"
-    "&kp PSCRN": "SHOT"
-    "&kp BSPC": "BKSP"
-    "&kp DEL": "DEL"
-    "&kp SPACE": "SPACE"
-    "&mui_or_dgl": {t: "MUI ADV", s: "2× DONGLE"}
-    "&bst_tog ZBS_TOG": "SWITCH\nLAYOUT"
-    "&af_toggle AF_TOG": "TOGGLE\nFX"
-    "&soft_off": "POWER\nOFF"
-    "&bt BT_CLR": "BT\nCLEAR"
-    "&bt BT_NXT": "BT\nNEXT"
-    "&bt BT_PRV": "BT\nPREV"
-    "&sens P2SM_INC 1": "SENS+"
-    "&sens P2SM_DEC 1": "SENS-"
-    "&scrlsens P2SM_INC 1": "SCRL+"
-    "&scrlsens P2SM_DEC 1": "SCRL-"
-    "&tog 3": {t: "SCROLL\nLOCK"}
-    "&tog 4": {t: "SNIPE\nUNLOCK"}
-    "&kp RCTRL": "ZOOM"
-    "&to 0": "BACK"
-    "&kp C_PLAY": "PLAY"
-    "&kp C_PREV": "PREV"
-    "&kp C_NEXT": "NEXT"
-    "&kp C_VOL_UP": "VOL+"
-    "&kp C_VOL_DN": "VOL-"
-    "&kp RC(PG_DN)": "TAB▶"
-    "&kp RC(PG_UP)": "TAB◀"
-    "&qat1": "PASTE\nFORMAT"
-    "&qat3": "PASTE\nFORMULAS"
-    "&qat6": "COPY AS\nPICTURE"
-    "&qat8": "REV\nTRANSPOSE"
-    "&ptv": "TRANSPOSE\nVALUES"
-  # Empty transparent keys read cleaner than ▽ scatter.
+    "&snlk": {t: "←", h: "◎", s: "2×🔒"}
+    "&ltlk": {t: "Esc", h: "↕", s: "2×🔒"}
+    "&ltmkp 6 0x70028": {t: "⏎", h: "♪"}
+    "&ltmkp 6 ENTER": {t: "⏎", h: "♪"}
+    "&cdch 1 0": {t: "⎘", h: "✎", s: "2×↓"}
+    "&cdc": {t: "⎘", s: "2×↓"}
+    "&mkp MCLK": "●"
+    "&mkp LCLK": "◐"
+    "&mkp RCLK": "◑"
+    "&syslk": {t: "✕", h: "⚙", s: "2×↻"}
+    "&kp LA(ESC)": "⌘▶"
+    "&kp LA(LS(ESC))": "⌘◀"
+    "&bst_copy": "⎘"
+    "&bst_paste": "↓"
+    "&bst_cut": "✂"
+    "&bst_undo": "↶"
+    "&pv": "↓123"
+    "&unclose": "↻↹"
+    "&axlk": {t: "⟷", h: "hold"}
+    "&kp RC(A)": "↻"
+    "&kp PSCRN": "▣"
+    "&kp BSPC": "⌫"
+    "&kp DEL": "⌦"
+    "&kp SPACE": "␣"
+    "&mui_or_dgl": {t: "BLE", s: "2×USB"}
+    "&bst_tog ZBS_TOG": "⇄"
+    "&af_toggle AF_TOG": "✦"
+    "&soft_off": "⏻"
+    "&bt BT_CLR": "BT✕"
+    "&bt BT_NXT": "BT▶"
+    "&bt BT_PRV": "BT◀"
+    "&sens P2SM_INC 1": "◉+"
+    "&sens P2SM_DEC 1": "◉-"
+    "&scrlsens P2SM_INC 1": "↕+"
+    "&scrlsens P2SM_DEC 1": "↕-"
+    "&tog 3": {t: "🔒↕"}
+    "&tog 4": {t: "🔓"}
+    "&kp RCTRL": "⊕"
+    "&to 0": "⌂"
+    "&kp C_PLAY": "▶"
+    "&kp C_PREV": "◀◀"
+    "&kp C_NEXT": "▶▶"
+    "&kp C_VOL_UP": "♪+"
+    "&kp C_VOL_DN": "♪-"
+    "&kp RC(PG_DN)": "↹▶"
+    "&kp RC(PG_UP)": "↹◀"
+    "&kp LEFT": "←"
+    "&kp RIGHT": "→"
+    "&kp UP": "↑"
+    "&kp DOWN": "↓"
+    "&qat1": "↓fmt"
+    "&qat3": "↓ƒx"
+    "&qat6": "⎘▣"
+    "&qat8": "⇄ᵀ"
+    "&ptv": "⇄123"
   trans_legend: ""
 
 draw_config:
-  # Two columns → larger layers on the GitHub README width.
   n_columns: 2
   append_colon_to_layer_header: false
-  # Slightly larger unit → roomier caps for big type.
   key_h: 64
   key_w: 68
   key_rx: 10
   key_ry: 10
-  combo_w: 52
-  combo_h: 28
+  combo_w: 48
+  combo_h: 26
   inner_pad_w: 6
   inner_pad_h: 6
-  outer_pad_w: 32
-  outer_pad_h: 40
+  outer_pad_w: 44
+  outer_pad_h: 52
   small_pad: 4
   line_spacing: 1.15
-  # Allow longer legends before forced shrink.
-  shrink_wide_legends: 12
-  footer_text: "tap · orange = hold · blue 2× = double-tap"
+  shrink_wide_legends: 14
+  footer_text: "● mid  ◐ left  ◑ right  ⎘ copy  ↓ paste  ·  orange=hold  blue=2×"
   svg_extra_style: |
     svg.keymap {
-      font-family: "DejaVu Sans", "Segoe UI", "Helvetica Neue", sans-serif;
-      font-size: 16px;
+      font-family: "DejaVu Sans", "Segoe UI Symbol", sans-serif;
+      font-size: 18px;
       font-weight: 600;
       fill: #1a1d21;
     }
     rect.layer-frame {
-      fill: #f3f5f7;
-      stroke: #6b7280;
-      stroke-width: 2;
+      fill: #fafbfc;
+      stroke: #1a1d21;
+      stroke-width: 2.5;
+    }
+    #layer-dividers line {
+      stroke: #1a1d21;
+      stroke-width: 4;
     }
     rect.key {
       fill: #ffffff;
@@ -116,13 +120,17 @@ draw_config:
       paint-order: stroke;
     }
     text.footer {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
       fill: #5c6570;
       stroke: none;
     }
+    text.key.tap {
+      font-size: 22px;
+      font-weight: 700;
+    }
     text.hold, text.shifted, text.left, text.right, text.tl, text.tr, text.bl, text.br, text.combo {
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
     }
     text.hold {
@@ -130,6 +138,9 @@ draw_config:
     }
     text.shifted {
       fill: #2b6cb0;
+    }
+    text.combo.tap {
+      font-size: 12px;
     }
     text.combo.hold, text.combo.shifted {
       font-size: 10px;

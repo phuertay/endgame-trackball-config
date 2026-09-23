@@ -2,92 +2,68 @@ layout:
   zmk_keyboard: efogtech_trackball_0
 layers:
   Default:
-  - t: ENTER
-    h: media
-  - t: ESC
-    h: scroll
-    s: 2× LOCK
-  - 'MID
-
-    CLICK'
-  - t: COPY
-    h: edit
-    s: 2× PASTE
-  - 'LEFT
-
-    CLICK'
-  - 'RIGHT
-
-    CLICK'
-  - t: BACK
-    h: snipe
-    s: 2× LOCK
-  - t: CLOSE
-    h: system
-    s: 2× RELOAD
-  - APP◀
-  - TAB◀
-  - APP▶
-  - TAB▶
+  - t: ⏎
+    h: ♪
+  - t: Esc
+    h: ↕
+    s: 2×🔒
+  - ●
+  - t: ⎘
+    h: ✎
+    s: 2×↓
+  - ◐
+  - ◑
+  - t: ←
+    h: ◎
+    s: 2×🔒
+  - t: ✕
+    h: ⚙
+    s: 2×↻
+  - ⌘◀
+  - ↹◀
+  - ⌘▶
+  - ↹▶
   Edit:
-  - BKSP
-  - DEL
-  - CUT
+  - ⌫
+  - ⌦
+  - ✂
   - ''
-  - 'PASTE
-
-    VALUES'
-  - SHOT
-  - UNDO
-  - 'REOPEN
-
-    TAB'
-  - APP◀
-  - TAB◀
-  - APP▶
-  - TAB▶
+  - ↓123
+  - ▣
+  - ↶
+  - ↻↹
+  - ⌘◀
+  - ↹◀
+  - ⌘▶
+  - ↹▶
   System:
-  - t: MUI ADV
-    s: 2× DONGLE
-  - 'BT
-
-    CLEAR'
-  - 'SWITCH
-
-    LAYOUT'
-  - 'BT
-
-    NEXT'
-  - 'TOGGLE
-
-    FX'
-  - 'BT
-
-    PREV'
-  - 'POWER
-
-    OFF'
+  - t: BLE
+    s: 2×USB
+  - BT✕
+  - ⇄
+  - BT▶
+  - ✦
+  - BT◀
+  - ⏻
   - ''
-  - SENS+
-  - SCRL+
-  - SENS-
-  - SCRL-
+  - ◉+
+  - ↕+
+  - ◉-
+  - ↕-
   Scroll:
   - ''
-  - 'SCROLL
-
-    LOCK'
-  - t: AXIS
+  - 🔒↕
+  - t: ⟷
     h: hold
-  - ZOOM
+  - ⊕
   - ''
   - ''
   - ''
   - ''
-  - LEFT
-  - UP
-  - RIGHT
-  - DOWN
+  - ←
+  - ↑
+  - →
+  - ↓
   Snipe:
   - ''
   - ''
@@ -95,58 +71,44 @@ layers:
   - ''
   - ''
   - ''
-  - 'SNIPE
-
-    UNLOCK'
+  - 🔓
   - ''
-  - LEFT
-  - UP
-  - RIGHT
-  - DOWN
+  - ←
+  - ↑
+  - →
+  - ↓
   Excel:
-  - 'PASTE
-
-    FORMAT'
-  - 'PASTE
-
-    FORMULAS'
-  - 'REV
-
-    TRANSPOSE'
-  - t: COPY
-    s: 2× PASTE
-  - 'LEFT
-
-    CLICK'
-  - 'TRANSPOSE
-
-    VALUES'
-  - 'COPY AS
-
-    PICTURE'
-  - BACK
-  - APP◀
-  - TAB◀
-  - APP▶
-  - TAB▶
+  - ↓fmt
+  - ↓ƒx
+  - ⇄ᵀ
+  - t: ⎘
+    s: 2×↓
+  - ◐
+  - ⇄123
+  - ⎘▣
+  - ⌂
+  - ⌘◀
+  - ↹◀
+  - ⌘▶
+  - ↹▶
   Media:
   - ''
   - ''
-  - PREV
-  - NEXT
+  - ◀◀
+  - ▶▶
   - ''
   - ''
-  - PLAY
-  - BACK
-  - VOL+
-  - TAB◀
-  - VOL-
-  - TAB▶
+  - ▶
+  - ⌂
+  - ♪+
+  - ↹◀
+  - ♪-
+  - ↹▶
 combos:
 - p:
   - 0
   - 1
   k:
-    t: Excel
-    h: toggle
+    t: XL
+    h: tog
   d: false

@@ -46,6 +46,12 @@ jobs:
           data = yaml.safe_load(p.read_text())
           for combo in data.get("combos") or []:
               combo["d"] = False
+              k = combo.get("k")
+              if isinstance(k, dict):
+                  k["t"] = "XL"
+                  k["h"] = "tog"
+              elif isinstance(k, str):
+                  combo["k"] = {"t": "XL", "h": "tog"}
           p.write_text(yaml.dump(data, sort_keys=False, allow_unicode=True))
           PY
           keymap -c keymap_drawer.config.yaml draw \
