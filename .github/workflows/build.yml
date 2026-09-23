@@ -91,7 +91,7 @@ jobs:
           if [ ! -f keymap-drawer/keymap.pdf ]; then
             sudo apt-get update
             sudo apt-get install -y --no-install-recommends librsvg2-bin
-            rsvg-convert -f pdf -o keymap-drawer/keymap.pdf keymap-drawer/keymap.svg
+            rsvg-convert -f pdf -b white -o keymap-drawer/keymap.pdf keymap-drawer/keymap.svg
           fi
           cp keymap-drawer/keymap.pdf keymap-layout.pdf
       - name: Publish release
@@ -133,7 +133,7 @@ jobs:
           if [ ! -f keymap-drawer/keymap.pdf ]; then
             sudo apt-get update
             sudo apt-get install -y --no-install-recommends librsvg2-bin
-            rsvg-convert -f pdf -o keymap-drawer/keymap.pdf keymap-drawer/keymap.svg
+            rsvg-convert -f pdf -b white -o keymap-drawer/keymap.pdf keymap-drawer/keymap.svg
           fi
           cp keymap-drawer/keymap.pdf keymap-layout.pdf
       - name: Upload paw3395 firmware to existing release

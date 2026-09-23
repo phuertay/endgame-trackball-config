@@ -1,0 +1,46 @@
+/*
+ * Draw-only physical layout for keymap-drawer (README SVG + release PDF).
+ * Same key order / topology as buttons.dtsi physical_layout0, but squatter
+ * sides and tighter spacing so legends stay large and readable.
+ * Does NOT affect firmware / ZMK Studio.
+ *
+ * Key order (matches keymap positions):
+ *   0–1  top pair
+ *   2–3  upper side pair
+ *   4–5  lower side pair
+ *   6–7  bottom pair
+ *   8–9  vertical encoder strips (L, R)
+ *  10–11 horizontal encoder strips (L, R)
+ */
+/ {
+	draw_layout: physical_layout_draw {
+		compatible = "zmk,physical-layout";
+		display-name = "Draw Layout";
+
+		keys  //               w     h     x     y     rot  rx   ry
+		/* top pair */
+		= <&key_physical_attrs 195   95    150   0     0    14   14 >
+		, <&key_physical_attrs 195   95    365   0     0    14   14 >
+
+		/* upper sides — match top key height (was ~3.75u pillars) */
+		, <&key_physical_attrs 140   95    0     0     0    14   14 >
+		, <&key_physical_attrs 140   95    570   0     0    14   14 >
+
+		/* lower sides */
+		, <&key_physical_attrs 140   95    0     110   0    14   14 >
+		, <&key_physical_attrs 140   95    570   110   0    14   14 >
+
+		/* bottom pair */
+		, <&key_physical_attrs 195   95    150   220   0    14   14 >
+		, <&key_physical_attrs 195   95    365   220   0    14   14 >
+
+		/* encoder vertical */
+		, <&key_physical_attrs 70    80    0     225   0    12   12 >
+		, <&key_physical_attrs 70    80    640   225   0    12   12 >
+
+		/* encoder horizontal */
+		, <&key_physical_attrs 100   55    75    315   0    12   12 >
+		, <&key_physical_attrs 100   55    535   315   0    12   12 >
+		;
+	};
+};

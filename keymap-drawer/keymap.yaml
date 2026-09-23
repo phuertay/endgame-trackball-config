@@ -1,51 +1,49 @@
-layout: {zmk_keyboard: efogtech_trackball_0}
+layout:
+  zmk_keyboard: efogtech_trackball_0
 layers:
   Default:
-  - {t: ENTER, h: media}
-  - {t: ESC, h: scroll}
-  - 'MIDDLE
+  - t: ENTER
+    h: media
+  - t: ESC
+    h: scroll
+  - 'MID
 
     CLICK'
-  - {t: COPY / PASTE, h: edit}
+  - t: COPY
+    h: edit
+    s: PASTE
   - 'LEFT
 
     CLICK'
   - 'RIGHT
 
     CLICK'
-  - {t: BACK, h: snipe}
-  - {t: CLOSE, h: system, s: 2× RELOAD}
-  - 'APP
-
-    PREV'
-  - TAB <
-  - 'APP
-
-    NEXT'
-  - TAB >
+  - t: BACK
+    h: snipe
+  - t: CLOSE
+    h: system
+    s: 2x RELOAD
+  - APP◀
+  - TAB◀
+  - APP▶
+  - TAB▶
   Edit:
   - BKSP
   - DEL
   - CUT
-  - {t: ▽, type: trans}
+  - ''
   - 'PASTE
 
     VALUES'
-  - 'SCREEN
-
-    SHOT'
+  - SHOT
   - UNDO
   - 'REOPEN
 
     TAB'
-  - 'APP
-
-    PREV'
-  - TAB <
-  - 'APP
-
-    NEXT'
-  - TAB >
+  - APP◀
+  - TAB◀
+  - APP▶
+  - TAB▶
   System:
   - 'MUI /
 
@@ -61,54 +59,45 @@ layers:
     NEXT'
   - 'TOGGLE
 
-    EFFECTS'
+    FX'
   - 'BT
 
     PREV'
   - 'POWER
 
     OFF'
-  - {t: ▽, type: trans}
-  - SENS +
-  - 'SCROLL
-
-    SENS +'
-  - SENS -
-  - 'SCROLL
-
-    SENS -'
+  - ''
+  - SENS+
+  - SCRL+
+  - SENS-
+  - SCRL-
   Scroll:
-  - {t: ▽, type: trans}
+  - ''
   - 'SCROLL
 
     LOCK'
-  - {t: 'AXIS
-
-      TOGGLE', h: 'AXIS
-
-      HOLD'}
-  - 'ZOOM
-
-    (hold)'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - t: AXIS
+    h: hold
+  - ZOOM
+  - ''
+  - ''
+  - ''
+  - ''
   - LEFT
   - UP
   - RIGHT
   - DOWN
   Snipe:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
   - 'SNIPE
 
     UNLOCK'
-  - {t: ▽, type: trans}
+  - ''
   - LEFT
   - UP
   - RIGHT
@@ -123,7 +112,8 @@ layers:
   - 'REV
 
     TRANSPOSE'
-  - {t: COPY, s: PASTE}
+  - t: COPY
+    s: PASTE
   - 'LEFT
 
     CLICK'
@@ -134,27 +124,28 @@ layers:
 
     PICTURE'
   - BACK
-  - 'APP
-
-    PREV'
-  - TAB <
-  - 'APP
-
-    NEXT'
-  - TAB >
+  - APP◀
+  - TAB◀
+  - APP▶
+  - TAB▶
   Media:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - ''
+  - ''
   - PREV
   - NEXT
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
+  - ''
+  - ''
   - PLAY
   - BACK
-  - VOL +
-  - TAB <
-  - VOL -
-  - TAB >
+  - VOL+
+  - TAB◀
+  - VOL-
+  - TAB▶
 combos:
-- p: [0, 1]
-  k: {t: Excel, h: toggle}
+- p:
+  - 0
+  - 1
+  k:
+    t: Excel
+    h: toggle
+  d: false

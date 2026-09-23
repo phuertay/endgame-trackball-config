@@ -1,57 +1,137 @@
 parse_config:
+  # Shorter legends so large fonts fit without shrinking.
   raw_binding_map:
     "&snlk": {t: "BACK", h: "snipe"}
     "&ltlk": {t: "ESC", h: "scroll"}
     "&ltmkp 6 0x70028": {t: "ENTER", h: "media"}
     "&ltmkp 6 ENTER": {t: "ENTER", h: "media"}
-    "&cdch 1 0": {t: "COPY / PASTE", h: "edit"}
+    "&cdch 1 0": {t: "COPY", h: "edit", s: "PASTE"}
     "&cdc": {t: "COPY", s: "PASTE"}
-    "&mkp MCLK": "MIDDLE\nCLICK"
+    "&mkp MCLK": "MID\nCLICK"
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
-    "&syslk": {t: "CLOSE", h: "system", s: "2× RELOAD"}
-    "&kp LA(ESC)": "APP\nNEXT"
-    "&kp LA(LS(ESC))": "APP\nPREV"
+    "&syslk": {t: "CLOSE", h: "system", s: "2x RELOAD"}
+    "&kp LA(ESC)": "APP▶"
+    "&kp LA(LS(ESC))": "APP◀"
     "&bst_copy": "COPY"
     "&bst_paste": "PASTE"
     "&bst_cut": "CUT"
     "&bst_undo": "UNDO"
     "&pv": "PASTE\nVALUES"
     "&unclose": "REOPEN\nTAB"
-    "&axlk": {t: "AXIS\nTOGGLE", h: "AXIS\nHOLD"}
+    "&axlk": {t: "AXIS", h: "hold"}
     "&kp RC(A)": "RELOAD"
-    "&kp PSCRN": "SCREEN\nSHOT"
+    "&kp PSCRN": "SHOT"
     "&kp BSPC": "BKSP"
     "&kp DEL": "DEL"
     "&kp SPACE": "SPACE"
     "&mui_or_dgl": "MUI /\nDONGLE"
     "&bst_tog ZBS_TOG": "SWITCH\nLAYOUT"
-    "&af_toggle AF_TOG": "TOGGLE\nEFFECTS"
+    "&af_toggle AF_TOG": "TOGGLE\nFX"
     "&soft_off": "POWER\nOFF"
     "&bt BT_CLR": "BT\nCLEAR"
     "&bt BT_NXT": "BT\nNEXT"
     "&bt BT_PRV": "BT\nPREV"
-    "&sens P2SM_INC 1": "SENS +"
-    "&sens P2SM_DEC 1": "SENS -"
-    "&scrlsens P2SM_INC 1": "SCROLL\nSENS +"
-    "&scrlsens P2SM_DEC 1": "SCROLL\nSENS -"
+    "&sens P2SM_INC 1": "SENS+"
+    "&sens P2SM_DEC 1": "SENS-"
+    "&scrlsens P2SM_INC 1": "SCRL+"
+    "&scrlsens P2SM_DEC 1": "SCRL-"
     "&tog 3": {t: "SCROLL\nLOCK"}
     "&tog 4": {t: "SNIPE\nUNLOCK"}
-    "&kp RCTRL": "ZOOM\n(hold)"
+    "&kp RCTRL": "ZOOM"
     "&to 0": "BACK"
     "&kp C_PLAY": "PLAY"
     "&kp C_PREV": "PREV"
     "&kp C_NEXT": "NEXT"
-    "&kp C_VOL_UP": "VOL +"
-    "&kp C_VOL_DN": "VOL -"
-    "&kp RC(PG_DN)": "TAB >"
-    "&kp RC(PG_UP)": "TAB <"
+    "&kp C_VOL_UP": "VOL+"
+    "&kp C_VOL_DN": "VOL-"
+    "&kp RC(PG_DN)": "TAB▶"
+    "&kp RC(PG_UP)": "TAB◀"
     "&qat1": "PASTE\nFORMAT"
     "&qat3": "PASTE\nFORMULAS"
     "&qat6": "COPY AS\nPICTURE"
     "&qat8": "REV\nTRANSPOSE"
     "&ptv": "TRANSPOSE\nVALUES"
+  # Empty transparent keys read cleaner than ▽ scatter.
+  trans_legend: ""
+
 draw_config:
-  # 3 columns keeps all layers on one roughly-square page (better for the release PDF).
-  n_columns: 3
+  # Two columns → larger layers on the GitHub README width.
+  n_columns: 2
   append_colon_to_layer_header: false
+  # Slightly larger unit → roomier caps for big type.
+  key_h: 64
+  key_w: 68
+  key_rx: 10
+  key_ry: 10
+  combo_w: 52
+  combo_h: 28
+  inner_pad_w: 6
+  inner_pad_h: 6
+  outer_pad_w: 28
+  outer_pad_h: 36
+  small_pad: 4
+  line_spacing: 1.15
+  # Allow longer legends before forced shrink.
+  shrink_wide_legends: 12
+  footer_text: "Endgame trackball · hold = layer / shifted = double-tap"
+  svg_extra_style: |
+    svg.keymap {
+      font-family: "DejaVu Sans", "Segoe UI", "Helvetica Neue", sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      fill: #1a1d21;
+    }
+    rect.key {
+      fill: #ffffff;
+      stroke: #1a1d21;
+      stroke-width: 1.75;
+    }
+    rect.combo, rect.combo-separate {
+      fill: #d8ebff;
+      stroke: #2b6cb0;
+      stroke-width: 1.5;
+    }
+    rect.held, rect.combo.held {
+      fill: #ffe8c8;
+      stroke: #c05621;
+    }
+    rect.ghost, rect.combo.ghost {
+      stroke: #a0a6ad;
+      stroke-dasharray: 5, 4;
+      fill: #f4f5f6;
+    }
+    text.label {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      stroke: #ffffff;
+      stroke-width: 6;
+      paint-order: stroke;
+    }
+    text.footer {
+      font-size: 12px;
+      font-weight: 500;
+      fill: #5c6570;
+      stroke: none;
+    }
+    text.hold, text.shifted, text.left, text.right, text.tl, text.tr, text.bl, text.br, text.combo {
+      font-size: 12px;
+      font-weight: 700;
+    }
+    text.hold {
+      fill: #c05621;
+    }
+    text.shifted {
+      fill: #2b6cb0;
+    }
+    text.combo.hold, text.combo.shifted {
+      font-size: 10px;
+    }
+    text.trans {
+      fill: #c5c9ce;
+    }
+    path.combo {
+      stroke: #2b6cb0;
+      stroke-width: 1.5;
+    }
