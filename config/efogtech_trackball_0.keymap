@@ -136,18 +136,17 @@
 		};
 
 		/*
-		 * TEMP: Neu paste-values timing cal (combo pos6+7).
-		 * Top = Enter sweep @ Win 500; bottom = Win sweep @ Enter 1000.
-		 * See config/pv_cal.dtsi for the binary-search protocol.
+		 * TEMP: Neu paste-values timing cal ROUND 2 (combo pos6+7).
+		 * Round 1: only E250 failed. See config/pv_cal.dtsi.
 		 */
 		pv_cal_layer {
 			display-name = "PV Cal";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &pv_e250       &pv_e500
-			    &pv_e750       &pv_e1000
-			    &pv_w250       &pv_w375
-			    &pv_w500       &to LAYER_DEFAULT
+			    &pv_e300       &pv_e350
+			    &pv_e400       &pv_e450
+			    &pv_w100       &pv_w150
+			    &pv_e500w250   &to LAYER_DEFAULT
 
 			    &at TAB        &kp RC(PG_UP)
 			    &at LS(TAB)    &kp RC(PG_DN)

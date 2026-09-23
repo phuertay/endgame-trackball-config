@@ -1,21 +1,20 @@
 /*
- * TEMPORARY Neu paste-values timing calibration.
+ * TEMPORARY Neu paste-values timing calibration — ROUND 2
  *
- * Combo both lower buttons (pos 6+7) toggles LAYER_PV_CAL. Leave with pos7
- * (BACK) or the same combo again.
+ * Round 1 result: only top-left failed → E250@W500 fail; all else ok.
+ * So Enter floor is in (250, 500]; Win floor is ≤250 (with Enter=1000).
  *
- * How to binary-search (one flash):
- *   Top four  = ENTER sweep, Win wait fixed at 500ms
- *               pos0 E250 | pos1 E500
- *               pos2 E750 | pos3 E1000  ← control (known working)
- *   Bottom    = Win sweep, Enter wait fixed at 1000ms
- *               pos4 W250 | pos5 W375
- *               pos6 W500 | pos7 BACK
+ * Combo both lower buttons (pos 6+7) toggles LAYER_PV_CAL. Leave with pos7.
  *
- * Report e.g. "E250 fail, E500 fail, E750 ok, E1000 ok; W250 fail, W375 ok".
- * Next flash halves the surviving window (we'll retarget the macros).
+ *   Top four  = ENTER fine sweep, Win fixed at 500
+ *               pos0 E300 | pos1 E350
+ *               pos2 E400 | pos3 E450
+ *   Bottom    = Win below 250 (Enter=1000) + combined mins
+ *               pos4 W100 | pos5 W150
+ *               pos6 E500@W250 | pos7 BACK
+ *               (pos6 = round-1 mins combined: does E500 still work at W250?)
  *
- * Hold 12ms / gap 50ms stay fixed — only the two long waits vary.
+ * Report ok/fail per key.
  */
 
 #define PV_CAL_HOLD 12
@@ -23,8 +22,8 @@
 
 / {
 	macros {
-		/* ENTER sweep (Win = 500) */
-		pv_e250: pv_e250 {
+		/* ENTER fine sweep (Win = 500) */
+		pv_e300: pv_e300 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -39,12 +38,12 @@
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
-				, <&macro_wait_time 250>
+				, <&macro_wait_time 300>
 				, <&macro_tap &kp RET>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;
 		};
-		pv_e500: pv_e500 {
+		pv_e350: pv_e350 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -59,12 +58,12 @@
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
-				, <&macro_wait_time 500>
+				, <&macro_wait_time 350>
 				, <&macro_tap &kp RET>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;
 		};
-		pv_e750: pv_e750 {
+		pv_e400: pv_e400 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -79,12 +78,12 @@
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
-				, <&macro_wait_time 750>
+				, <&macro_wait_time 400>
 				, <&macro_tap &kp RET>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;
 		};
-		pv_e1000: pv_e1000 {
+		pv_e450: pv_e450 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -96,6 +95,48 @@
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_release &kp FSLH>
 				, <&macro_wait_time 500>
+				, <&macro_release &kp LGUI>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp TAB>
+				, <&macro_wait_time 450>
+				, <&macro_tap &kp RET>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp RET>;
+		};
+
+		/* Win below 250 (Enter = 1000) */
+		pv_w100: pv_w100 {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			wait-ms = <PV_CAL_GAP>;
+			tap-ms = <PV_CAL_HOLD>;
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_wait_time PV_CAL_HOLD>
+				, <&macro_press &kp FSLH>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time 100>
+				, <&macro_release &kp LGUI>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp TAB>
+				, <&macro_wait_time 1000>
+				, <&macro_tap &kp RET>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_tap &kp RET>;
+		};
+		pv_w150: pv_w150 {
+			compatible = "zmk,behavior-macro";
+			#binding-cells = <0>;
+			wait-ms = <PV_CAL_GAP>;
+			tap-ms = <PV_CAL_HOLD>;
+			bindings
+				= <&macro_press &kp LGUI>
+				, <&macro_wait_time PV_CAL_HOLD>
+				, <&macro_press &kp FSLH>
+				, <&macro_wait_time PV_CAL_GAP>
+				, <&macro_release &kp FSLH>
+				, <&macro_wait_time 150>
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
@@ -105,8 +146,8 @@
 				, <&macro_tap &kp RET>;
 		};
 
-		/* Win sweep (Enter = 1000) */
-		pv_w250: pv_w250 {
+		/* Round-1 mins combined: Enter 500 (ok) + Win 250 (ok separately) */
+		pv_e500w250: pv_e500w250 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -121,47 +162,7 @@
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
-				, <&macro_wait_time 1000>
-				, <&macro_tap &kp RET>
-				, <&macro_wait_time PV_CAL_GAP>
-				, <&macro_tap &kp RET>;
-		};
-		pv_w375: pv_w375 {
-			compatible = "zmk,behavior-macro";
-			#binding-cells = <0>;
-			wait-ms = <PV_CAL_GAP>;
-			tap-ms = <PV_CAL_HOLD>;
-			bindings
-				= <&macro_press &kp LGUI>
-				, <&macro_wait_time PV_CAL_HOLD>
-				, <&macro_press &kp FSLH>
-				, <&macro_wait_time PV_CAL_GAP>
-				, <&macro_release &kp FSLH>
-				, <&macro_wait_time 375>
-				, <&macro_release &kp LGUI>
-				, <&macro_wait_time PV_CAL_GAP>
-				, <&macro_tap &kp TAB>
-				, <&macro_wait_time 1000>
-				, <&macro_tap &kp RET>
-				, <&macro_wait_time PV_CAL_GAP>
-				, <&macro_tap &kp RET>;
-		};
-		pv_w500: pv_w500 {
-			compatible = "zmk,behavior-macro";
-			#binding-cells = <0>;
-			wait-ms = <PV_CAL_GAP>;
-			tap-ms = <PV_CAL_HOLD>;
-			bindings
-				= <&macro_press &kp LGUI>
-				, <&macro_wait_time PV_CAL_HOLD>
-				, <&macro_press &kp FSLH>
-				, <&macro_wait_time PV_CAL_GAP>
-				, <&macro_release &kp FSLH>
 				, <&macro_wait_time 500>
-				, <&macro_release &kp LGUI>
-				, <&macro_wait_time PV_CAL_GAP>
-				, <&macro_tap &kp TAB>
-				, <&macro_wait_time 1000>
 				, <&macro_tap &kp RET>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;
