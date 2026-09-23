@@ -80,7 +80,8 @@
 			display-name = "Scroll";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &trans     &tog LAYER_SCROLL
+			    // pos1 stays &trans so default &ltlk (incl. 2× lock/unlock) flows through
+			    &trans     &trans
 			    &axlk      &kp RCTRL
 			    &trans     &trans
 			    &trans     &to LAYER_DEFAULT
@@ -97,7 +98,8 @@
 			    &trans     &trans
 			    &trans     &trans
 			    &trans     &trans
-			    &tog LAYER_SNIPE  &to LAYER_DEFAULT
+			    // pos6 stays &trans so default &snlk (incl. 2× lock/unlock) flows through
+			    &trans     &to LAYER_DEFAULT
 
 			    &kp LEFT   &kp UP
 			    &kp RIGHT  &kp DOWN

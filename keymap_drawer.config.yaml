@@ -11,14 +11,14 @@ parse_config:
     "&mkp MCLK": "mid clk"
     "&mkp LCLK": "left clk"
     "&mkp RCLK": "right clk"
-    "&syslk": {t: "✕", h: "system", s: "2× reload"}
+    "&syslk": {t: "$$mdi:close$$", h: "system", s: "2× reload"}
     "&kp LA(ESC)": "app"
     "&kp LA(LS(ESC))": "app"
     "&bst_copy": "$$mdi:content-copy$$"
     "&bst_paste": "$$mdi:content-paste$$"
     "&bst_cut": "$$mdi:content-cut$$"
     "&bst_undo": "$$mdi:undo$$"
-    "&pv": {t: "$$mdi:clipboard-text$$", right: "val"}
+    "&pv": "$$excel-paste-values$$"
     "&unclose": "reopen\ntab"
     "&axlk": {t: "axis", h: "hold"}
     "&kp RC(A)": "reload"
@@ -30,16 +30,13 @@ parse_config:
     "&bst_tog ZBS_TOG": "swap\nlayout"
     "&af_toggle AF_TOG": "fx"
     "&soft_off": "$$mdi:power$$"
-    "&bt BT_CLR": {t: "$$mdi:bluetooth$$", right: "✕"}
+    "&bt BT_CLR": {t: "$$mdi:bluetooth$$", right: "$$mdi:close$$"}
     "&bt BT_NXT": {t: "$$mdi:bluetooth$$", right: "$$mdi:arrow-down$$"}
     "&bt BT_PRV": {t: "$$mdi:bluetooth$$", right: "$$mdi:arrow-up$$"}
     "&sens P2SM_INC 1": "sens +"
     "&sens P2SM_DEC 1": "sens -"
     "&scrlsens P2SM_INC 1": "scrl +"
     "&scrlsens P2SM_DEC 1": "scrl -"
-    # Sticky scroll/snipe: tap the layer's unlock key to drop back out.
-    "&tog 3": "$$mdi:home$$"
-    "&tog 4": "$$mdi:home$$"
     "&kp RCTRL": "zoom"
     # Explicit return-to-default (excel/media pos7 — same physical spot).
     "&to 0": "$$mdi:home$$"
@@ -56,19 +53,24 @@ parse_config:
     "&kp RIGHT": "$$mdi:arrow-right$$"
     "&kp UP": "$$mdi:arrow-up$$"
     "&kp DOWN": "$$mdi:arrow-down$$"
-    "&qat1": {t: "$$mdi:format-paint$$", right: "fmt"}
-    "&qat3": {t: "$$mdi:content-paste$$", right: "ƒx"}
-    "&qat6": {t: "$$mdi:image$$", right: "copy"}
+    "&qat1": "$$excel-paste-format$$"
+    "&qat3": "$$excel-paste-formulas$$"
+    "&qat6": "$$excel-copy-picture$$"
     "&qat8": "rev\ntranspose"
     "&ptv": "transpose\nvalues"
   trans_legend: ""
 
 draw_config:
+  glyphs:
+    excel-paste-values: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#1a1d21" d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z"/><text x="12" y="16.8" text-anchor="middle" font-family="DejaVu Sans" font-size="5.8" font-weight="700" fill="#1a1d21">123</text></svg>'
+    excel-paste-format: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#1a1d21" d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z"/><g transform="translate(9.8,10.8) scale(0.48)"><path fill="#1a1d21" d="M18,4V3A1,1 0 0,0 17,2H5A1,1 0 0,0 4,3V7A1,1 0 0,0 5,8H17A1,1 0 0,0 18,7V6H19V10H9V21A1,1 0 0,0 10,22H12A1,1 0 0,0 13,21V12H21V4H18Z"/></g></svg>'
+    excel-paste-formulas: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#1a1d21" d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z"/><text x="12" y="17.2" text-anchor="middle" font-family="DejaVu Sans" font-size="8.5" font-style="italic" font-weight="700" fill="#1a1d21">fx</text></svg>'
+    excel-copy-picture: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#1a1d21" d="M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M7,7H17V5H19V19H5V5H7V7Z"/><path fill="#1a1d21" d="M8,9H16V17H8V9M9.5,15.5L11,13.5L12.25,15.1L14,12.5L15.5,15.5H9.5Z"/></svg>'
   n_columns: 2
   append_colon_to_layer_header: false
   glyph_tap_size: 28
   glyph_hold_size: 24
-  glyph_shifted_size: 20
+  glyph_shifted_size: 28
   key_h: 64
   key_w: 68
   key_rx: 10

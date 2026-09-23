@@ -16,7 +16,7 @@ layers:
   - t: back
     h: snipe
     s: 2× lock
-  - t: ✕
+  - t: $$mdi:close$$
     h: system
     s: 2× reload
   - app
@@ -28,8 +28,7 @@ layers:
   - $$mdi:backspace-reverse$$
   - $$mdi:content-cut$$
   - ''
-  - t: $$mdi:clipboard-text$$
-    right: val
+  - $$excel-paste-values$$
   - PrtSc
   - $$mdi:undo$$
   - 'reopen
@@ -43,7 +42,7 @@ layers:
   - t: ble adv
     s: 2× dongle
   - t: $$mdi:bluetooth$$
-    right: ✕
+    right: $$mdi:close$$
   - 'swap
 
     layout'
@@ -60,7 +59,7 @@ layers:
   - scrl -
   scroll:
   - ''
-  - $$mdi:home$$
+  - ''
   - t: axis
     h: hold
   - zoom
@@ -79,17 +78,15 @@ layers:
   - ''
   - ''
   - ''
-  - $$mdi:home$$
+  - ''
   - $$mdi:home$$
   - $$mdi:arrow-left$$
   - $$mdi:arrow-up$$
   - $$mdi:arrow-right$$
   - $$mdi:arrow-down$$
   excel:
-  - t: $$mdi:format-paint$$
-    right: fmt
-  - t: $$mdi:content-paste$$
-    right: ƒx
+  - $$excel-paste-format$$
+  - $$excel-paste-formulas$$
   - 'rev
 
     transpose'
@@ -99,8 +96,7 @@ layers:
   - 'transpose
 
     values'
-  - t: $$mdi:image$$
-    right: copy
+  - $$excel-copy-picture$$
   - $$mdi:home$$
   - app
   - tab
