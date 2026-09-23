@@ -43,12 +43,12 @@ def postprocess(svg: str) -> str:
     margin = 24.0
 
     lines = [
-        '<g id="layer-dividers" fill="none" stroke="#9aa3ad" '
+        '<g id="layer-dividers" fill="none" stroke="#8b949e" '
         'stroke-width="2" stroke-linecap="butt">'
     ]
     for i in range(len(ys) - 1):
-        # Gutter midpoint between stacked layer rows.
-        y = round(ys[i] + row_pitch / 2, 1)
+        # Sit in the gutter just above the next row's layer header.
+        y = round(ys[i + 1] - 10, 1)
         lines.append(
             f'<line class="layer-divider-h" x1="{margin}" y1="{y}" '
             f'x2="{board_w - margin}" y2="{y}"/>'
