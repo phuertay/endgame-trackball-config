@@ -155,6 +155,27 @@ layers:
   - TAB <
   - VOL -
   - TAB >
+  PV Cal: ['E390
+
+      W500', 'E400
+
+      W500', 'E390
+
+      W250', 'E400
+
+      W250', 'E400
+
+      W200', 'E400
+
+      W300', 'E425
+
+      W250', BACK, 'APP
+
+      CYCLE >', TAB <, 'APP
+
+      CYCLE <', TAB >]
 combos:
 - p: [0, 1]
   k: {t: Excel, h: toggle}
+- p: [6, 7]
+  k: {t: PV Cal, h: toggle}
