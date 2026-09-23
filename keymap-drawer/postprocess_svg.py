@@ -94,10 +94,17 @@ def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
         'stroke-width="2" stroke-linecap="butt">'
     ]
 
-    # Horizontal: midpoint of gutter between one row's keys and the next row.
+    # Horizontal: sit just above the next layer row, with clear space
+    # below the previous row's encoders (mid-gutter overlapped them).
     if len(ys) >= 2:
         for i in range(len(ys) - 1):
-            y = round((content_bottom[ys[i]] + ys[i + 1]) / 2, 1)
+            bottom = content_bottom[ys[i]]
+            next_top = ys[i + 1]
+            gap = next_top - bottom
+            # Prefer near the next layer; keep ≥14px clear of encoders.
+            y = round(next_top - 12, 1)
+            if y < bottom + 14:
+                y = round(bottom + max(gap * 0.75, 14), 1)
             lines.append(
                 f'<line class="layer-divider-h" x1="{margin}" y1="{y}" '
                 f'x2="{board_w - margin}" y2="{y}"/>'

@@ -1,10 +1,10 @@
-<svg width="1053" height="1187" viewBox="0 0 1053 1187" class="keymap" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="1053" height="1267" viewBox="0 0 1053 1267" class="keymap" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <rect id="page-bg" width="100%" height="100%" fill="#ffffff"/>
 <g id="layer-dividers" fill="none" stroke="#8b949e" stroke-width="2" stroke-linecap="butt">
-<line class="layer-divider-h" x1="24.0" y1="257.5" x2="1029.0" y2="257.5"/>
-<line class="layer-divider-h" x1="24.0" y1="542.5" x2="1029.0" y2="542.5"/>
-<line class="layer-divider-h" x1="24.0" y1="827.0" x2="1029.0" y2="827.0"/>
-<line class="layer-divider-v" x1="523.5" y1="24.0" x2="523.5" y2="1163.0"/>
+<line class="layer-divider-h" x1="24.0" y1="289.0" x2="1029.0" y2="289.0"/>
+<line class="layer-divider-h" x1="24.0" y1="590.0" x2="1029.0" y2="590.0"/>
+<line class="layer-divider-h" x1="24.0" y1="890.0" x2="1029.0" y2="890.0"/>
+<line class="layer-divider-v" x1="523.5" y1="24.0" x2="523.5" y2="1243.0"/>
 </g>
 <defs>/* start glyphs */
 <symbol id="mdi:arrow-down" viewBox="0 0 24 24"><path fill="#1a1d21" d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z" /></symbol>
@@ -230,8 +230,8 @@ path.combo {
 }
 </style>
 <g transform="translate(36, 0)" class="layer-default">
-<text x="0" y="24" class="label" id="default">default</text>
-<g transform="translate(0, 48)">
+<text x="0" y="32" class="label" id="default">default</text>
+<g transform="translate(0, 64)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#mdi:keyboard-return" xlink:href="#mdi:keyboard-return" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:keyboard-return"/>
@@ -303,8 +303,8 @@ path.combo {
 </g>
 </g>
 <g transform="translate(562, 0)" class="layer-edit">
-<text x="0" y="24" class="label" id="edit">edit</text>
-<g transform="translate(0, 48)">
+<text x="0" y="32" class="label" id="edit">edit</text>
+<g transform="translate(0, 64)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#mdi:keyboard-backspace" xlink:href="#mdi:keyboard-backspace" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:keyboard-backspace"/>
@@ -362,9 +362,9 @@ path.combo {
 </g>
 </g>
 </g>
-<g transform="translate(36, 285)" class="layer-system">
-<text x="0" y="24" class="label" id="system">system</text>
-<g transform="translate(0, 48)">
+<g transform="translate(36, 301)" class="layer-system">
+<text x="0" y="32" class="label" id="system">system</text>
+<g transform="translate(0, 64)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <text x="0" y="0" class="key tap">
@@ -403,6 +403,7 @@ path.combo {
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
+<use href="#mdi:home" xlink:href="#mdi:home" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:home"/>
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
@@ -435,9 +436,9 @@ path.combo {
 </g>
 </g>
 </g>
-<g transform="translate(562, 285)" class="layer-scroll">
-<text x="0" y="24" class="label" id="scroll">scroll</text>
-<g transform="translate(0, 48)">
+<g transform="translate(562, 301)" class="layer-scroll">
+<text x="0" y="32" class="label" id="scroll">scroll</text>
+<g transform="translate(0, 64)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 </g>
@@ -465,6 +466,7 @@ path.combo {
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
+<use href="#mdi:home" xlink:href="#mdi:home" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:home"/>
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
@@ -489,9 +491,9 @@ path.combo {
 </g>
 </g>
 </g>
-<g transform="translate(36, 570)" class="layer-snipe">
-<text x="0" y="24" class="label" id="snipe">snipe</text>
-<g transform="translate(0, 48)">
+<g transform="translate(36, 602)" class="layer-snipe">
+<text x="0" y="32" class="label" id="snipe">snipe</text>
+<g transform="translate(0, 64)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 </g>
@@ -516,6 +518,7 @@ path.combo {
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
+<use href="#mdi:home" xlink:href="#mdi:home" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:home"/>
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
@@ -540,9 +543,9 @@ path.combo {
 </g>
 </g>
 </g>
-<g transform="translate(562, 570)" class="layer-excel">
-<text x="0" y="24" class="label" id="excel">excel</text>
-<g transform="translate(0, 48)">
+<g transform="translate(562, 602)" class="layer-excel">
+<text x="0" y="32" class="label" id="excel">excel</text>
+<g transform="translate(0, 64)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#mdi:format-paint" xlink:href="#mdi:format-paint" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:format-paint"/>
@@ -608,9 +611,9 @@ path.combo {
 </g>
 </g>
 </g>
-<g transform="translate(36, 854)" class="layer-media">
-<text x="0" y="24" class="label" id="media">media</text>
-<g transform="translate(0, 48)">
+<g transform="translate(36, 902)" class="layer-media">
+<text x="0" y="32" class="label" id="media">media</text>
+<g transform="translate(0, 64)">
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 </g>
@@ -662,4 +665,4 @@ path.combo {
 </g>
 </g>
 </g>
-<text x="1017.0" y="1163.0" class="footer">orange = hold · blue = double-tap (2×)</text></svg>
+<text x="1017.0" y="1235.0" class="footer">orange = hold · blue = double-tap (2×)</text></svg>

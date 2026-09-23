@@ -53,7 +53,7 @@ layers:
   - t: $$mdi:bluetooth$$
     right: $$mdi:arrow-up$$
   - $$mdi:power$$
-  - ''
+  - $$mdi:home$$
   - sens +
   - scrl +
   - sens -
@@ -67,7 +67,7 @@ layers:
   - ''
   - ''
   - ''
-  - ''
+  - $$mdi:home$$
   - $$mdi:arrow-left$$
   - $$mdi:arrow-up$$
   - $$mdi:arrow-right$$
@@ -80,7 +80,7 @@ layers:
   - ''
   - ''
   - $$mdi:home$$
-  - ''
+  - $$mdi:home$$
   - $$mdi:arrow-left$$
   - $$mdi:arrow-up$$
   - $$mdi:arrow-right$$

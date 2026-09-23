@@ -69,7 +69,7 @@
 			    &mui_or_dgl          &bt BT_CLR
 			    &bst_tog ZBS_TOG     &bt BT_NXT
 			    &af_toggle AF_TOG    &bt BT_PRV
-			    &soft_off            &trans
+			    &soft_off            &to LAYER_DEFAULT
 
 			    &sens P2SM_INC 1     &scrlsens P2SM_INC 1
 			    &sens P2SM_DEC 1     &scrlsens P2SM_DEC 1
@@ -83,7 +83,7 @@
 			    &trans     &tog LAYER_SCROLL
 			    &axlk      &kp RCTRL
 			    &trans     &trans
-			    &trans     &trans
+			    &trans     &to LAYER_DEFAULT
 
 			    &kp LEFT   &kp UP
 			    &kp RIGHT  &kp DOWN
@@ -97,7 +97,7 @@
 			    &trans     &trans
 			    &trans     &trans
 			    &trans     &trans
-			    &tog LAYER_SNIPE  &trans
+			    &tog LAYER_SNIPE  &to LAYER_DEFAULT
 
 			    &kp LEFT   &kp UP
 			    &kp RIGHT  &kp DOWN
