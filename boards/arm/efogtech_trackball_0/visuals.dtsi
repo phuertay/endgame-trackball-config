@@ -8,6 +8,7 @@
 #define LAYER_SNIPE        4
 #define LAYER_EXCEL        5
 #define LAYER_MEDIA        6
+#define LAYER_ALTTAB       7
 #endif
 
 / {
@@ -83,6 +84,13 @@
 		layer_media {
 			event-type = "layer";
 			layer-index = <LAYER_MEDIA>;
+			colors = [00 00 00];
+			persistent;
+		};
+
+		layer_alttab {
+			event-type = "layer";
+			layer-index = <LAYER_ALTTAB>;
 			colors = [00 00 00];
 			persistent;
 		};

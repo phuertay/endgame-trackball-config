@@ -15,6 +15,7 @@
 #define LAYER_SNIPE        4
 #define LAYER_EXCEL        5
 #define LAYER_MEDIA        6
+#define LAYER_ALTTAB       7
 #endif
 
 #include "clipboard_layouts.dtsi"
@@ -48,11 +49,12 @@
 
 		// Edit: hold the copy/paste button (pos3). pos3 itself must be &trans
 		// so the hold key stays usable — Delete lives on pos1 next to Bksp.
+		// Hold Bksp: Alt down + LAYER_ALTTAB (encoders Tab / Shift+Tab); release Alt up.
 		edit_layer {
 			display-name = "Edit";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &kp BSPC       &kp DEL
+			    &bspc_at BSPC  &kp DEL
 			    &bst_cut       &trans
 			    &pv            &kp PSCRN
 			    &bst_undo      &unclose
@@ -131,6 +133,23 @@
 
 			    &kp C_VOL_UP    &kp RC(PG_UP)
 			    &kp C_VOL_DN    &kp RC(PG_DN)
+		    >;
+		};
+
+		// Momentary while Edit Bksp is held (&bspc_at). Alt is held by the
+		// macro; encoders send Tab / Shift+Tab for the OS app switcher.
+		// CW = Tab (next), CCW = Shift+Tab (prev) on both sides.
+		alttab_layer {
+			display-name = "Alt+Tab";
+			DECLARE_ENCODERS;
+			bindings = <
+			    &trans     &trans
+			    &trans     &trans
+			    &trans     &trans
+			    &trans     &trans
+
+			    &kp LS(TAB) &kp TAB
+			    &kp TAB     &kp LS(TAB)
 		    >;
 		};
 	};

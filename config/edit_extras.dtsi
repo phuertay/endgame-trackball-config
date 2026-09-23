@@ -146,6 +146,20 @@
 			tap-ms = <10>;
 			bindings = <&kp LALT &kp LS(N0)>;
 		};
+
+		/* Hold: Alt down + momentary Alt+Tab layer (encoders → Tab / Shift+Tab).
+		 * Release: layer off, then Alt up. Bound via &bspc_at on Edit Bksp. */
+		alt_tab_hold: alt_tab_hold {
+			compatible = "zmk,behavior-macro";
+			display-name = "Alt+Tab hold (Alt + encoders)";
+			#binding-cells = <0>;
+			bindings
+				= <&macro_press &kp LALT>
+				, <&macro_press &mo LAYER_ALTTAB>
+				, <&macro_pause_for_release>
+				, <&macro_release &mo LAYER_ALTTAB>
+				, <&macro_release &kp LALT>;
+		};
 	};
 
 	behaviors {
@@ -167,6 +181,16 @@
 			display-name = "Scroll axis (tap toggle / hold swap)";
 			#binding-cells = <0>;
 			tapping-term-ms = <200>;
+		};
+
+		/* Tap = Backspace; hold = Alt down + Alt+Tab layer until release. */
+		bspc_at: bspc-alt-tab {
+			compatible = "zmk,behavior-hold-tap";
+			display-name = "Bksp / Alt+Tab (hold)";
+			#binding-cells = <1>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <200>;
+			bindings = <&alt_tab_hold>, <&kp>;
 		};
 	};
 };

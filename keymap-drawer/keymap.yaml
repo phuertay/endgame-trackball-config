@@ -24,7 +24,8 @@ layers:
   - app
   - tab
   edit:
-  - $$mdi:keyboard-backspace$$
+  - t: $$mdi:keyboard-backspace$$
+    h: alt
   - $$mdi:backspace-reverse$$
   - $$mdi:content-cut$$
   - ''
@@ -115,6 +116,23 @@ layers:
   - tab
   - $$mdi:volume-minus$$
   - tab
+  alt+tab:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - 'shift
+
+    tab'
+  - tab
+  - tab
+  - 'shift
+
+    tab'
 combos:
 - p:
   - 0
