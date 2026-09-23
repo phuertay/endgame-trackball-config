@@ -60,9 +60,7 @@ layers:
   - scrl -
   scroll:
   - ''
-  - 'unlock
-
-    scroll'
+  - $$mdi:home$$
   - t: axis
     h: hold
   - zoom
@@ -81,9 +79,7 @@ layers:
   - ''
   - ''
   - ''
-  - 'unlock
-
-    snipe'
+  - $$mdi:home$$
   - ''
   - ←
   - ↑

@@ -37,10 +37,13 @@ parse_config:
     "&sens P2SM_DEC 1": "sens -"
     "&scrlsens P2SM_INC 1": "scrl +"
     "&scrlsens P2SM_DEC 1": "scrl -"
-    "&tog 3": {t: "unlock\nscroll"}
-    "&tog 4": {t: "unlock\nsnipe"}
+    # Sticky scroll/snipe: tap the layer's unlock key to drop back out.
+    "&tog 3": "$$mdi:home$$"
+    "&tog 4": "$$mdi:home$$"
     "&kp RCTRL": "zoom"
+    # Explicit return-to-default (excel/media pos7 — same physical spot).
     "&to 0": "$$mdi:home$$"
+    "&to LAYER_DEFAULT": "$$mdi:home$$"
     "&kp C_PP": "$$mdi:play-pause$$"
     "&kp C_PLAY": "$$mdi:play-pause$$"
     "&kp C_PREV": "$$mdi:skip-previous$$"
