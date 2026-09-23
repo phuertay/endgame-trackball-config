@@ -15,6 +15,7 @@
 #define LAYER_SNIPE        4
 #define LAYER_EXCEL        5
 #define LAYER_MEDIA        6
+#define LAYER_PV_CAL       7
 #endif
 
 #include "clipboard_layouts.dtsi"
@@ -22,6 +23,7 @@
 #include "scaling.dtsi"
 #include "alt_tab.dtsi"
 #include "edit_extras.dtsi"
+#include "pv_cal.dtsi"
 #include "combos.dtsi"
 
 / {
@@ -130,6 +132,25 @@
 
 			    &kp C_VOL_UP    &kp RC(PG_UP)
 			    &kp C_VOL_DN    &kp RC(PG_DN)
+		    >;
+		};
+
+		/*
+		 * TEMP: Neu paste-values timing cal (combo pos6+7).
+		 * Top = Enter sweep @ Win 500; bottom = Win sweep @ Enter 1000.
+		 * See config/pv_cal.dtsi for the binary-search protocol.
+		 */
+		pv_cal_layer {
+			display-name = "PV Cal";
+			DECLARE_ENCODERS;
+			bindings = <
+			    &pv_e250       &pv_e500
+			    &pv_e750       &pv_e1000
+			    &pv_w250       &pv_w375
+			    &pv_w500       &to LAYER_DEFAULT
+
+			    &at TAB        &kp RC(PG_UP)
+			    &at LS(TAB)    &kp RC(PG_DN)
 		    >;
 		};
 	};
