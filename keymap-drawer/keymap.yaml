@@ -20,9 +20,9 @@ layers:
     h: system
     s: 2× reload
   - app ←
-  - ↹ ←
+  - tab ←
   - app →
-  - ↹ →
+  - tab →
   edit:
   - ⌫
   - ⌦
@@ -37,17 +37,20 @@ layers:
 
     tab'
   - app ←
-  - ↹ ←
+  - tab ←
   - app →
-  - ↹ →
+  - tab →
   system:
   - t: ble
     s: 2× usb
-  - bt ✕
+  - t: $$mdi:bluetooth$$
+    right: ✕
   - layout
-  - bt →
+  - t: $$mdi:bluetooth$$
+    right: →
   - fx
-  - bt ←
+  - t: $$mdi:bluetooth$$
+    right: ←
   - power
   - ''
   - sens +
@@ -106,9 +109,9 @@ layers:
     picture'
   - ⌂
   - app ←
-  - ↹ ←
+  - tab ←
   - app →
-  - ↹ →
+  - tab →
   media:
   - ''
   - ''
@@ -119,9 +122,9 @@ layers:
   - ▶
   - ⌂
   - ♪ +
-  - ↹ ←
+  - tab ←
   - ♪ -
-  - ↹ →
+  - tab →
 combos:
 - p:
   - 0

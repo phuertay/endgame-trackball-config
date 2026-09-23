@@ -1,6 +1,6 @@
 parse_config:
   # Tap = center, hold (h) = orange, shifted/2× (s) = blue.
-  # Plain words + common symbols (arrows, media, tab, bt).
+  # Plain words + common symbols (arrows, media, bluetooth glyph).
   raw_binding_map:
     "&snlk": {t: "back", h: "snipe", s: "2× lock"}
     "&ltlk": {t: "esc", h: "scroll", s: "2× lock"}
@@ -30,9 +30,9 @@ parse_config:
     "&bst_tog ZBS_TOG": "layout"
     "&af_toggle AF_TOG": "fx"
     "&soft_off": "power"
-    "&bt BT_CLR": "bt ✕"
-    "&bt BT_NXT": "bt →"
-    "&bt BT_PRV": "bt ←"
+    "&bt BT_CLR": {t: "$$mdi:bluetooth$$", right: "✕"}
+    "&bt BT_NXT": {t: "$$mdi:bluetooth$$", right: "→"}
+    "&bt BT_PRV": {t: "$$mdi:bluetooth$$", right: "←"}
     "&sens P2SM_INC 1": "sens +"
     "&sens P2SM_DEC 1": "sens -"
     "&scrlsens P2SM_INC 1": "scrl +"
@@ -46,8 +46,8 @@ parse_config:
     "&kp C_NEXT": "▶▶"
     "&kp C_VOL_UP": "♪ +"
     "&kp C_VOL_DN": "♪ -"
-    "&kp RC(PG_DN)": "↹ →"
-    "&kp RC(PG_UP)": "↹ ←"
+    "&kp RC(PG_DN)": "tab →"
+    "&kp RC(PG_UP)": "tab ←"
     "&kp LEFT": "←"
     "&kp RIGHT": "→"
     "&kp UP": "↑"

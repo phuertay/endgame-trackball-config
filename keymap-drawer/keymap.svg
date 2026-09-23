@@ -6,6 +6,10 @@
 <line class="layer-divider-h" x1="24.0" y1="844.0" x2="1029.0" y2="844.0"/>
 <line class="layer-divider-v" x1="299.0" y1="24.0" x2="299.0" y2="1163.0"/>
 </g>
+<defs>/* start glyphs */
+<symbol id="mdi:bluetooth" viewBox="0 0 24 24"><path fill="#1a1d21" d="M17.71,7.71L12,2H11V9.58L6.41,5L5,6.41L10.59,12L5,17.58L6.41,19L11,14.41V22H12L17.71,16.29L13.41,12L17.71,7.71M13,5.83L14.88,7.71L13,9.58V5.83M14.88,16.29L13,18.17V14.41L14.88,16.29Z"/></symbol>
+
+</defs>/* end glyphs */
 <style>/* inherit to force styles through use tags */
 svg path {
     fill: inherit;
@@ -257,7 +261,7 @@ path.combo {
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">↹</tspan><tspan x="0" dy="1.15em">←</tspan>
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">←</tspan>
 </text>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
@@ -269,7 +273,7 @@ path.combo {
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">↹</tspan><tspan x="0" dy="1.15em">→</tspan>
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">→</tspan>
 </text>
 </g>
 <g class="combo combopos-0">
@@ -326,7 +330,7 @@ path.combo {
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">↹</tspan><tspan x="0" dy="1.15em">←</tspan>
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">←</tspan>
 </text>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
@@ -338,7 +342,7 @@ path.combo {
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">↹</tspan><tspan x="0" dy="1.15em">→</tspan>
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">→</tspan>
 </text>
 </g>
 <g class="combo combopos-0">
@@ -358,9 +362,8 @@ path.combo {
 </g>
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">bt</tspan><tspan x="0" dy="1.15em">✕</tspan>
-</text>
+<use href="#mdi:bluetooth" xlink:href="#mdi:bluetooth" x="-7" y="-7" height="14" width="14.0" class="key tap glyph mdi:bluetooth"/>
+<text x="52" y="0" class="key right">✕</text>
 </g>
 <g transform="translate(45, 30)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
@@ -368,9 +371,8 @@ path.combo {
 </g>
 <g transform="translate(410, 30)" class="key keypos-3">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">bt</tspan><tspan x="0" dy="1.15em">→</tspan>
-</text>
+<use href="#mdi:bluetooth" xlink:href="#mdi:bluetooth" x="-7" y="-7" height="14" width="14.0" class="key tap glyph mdi:bluetooth"/>
+<text x="35" y="0" class="key right">→</text>
 </g>
 <g transform="translate(45, 101)" class="key keypos-4">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
@@ -378,9 +380,8 @@ path.combo {
 </g>
 <g transform="translate(410, 101)" class="key keypos-5">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">bt</tspan><tspan x="0" dy="1.15em">←</tspan>
-</text>
+<use href="#mdi:bluetooth" xlink:href="#mdi:bluetooth" x="-7" y="-7" height="14" width="14.0" class="key tap glyph mdi:bluetooth"/>
+<text x="35" y="0" class="key right">←</text>
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
@@ -584,7 +585,7 @@ path.combo {
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">↹</tspan><tspan x="0" dy="1.15em">←</tspan>
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">←</tspan>
 </text>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
@@ -596,7 +597,7 @@ path.combo {
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">↹</tspan><tspan x="0" dy="1.15em">→</tspan>
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">→</tspan>
 </text>
 </g>
 <g class="combo combopos-0">
@@ -646,7 +647,7 @@ path.combo {
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">↹</tspan><tspan x="0" dy="1.15em">←</tspan>
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">←</tspan>
 </text>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
@@ -658,7 +659,7 @@ path.combo {
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
 <text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">↹</tspan><tspan x="0" dy="1.15em">→</tspan>
+<tspan x="0" dy="-0.57em">tab</tspan><tspan x="0" dy="1.15em">→</tspan>
 </text>
 </g>
 <g class="combo combopos-0">
