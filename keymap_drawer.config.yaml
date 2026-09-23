@@ -4,8 +4,8 @@ parse_config:
   raw_binding_map:
     "&snlk": {t: "back", h: "snipe", s: "2× lock"}
     "&ltlk": {t: "esc", h: "scroll", s: "2× lock"}
-    "&ltmkp 6 0x70028": {t: "enter", h: "media"}
-    "&ltmkp 6 ENTER": {t: "enter", h: "media"}
+    "&ltmkp 6 0x70028": {t: "⏎", h: "media"}
+    "&ltmkp 6 ENTER": {t: "⏎", h: "media"}
     "&cdch 1 0": {t: "copy", h: "edit", s: "2× paste"}
     "&cdc": {t: "copy", s: "2× paste"}
     "&mkp MCLK": "mid"
@@ -23,9 +23,9 @@ parse_config:
     "&axlk": {t: "axis", h: "hold"}
     "&kp RC(A)": "reload"
     "&kp PSCRN": "shot"
-    "&kp BSPC": "bksp"
-    "&kp DEL": "del"
-    "&kp SPACE": "space"
+    "&kp BSPC": "⌫"
+    "&kp DEL": "⌦"
+    "&kp SPACE": "␣"
     "&mui_or_dgl": {t: "ble", s: "2× usb"}
     "&bst_tog ZBS_TOG": "layout"
     "&af_toggle AF_TOG": "fx"
@@ -40,14 +40,14 @@ parse_config:
     "&tog 3": {t: "unlock\nscroll"}
     "&tog 4": {t: "unlock\nsnipe"}
     "&kp RCTRL": "zoom"
-    "&to 0": "home"
+    "&to 0": "⌂"
     "&kp C_PLAY": "▶"
     "&kp C_PREV": "◀◀"
     "&kp C_NEXT": "▶▶"
     "&kp C_VOL_UP": "♪ +"
     "&kp C_VOL_DN": "♪ -"
-    "&kp RC(PG_DN)": "tab →"
-    "&kp RC(PG_UP)": "tab ←"
+    "&kp RC(PG_DN)": "↹ →"
+    "&kp RC(PG_UP)": "↹ ←"
     "&kp LEFT": "←"
     "&kp RIGHT": "→"
     "&kp UP": "↑"
@@ -84,7 +84,7 @@ draw_config:
       font-weight: 400;
       fill: #1a1d21;
     }
-    #layer-dividers line, line.layer-divider-h {
+    #layer-dividers line, line.layer-divider-h, line.layer-divider-v {
       stroke: #8b949e;
       stroke-width: 2;
     }

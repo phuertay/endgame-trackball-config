@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Post-process keymap-drawer SVG: white page + horizontal layer dividers only."""
+"""Post-process keymap-drawer SVG: white page + H/V layer dividers."""
 
 from __future__ import annotations
 
@@ -33,26 +33,36 @@ def postprocess(svg: str) -> str:
     if not layers:
         return svg
 
+    xs = sorted({float(m.group(1)) for m in layers})
     ys = sorted({float(m.group(2)) for m in layers})
-    if len(ys) < 2:
-        return svg
 
     size = re.search(r'<svg[^>]*width="([\d.]+)"[^>]*height="([\d.]+)"', svg)
     board_w = float(size.group(1)) if size else 1000.0
-    row_pitch = ys[1] - ys[0]
+    board_h = float(size.group(2)) if size else 1000.0
     margin = 24.0
 
     lines = [
         '<g id="layer-dividers" fill="none" stroke="#8b949e" '
         'stroke-width="2" stroke-linecap="butt">'
     ]
-    for i in range(len(ys) - 1):
-        # Sit in the gutter just above the next row's layer header.
-        y = round(ys[i + 1] - 10, 1)
+
+    # Horizontal gutters between stacked layer rows.
+    if len(ys) >= 2:
+        for i in range(len(ys) - 1):
+            y = round(ys[i + 1] - 10, 1)
+            lines.append(
+                f'<line class="layer-divider-h" x1="{margin}" y1="{y}" '
+                f'x2="{board_w - margin}" y2="{y}"/>'
+            )
+
+    # Vertical gutter between the two columns.
+    if len(xs) >= 2:
+        x = round((xs[0] + xs[1]) / 2, 1)
         lines.append(
-            f'<line class="layer-divider-h" x1="{margin}" y1="{y}" '
-            f'x2="{board_w - margin}" y2="{y}"/>'
+            f'<line class="layer-divider-v" x1="{x}" y1="{margin}" '
+            f'x2="{x}" y2="{board_h - margin}"/>'
         )
+
     lines.append("</g>")
 
     return svg.replace(

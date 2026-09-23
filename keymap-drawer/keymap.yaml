@@ -2,7 +2,7 @@ layout:
   zmk_keyboard: efogtech_trackball_0
 layers:
   default:
-  - t: enter
+  - t: ⏎
     h: media
   - t: esc
     h: scroll
@@ -20,12 +20,12 @@ layers:
     h: system
     s: 2× reload
   - app ←
-  - tab ←
+  - ↹ ←
   - app →
-  - tab →
+  - ↹ →
   edit:
-  - bksp
-  - del
+  - ⌫
+  - ⌦
   - cut
   - ''
   - 'paste
@@ -37,9 +37,9 @@ layers:
 
     tab'
   - app ←
-  - tab ←
+  - ↹ ←
   - app →
-  - tab →
+  - ↹ →
   system:
   - t: ble
     s: 2× usb
@@ -104,11 +104,11 @@ layers:
   - 'copy
 
     picture'
-  - home
+  - ⌂
   - app ←
-  - tab ←
+  - ↹ ←
   - app →
-  - tab →
+  - ↹ →
   media:
   - ''
   - ''
@@ -117,11 +117,11 @@ layers:
   - ''
   - ''
   - ▶
-  - home
+  - ⌂
   - ♪ +
-  - tab ←
+  - ↹ ←
   - ♪ -
-  - tab →
+  - ↹ →
 combos:
 - p:
   - 0
