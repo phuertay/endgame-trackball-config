@@ -14,5 +14,5 @@ properties:
     description: Encoded keycode of the modifier to hold across activations (e.g. LEFT_ALT).
   release-after-ms:
     type: int
-    default: 500
+    default: 1500
     description: Milliseconds of inactivity after which the held modifier is released.
