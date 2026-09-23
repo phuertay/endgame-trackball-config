@@ -24,8 +24,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install keymap-drawer
-        run: python -m pip install keymap-drawer
+      - name: Install Cairo system library
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libcairo2
+
+      - name: Install keymap-drawer and CairoSVG
+        run: python -m pip install keymap-drawer cairosvg
 
       - name: Parse and draw keymap
         run: |
@@ -38,15 +41,18 @@ jobs:
             -l physical_layout0 \
             keymap-drawer/keymap.yaml \
             > keymap-drawer/keymap.svg
+          cairosvg keymap-drawer/keymap.svg -o keymap-drawer/keymap.pdf
 
-      - name: Upload diagram artifact
+      - name: Upload diagram artifacts
         uses: actions/upload-artifact@v4
         with:
           name: keymap-diagram
-          path: keymap-drawer/keymap.svg
+          path: |
+            keymap-drawer/keymap.svg
+            keymap-drawer/keymap.pdf
 
       - name: Commit updated diagram
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update keymap diagram"
-          file_pattern: "keymap-drawer/keymap.svg keymap-drawer/keymap.yaml"
+          file_pattern: "keymap-drawer/keymap.svg keymap-drawer/keymap.yaml keymap-drawer/keymap.pdf"

@@ -52,5 +52,6 @@ parse_config:
     "&qat8": "REV\nTRANSPOSE"
     "&ptv": "TRANSPOSE\nVALUES"
 draw_config:
-  n_columns: 2
+  # 3 columns keeps all layers on one roughly-square page (better for the release PDF).
+  n_columns: 3
   append_colon_to_layer_header: false

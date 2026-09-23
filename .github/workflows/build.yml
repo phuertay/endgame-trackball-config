@@ -72,6 +72,8 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Download firmware artifacts
         uses: actions/download-artifact@v4
         with:
@@ -83,6 +85,15 @@ jobs:
             mv "$file" "${{ needs.meta.outputs.release_version }}.uf2"
             break
           done
+      - name: Prepare keymap layout PDF
+        run: |
+          set -euo pipefail
+          if [ ! -f keymap-drawer/keymap.pdf ]; then
+            sudo apt-get update && sudo apt-get install -y --no-install-recommends libcairo2
+            python3 -m pip install cairosvg
+            cairosvg keymap-drawer/keymap.svg -o keymap-drawer/keymap.pdf
+          fi
+          cp keymap-drawer/keymap.pdf keymap-layout.pdf
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
@@ -90,6 +101,7 @@ jobs:
           name: "${{ needs.meta.outputs.release_name }}"
           files: |
             ./*.uf2
+            keymap-layout.pdf
           draft: false
           prerelease: false
 
@@ -101,6 +113,8 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Download firmware artifacts
         uses: actions/download-artifact@v4
         with:
@@ -113,9 +127,19 @@ jobs:
             mv "$file" "${{ needs.meta.outputs.paw3395_version }}.uf2"
             break
           done
+      - name: Prepare keymap layout PDF
+        run: |
+          set -euo pipefail
+          if [ ! -f keymap-drawer/keymap.pdf ]; then
+            sudo apt-get update && sudo apt-get install -y --no-install-recommends libcairo2
+            python3 -m pip install cairosvg
+            cairosvg keymap-drawer/keymap.svg -o keymap-drawer/keymap.pdf
+          fi
+          cp keymap-drawer/keymap.pdf keymap-layout.pdf
       - name: Upload paw3395 firmware to existing release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ needs.meta.outputs.paw3395_lookup_version }}
           files: |
             ./*.uf2
+            keymap-layout.pdf
