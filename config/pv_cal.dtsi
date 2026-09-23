@@ -1,19 +1,19 @@
 /*
- * TEMPORARY Neu paste-values timing calibration — ROUND 3
+ * TEMPORARY Neu paste-values timing calibration — ROUND 4
  *
- * Round 2: E300/E350 fail; E400/E450 ok; W100/W150 ok; E500@W250 ok.
- * Enter floor ∈ (350, 400]; Win floor ≤ 100 (with Enter=1000).
+ * Round 3 CORRECTION: E400@W100 / W150 / E450@W100 were false positives —
+ * they did a normal paste + spurious Enter, not paste-as-values.
+ * Real hits: E390@W500 ~90%, E400@W250 ~90%. E360 fail, E375 ~30%.
+ * Win must be well above 150ms.
  *
  * Combo both lower buttons (pos 6+7) toggles LAYER_PV_CAL. Leave with pos7.
  *
- *   Top     = ENTER between 350 and 400 (Win=500)
- *               pos0 E360 | pos1 E375
- *               pos2 E390 | pos3 E400@W250  ← likely production candidate
- *   Bottom  = Enter floor × fast Win
- *               pos4 E400@W100 | pos5 E400@W150
- *               pos6 E450@W100 | pos7 BACK
+ *               pos0 E390@W500 | pos1 E400@W500
+ *               pos2 E390@W250 | pos3 E400@W250
+ *               pos4 E400@W200 | pos5 E400@W300
+ *               pos6 E425@W250 | pos7 BACK
  *
- * Report ok/fail per key. If E400@W100 works, that's the aggressive lock-in.
+ * Only count a key as ok if Excel gets *values* (not a normal paste).
  */
 
 #define PV_CAL_HOLD 12
@@ -21,7 +21,7 @@
 
 / {
 	macros {
-		pv_e360: pv_e360 {
+		pv_e390w500: pv_e390w500 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -36,12 +36,12 @@
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
-				, <&macro_wait_time 360>
+				, <&macro_wait_time 390>
 				, <&macro_tap &kp RET>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;
 		};
-		pv_e375: pv_e375 {
+		pv_e400w500: pv_e400w500 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -56,12 +56,12 @@
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
-				, <&macro_wait_time 375>
+				, <&macro_wait_time 400>
 				, <&macro_tap &kp RET>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;
 		};
-		pv_e390: pv_e390 {
+		pv_e390w250: pv_e390w250 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -72,7 +72,7 @@
 				, <&macro_press &kp FSLH>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_release &kp FSLH>
-				, <&macro_wait_time 500>
+				, <&macro_wait_time 250>
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
@@ -101,7 +101,7 @@
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;
 		};
-		pv_e400w100: pv_e400w100 {
+		pv_e400w200: pv_e400w200 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -112,7 +112,7 @@
 				, <&macro_press &kp FSLH>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_release &kp FSLH>
-				, <&macro_wait_time 100>
+				, <&macro_wait_time 200>
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
@@ -121,7 +121,7 @@
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;
 		};
-		pv_e400w150: pv_e400w150 {
+		pv_e400w300: pv_e400w300 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -132,7 +132,7 @@
 				, <&macro_press &kp FSLH>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_release &kp FSLH>
-				, <&macro_wait_time 150>
+				, <&macro_wait_time 300>
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
@@ -141,7 +141,7 @@
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;
 		};
-		pv_e450w100: pv_e450w100 {
+		pv_e425w250: pv_e425w250 {
 			compatible = "zmk,behavior-macro";
 			#binding-cells = <0>;
 			wait-ms = <PV_CAL_GAP>;
@@ -152,11 +152,11 @@
 				, <&macro_press &kp FSLH>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_release &kp FSLH>
-				, <&macro_wait_time 100>
+				, <&macro_wait_time 250>
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp TAB>
-				, <&macro_wait_time 450>
+				, <&macro_wait_time 425>
 				, <&macro_tap &kp RET>
 				, <&macro_wait_time PV_CAL_GAP>
 				, <&macro_tap &kp RET>;

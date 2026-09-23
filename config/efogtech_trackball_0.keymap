@@ -136,17 +136,17 @@
 		};
 
 		/*
-		 * TEMP: Neu paste-values timing cal ROUND 3 (combo pos6+7).
-		 * Round 2: Enter floor (350,400]; Win ≤100. See config/pv_cal.dtsi.
+		 * TEMP: Neu paste-values timing cal ROUND 4 (combo pos6+7).
+		 * R3 fix: W100/W150 were normal-paste false positives. Win ≥200.
 		 */
 		pv_cal_layer {
 			display-name = "PV Cal";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &pv_e360       &pv_e375
-			    &pv_e390       &pv_e400w250
-			    &pv_e400w100   &pv_e400w150
-			    &pv_e450w100   &to LAYER_DEFAULT
+			    &pv_e390w500   &pv_e400w500
+			    &pv_e390w250   &pv_e400w250
+			    &pv_e400w200   &pv_e400w300
+			    &pv_e425w250   &to LAYER_DEFAULT
 
 			    &at TAB        &kp RC(PG_UP)
 			    &at LS(TAB)    &kp RC(PG_DN)
