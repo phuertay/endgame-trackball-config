@@ -1,16 +1,17 @@
 parse_config:
   # Shorter legends so large fonts fit without shrinking.
+  # Tap = center, hold (h) = orange bottom, shifted/2× (s) = blue top.
   raw_binding_map:
-    "&snlk": {t: "BACK", h: "snipe"}
-    "&ltlk": {t: "ESC", h: "scroll"}
+    "&snlk": {t: "BACK", h: "snipe", s: "2× LOCK"}
+    "&ltlk": {t: "ESC", h: "scroll", s: "2× LOCK"}
     "&ltmkp 6 0x70028": {t: "ENTER", h: "media"}
     "&ltmkp 6 ENTER": {t: "ENTER", h: "media"}
-    "&cdch 1 0": {t: "COPY", h: "edit", s: "PASTE"}
-    "&cdc": {t: "COPY", s: "PASTE"}
+    "&cdch 1 0": {t: "COPY", h: "edit", s: "2× PASTE"}
+    "&cdc": {t: "COPY", s: "2× PASTE"}
     "&mkp MCLK": "MID\nCLICK"
     "&mkp LCLK": "LEFT\nCLICK"
     "&mkp RCLK": "RIGHT\nCLICK"
-    "&syslk": {t: "CLOSE", h: "system", s: "2x RELOAD"}
+    "&syslk": {t: "CLOSE", h: "system", s: "2× RELOAD"}
     "&kp LA(ESC)": "APP▶"
     "&kp LA(LS(ESC))": "APP◀"
     "&bst_copy": "COPY"
@@ -25,7 +26,7 @@ parse_config:
     "&kp BSPC": "BKSP"
     "&kp DEL": "DEL"
     "&kp SPACE": "SPACE"
-    "&mui_or_dgl": "MUI /\nDONGLE"
+    "&mui_or_dgl": {t: "MUI ADV", s: "2× DONGLE"}
     "&bst_tog ZBS_TOG": "SWITCH\nLAYOUT"
     "&af_toggle AF_TOG": "TOGGLE\nFX"
     "&soft_off": "POWER\nOFF"
@@ -68,19 +69,24 @@ draw_config:
   combo_h: 28
   inner_pad_w: 6
   inner_pad_h: 6
-  outer_pad_w: 28
-  outer_pad_h: 36
+  outer_pad_w: 32
+  outer_pad_h: 40
   small_pad: 4
   line_spacing: 1.15
   # Allow longer legends before forced shrink.
   shrink_wide_legends: 12
-  footer_text: "Endgame trackball · hold = layer / shifted = double-tap"
+  footer_text: "tap · orange = hold · blue 2× = double-tap"
   svg_extra_style: |
     svg.keymap {
       font-family: "DejaVu Sans", "Segoe UI", "Helvetica Neue", sans-serif;
       font-size: 16px;
       font-weight: 600;
       fill: #1a1d21;
+    }
+    rect.layer-frame {
+      fill: #f3f5f7;
+      stroke: #6b7280;
+      stroke-width: 2;
     }
     rect.key {
       fill: #ffffff;

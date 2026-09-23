@@ -9,6 +9,7 @@ on:
       - "keymap_drawer.config.yaml"
       - ".github/workflows/draw-keymap.yml"
       - "keymap-drawer/draw-layout.dtsi"
+      - "keymap-drawer/postprocess_svg.py"
   workflow_dispatch:
 
 jobs:
@@ -52,21 +53,7 @@ jobs:
             -l draw_layout \
             keymap-drawer/keymap.yaml \
             > keymap-drawer/keymap.svg
-          # Opaque page so GitHub dark mode / PDF viewers don't show black voids
-          python3 - <<'PY'
-          from pathlib import Path
-          import re
-          p = Path("keymap-drawer/keymap.svg")
-          svg = p.read_text()
-          if 'id="page-bg"' not in svg:
-              svg = re.sub(
-                  r"(<svg\b[^>]*>)",
-                  r'\1\n<rect id="page-bg" width="100%" height="100%" fill="#ffffff"/>',
-                  svg,
-                  count=1,
-              )
-              p.write_text(svg)
-          PY
+          python3 keymap-drawer/postprocess_svg.py keymap-drawer/keymap.svg
           # librsvg — CairoSVG mis-renders fonts as huge glyphs
           rsvg-convert -f pdf -b white -o keymap-drawer/keymap.pdf keymap-drawer/keymap.svg
 
