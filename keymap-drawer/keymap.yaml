@@ -35,9 +35,9 @@ layers:
   - 'reopen
 
     tab'
-  - app
+  - $$mdi:keyboard-tab$$
   - tab
-  - app
+  - $$mdi:keyboard-tab$$
   - tab
   system:
   - t: ble adv
