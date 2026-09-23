@@ -7,13 +7,14 @@
  *
  * paste-values:
  *   Terminator -> Win+F13 (dacman)              : LG(F13)
- *   Neu        -> Win+V, wait 500, Tab, Enter, wait 500, Enter
+ *   Neu        -> Win+V, wait 150, Tab, Enter, wait 400, Enter
  *                V is physical "/" (FSLH) on Neu.
  *                &macro_wait_time does not pause where it is written; it
  *                sets the delay after the next queued press/release. The
- *                500ms pauses are armed on the Win release and the first
- *                Enter. Keys are held MACRO_HOLD_MS; other steps wait at
- *                least MACRO_GAP_MS between keys.
+ *                post-Win pause is armed on the Win release; the pause
+ *                between the two Enters is armed on the first Enter.
+ *                Timed via PV Cal layer: E400@W150 was solid; E375 flaky,
+ *                W100 ~90%. Hold MACRO_HOLD_MS; other gaps ≥ MACRO_GAP_MS.
  *
  * Excel QAT: quick Alt tap, then a per-key wait, then Shift+digit.
  *   Paste format (1)     100ms
@@ -37,7 +38,8 @@
  */
 
 #define MACRO_WAIT_CHORD 40
-#define MACRO_WAIT_PV    500
+#define MACRO_WAIT_PV    150
+#define MACRO_WAIT_ENTER 400
 #define MACRO_HOLD_MS    12
 #define MACRO_GAP_MS     50
 
@@ -66,7 +68,7 @@
 				, <&macro_release &kp LGUI>
 				, <&macro_wait_time MACRO_GAP_MS>
 				, <&macro_tap &kp TAB>
-				, <&macro_wait_time MACRO_WAIT_PV>
+				, <&macro_wait_time MACRO_WAIT_ENTER>
 				, <&macro_tap &kp RET>
 				, <&macro_wait_time MACRO_GAP_MS>
 				, <&macro_tap &kp RET>;
