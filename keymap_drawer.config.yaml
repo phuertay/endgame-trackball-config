@@ -31,8 +31,8 @@ parse_config:
     "&af_toggle AF_TOG": "fx"
     "&soft_off": "$$mdi:power$$"
     "&bt BT_CLR": {t: "$$mdi:bluetooth$$", right: "✕"}
-    "&bt BT_NXT": {t: "$$mdi:bluetooth$$", right: "↓"}
-    "&bt BT_PRV": {t: "$$mdi:bluetooth$$", right: "↑"}
+    "&bt BT_NXT": {t: "$$mdi:bluetooth$$", right: "$$mdi:arrow-down$$"}
+    "&bt BT_PRV": {t: "$$mdi:bluetooth$$", right: "$$mdi:arrow-up$$"}
     "&sens P2SM_INC 1": "sens +"
     "&sens P2SM_DEC 1": "sens -"
     "&scrlsens P2SM_INC 1": "scrl +"
@@ -52,10 +52,10 @@ parse_config:
     "&kp C_VOL_DN": "$$mdi:volume-minus$$"
     "&kp RC(PG_DN)": "tab"
     "&kp RC(PG_UP)": "tab"
-    "&kp LEFT": "←"
-    "&kp RIGHT": "→"
-    "&kp UP": "↑"
-    "&kp DOWN": "↓"
+    "&kp LEFT": "$$mdi:arrow-left$$"
+    "&kp RIGHT": "$$mdi:arrow-right$$"
+    "&kp UP": "$$mdi:arrow-up$$"
+    "&kp DOWN": "$$mdi:arrow-down$$"
     "&qat1": {t: "$$mdi:format-paint$$", right: "fmt"}
     "&qat3": {t: "$$mdi:content-paste$$", right: "ƒx"}
     "&qat6": {t: "$$mdi:image$$", right: "copy"}

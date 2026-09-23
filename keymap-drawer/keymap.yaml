@@ -48,10 +48,10 @@ layers:
 
     layout'
   - t: $$mdi:bluetooth$$
-    right: ↓
+    right: $$mdi:arrow-down$$
   - fx
   - t: $$mdi:bluetooth$$
-    right: ↑
+    right: $$mdi:arrow-up$$
   - $$mdi:power$$
   - ''
   - sens +
@@ -68,10 +68,10 @@ layers:
   - ''
   - ''
   - ''
-  - ←
-  - ↑
-  - →
-  - ↓
+  - $$mdi:arrow-left$$
+  - $$mdi:arrow-up$$
+  - $$mdi:arrow-right$$
+  - $$mdi:arrow-down$$
   snipe:
   - ''
   - ''
@@ -81,10 +81,10 @@ layers:
   - ''
   - $$mdi:home$$
   - ''
-  - ←
-  - ↑
-  - →
-  - ↓
+  - $$mdi:arrow-left$$
+  - $$mdi:arrow-up$$
+  - $$mdi:arrow-right$$
+  - $$mdi:arrow-down$$
   excel:
   - t: $$mdi:format-paint$$
     right: fmt

@@ -7,6 +7,10 @@
 <line class="layer-divider-v" x1="523.5" y1="24.0" x2="523.5" y2="1163.0"/>
 </g>
 <defs>/* start glyphs */
+<symbol id="mdi:arrow-down" viewBox="0 0 24 24"><path fill="#1a1d21" d="M11,4H13V16L18.5,10.5L19.92,11.92L12,19.84L4.08,11.92L5.5,10.5L11,16V4Z" /></symbol>
+<symbol id="mdi:arrow-left" viewBox="0 0 24 24"><path fill="#1a1d21" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" /></symbol>
+<symbol id="mdi:arrow-right" viewBox="0 0 24 24"><path fill="#1a1d21" d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z" /></symbol>
+<symbol id="mdi:arrow-up" viewBox="0 0 24 24"><path fill="#1a1d21" d="M13,20H11V8L5.5,13.5L4.08,12.08L12,4.16L19.92,12.08L18.5,13.5L13,8V20Z" /></symbol>
 <symbol id="mdi:backspace-reverse" viewBox="0 0 24 24"><path fill="#1a1d21" d="M2,21H17C17.7,21 18.2,20.6 18.6,20.1L24,12L18.6,3.9C18.2,3.4 17.7,3 17,3H2A2,2 0 0,0 0,5V19A2,2 0 0,0 2,21M5,8.4L6.4,7L10,10.6L13.6,7L15,8.4L11.4,12L15,15.6L13.6,17L10,13.4L6.4,17L5,15.6L8.6,12" /></symbol>
 <symbol id="mdi:bluetooth" viewBox="0 0 24 24"><path fill="#1a1d21" d="M14.88,16.29L13,18.17V14.41M13,5.83L14.88,7.71L13,9.58M17.71,7.71L12,2H11V9.58L6.41,5L5,6.41L10.59,12L5,17.58L6.41,19L11,14.41V22H12L17.71,16.29L13.41,12L17.71,7.71Z" /></symbol>
 <symbol id="mdi:clipboard-text" viewBox="0 0 24 24"><path fill="#1a1d21" d="M17,9H7V7H17M17,13H7V11H17M14,17H7V15H14M12,3A1,1 0 0,1 13,4A1,1 0 0,1 12,5A1,1 0 0,1 11,4A1,1 0 0,1 12,3M19,3H14.82C14.4,1.84 13.3,1 12,1C10.7,1 9.6,1.84 9.18,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3Z" /></symbol>
@@ -382,7 +386,7 @@ path.combo {
 <g transform="translate(410, 30)" class="key keypos-3">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
 <use href="#mdi:bluetooth" xlink:href="#mdi:bluetooth" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:bluetooth"/>
-<text x="35" y="0" class="key right">↓</text>
+<use href="#mdi:arrow-down" xlink:href="#mdi:arrow-down" x="15" y="-10" height="20" width="20.0" class="key right glyph mdi:arrow-down"/>
 </g>
 <g transform="translate(45, 101)" class="key keypos-4">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
@@ -391,7 +395,7 @@ path.combo {
 <g transform="translate(410, 101)" class="key keypos-5">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
 <use href="#mdi:bluetooth" xlink:href="#mdi:bluetooth" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:bluetooth"/>
-<text x="35" y="0" class="key right">↑</text>
+<use href="#mdi:arrow-up" xlink:href="#mdi:arrow-up" x="15" y="-10" height="20" width="20.0" class="key right glyph mdi:arrow-up"/>
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
@@ -464,19 +468,19 @@ path.combo {
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">←</text>
+<use href="#mdi:arrow-left" xlink:href="#mdi:arrow-left" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:arrow-left"/>
 </g>
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">↑</text>
+<use href="#mdi:arrow-up" xlink:href="#mdi:arrow-up" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:arrow-up"/>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">→</text>
+<use href="#mdi:arrow-right" xlink:href="#mdi:arrow-right" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:arrow-right"/>
 </g>
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">↓</text>
+<use href="#mdi:arrow-down" xlink:href="#mdi:arrow-down" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:arrow-down"/>
 </g>
 <g class="combo combopos-0">
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
@@ -515,19 +519,19 @@ path.combo {
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">←</text>
+<use href="#mdi:arrow-left" xlink:href="#mdi:arrow-left" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:arrow-left"/>
 </g>
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">↑</text>
+<use href="#mdi:arrow-up" xlink:href="#mdi:arrow-up" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:arrow-up"/>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">→</text>
+<use href="#mdi:arrow-right" xlink:href="#mdi:arrow-right" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:arrow-right"/>
 </g>
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">↓</text>
+<use href="#mdi:arrow-down" xlink:href="#mdi:arrow-down" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:arrow-down"/>
 </g>
 <g class="combo combopos-0">
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
