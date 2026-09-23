@@ -24,11 +24,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Cairo system library
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libcairo2
-
-      - name: Install keymap-drawer and CairoSVG
-        run: python -m pip install keymap-drawer cairosvg
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends librsvg2-bin
+          python -m pip install keymap-drawer
 
       - name: Parse and draw keymap
         run: |
@@ -41,7 +41,8 @@ jobs:
             -l physical_layout0 \
             keymap-drawer/keymap.yaml \
             > keymap-drawer/keymap.svg
-          cairosvg keymap-drawer/keymap.svg -o keymap-drawer/keymap.pdf
+          # librsvg — CairoSVG mis-renders the monospace font stack as huge glyphs
+          rsvg-convert -f pdf -o keymap-drawer/keymap.pdf keymap-drawer/keymap.svg
 
       - name: Upload diagram artifacts
         uses: actions/upload-artifact@v4
