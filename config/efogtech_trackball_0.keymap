@@ -15,6 +15,7 @@
 #define LAYER_SNIPE        4
 #define LAYER_EXCEL        5
 #define LAYER_MEDIA        6
+#define LAYER_PV_CAL       7
 #endif
 
 #include "clipboard_layouts.dtsi"
@@ -22,6 +23,7 @@
 #include "scaling.dtsi"
 #include "alt_tab.dtsi"
 #include "edit_extras.dtsi"
+#include "pv_cal.dtsi"
 #include "combos.dtsi"
 
 / {
@@ -130,6 +132,24 @@
 
 			    &kp C_VOL_UP    &kp RC(PG_UP)
 			    &kp C_VOL_DN    &kp RC(PG_DN)
+		    >;
+		};
+
+		/*
+		 * TEMP: Neu paste-values timing cal ROUND 3 (combo pos6+7).
+		 * Round 2: Enter floor (350,400]; Win ≤100. See config/pv_cal.dtsi.
+		 */
+		pv_cal_layer {
+			display-name = "PV Cal";
+			DECLARE_ENCODERS;
+			bindings = <
+			    &pv_e360       &pv_e375
+			    &pv_e390       &pv_e400w250
+			    &pv_e400w100   &pv_e400w150
+			    &pv_e450w100   &to LAYER_DEFAULT
+
+			    &at TAB        &kp RC(PG_UP)
+			    &at LS(TAB)    &kp RC(PG_DN)
 		    >;
 		};
 	};

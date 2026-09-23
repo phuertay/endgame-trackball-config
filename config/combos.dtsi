@@ -4,6 +4,9 @@
  * Excel is used in bursts, so it's a toggle-lock reached by pressing the two
  * top buttons (positions 0 and 1) together; tap the Back key on the layer
  * (&to LAYER_DEFAULT) to leave. LAYER_EXCEL must be defined before include.
+ *
+ * Paste-values CAL (temporary): both lower buttons (pos 6+7) toggle
+ * LAYER_PV_CAL. LAYER_PV_CAL must be defined before include.
  */
 
 / {
@@ -14,6 +17,12 @@
 			timeout-ms = <50>;
 			key-positions = <0 1>;
 			bindings = <&tog LAYER_EXCEL>;
+		};
+
+		combo_pv_cal {
+			timeout-ms = <50>;
+			key-positions = <6 7>;
+			bindings = <&tog LAYER_PV_CAL>;
 		};
 	};
 };
