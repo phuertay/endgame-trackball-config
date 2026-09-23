@@ -1,7 +1,9 @@
 description: |
-  Encoder Alt-Tab. Each activation ensures Left Alt is down, then taps param1
-  (Tab or Shift+Tab). Alt stays down across activations and is released after
-  release-after-ms of inactivity, which commits the OS app switcher.
+  Encoder window cycle. Each activation ensures the hold-key (Left Alt) is
+  down, then taps param1. Use Esc and Shift+Esc so Alt+Esc and Alt+Shift+Esc
+  rotate the window stack in opposite directions. Those stay inverses after
+  the window opens: N clicks one way and N the other return to the same app.
+  Alt stays down across activations and releases after release-after-ms.
 
 compatible: "zmk,behavior-alt-tab"
 
@@ -14,5 +16,5 @@ properties:
     description: Encoded keycode of the modifier to hold across activations (e.g. LEFT_ALT).
   release-after-ms:
     type: int
-    default: 750
+    default: 200
     description: Milliseconds of inactivity after which the held modifier is released.

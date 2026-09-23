@@ -12,6 +12,8 @@ parse_config:
     "&syslk": {t: "CLOSE", h: "system", s: "2× RELOAD"}
     "&at TAB": "APP\nCYCLE >"
     "&at LS(TAB)": "APP\nCYCLE <"
+    "&at ESC": "APP\nNEXT"
+    "&at LS(ESC)": "APP\nPREV"
     "&kp TAB": "TAB"
     "&kp LS(TAB)": "APP\nCYCLE <"
     "&bst_copy": "COPY"

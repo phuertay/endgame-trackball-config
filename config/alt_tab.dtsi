@@ -1,14 +1,16 @@
 /*
- * Left encoder Alt-Tab.
+ * Left encoder window cycle.
  *
- * CW taps Tab, CCW taps Shift+Tab. The two directions undo each other while
- * Alt is held: roll back the same number of detents and the highlight returns.
- * Alt is pressed on the first detent and stays down across both directions.
- * It releases after release-after-ms of idle, or when another key is pressed.
+ * CW taps Esc, CCW taps Shift+Esc, with Left Alt held. That is Alt+Esc /
+ * Alt+Shift+Esc: each click sends the focused window to the bottom of the
+ * stack or brings the bottom window back up. The two directions are inverses,
+ * including after the window has already opened. Roll clockwise 3 clicks,
+ * then counterclockwise 3 clicks, and the original window is focused again.
  *
- * Do not split the directions across a tri-state swapper and a raw Shift+Tab.
- * That path emits Alt once, then bare Tab / Shift+Tab: the follower never
- * raises the position events the swapper uses to keep Alt held.
+ * Alt+Tab cannot do this. Its list is most-recently-used, so once Alt is
+ * released the path you walked is gone and rolling back does not retrace it.
+ *
+ * Alt releases after release-after-ms of idle, or when another key is pressed.
  */
 
 #include <dt-bindings/zmk/keys.h>
@@ -18,9 +20,9 @@
 		at: alt_tab {
 			compatible = "zmk,behavior-alt-tab";
 			#binding-cells = <1>;
-			display-name = "Alt-Tab";
+			display-name = "Alt-Esc";
 			hold-key = <LEFT_ALT>;
-			release-after-ms = <750>;
+			release-after-ms = <200>;
 		};
 	};
 };

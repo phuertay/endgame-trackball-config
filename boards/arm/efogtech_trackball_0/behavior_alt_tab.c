@@ -1,7 +1,7 @@
 /*
  * Encoder Alt-Tab.
  *
- * Each detent taps param1 (Tab or Shift+Tab) while Left Alt stays down.
+ * Each detent taps param1 (Esc or Shift+Esc) while Left Alt stays down.
  * Alt is released only after the encoder has been idle, or when another key
  * is pressed, which commits the OS switcher.
  *
@@ -258,7 +258,7 @@ ZMK_SUBSCRIPTION(behavior_alt_tab, zmk_position_state_changed);
     static struct behavior_alt_tab_data behavior_alt_tab_data_##n = {};                            \
     static const struct behavior_alt_tab_config behavior_alt_tab_config_##n = {                    \
         .hold_key = DT_INST_PROP(n, hold_key),                                                     \
-        .release_after_ms = DT_INST_PROP_OR(n, release_after_ms, 750),                             \
+        .release_after_ms = DT_INST_PROP_OR(n, release_after_ms, 200),                             \
     };                                                                                             \
     BEHAVIOR_DT_INST_DEFINE(n, behavior_alt_tab_init, NULL, &behavior_alt_tab_data_##n,            \
                             &behavior_alt_tab_config_##n, POST_KERNEL,                             \
