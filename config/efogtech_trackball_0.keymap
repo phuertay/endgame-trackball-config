@@ -20,7 +20,6 @@
 #include "clipboard_layouts.dtsi"
 #include "scroll_lock.dtsi"
 #include "scaling.dtsi"
-#include "alt_tab.dtsi"
 #include "edit_extras.dtsi"
 #include "combos.dtsi"
 
@@ -41,9 +40,9 @@
 			    &mkp LCLK                 &mkp RCLK
 			    &snlk                     &syslk
 
-			    // left = Alt+Shift+Esc / Alt+Esc (Z-order; N back undoes N forward); right = browser tabs
-			    &at LS(ESC)               &kp RC(PG_UP)
-			    &at ESC                   &kp RC(PG_DN)
+			    // left = Alt+Shift+Esc / Alt+Esc; right = browser tabs
+			    &kp LA(LS(ESC))           &kp RC(PG_UP)
+			    &kp LA(ESC)               &kp RC(PG_DN)
 		    >;
 		};
 
@@ -58,8 +57,8 @@
 			    &pv            &kp PSCRN
 			    &bst_undo      &unclose
 
-			    &at LS(ESC)    &kp RC(PG_UP)
-			    &at ESC        &kp RC(PG_DN)
+			    &kp LA(LS(ESC)) &kp RC(PG_UP)
+			    &kp LA(ESC)     &kp RC(PG_DN)
 		    >;
 		};
 
@@ -114,8 +113,8 @@
 			    &mkp LCLK    &ptv
 			    &qat6        &to LAYER_DEFAULT
 
-			    &at LS(ESC)    &kp RC(PG_UP)
-			    &at ESC        &kp RC(PG_DN)
+			    &kp LA(LS(ESC)) &kp RC(PG_UP)
+			    &kp LA(ESC)     &kp RC(PG_DN)
 		    >;
 		};
 
