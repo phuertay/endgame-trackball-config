@@ -10,6 +10,7 @@ on:
       - ".github/workflows/draw-keymap.yml"
       - "keymap-drawer/draw-layout.dtsi"
       - "keymap-drawer/postprocess_svg.py"
+      - "keymap-drawer/render_previews.py"
   workflow_dispatch:
 
 jobs:

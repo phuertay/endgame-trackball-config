@@ -16,7 +16,7 @@ layers:
   - t: back
     h: snipe
     s: 2× lock
-  - t: close
+  - t: ✕
     h: system
     s: 2× reload
   - app ←
@@ -43,7 +43,7 @@ layers:
   system:
   - t: ble
     s: 2× usb
-  - bt clear
+  - bt ✕
   - layout
   - bt →
   - fx
@@ -112,15 +112,15 @@ layers:
   media:
   - ''
   - ''
-  - prev
-  - next
+  - ◀◀
+  - ▶▶
   - ''
   - ''
-  - play
+  - ▶
   - home
-  - vol +
+  - ♪ +
   - tab ←
-  - vol -
+  - ♪ -
   - tab →
 combos:
 - p:

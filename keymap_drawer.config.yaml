@@ -1,6 +1,6 @@
 parse_config:
   # Tap = center, hold (h) = orange, shifted/2× (s) = blue.
-  # Short words + only common symbols (←→↑↓ ▶ ✕).
+  # Plain words + common symbols (arrows, media, tab, bt).
   raw_binding_map:
     "&snlk": {t: "back", h: "snipe", s: "2× lock"}
     "&ltlk": {t: "esc", h: "scroll", s: "2× lock"}
@@ -11,7 +11,7 @@ parse_config:
     "&mkp MCLK": "mid"
     "&mkp LCLK": "left"
     "&mkp RCLK": "right"
-    "&syslk": {t: "close", h: "system", s: "2× reload"}
+    "&syslk": {t: "✕", h: "system", s: "2× reload"}
     "&kp LA(ESC)": "app →"
     "&kp LA(LS(ESC))": "app ←"
     "&bst_copy": "copy"
@@ -30,7 +30,7 @@ parse_config:
     "&bst_tog ZBS_TOG": "layout"
     "&af_toggle AF_TOG": "fx"
     "&soft_off": "power"
-    "&bt BT_CLR": "bt clear"
+    "&bt BT_CLR": "bt ✕"
     "&bt BT_NXT": "bt →"
     "&bt BT_PRV": "bt ←"
     "&sens P2SM_INC 1": "sens +"
@@ -41,11 +41,11 @@ parse_config:
     "&tog 4": {t: "unlock\nsnipe"}
     "&kp RCTRL": "zoom"
     "&to 0": "home"
-    "&kp C_PLAY": "play"
-    "&kp C_PREV": "prev"
-    "&kp C_NEXT": "next"
-    "&kp C_VOL_UP": "vol +"
-    "&kp C_VOL_DN": "vol -"
+    "&kp C_PLAY": "▶"
+    "&kp C_PREV": "◀◀"
+    "&kp C_NEXT": "▶▶"
+    "&kp C_VOL_UP": "♪ +"
+    "&kp C_VOL_DN": "♪ -"
     "&kp RC(PG_DN)": "tab →"
     "&kp RC(PG_UP)": "tab ←"
     "&kp LEFT": "←"
@@ -71,7 +71,7 @@ draw_config:
   inner_pad_w: 6
   inner_pad_h: 6
   outer_pad_w: 36
-  outer_pad_h: 44
+  outer_pad_h: 48
   small_pad: 4
   line_spacing: 1.15
   shrink_wide_legends: 12
@@ -83,6 +83,10 @@ draw_config:
       font-size: 15px;
       font-weight: 400;
       fill: #1a1d21;
+    }
+    #layer-dividers line, line.layer-divider-h {
+      stroke: #8b949e;
+      stroke-width: 2;
     }
     rect.key {
       fill: #ffffff;
