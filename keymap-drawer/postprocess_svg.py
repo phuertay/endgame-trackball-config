@@ -7,12 +7,21 @@ import re
 import sys
 from pathlib import Path
 
+# Extra vertical space between layer rows so H-dividers clear encoders.
+# keymap-drawer packs rows flush (key bottoms ≈ next layer top).
+_ROW_GAP = 40.0
+
 _LAYER_RE = re.compile(
     r'<g transform="translate\(([\d.]+),\s*([\d.]+)\)" class="layer-([^"]+)">'
 )
 _KEY_RE = re.compile(
     r'transform="translate\(([\d.-]+),\s*([\d.-]+)\)" class="key keypos-(\d+)"[^>]*>\s*'
     r'<rect[^>]*x="([^"]+)"[^>]*y="([^"]+)"[^>]*width="([^"]+)"[^>]*height="([^"]+)"',
+)
+# keymap-drawer wraps keys in <g transform="translate(0, label_h)"> after the title.
+_INNER_SHIFT_RE = re.compile(
+    r'<g transform="translate\(([\d.-]+),\s*([\d.-]+)\)">\s*'
+    r'<g transform="translate\([^)]+\)" class="key keypos-'
 )
 # Nested <svg> glyph defs from keymap-drawer do not paint under rsvg-convert.
 _NESTED_GLYPH_RE = re.compile(
@@ -50,19 +59,79 @@ def _layer_chunks(svg: str) -> list[tuple[str, float, float, str]]:
 
 
 def _key_bounds(chunk: str) -> list[dict[str, float]]:
+    """Key rects in layer-local coords (includes label→keys inner translate)."""
+    inner_x = inner_y = 0.0
+    if m := _INNER_SHIFT_RE.search(chunk):
+        inner_x, inner_y = float(m.group(1)), float(m.group(2))
+
     keys: list[dict[str, float]] = []
     for m in _KEY_RE.finditer(chunk):
         kx, ky, _pos, rx, ry, rw, rh = m.groups()
         kx, ky, rx, ry, rw, rh = map(float, (kx, ky, rx, ry, rw, rh))
         keys.append(
             {
-                "left": kx + rx,
-                "right": kx + rx + rw,
-                "top": ky + ry,
-                "bottom": ky + ry + rh,
+                "left": inner_x + kx + rx,
+                "right": inner_x + kx + rx + rw,
+                "top": inner_y + ky + ry,
+                "bottom": inner_y + ky + ry + rh,
             }
         )
     return keys
+
+
+def _expand_row_gaps(svg: str) -> tuple[str, float]:
+    """Shift layer rows apart and grow the viewBox/height. Returns (svg, extra_h)."""
+    ys = sorted({float(m.group(2)) for m in _LAYER_RE.finditer(svg)})
+    if len(ys) < 2:
+        return svg, 0.0
+
+    # Map original y -> y + ROW_GAP * row_index
+    y_to_row = {y: i for i, y in enumerate(ys)}
+    added = _ROW_GAP * (len(ys) - 1)
+
+    def shift_layer(m: re.Match[str]) -> str:
+        x, y, name = m.group(1), float(m.group(2)), m.group(3)
+        new_y = y + _ROW_GAP * y_to_row[y]
+        return f'<g transform="translate({x}, {new_y})" class="layer-{name}">'
+
+    svg = _LAYER_RE.sub(shift_layer, svg)
+
+    # Grow svg height / viewBox.
+    def grow_svg(m: re.Match[str]) -> str:
+        tag = m.group(0)
+        # height="N"
+        tag = re.sub(
+            r'\bheight="([\d.]+)"',
+            lambda mm: f'height="{float(mm.group(1)) + added}"',
+            tag,
+            count=1,
+        )
+        # viewBox="0 0 W H"
+        tag = re.sub(
+            r'\bviewBox="([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)"',
+            lambda mm: (
+                f'viewBox="{mm.group(1)} {mm.group(2)} {mm.group(3)} '
+                f'{float(mm.group(4)) + added}"'
+            ),
+            tag,
+            count=1,
+        )
+        return tag
+
+    svg = re.sub(r"<svg\b[^>]*>", grow_svg, svg, count=1)
+
+    # Footer sits near the old bottom — nudge it down with the last row gap.
+    def shift_footer(m: re.Match[str]) -> str:
+        x, y = m.group(1), float(m.group(2))
+        return f'<text x="{x}" y="{y + added}" class="footer">'
+
+    svg = re.sub(
+        r'<text x="([^"]+)" y="([\d.]+)" class="footer">',
+        shift_footer,
+        svg,
+        count=1,
+    )
+    return svg, added
 
 
 def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
@@ -75,7 +144,6 @@ def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
     xs = sorted({lx for _n, lx, _ly, _c in layers})
     ys = sorted({ly for _n, _lx, ly, _c in layers})
 
-    # Absolute content extents per layer origin.
     content_right: dict[float, float] = {x: x for x in xs}
     content_bottom: dict[float, float] = {y: y for y in ys}
     for _name, lx, ly, chunk in layers:
@@ -94,17 +162,12 @@ def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
         'stroke-width="2" stroke-linecap="butt">'
     ]
 
-    # Horizontal: sit just above the next layer row, with clear space
-    # below the previous row's encoders (mid-gutter overlapped them).
+    # Horizontal: midpoint of the free gutter below encoders / above next row.
     if len(ys) >= 2:
         for i in range(len(ys) - 1):
             bottom = content_bottom[ys[i]]
             next_top = ys[i + 1]
-            gap = next_top - bottom
-            # Prefer near the next layer; keep ≥14px clear of encoders.
-            y = round(next_top - 12, 1)
-            if y < bottom + 14:
-                y = round(bottom + max(gap * 0.75, 14), 1)
+            y = round((bottom + next_top) / 2, 1)
             lines.append(
                 f'<line class="layer-divider-h" x1="{margin}" y1="{y}" '
                 f'x2="{board_w - margin}" y2="{y}"/>'
@@ -132,6 +195,13 @@ def postprocess(svg: str) -> str:
         flags=re.DOTALL,
     )
     svg = _fix_glyphs(svg)
+
+    # Undo a previous row-gap expand if re-run on already-processed SVG:
+    # (layers already shifted — detect via gap vs content). Always expand from
+    # keymap-drawer output which packs rows flush; idempotent re-run needs the
+    # raw draw output. Callers regenerate SVG before postprocess.
+
+    svg, _added = _expand_row_gaps(svg)
 
     if 'id="page-bg"' not in svg:
         svg = re.sub(

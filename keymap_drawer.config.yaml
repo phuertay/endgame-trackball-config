@@ -78,7 +78,7 @@ draw_config:
   inner_pad_w: 6
   inner_pad_h: 6
   outer_pad_w: 36
-  outer_pad_h: 64
+  outer_pad_h: 48
   small_pad: 4
   line_spacing: 1.15
   shrink_wide_legends: 12
