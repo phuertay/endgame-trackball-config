@@ -125,7 +125,7 @@
 			    &trans          &trans
 			    &kp C_PREV      &kp C_NEXT
 			    &trans          &trans
-			    &kp C_PLAY      &to LAYER_DEFAULT
+			    &kp C_PP        &to LAYER_DEFAULT
 
 			    &kp C_VOL_UP    &kp RC(PG_UP)
 			    &kp C_VOL_DN    &kp RC(PG_DN)
