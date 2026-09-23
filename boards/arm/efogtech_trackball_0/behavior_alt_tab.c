@@ -258,7 +258,7 @@ ZMK_SUBSCRIPTION(behavior_alt_tab, zmk_position_state_changed);
     static struct behavior_alt_tab_data behavior_alt_tab_data_##n = {};                            \
     static const struct behavior_alt_tab_config behavior_alt_tab_config_##n = {                    \
         .hold_key = DT_INST_PROP(n, hold_key),                                                     \
-        .release_after_ms = DT_INST_PROP_OR(n, release_after_ms, 1500),                            \
+        .release_after_ms = DT_INST_PROP_OR(n, release_after_ms, 750),                             \
     };                                                                                             \
     BEHAVIOR_DT_INST_DEFINE(n, behavior_alt_tab_init, NULL, &behavior_alt_tab_data_##n,            \
                             &behavior_alt_tab_config_##n, POST_KERNEL,                             \

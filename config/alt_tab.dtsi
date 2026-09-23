@@ -1,12 +1,10 @@
 /*
  * Left encoder Alt-Tab.
  *
- * CCW taps Tab, CW taps Shift+Tab. Alt is pressed on the first detent of a
- * roll and stays down for every later detent in either direction. It releases
- * after the encoder has been idle for release-after-ms (or when another key
- * is pressed), which commits the OS switcher. The idle window has to cover a
- * slow roll: a short one commits the switcher and the next detent is typed
- * into the focused app as a plain Tab.
+ * CW taps Tab, CCW taps Shift+Tab. The two directions undo each other while
+ * Alt is held: roll back the same number of detents and the highlight returns.
+ * Alt is pressed on the first detent and stays down across both directions.
+ * It releases after release-after-ms of idle, or when another key is pressed.
  *
  * Do not split the directions across a tri-state swapper and a raw Shift+Tab.
  * That path emits Alt once, then bare Tab / Shift+Tab: the follower never
@@ -22,7 +20,7 @@
 			#binding-cells = <1>;
 			display-name = "Alt-Tab";
 			hold-key = <LEFT_ALT>;
-			release-after-ms = <1500>;
+			release-after-ms = <750>;
 		};
 	};
 };

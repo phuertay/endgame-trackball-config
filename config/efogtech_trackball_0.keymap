@@ -41,9 +41,9 @@
 			    &mkp LCLK                 &mkp RCLK
 			    &snlk                     &syslk
 
-			    // left = Alt held + Tab / Shift+Tab; right = browser tabs
-			    &at TAB                   &kp RC(PG_UP)
-			    &at LS(TAB)               &kp RC(PG_DN)
+			    // left = Alt held, CCW Shift+Tab / CW Tab (they undo); right = browser tabs
+			    &at LS(TAB)               &kp RC(PG_UP)
+			    &at TAB                   &kp RC(PG_DN)
 		    >;
 		};
 
@@ -58,8 +58,8 @@
 			    &pv            &kp PSCRN
 			    &bst_undo      &unclose
 
-			    &at TAB        &kp RC(PG_UP)
-			    &at LS(TAB)    &kp RC(PG_DN)
+			    &at LS(TAB)    &kp RC(PG_UP)
+			    &at TAB        &kp RC(PG_DN)
 		    >;
 		};
 
@@ -114,8 +114,8 @@
 			    &mkp LCLK    &ptv
 			    &qat6        &to LAYER_DEFAULT
 
-			    &at TAB        &kp RC(PG_UP)
-			    &at LS(TAB)    &kp RC(PG_DN)
+			    &at LS(TAB)    &kp RC(PG_UP)
+			    &at TAB        &kp RC(PG_DN)
 		    >;
 		};
 
