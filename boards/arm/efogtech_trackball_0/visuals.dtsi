@@ -8,7 +8,6 @@
 #define LAYER_SNIPE        4
 #define LAYER_EXCEL        5
 #define LAYER_MEDIA        6
-#define LAYER_PV_CAL       7
 #endif
 
 / {

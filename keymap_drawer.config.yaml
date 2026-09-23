@@ -53,13 +53,6 @@ parse_config:
     "&qat6": "COPY AS\nPICTURE"
     "&qat8": "REV\nTRANSPOSE"
     "&ptv": "TRANSPOSE\nVALUES"
-    "&pv_e390w500": "E390\nW500"
-    "&pv_e400w500": "E400\nW500"
-    "&pv_e390w250": "E390\nW250"
-    "&pv_e400w250": "E400\nW250"
-    "&pv_e400w200": "E400\nW200"
-    "&pv_e400w300": "E400\nW300"
-    "&pv_e425w250": "E425\nW250"
 draw_config:
   n_columns: 2
   append_colon_to_layer_header: false
