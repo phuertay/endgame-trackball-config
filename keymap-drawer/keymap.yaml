@@ -35,9 +35,9 @@ layers:
   - 'reopen
 
     tab'
-  - $$mdi:keyboard-tab$$
+  - ↹
   - tab
-  - $$mdi:keyboard-tab$$
+  - ↹
   - tab
   system:
   - t: ble adv
@@ -125,14 +125,10 @@ layers:
   - ''
   - ''
   - ''
-  - 'shift
-
-    tab'
-  - tab
-  - tab
-  - 'shift
-
-    tab'
+  - ↹
+  - ''
+  - ↹
+  - ''
 combos:
 - p:
   - 0

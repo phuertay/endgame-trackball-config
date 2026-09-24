@@ -55,11 +55,11 @@ jobs:
                   combo["k"] = {"t": "excel", "h": "tog"}
           # Sentence-case layer titles on the diagram (not ALL CAPS).
           data["layers"] = {name.lower(): keys for name, keys in data["layers"].items()}
-          # Edit left encoder: tab sign (positions 8 + 10), not "app".
+          # Edit left encoder only: tab sign ↹ (positions 8 + 10). Right stays "tab".
           edit = data["layers"].get("edit")
           if isinstance(edit, list) and len(edit) >= 11:
-              edit[8] = "$$mdi:keyboard-tab$$"
-              edit[10] = "$$mdi:keyboard-tab$$"
+              edit[8] = "↹"
+              edit[10] = "↹"
           p.write_text(yaml.dump(data, sort_keys=False, allow_unicode=True))
           PY
           keymap -c keymap_drawer.config.yaml draw \

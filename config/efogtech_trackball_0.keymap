@@ -49,7 +49,7 @@
 
 		// Edit: hold the copy/paste button (pos3). pos3 itself must be &trans
 		// so the hold key stays usable — Delete lives on pos1 next to Bksp.
-		// Hold Bksp: Alt down + LAYER_ALTTAB (encoders Tab / Shift+Tab); release Alt up.
+		// Hold Bksp: Alt down + LAYER_ALTTAB (left encoder Tab / Shift+Tab); release Alt up.
 		edit_layer {
 			display-name = "Edit";
 			DECLARE_ENCODERS;
@@ -137,8 +137,9 @@
 		};
 
 		// Momentary while Edit Bksp is held (&bspc_at). Alt is held by the
-		// macro; encoders send Tab / Shift+Tab for the OS app switcher.
-		// CW = Tab (next), CCW = Shift+Tab (prev) on both sides.
+		// macro; left encoder only → Tab / Shift+Tab. Right encoder stays
+		// browser tabs via &trans into the Edit layer.
+		// Left: CW = Tab (next), CCW = Shift+Tab (prev).
 		alttab_layer {
 			display-name = "Alt+Tab";
 			DECLARE_ENCODERS;
@@ -148,8 +149,8 @@
 			    &trans     &trans
 			    &trans     &trans
 
-			    &kp LS(TAB) &kp TAB
-			    &kp TAB     &kp LS(TAB)
+			    &kp LS(TAB) &trans
+			    &kp TAB     &trans
 		    >;
 		};
 	};

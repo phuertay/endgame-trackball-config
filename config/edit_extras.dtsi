@@ -147,7 +147,7 @@
 			bindings = <&kp LALT &kp LS(N0)>;
 		};
 
-		/* Hold: Alt down + momentary Alt+Tab layer (encoders → Tab / Shift+Tab).
+		/* Hold: Alt down + momentary Alt+Tab layer (left encoder → Tab / Shift+Tab).
 		 * Release: layer off, then Alt up. Bound via &bspc_at on Edit Bksp. */
 		alt_tab_hold: alt_tab_hold {
 			compatible = "zmk,behavior-macro";
