@@ -8,6 +8,9 @@ on:
       - "boards/arm/efogtech_trackball_0/buttons.dtsi"
       - "keymap_drawer.config.yaml"
       - ".github/workflows/draw-keymap.yml"
+      - "keymap-drawer/draw-layout.dtsi"
+      - "keymap-drawer/postprocess_svg.py"
+      - "keymap-drawer/render_previews.py"
   workflow_dispatch:
 
 jobs:
@@ -24,8 +27,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install keymap-drawer
-        run: python -m pip install keymap-drawer
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends librsvg2-bin fonts-dejavu-core
+          python -m pip install keymap-drawer
 
       - name: Parse and draw keymap
         run: |
@@ -33,20 +39,46 @@ jobs:
           keymap -c keymap_drawer.config.yaml parse \
             -z config/efogtech_trackball_0.keymap \
             > keymap-drawer/keymap.yaml
+          # Drop combo dendrons — the arcs read as strikethrough on key labels.
+          python3 - <<'PY'
+          from pathlib import Path
+          import yaml
+          p = Path("keymap-drawer/keymap.yaml")
+          data = yaml.safe_load(p.read_text())
+          for combo in data.get("combos") or []:
+              combo["d"] = False
+              k = combo.get("k")
+              if isinstance(k, dict):
+                  k["t"] = "excel"
+                  k["h"] = "tog"
+              elif isinstance(k, str):
+                  combo["k"] = {"t": "excel", "h": "tog"}
+          # Sentence-case layer titles on the diagram (not ALL CAPS).
+          data["layers"] = {name.lower(): keys for name, keys in data["layers"].items()}
+          p.write_text(yaml.dump(data, sort_keys=False, allow_unicode=True))
+          PY
           keymap -c keymap_drawer.config.yaml draw \
-            -d boards/arm/efogtech_trackball_0/buttons.dtsi \
-            -l physical_layout0 \
+            -d keymap-drawer/draw-layout.dtsi \
+            -l draw_layout \
             keymap-drawer/keymap.yaml \
             > keymap-drawer/keymap.svg
+          python3 keymap-drawer/postprocess_svg.py keymap-drawer/keymap.svg
+          # librsvg — CairoSVG mis-renders fonts as huge glyphs
+          rsvg-convert -f pdf -b white -o keymap-drawer/keymap.pdf keymap-drawer/keymap.svg
+          # PNG for GitHub README landing page (SVG sanitizer is unreliable)
+          rsvg-convert -f png -b white -w 1400 -o keymap-drawer/keymap.png keymap-drawer/keymap.svg
 
-      - name: Upload diagram artifact
+      - name: Upload diagram artifacts
         uses: actions/upload-artifact@v4
         with:
           name: keymap-diagram
-          path: keymap-drawer/keymap.svg
+          path: |
+            keymap-drawer/keymap.svg
+            keymap-drawer/keymap.pdf
+            keymap-drawer/keymap.png
 
       - name: Commit updated diagram
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update keymap diagram"
-          file_pattern: "keymap-drawer/keymap.svg keymap-drawer/keymap.yaml"
+          file_pattern: "keymap-drawer/keymap.svg keymap-drawer/keymap.yaml keymap-drawer/keymap.pdf keymap-drawer/keymap.png"

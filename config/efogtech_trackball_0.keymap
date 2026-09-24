@@ -15,6 +15,7 @@
 #define LAYER_SNIPE        4
 #define LAYER_EXCEL        5
 #define LAYER_MEDIA        6
+#define LAYER_ALTTAB       7
 #endif
 
 #include "clipboard_layouts.dtsi"
@@ -29,8 +30,8 @@
 
 		// pos0 -> Media hold / Enter tap, pos1 -> Scroll lock,
 		// pos2 -> middle click, hold pos3 -> Edit,
-		// pos6 -> Snipe sticky / Back tap,
-		// pos7 -> Close tap / System hold / Reload double-tap.
+		// pos6 -> Snipe sticky / Close tap,
+		// pos7 -> Back tap / System hold / Reload double-tap.
 		default_layer {
 			display-name = "Default";
 			DECLARE_ENCODERS;
@@ -48,14 +49,15 @@
 
 		// Edit: hold the copy/paste button (pos3). pos3 itself must be &trans
 		// so the hold key stays usable — Delete lives on pos1 next to Bksp.
+		// Hold Bksp: Alt down + LAYER_ALTTAB (left encoder Tab / Shift+Tab); release Alt up.
 		edit_layer {
 			display-name = "Edit";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &kp BSPC       &kp DEL
+			    &bspc_at 0 BSPC  &kp DEL
 			    &bst_cut       &trans
 			    &pv            &kp PSCRN
-			    &bst_undo      &unclose
+			    &unclose       &bst_undo
 
 			    &kp LA(LS(ESC)) &kp RC(PG_UP)
 			    &kp LA(ESC)     &kp RC(PG_DN)
@@ -69,7 +71,7 @@
 			    &mui_or_dgl          &bt BT_CLR
 			    &bst_tog ZBS_TOG     &bt BT_NXT
 			    &af_toggle AF_TOG    &bt BT_PRV
-			    &soft_off            &trans
+			    &soft_off            &to LAYER_DEFAULT
 
 			    &sens P2SM_INC 1     &scrlsens P2SM_INC 1
 			    &sens P2SM_DEC 1     &scrlsens P2SM_DEC 1
@@ -80,10 +82,11 @@
 			display-name = "Scroll";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &trans     &tog LAYER_SCROLL
+			    // pos1 stays &trans so default &ltlk (incl. 2× scroll lock/unlock) flows through
+			    &trans     &trans
 			    &axlk      &kp RCTRL
 			    &trans     &trans
-			    &trans     &trans
+			    &trans     &to LAYER_DEFAULT
 
 			    &kp LEFT   &kp UP
 			    &kp RIGHT  &kp DOWN
@@ -97,7 +100,8 @@
 			    &trans     &trans
 			    &trans     &trans
 			    &trans     &trans
-			    &tog LAYER_SNIPE  &trans
+			    // pos6 stays &trans so default &snlk (incl. 2× snipe lock/unlock) flows through
+			    &trans     &to LAYER_DEFAULT
 
 			    &kp LEFT   &kp UP
 			    &kp RIGHT  &kp DOWN
@@ -125,10 +129,28 @@
 			    &trans          &trans
 			    &kp C_PREV      &kp C_NEXT
 			    &trans          &trans
-			    &kp C_PLAY      &to LAYER_DEFAULT
+			    &kp C_PP        &to LAYER_DEFAULT
 
 			    &kp C_VOL_UP    &kp RC(PG_UP)
 			    &kp C_VOL_DN    &kp RC(PG_DN)
+		    >;
+		};
+
+		// Momentary while Edit Bksp is held (&bspc_at). Alt is held by the
+		// macro; left encoder only → Tab / Shift+Tab. Right encoder stays
+		// browser tabs via &trans into the Edit layer.
+		// Left: CW = Tab (next), CCW = Shift+Tab (prev).
+		alttab_layer {
+			display-name = "Alt+Tab";
+			DECLARE_ENCODERS;
+			bindings = <
+			    &trans     &trans
+			    &trans     &trans
+			    &trans     &trans
+			    &trans     &trans
+
+			    &kp LS(TAB) &trans
+			    &kp TAB     &trans
 		    >;
 		};
 	};

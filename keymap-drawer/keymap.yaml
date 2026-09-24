@@ -1,160 +1,139 @@
-layout: {zmk_keyboard: efogtech_trackball_0}
+layout:
+  zmk_keyboard: efogtech_trackball_0
 layers:
-  Default:
-  - {t: ENTER, h: media}
-  - {t: ESC, h: scroll}
-  - 'MIDDLE
+  default:
+  - t: $$mdi:keyboard-return$$
+    h: media
+  - t: $$mdi:keyboard-esc$$
+    h: scroll
+    s: 2× scroll
+  - mid clk
+  - t: $$mdi:content-copy$$
+    h: edit
+    s: 2× paste
+  - left clk
+  - right clk
+  - t: $$mdi:close$$
+    h: snipe
+    s: 2× snipe
+  - t: back
+    h: system
+    s: 2× reload
+  - app
+  - tab
+  - app
+  - tab
+  edit:
+  - t: $$mdi:keyboard-backspace$$
+    h: alt
+  - $$mdi:backspace-reverse$$
+  - $$mdi:content-cut$$
+  - ''
+  - $$excel-paste-values$$
+  - PrtSc
+  - 'reopen
 
-    CLICK'
-  - {t: COPY / PASTE, h: edit}
-  - 'LEFT
+    tab'
+  - $$mdi:undo$$
+  - app
+  - tab
+  - app
+  - tab
+  system:
+  - t: ble adv
+    s: 2× dongle
+  - t: $$mdi:bluetooth$$
+    right: $$mdi:close$$
+  - 'swap
 
-    CLICK'
-  - 'RIGHT
+    layout'
+  - t: $$mdi:bluetooth$$
+    right: $$mdi:arrow-down$$
+  - fx
+  - t: $$mdi:bluetooth$$
+    right: $$mdi:arrow-up$$
+  - $$mdi:power$$
+  - $$mdi:home$$
+  - sens +
+  - scrl +
+  - sens -
+  - scrl -
+  scroll:
+  - ''
+  - ''
+  - t: axis
+    h: hold
+  - zoom
+  - ''
+  - ''
+  - ''
+  - $$mdi:home$$
+  - $$mdi:arrow-left$$
+  - $$mdi:arrow-up$$
+  - $$mdi:arrow-right$$
+  - $$mdi:arrow-down$$
+  snipe:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - $$mdi:home$$
+  - $$mdi:arrow-left$$
+  - $$mdi:arrow-up$$
+  - $$mdi:arrow-right$$
+  - $$mdi:arrow-down$$
+  excel:
+  - $$excel-paste-format$$
+  - $$excel-paste-formulas$$
+  - 'rev
 
-    CLICK'
-  - {t: BACK, h: snipe}
-  - {t: CLOSE, h: system, s: 2× RELOAD}
-  - 'APP
+    transpose'
+  - t: $$mdi:content-copy$$
+    s: 2× paste
+  - left clk
+  - 'transpose
 
-    PREV'
-  - TAB <
-  - 'APP
-
-    NEXT'
-  - TAB >
-  Edit:
-  - BKSP
-  - DEL
-  - CUT
-  - {t: ▽, type: trans}
-  - 'PASTE
-
-    VALUES'
-  - 'SCREEN
-
-    SHOT'
-  - UNDO
-  - 'REOPEN
-
-    TAB'
-  - 'APP
-
-    PREV'
-  - TAB <
-  - 'APP
-
-    NEXT'
-  - TAB >
-  System:
-  - 'MUI /
-
-    DONGLE'
-  - 'BT
-
-    CLEAR'
-  - 'SWITCH
-
-    LAYOUT'
-  - 'BT
-
-    NEXT'
-  - 'TOGGLE
-
-    EFFECTS'
-  - 'BT
-
-    PREV'
-  - 'POWER
-
-    OFF'
-  - {t: ▽, type: trans}
-  - SENS +
-  - 'SCROLL
-
-    SENS +'
-  - SENS -
-  - 'SCROLL
-
-    SENS -'
-  Scroll:
-  - {t: ▽, type: trans}
-  - 'SCROLL
-
-    LOCK'
-  - {t: 'AXIS
-
-      TOGGLE', h: 'AXIS
-
-      HOLD'}
-  - 'ZOOM
-
-    (hold)'
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - LEFT
-  - UP
-  - RIGHT
-  - DOWN
-  Snipe:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - 'SNIPE
-
-    UNLOCK'
-  - {t: ▽, type: trans}
-  - LEFT
-  - UP
-  - RIGHT
-  - DOWN
-  Excel:
-  - 'PASTE
-
-    FORMAT'
-  - 'PASTE
-
-    FORMULAS'
-  - 'REV
-
-    TRANSPOSE'
-  - {t: COPY, s: PASTE}
-  - 'LEFT
-
-    CLICK'
-  - 'TRANSPOSE
-
-    VALUES'
-  - 'COPY AS
-
-    PICTURE'
-  - BACK
-  - 'APP
-
-    PREV'
-  - TAB <
-  - 'APP
-
-    NEXT'
-  - TAB >
-  Media:
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - PREV
-  - NEXT
-  - {t: ▽, type: trans}
-  - {t: ▽, type: trans}
-  - PLAY
-  - BACK
-  - VOL +
-  - TAB <
-  - VOL -
-  - TAB >
+    values'
+  - $$excel-copy-picture$$
+  - $$mdi:home$$
+  - app
+  - tab
+  - app
+  - tab
+  media:
+  - ''
+  - ''
+  - $$mdi:skip-previous$$
+  - $$mdi:skip-next$$
+  - ''
+  - ''
+  - $$mdi:play-pause$$
+  - $$mdi:home$$
+  - $$mdi:volume-plus$$
+  - tab
+  - $$mdi:volume-minus$$
+  - tab
+  alt+tab:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - $$tab-sign$$
+  - ''
+  - $$tab-sign$$
+  - ''
 combos:
-- p: [0, 1]
-  k: {t: Excel, h: toggle}
+- p:
+  - 0
+  - 1
+  k:
+    t: excel
+    h: tog
+  d: false
