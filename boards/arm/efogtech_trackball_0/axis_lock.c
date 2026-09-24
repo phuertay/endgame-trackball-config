@@ -2,7 +2,7 @@
  * Scroll-axis lock: hard-lock ball motion to one axis on the scroll layer.
  *
  * Default: Y only (vertical scroll).
- * `&axlk` tap         → permanently toggle Y ↔ X (re-locks if unlocked)
+ * `&axlk` tap         → permanently toggle Y ↔ X; after free, tap → Y only
  * `&axlk` hold        → temporarily use the other axis until release
  * `&axlk` double-tap  → release both axes (free X+Y scroll)
  */
@@ -27,8 +27,10 @@ static bool axis_lock_effective_horizontal(void) {
 
 static void axis_lock_toggle(void) {
     if (axis_lock_unlocked) {
+        /* Next tap after free always returns to vertical (default). */
         axis_lock_unlocked = false;
-        LOG_DBG("scroll axis lock: re-locked %s only", axis_lock_horizontal ? "X" : "Y");
+        axis_lock_horizontal = false;
+        LOG_DBG("scroll axis lock: re-locked Y only");
         return;
     }
     axis_lock_horizontal = !axis_lock_horizontal;
