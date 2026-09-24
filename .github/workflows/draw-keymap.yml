@@ -65,6 +65,8 @@ jobs:
           python3 keymap-drawer/postprocess_svg.py keymap-drawer/keymap.svg
           # librsvg — CairoSVG mis-renders fonts as huge glyphs
           rsvg-convert -f pdf -b white -o keymap-drawer/keymap.pdf keymap-drawer/keymap.svg
+          # PNG for GitHub README landing page (SVG sanitizer is unreliable)
+          rsvg-convert -f png -b white -w 1400 -o keymap-drawer/keymap.png keymap-drawer/keymap.svg
 
       - name: Upload diagram artifacts
         uses: actions/upload-artifact@v4
@@ -73,9 +75,10 @@ jobs:
           path: |
             keymap-drawer/keymap.svg
             keymap-drawer/keymap.pdf
+            keymap-drawer/keymap.png
 
       - name: Commit updated diagram
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update keymap diagram"
-          file_pattern: "keymap-drawer/keymap.svg keymap-drawer/keymap.yaml keymap-drawer/keymap.pdf"
+          file_pattern: "keymap-drawer/keymap.svg keymap-drawer/keymap.yaml keymap-drawer/keymap.pdf keymap-drawer/keymap.png"
