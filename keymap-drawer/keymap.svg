@@ -243,7 +243,7 @@ path.combo {
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#mdi:keyboard-esc" xlink:href="#mdi:keyboard-esc" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:keyboard-esc"/>
 <text x="0" y="20" class="key hold">scroll</text>
-<text x="0" y="-20" class="key shifted">2× lock</text>
+<text x="0" y="-20" class="key shifted">2× scroll</text>
 </g>
 <g transform="translate(45, 30)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
@@ -271,13 +271,13 @@ path.combo {
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">back</text>
+<use href="#mdi:close" xlink:href="#mdi:close" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:close"/>
 <text x="0" y="20" class="key hold">snipe</text>
-<text x="0" y="-20" class="key shifted">2× lock</text>
+<text x="0" y="-20" class="key shifted">2× snipe</text>
 </g>
 <g transform="translate(296, 171)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<use href="#mdi:close" xlink:href="#mdi:close" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:close"/>
+<text x="0" y="0" class="key tap">back</text>
 <text x="0" y="20" class="key hold">system</text>
 <text x="0" y="-20" class="key shifted">2× reload</text>
 </g>
@@ -333,13 +333,13 @@ path.combo {
 </g>
 <g transform="translate(158, 171)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<use href="#mdi:undo" xlink:href="#mdi:undo" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:undo"/>
-</g>
-<g transform="translate(296, 171)" class="key keypos-7">
-<rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <text x="0" y="0" class="key tap">
 <tspan x="0" dy="-0.57em">reopen</tspan><tspan x="0" dy="1.15em">tab</tspan>
 </text>
+</g>
+<g transform="translate(296, 171)" class="key keypos-7">
+<rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
+<use href="#mdi:undo" xlink:href="#mdi:undo" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:undo"/>
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>

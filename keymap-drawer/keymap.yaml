@@ -6,17 +6,17 @@ layers:
     h: media
   - t: $$mdi:keyboard-esc$$
     h: scroll
-    s: 2× lock
+    s: 2× scroll
   - mid clk
   - t: $$mdi:content-copy$$
     h: edit
     s: 2× paste
   - left clk
   - right clk
-  - t: back
-    h: snipe
-    s: 2× lock
   - t: $$mdi:close$$
+    h: snipe
+    s: 2× snipe
+  - t: back
     h: system
     s: 2× reload
   - app
@@ -31,10 +31,10 @@ layers:
   - ''
   - $$excel-paste-values$$
   - PrtSc
-  - $$mdi:undo$$
   - 'reopen
 
     tab'
+  - $$mdi:undo$$
   - app
   - tab
   - app

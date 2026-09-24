@@ -2,8 +2,8 @@ parse_config:
   # Tap = center, hold (h) = orange, shifted/2× (s) = blue.
   # Words + MDI glyphs (glyph_tap_size below). No bold / ALL CAPS.
   raw_binding_map:
-    "&snlk": {t: "back", h: "snipe", s: "2× lock"}
-    "&ltlk": {t: "$$mdi:keyboard-esc$$", h: "scroll", s: "2× lock"}
+    "&snlk": {t: "$$mdi:close$$", h: "snipe", s: "2× snipe"}
+    "&ltlk": {t: "$$mdi:keyboard-esc$$", h: "scroll", s: "2× scroll"}
     "&ltmkp 6 0x70028": {t: "$$mdi:keyboard-return$$", h: "media"}
     "&ltmkp 6 ENTER": {t: "$$mdi:keyboard-return$$", h: "media"}
     "&cdch 1 0": {t: "$$mdi:content-copy$$", h: "edit", s: "2× paste"}
@@ -11,7 +11,7 @@ parse_config:
     "&mkp MCLK": "mid clk"
     "&mkp LCLK": "left clk"
     "&mkp RCLK": "right clk"
-    "&syslk": {t: "$$mdi:close$$", h: "system", s: "2× reload"}
+    "&syslk": {t: "back", h: "system", s: "2× reload"}
     "&kp LA(ESC)": "app"
     "&kp LA(LS(ESC))": "app"
     "&bst_copy": "$$mdi:content-copy$$"

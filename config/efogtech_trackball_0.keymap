@@ -30,8 +30,8 @@
 
 		// pos0 -> Media hold / Enter tap, pos1 -> Scroll lock,
 		// pos2 -> middle click, hold pos3 -> Edit,
-		// pos6 -> Snipe sticky / Back tap,
-		// pos7 -> Close tap / System hold / Reload double-tap.
+		// pos6 -> Snipe sticky / Close tap,
+		// pos7 -> Back tap / System hold / Reload double-tap.
 		default_layer {
 			display-name = "Default";
 			DECLARE_ENCODERS;
@@ -57,7 +57,7 @@
 			    &bspc_at 0 BSPC  &kp DEL
 			    &bst_cut       &trans
 			    &pv            &kp PSCRN
-			    &bst_undo      &unclose
+			    &unclose       &bst_undo
 
 			    &kp LA(LS(ESC)) &kp RC(PG_UP)
 			    &kp LA(ESC)     &kp RC(PG_DN)
@@ -82,7 +82,7 @@
 			display-name = "Scroll";
 			DECLARE_ENCODERS;
 			bindings = <
-			    // pos1 stays &trans so default &ltlk (incl. 2× lock/unlock) flows through
+			    // pos1 stays &trans so default &ltlk (incl. 2× scroll lock/unlock) flows through
 			    &trans     &trans
 			    &axlk      &kp RCTRL
 			    &trans     &trans
@@ -100,7 +100,7 @@
 			    &trans     &trans
 			    &trans     &trans
 			    &trans     &trans
-			    // pos6 stays &trans so default &snlk (incl. 2× lock/unlock) flows through
+			    // pos6 stays &trans so default &snlk (incl. 2× snipe lock/unlock) flows through
 			    &trans     &to LAYER_DEFAULT
 
 			    &kp LEFT   &kp UP

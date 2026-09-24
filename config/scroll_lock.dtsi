@@ -3,7 +3,7 @@
  *
  * Both are sticky: you engage them and they stay put, leaving the ball hand
  * free. Each button gives three actions:
- *   tap         -> its key            (Escape for scroll, Back/MB4 for snipe)
+ *   tap         -> its key            (Escape for scroll, Close/MB5 for snipe)
  *   hold        -> momentary layer     (&mo LAYER_*)
  *   double-tap  -> lock/unlock layer   (&tog LAYER_*)
  * Once locked, a single tap of the layer's own button (bound to &tog on that
@@ -11,8 +11,9 @@
  *
  * Media is momentary on pos0 (Enter tap / Media hold) and sits above Snipe in
  * the layer stack so its encoders win while held; it does not use a lock
- * behavior here. Enter stays on pos0 and Back (MB4) stays on pos6 — only the
- * layers swapped, not the tap keys.
+ * behavior here. Enter stays on pos0. Tap keys on pos6/pos7 are Close (MB5)
+ * on the snipe button and Back (MB4) on the system button (kp-only swap vs
+ * the hold layers).
  *
  * IMPORTANT ordering: each is a tap-dance (outer) wrapping a hold-tap (inner).
  * The reverse -- a hold-tap wrapping a tap-dance -- does NOT work: each tap
@@ -42,7 +43,7 @@
 			bindings = <&mo>, <&kp>;
 		};
 
-		// Same as lk_ht but tap is a mouse button (&mkp), for Back on Snipe.
+		// Same as lk_ht but tap is a mouse button (&mkp).
 		lk_htm: lk_htm {
 			compatible = "zmk,behavior-hold-tap";
 			display-name = "Momentary layer / mouse key (hold/tap)";
@@ -61,24 +62,24 @@
 			bindings = <&lk_ht LAYER_SCROLL ESC>, <&tog LAYER_SCROLL>;
 		};
 
+		/* pos6: hold/2× = snipe; tap = Close (MB5). Back lives on syslk. */
 		snlk: snlk {
 			compatible = "zmk,behavior-tap-dance";
-			display-name = "Back / snipe / lock (tap/hold/double-tap)";
+			display-name = "Close / snipe / lock (tap/hold/double-tap)";
 			#binding-cells = <0>;
 			tapping-term-ms = <350>;
-			bindings = <&lk_htm LAYER_SNIPE MB4>, <&tog LAYER_SNIPE>;
+			bindings = <&lk_htm LAYER_SNIPE MB5>, <&tog LAYER_SNIPE>;
 		};
 
-		/* Close had no double-tap (tap = MB5, hold = System). Double-tap is
-		 * reload: Right Ctrl+A, same key that used to sit on the Edit layer.
+		/* pos7: hold = System; tap = Back (MB4); double-tap = reload.
 		 * Tap-dance stays outside the hold-tap, same reason as ltlk/snlk.
 		 */
 		syslk: syslk {
 			compatible = "zmk,behavior-tap-dance";
-			display-name = "Close / system / reload (tap/hold/double-tap)";
+			display-name = "Back / system / reload (tap/hold/double-tap)";
 			#binding-cells = <0>;
 			tapping-term-ms = <350>;
-			bindings = <&lk_htm LAYER_SYSTEM MB5>, <&kp RC(A)>;
+			bindings = <&lk_htm LAYER_SYSTEM MB4>, <&kp RC(A)>;
 		};
 	};
 };
