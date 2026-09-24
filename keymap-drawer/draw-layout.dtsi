@@ -18,29 +18,29 @@
 		display-name = "Draw Layout";
 
 		keys  //               w     h     x     y     rot  rx   ry
-		/* top pair */
+		/* top pair — sits above the side pillars */
 		= <&key_physical_attrs 195   95    150   0     0    14   14 >
 		, <&key_physical_attrs 195   95    365   0     0    14   14 >
 
-		/* upper sides — match top key height (was ~3.75u pillars) */
-		, <&key_physical_attrs 140   95    0     0     0    14   14 >
-		, <&key_physical_attrs 140   95    570   0     0    14   14 >
+		/* upper sides — dropped so top pair reads higher */
+		, <&key_physical_attrs 140   95    0     32    0    14   14 >
+		, <&key_physical_attrs 140   95    570   32    0    14   14 >
 
 		/* lower sides */
-		, <&key_physical_attrs 140   95    0     110   0    14   14 >
-		, <&key_physical_attrs 140   95    570   110   0    14   14 >
+		, <&key_physical_attrs 140   95    0     142   0    14   14 >
+		, <&key_physical_attrs 140   95    570   142   0    14   14 >
 
 		/* bottom pair */
-		, <&key_physical_attrs 195   95    150   220   0    14   14 >
-		, <&key_physical_attrs 195   95    365   220   0    14   14 >
+		, <&key_physical_attrs 195   95    150   252   0    14   14 >
+		, <&key_physical_attrs 195   95    365   252   0    14   14 >
 
 		/* encoder vertical */
-		, <&key_physical_attrs 70    80    0     225   0    12   12 >
-		, <&key_physical_attrs 70    80    640   225   0    12   12 >
+		, <&key_physical_attrs 70    80    0     257   0    12   12 >
+		, <&key_physical_attrs 70    80    640   257   0    12   12 >
 
 		/* encoder horizontal */
-		, <&key_physical_attrs 100   55    75    315   0    12   12 >
-		, <&key_physical_attrs 100   55    535   315   0    12   12 >
+		, <&key_physical_attrs 100   55    75    347   0    12   12 >
+		, <&key_physical_attrs 100   55    535   347   0    12   12 >
 		;
 	};
 };
