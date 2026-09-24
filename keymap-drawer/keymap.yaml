@@ -4,7 +4,7 @@ layers:
   default:
   - t: $$mdi:keyboard-return$$
     h: media
-  - t: $$mdi:keyboard-esc$$
+  - t: $$esc-sign$$
     h: scroll
     s: 2× scroll
   - mid clk
@@ -25,12 +25,12 @@ layers:
   - tab
   edit:
   - $$mdi:keyboard-backspace$$
-  - t: $$mdi:backspace-reverse$$
+  - t: $$del-sign$$
     h: alt
   - $$mdi:content-cut$$
   - ''
   - $$excel-paste-values$$
-  - PrtSc
+  - $$prtsc-sign$$
   - 'reopen
 
     tab'
