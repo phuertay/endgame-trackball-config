@@ -310,11 +310,11 @@ path.combo {
 <g transform="translate(158, 30)" class="key keypos-0">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#mdi:keyboard-backspace" xlink:href="#mdi:keyboard-backspace" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:keyboard-backspace"/>
-<text x="0" y="20" class="key hold">alt</text>
 </g>
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#mdi:backspace-reverse" xlink:href="#mdi:backspace-reverse" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:backspace-reverse"/>
+<text x="0" y="20" class="key hold">alt</text>
 </g>
 <g transform="translate(45, 51)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
