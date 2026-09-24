@@ -456,6 +456,7 @@ path.combo {
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
 <text x="0" y="0" class="key tap">axis</text>
 <text x="0" y="20" class="key hold">hold</text>
+<text x="0" y="-20" class="key shifted">2× free</text>
 </g>
 <g transform="translate(410, 51)" class="key keypos-3">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
