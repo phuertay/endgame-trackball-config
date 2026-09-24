@@ -54,7 +54,7 @@
 			display-name = "Edit";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &bspc_at BSPC  &kp DEL
+			    &bspc_at 0 BSPC  &kp DEL
 			    &bst_cut       &trans
 			    &pv            &kp PSCRN
 			    &bst_undo      &unclose

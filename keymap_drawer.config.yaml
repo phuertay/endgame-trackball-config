@@ -24,8 +24,13 @@ parse_config:
     "&kp RC(A)": "reload"
     "&kp PSCRN": "PrtSc"
     "&kp BSPC": "$$mdi:keyboard-backspace$$"
+    "&bspc_at 0 BSPC": {t: "$$mdi:keyboard-backspace$$", h: "alt"}
+    "&bspc_at 0 0x7002A": {t: "$$mdi:keyboard-backspace$$", h: "alt"}
     "&bspc_at BSPC": {t: "$$mdi:keyboard-backspace$$", h: "alt"}
     "&bspc_at 0x7002A": {t: "$$mdi:keyboard-backspace$$", h: "alt"}
+    "&bspc_at 7 BSPC": {t: "$$mdi:keyboard-backspace$$", h: "alt"}
+    "&bspc_at 7 0x7002A": {t: "$$mdi:keyboard-backspace$$", h: "alt"}
+    "&bspc_at LAYER_ALTTAB BSPC": {t: "$$mdi:keyboard-backspace$$", h: "alt"}
     "&kp DEL": "$$mdi:backspace-reverse$$"
     "&kp SPACE": "␣"
     "&mui_or_dgl": {t: "ble adv", s: "2× dongle"}
