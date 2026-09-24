@@ -180,9 +180,10 @@
 
 		axlk: axlk {
 			compatible = "zmk,behavior-axis-lock";
-			display-name = "Scroll axis (tap toggle / hold swap)";
+			display-name = "Scroll axis (tap toggle / hold swap / 2× free)";
 			#binding-cells = <0>;
-			tapping-term-ms = <200>;
+			/* 350 ms matches other double-tap locks; 200 was too tight. */
+			tapping-term-ms = <350>;
 		};
 
 		/* Tap = Backspace; hold = Alt + LAYER_ALTTAB until release.

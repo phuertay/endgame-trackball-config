@@ -1,6 +1,7 @@
 description: |
   Scroll-axis lock control. Tap toggles Y-only ↔ X-only permanently; hold
-  temporarily uses the other axis until release.
+  temporarily uses the other axis until release; double-tap releases both
+  axes (free X+Y).
 
 compatible: "zmk,behavior-axis-lock"
 
@@ -10,4 +11,7 @@ properties:
   tapping-term-ms:
     type: int
     default: 200
-    description: Hold longer than this to momentary-swap instead of toggle.
+    description: >
+      Hold longer than this to momentary-swap instead of toggle. Also the
+      window after a tap in which a second tap counts as double-tap (release
+      both axes).

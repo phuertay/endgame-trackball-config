@@ -20,7 +20,7 @@ parse_config:
     "&bst_undo": "$$mdi:undo$$"
     "&pv": "$$excel-paste-values$$"
     "&unclose": "reopen\ntab"
-    "&axlk": {t: "axis", h: "hold"}
+    "&axlk": {t: "axis", h: "hold", s: "2× free"}
     "&kp RC(A)": "reload"
     "&kp PSCRN": "PrtSc"
     "&kp BSPC": "$$mdi:keyboard-backspace$$"

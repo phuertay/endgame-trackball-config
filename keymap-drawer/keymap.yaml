@@ -63,6 +63,7 @@ layers:
   - ''
   - t: axis
     h: hold
+    s: 2× free
   - zoom
   - ''
   - ''
