@@ -185,6 +185,24 @@ def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
     return lines
 
 
+# PrtSc is landscape and reads tiny at glyph_tap_size; multiply <use> box.
+# 1.5 = 75% of the previous 2× scale (84×42 from base 56×28).
+_PRTSC_USE_SCALE = 1.5
+_PRTSC_USE_RE = re.compile(
+    r'(<use href="#prtsc-sign" xlink:href="#prtsc-sign" )'
+    r'x="[^"]*" y="[^"]*" height="([^"]*)" width="([^"]*)"'
+)
+
+
+def _scale_prtsc_uses(svg: str, scale: float = _PRTSC_USE_SCALE) -> str:
+    def repl(m: re.Match[str]) -> str:
+        h, w = float(m.group(2)), float(m.group(3))
+        nh, nw = h * scale, w * scale
+        return f'{m.group(1)}x="{-nw / 2}" y="{-nh / 2}" height="{nh:g}" width="{nw:g}"'
+
+    return _PRTSC_USE_RE.sub(repl, svg)
+
+
 def postprocess(svg: str) -> str:
     # Strip leftover frames/dividers so re-runs stay idempotent.
     svg = re.sub(r'\n?<rect class="layer-frame"[^/]*/>', "", svg)
@@ -195,6 +213,7 @@ def postprocess(svg: str) -> str:
         flags=re.DOTALL,
     )
     svg = _fix_glyphs(svg)
+    svg = _scale_prtsc_uses(svg)
 
     # Undo a previous row-gap expand if re-run on already-processed SVG:
     # (layers already shifted — detect via gap vs content). Always expand from

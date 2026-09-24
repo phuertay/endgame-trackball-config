@@ -148,7 +148,7 @@
 		};
 
 		/* Hold: Alt down + momentary Alt+Tab layer (left encoder → Tab / Shift+Tab).
-		 * Release: layer off, then Alt up. Bound via &bspc_at on Edit Bksp.
+		 * Release: layer off, then Alt up. Bound via &del_at on Edit Delete.
 		 * One-param (dummy) so hold-tap can be #binding-cells = <2> (macro 1 + kp 1).
 		 * Layer is hardcoded — do not forward the param into &mo (ZMK param leak). */
 		alt_tab_hold: alt_tab_hold {
@@ -186,11 +186,11 @@
 			tapping-term-ms = <350>;
 		};
 
-		/* Tap = Backspace; hold = Alt + LAYER_ALTTAB until release.
+		/* Tap = Delete; hold = Alt + LAYER_ALTTAB until release.
 		 * hold-tap requires #binding-cells = <2> (const in ZMK). */
-		bspc_at: bspc-alt-tab {
+		del_at: del-alt-tab {
 			compatible = "zmk,behavior-hold-tap";
-			display-name = "Bksp / Alt+Tab (hold)";
+			display-name = "Del / Alt+Tab (hold)";
 			#binding-cells = <2>;
 			flavor = "tap-preferred";
 			tapping-term-ms = <200>;
