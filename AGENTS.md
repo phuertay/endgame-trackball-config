@@ -11,3 +11,4 @@ After any keymap or diagram change (`config/*.keymap`, `config/*.dtsi`, `keymap_
 3. Include the latest full PNG inline in the reply, e.g. `<img src="/opt/cursor/artifacts/keymap-full-….png" alt="Full updated keymap diagram" />`.
 4. Close-ups are fine as extras; never substitute them for the full diagram.
 5. Keep `keymap-drawer/keymap.png` in sync for the GitHub README landing image (same draw pipeline; `rsvg-convert -f png -w 1400`).
+6. **Always regenerate every preview you show** (full diagram, layer crops, key close-ups, glyph strips). Never reuse older `/opt/cursor/artifacts/*` images from a previous turn — delete or overwrite them from the freshly drawn SVG/PNG in the same turn before attaching.
