@@ -1,11 +1,12 @@
-.west
-.zmk/
-modules
-zephyr
-zmk
-zmk-pmw3610-driver
-.vscode
-zmk-input-processor-mixer
-zmk-pointer-2s-mixer
 
 firmware.uf2
+keymap-drawer/__pycache__/
+modules
+.vscode
+.west
+zephyr
+.zmk/
+zmk
+zmk-input-processor-mixer
+zmk-pmw3610-driver
+zmk-pointer-2s-mixer
