@@ -31,6 +31,7 @@
 <symbol id="mdi:undo" viewBox="0 0 24 24"><path fill="#1a1d21" d="M12.5,8C9.85,8 7.45,9 5.6,10.6L2,7V16H11L7.38,12.38C8.77,11.22 10.54,10.5 12.5,10.5C16.04,10.5 19.05,12.81 20.1,16L22.47,15.22C21.08,11.03 17.15,8 12.5,8Z" /></symbol>
 <symbol id="mdi:volume-minus" viewBox="0 0 24 24"><path fill="#1a1d21" d="M3,9H7L12,4V20L7,15H3V9M14,11H22V13H14V11Z" /></symbol>
 <symbol id="mdi:volume-plus" viewBox="0 0 24 24"><path fill="#1a1d21" d="M3,9H7L12,4V20L7,15H3V9M14,11H17V8H19V11H22V13H19V16H17V13H14V11Z" /></symbol>
+<symbol id="tab-sign" viewBox="0 0 24 24"><path fill="#1a1d21" d="M2 3H5.4V11H2ZM13.5 4.3L5.2 7.1 13.5 9.9ZM12 6.1H21.5V8.1H12ZM18.6 13H22V21H18.6ZM10.5 14.3L18.8 17.1 10.5 19.9ZM2.5 16.1H12V18.1H2.5Z"/></symbol>
 </defs>/* end glyphs */
 <style>/* inherit to force styles through use tags */
 svg path {
@@ -342,7 +343,7 @@ path.combo {
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">↹</text>
+<text x="0" y="0" class="key tap">app</text>
 </g>
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
@@ -350,7 +351,7 @@ path.combo {
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">↹</text>
+<text x="0" y="0" class="key tap">app</text>
 </g>
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
@@ -690,14 +691,14 @@ path.combo {
 </g>
 <g transform="translate(22, 170)" class="key keypos-8">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
-<text x="0" y="0" class="key tap">↹</text>
+<use href="#tab-sign" xlink:href="#tab-sign" x="-14" y="-14" height="28" width="28.0" class="key tap glyph tab-sign"/>
 </g>
 <g transform="translate(432, 170)" class="key keypos-9">
 <rect rx="10" ry="10" x="-16" y="-20" width="33" height="39" class="key"/>
 </g>
 <g transform="translate(80, 219)" class="key keypos-10">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
-<text x="0" y="0" class="key tap">↹</text>
+<use href="#tab-sign" xlink:href="#tab-sign" x="-14" y="-14" height="28" width="28.0" class="key tap glyph tab-sign"/>
 </g>
 <g transform="translate(374, 219)" class="key keypos-11">
 <rect rx="10" ry="10" x="-26" y="-12" width="52" height="23" class="key"/>
