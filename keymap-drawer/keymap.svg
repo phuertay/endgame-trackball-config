@@ -334,7 +334,7 @@ path.combo {
 </g>
 <g transform="translate(410, 121)" class="key keypos-5">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
-<use href="#prtsc-sign" xlink:href="#prtsc-sign" x="-42.0" y="-21.0" height="42" width="84" class="key tap glyph prtsc-sign"/>
+<use href="#prtsc-sign" xlink:href="#prtsc-sign" x="-28.0" y="-14.0" height="28" width="56" class="key tap glyph prtsc-sign"/>
 </g>
 <g transform="translate(158, 179)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
@@ -382,7 +382,7 @@ path.combo {
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#mdi:bluetooth" xlink:href="#mdi:bluetooth" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:bluetooth"/>
-<use href="#mdi:close" xlink:href="#mdi:close" x="24" y="-14" height="28" width="28.0" class="key right glyph mdi:close"/>
+<use href="#mdi:close" xlink:href="#mdi:close" x="7" y="-14" height="28" width="28.0" class="key right glyph mdi:close"/>
 </g>
 <g transform="translate(45, 51)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>

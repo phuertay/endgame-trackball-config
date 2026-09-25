@@ -185,12 +185,22 @@ def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
     return lines
 
 
-# PrtSc is landscape and reads tiny at glyph_tap_size; multiply <use> box.
-# 1.5 = 75% of the previous 2× scale (84×42 from base 56×28).
-_PRTSC_USE_SCALE = 1.5
+# PrtSc is landscape; keep <use> at glyph_tap_size (no extra boost).
+# Was 1.5 (84×42 from base 56×28); still read too large on the key.
+_PRTSC_USE_SCALE = 1.0
 _PRTSC_USE_RE = re.compile(
     r'(<use href="#prtsc-sign" xlink:href="#prtsc-sign" )'
     r'x="[^"]*" y="[^"]*" height="([^"]*)" width="([^"]*)"'
+)
+
+# BT clear sits on a wide top key, so keymap-drawer parks the right-side ✕
+# at the far edge (x≈24) while BT stays centered — looks detached. Nudge
+# it to the same offset as BT+arrow on the narrower side keys (x=7).
+_BT_CLOSE_X = 7
+_BT_CLOSE_RE = re.compile(
+    r'(<use href="#mdi:bluetooth" xlink:href="#mdi:bluetooth"[^/]*/>\s*'
+    r'<use href="#mdi:close" xlink:href="#mdi:close" )'
+    r'x="[^"]*"'
 )
 
 
@@ -201,6 +211,10 @@ def _scale_prtsc_uses(svg: str, scale: float = _PRTSC_USE_SCALE) -> str:
         return f'{m.group(1)}x="{-nw / 2}" y="{-nh / 2}" height="{nh:g}" width="{nw:g}"'
 
     return _PRTSC_USE_RE.sub(repl, svg)
+
+
+def _nudge_bt_close(svg: str, x: float = _BT_CLOSE_X) -> str:
+    return _BT_CLOSE_RE.sub(rf'\1x="{x:g}"', svg)
 
 
 def postprocess(svg: str) -> str:
@@ -214,6 +228,7 @@ def postprocess(svg: str) -> str:
     )
     svg = _fix_glyphs(svg)
     svg = _scale_prtsc_uses(svg)
+    svg = _nudge_bt_close(svg)
 
     # Undo a previous row-gap expand if re-run on already-processed SVG:
     # (layers already shifted — detect via gap vs content). Always expand from
