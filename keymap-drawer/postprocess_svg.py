@@ -185,9 +185,9 @@ def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
     return lines
 
 
-# PrtSc is landscape and reads tiny at glyph_tap_size; multiply <use> box.
-# 1.5 = 75% of the previous 2× scale (84×42 from base 56×28).
-_PRTSC_USE_SCALE = 1.5
+# PrtSc is landscape; keep <use> at glyph_tap_size (no extra boost).
+# Was 1.5 (84×42 from base 56×28); still read too large on the key.
+_PRTSC_USE_SCALE = 1.0
 _PRTSC_USE_RE = re.compile(
     r'(<use href="#prtsc-sign" xlink:href="#prtsc-sign" )'
     r'x="[^"]*" y="[^"]*" height="([^"]*)" width="([^"]*)"'
