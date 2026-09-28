@@ -243,6 +243,7 @@ path.combo {
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#mdi:keyboard-return" xlink:href="#mdi:keyboard-return" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:keyboard-return"/>
 <text x="0" y="20" class="key hold">media</text>
+<text x="0" y="-20" class="key shifted">2× undo</text>
 </g>
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
@@ -278,7 +279,7 @@ path.combo {
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#mdi:close" xlink:href="#mdi:close" x="-14" y="-14" height="28" width="28.0" class="key tap glyph mdi:close"/>
 <text x="0" y="20" class="key hold">snipe</text>
-<text x="0" y="-20" class="key shifted">2× snipe</text>
+<text x="0" y="-20" class="key shifted">2× reopen</text>
 </g>
 <g transform="translate(296, 179)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
@@ -307,6 +308,16 @@ path.combo {
 <text x="227" y="30" class="combo tap">excel</text>
 <text x="227" y="39" class="combo hold">tog</text>
 </g>
+<g class="combo combopos-1">
+<rect rx="10" ry="10" x="203" y="166" width="48" height="26" class="combo"/>
+<text x="227" y="179" class="combo tap">snipe</text>
+<text x="227" y="188" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-2">
+<rect rx="10" ry="10" x="329" y="28" width="48" height="26" class="combo"/>
+<text x="353" y="41" class="combo tap">alt+tab</text>
+<text x="353" y="50" class="combo hold">hold</text>
+</g>
 </g>
 </g>
 <g transform="translate(562, 0.0)" class="layer-edit">
@@ -319,7 +330,6 @@ path.combo {
 <g transform="translate(296, 30)" class="key keypos-1">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
 <use href="#del-sign" xlink:href="#del-sign" x="-14" y="-14" height="28" width="28.0" class="key tap glyph del-sign"/>
-<text x="0" y="20" class="key hold">alt</text>
 </g>
 <g transform="translate(45, 51)" class="key keypos-2">
 <rect rx="10" ry="10" x="-39" y="-24" width="78" height="49" class="key"/>
@@ -338,9 +348,7 @@ path.combo {
 </g>
 <g transform="translate(158, 179)" class="key keypos-6">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
-<text x="0" y="0" class="key tap">
-<tspan x="0" dy="-0.57em">reopen</tspan><tspan x="0" dy="1.15em">tab</tspan>
-</text>
+<text x="0" y="0" class="key tap">␣</text>
 </g>
 <g transform="translate(296, 179)" class="key keypos-7">
 <rect rx="10" ry="10" x="-56" y="-24" width="113" height="49" class="key"/>
@@ -366,6 +374,16 @@ path.combo {
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
 <text x="227" y="30" class="combo tap">excel</text>
 <text x="227" y="39" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-1">
+<rect rx="10" ry="10" x="203" y="166" width="48" height="26" class="combo"/>
+<text x="227" y="179" class="combo tap">snipe</text>
+<text x="227" y="188" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-2">
+<rect rx="10" ry="10" x="329" y="28" width="48" height="26" class="combo"/>
+<text x="353" y="41" class="combo tap">alt+tab</text>
+<text x="353" y="50" class="combo hold">hold</text>
 </g>
 </g>
 </g>
@@ -441,6 +459,16 @@ path.combo {
 <text x="227" y="30" class="combo tap">excel</text>
 <text x="227" y="39" class="combo hold">tog</text>
 </g>
+<g class="combo combopos-1">
+<rect rx="10" ry="10" x="203" y="166" width="48" height="26" class="combo"/>
+<text x="227" y="179" class="combo tap">snipe</text>
+<text x="227" y="188" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-2">
+<rect rx="10" ry="10" x="329" y="28" width="48" height="26" class="combo"/>
+<text x="353" y="41" class="combo tap">alt+tab</text>
+<text x="353" y="50" class="combo hold">hold</text>
+</g>
 </g>
 </g>
 <g transform="translate(562, 332.0)" class="layer-scroll">
@@ -496,6 +524,16 @@ path.combo {
 <text x="227" y="30" class="combo tap">excel</text>
 <text x="227" y="39" class="combo hold">tog</text>
 </g>
+<g class="combo combopos-1">
+<rect rx="10" ry="10" x="203" y="166" width="48" height="26" class="combo"/>
+<text x="227" y="179" class="combo tap">snipe</text>
+<text x="227" y="188" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-2">
+<rect rx="10" ry="10" x="329" y="28" width="48" height="26" class="combo"/>
+<text x="353" y="41" class="combo tap">alt+tab</text>
+<text x="353" y="50" class="combo hold">hold</text>
+</g>
 </g>
 </g>
 <g transform="translate(36, 665.0)" class="layer-snipe">
@@ -546,6 +584,16 @@ path.combo {
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
 <text x="227" y="30" class="combo tap">excel</text>
 <text x="227" y="39" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-1">
+<rect rx="10" ry="10" x="203" y="166" width="48" height="26" class="combo"/>
+<text x="227" y="179" class="combo tap">snipe</text>
+<text x="227" y="188" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-2">
+<rect rx="10" ry="10" x="329" y="28" width="48" height="26" class="combo"/>
+<text x="353" y="41" class="combo tap">alt+tab</text>
+<text x="353" y="50" class="combo hold">hold</text>
 </g>
 </g>
 </g>
@@ -612,6 +660,16 @@ path.combo {
 <text x="227" y="30" class="combo tap">excel</text>
 <text x="227" y="39" class="combo hold">tog</text>
 </g>
+<g class="combo combopos-1">
+<rect rx="10" ry="10" x="203" y="166" width="48" height="26" class="combo"/>
+<text x="227" y="179" class="combo tap">snipe</text>
+<text x="227" y="188" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-2">
+<rect rx="10" ry="10" x="329" y="28" width="48" height="26" class="combo"/>
+<text x="353" y="41" class="combo tap">alt+tab</text>
+<text x="353" y="50" class="combo hold">hold</text>
+</g>
 </g>
 </g>
 <g transform="translate(36, 997.0)" class="layer-media">
@@ -666,6 +724,16 @@ path.combo {
 <text x="227" y="30" class="combo tap">excel</text>
 <text x="227" y="39" class="combo hold">tog</text>
 </g>
+<g class="combo combopos-1">
+<rect rx="10" ry="10" x="203" y="166" width="48" height="26" class="combo"/>
+<text x="227" y="179" class="combo tap">snipe</text>
+<text x="227" y="188" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-2">
+<rect rx="10" ry="10" x="329" y="28" width="48" height="26" class="combo"/>
+<text x="353" y="41" class="combo tap">alt+tab</text>
+<text x="353" y="50" class="combo hold">hold</text>
+</g>
 </g>
 </g>
 <g transform="translate(562, 997.0)" class="layer-alt+tab">
@@ -713,6 +781,16 @@ path.combo {
 <rect rx="10" ry="10" x="203" y="17" width="48" height="26" class="combo"/>
 <text x="227" y="30" class="combo tap">excel</text>
 <text x="227" y="39" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-1">
+<rect rx="10" ry="10" x="203" y="166" width="48" height="26" class="combo"/>
+<text x="227" y="179" class="combo tap">snipe</text>
+<text x="227" y="188" class="combo hold">tog</text>
+</g>
+<g class="combo combopos-2">
+<rect rx="10" ry="10" x="329" y="28" width="48" height="26" class="combo"/>
+<text x="353" y="41" class="combo tap">alt+tab</text>
+<text x="353" y="50" class="combo hold">hold</text>
 </g>
 </g>
 </g>

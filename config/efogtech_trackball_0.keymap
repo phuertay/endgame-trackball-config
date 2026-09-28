@@ -19,24 +19,25 @@
 #endif
 
 #include "clipboard_layouts.dtsi"
+#include "edit_extras.dtsi"
 #include "scroll_lock.dtsi"
 #include "scaling.dtsi"
-#include "edit_extras.dtsi"
 #include "combos.dtsi"
 
 / {
 	keymap {
 		compatible = "zmk,keymap";
 
-		// pos0 -> Media hold / Enter tap, pos1 -> Scroll lock,
-		// pos2 -> middle click, hold pos3 -> Edit,
-		// pos6 -> Snipe sticky / Close tap,
+		// pos0 -> Media hold / Enter tap / Undo double-tap,
+		// pos1 -> Scroll lock, pos2 -> middle click, hold pos3 -> Edit,
+		// pos6 -> Snipe hold / Close tap / reopen double-tap,
 		// pos7 -> Back tap / System hold / Reload double-tap.
+		// Combos: pos0+1 Excel tog, pos1+3 Alt+Tab hold, pos6+7 Snipe tog.
 		default_layer {
 			display-name = "Default";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &ltmkp LAYER_MEDIA ENTER  &ltlk
+			    &entlk                    &ltlk
 			    &mkp MCLK                 &cdch LAYER_EDIT 0
 			    &mkp LCLK                 &mkp RCLK
 			    &snlk                     &syslk
@@ -49,15 +50,15 @@
 
 		// Edit: hold the copy/paste button (pos3). pos3 itself must be &trans
 		// so the hold key stays usable — Delete lives on pos1 next to Bksp.
-		// Hold Del: Alt down + LAYER_ALTTAB (left encoder Tab / Shift+Tab); release Alt up.
+		// Space is on pos6 (reopen moved to Close 2× on Default).
 		edit_layer {
 			display-name = "Edit";
 			DECLARE_ENCODERS;
 			bindings = <
-			    &kp BSPC  &del_at 0 DEL
+			    &kp BSPC  &kp DEL
 			    &bst_cut       &trans
 			    &pv            &kp PSCRN
-			    &unclose       &bst_undo
+			    &kp SPACE      &bst_undo
 
 			    &kp LA(LS(ESC)) &kp RC(PG_UP)
 			    &kp LA(ESC)     &kp RC(PG_DN)
@@ -100,7 +101,7 @@
 			    &trans     &trans
 			    &trans     &trans
 			    &trans     &trans
-			    // pos6 stays &trans so default &snlk (incl. 2× snipe lock/unlock) flows through
+			    // pos6 stays &trans so default &snlk (hold snipe / 2× reopen) flows through
 			    &trans     &to LAYER_DEFAULT
 
 			    &kp LEFT   &kp UP
@@ -136,9 +137,9 @@
 		    >;
 		};
 
-		// Momentary while Edit Del is held (&del_at). Alt is held by the
-		// macro; left encoder only → Tab / Shift+Tab. Right encoder stays
-		// browser tabs via &trans into the Edit layer.
+		// Momentary while Esc+Copy combo is held (&alt_tab_hold). Alt is held
+		// by the macro; left encoder only → Tab / Shift+Tab. Right encoder
+		// stays browser tabs via &trans into the base layer.
 		// Left: CW = Tab (next), CCW = Shift+Tab (prev).
 		alttab_layer {
 			display-name = "Alt+Tab";

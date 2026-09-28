@@ -40,19 +40,24 @@ jobs:
             -z config/efogtech_trackball_0.keymap \
             > keymap-drawer/keymap.yaml
           # Drop combo dendrons — the arcs read as strikethrough on key labels.
+          # Label by key-positions (parse alone does not give friendly names).
           python3 - <<'PY'
           from pathlib import Path
           import yaml
+
+          COMBO_LABELS = {
+              frozenset({0, 1}): {"t": "excel", "h": "tog"},
+              frozenset({6, 7}): {"t": "snipe", "h": "tog"},
+              frozenset({1, 3}): {"t": "alt+tab", "h": "hold"},
+          }
+
           p = Path("keymap-drawer/keymap.yaml")
           data = yaml.safe_load(p.read_text())
           for combo in data.get("combos") or []:
               combo["d"] = False
-              k = combo.get("k")
-              if isinstance(k, dict):
-                  k["t"] = "excel"
-                  k["h"] = "tog"
-              elif isinstance(k, str):
-                  combo["k"] = {"t": "excel", "h": "tog"}
+              positions = frozenset(combo.get("p") or [])
+              label = COMBO_LABELS.get(positions, {"t": "combo", "h": "tog"})
+              combo["k"] = dict(label)
           # Sentence-case layer titles on the diagram (not ALL CAPS).
           data["layers"] = {name.lower(): keys for name, keys in data["layers"].items()}
           p.write_text(yaml.dump(data, sort_keys=False, allow_unicode=True))

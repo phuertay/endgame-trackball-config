@@ -1,24 +1,26 @@
 /*
- * Custom lock behaviors for the two sticky trackball layers (Scroll + Snipe).
+ * Custom lock / multi-tap behaviors for sticky trackball layers.
  *
- * Both are sticky: you engage them and they stay put, leaving the ball hand
- * free. Each button gives three actions:
- *   tap         -> its key            (Escape for scroll, Close/MB5 for snipe)
- *   hold        -> momentary layer     (&mo LAYER_*)
- *   double-tap  -> lock/unlock layer   (&tog LAYER_*)
- * Once locked, a single tap of the layer's own button (bound to &tog on that
- * layer) drops back out.
+ * Scroll (pos1 / &ltlk):
+ *   tap         -> Escape
+ *   hold        -> momentary LAYER_SCROLL
+ *   double-tap  -> lock/unlock LAYER_SCROLL
  *
- * Media is momentary on pos0 (Enter tap / Media hold) and sits above Snipe in
- * the layer stack so its encoders win while held; it does not use a lock
- * behavior here. Enter stays on pos0. Tap keys on pos6/pos7 are Close (MB5)
- * on the snipe button and Back (MB4) on the system button (kp-only swap vs
- * the hold layers).
+ * Snipe (pos6 / &snlk):
+ *   tap         -> Close (MB5)
+ *   hold        -> momentary LAYER_SNIPE
+ *   double-tap  -> reopen closed tab (&unclose)
+ * Sticky snipe lock/unlock is a combo of the lower two buttons (see combos.dtsi).
+ *
+ * Media is momentary on pos0 (Enter tap / Media hold / 2× Undo via &entlk)
+ * and sits above Snipe in the layer stack so its encoders win while held.
+ * Tap keys on pos6/pos7 are Close (MB5) on the snipe button and Back (MB4)
+ * on the system button (kp-only swap vs the hold layers).
  *
  * IMPORTANT ordering: each is a tap-dance (outer) wrapping a hold-tap (inner).
  * The reverse -- a hold-tap wrapping a tap-dance -- does NOT work: each tap
  * resolves through the hold-tap separately, so the inner tap-dance never counts
- * to two and the double-tap lock never fires. With the tap-dance on the outside
+ * to two and the double-tap never fires. With the tap-dance on the outside
  * it owns the tap counting, and its timer passes a held press straight through
  * to the inner hold-tap (so hold still reaches the layer).
  *
@@ -26,9 +28,10 @@
  * coming, the momentary-layer hold has some added latency.
  *
  * Bound in the keymap as `&ltlk` (scroll), `&snlk` (snipe), and `&syslk`
- * (close / system / reload). All are 0-cell (the layer + tap key are baked in
+ * (back / system / reload). All are 0-cell (the layer + tap key are baked in
  * below). LAYER_SCROLL / LAYER_SNIPE / LAYER_SYSTEM must be defined (in the
- * keymap) before this file is included.
+ * keymap) before this file is included. `&unclose` is defined in
+ * edit_extras.dtsi (phandle resolves after the full tree is built).
  */
 
 / {
@@ -62,13 +65,14 @@
 			bindings = <&lk_ht LAYER_SCROLL ESC>, <&tog LAYER_SCROLL>;
 		};
 
-		/* pos6: hold/2× = snipe; tap = Close (MB5). Back lives on syslk. */
+		/* pos6: hold = snipe; tap = Close (MB5); 2× = reopen tab.
+		 * Sticky snipe lock is combo pos6+7. Back lives on syslk. */
 		snlk: snlk {
 			compatible = "zmk,behavior-tap-dance";
-			display-name = "Close / snipe / lock (tap/hold/double-tap)";
+			display-name = "Close / snipe / reopen (tap/hold/double-tap)";
 			#binding-cells = <0>;
 			tapping-term-ms = <350>;
-			bindings = <&lk_htm LAYER_SNIPE MB5>, <&tog LAYER_SNIPE>;
+			bindings = <&lk_htm LAYER_SNIPE MB5>, <&unclose>;
 		};
 
 		/* pos7: hold = System; tap = Back (MB4); double-tap = reload.
