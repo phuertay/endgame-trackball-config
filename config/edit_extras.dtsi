@@ -148,8 +148,8 @@
 		};
 
 		/* Hold: Alt down + momentary Alt+Tab layer (left encoder → Tab / Shift+Tab).
-		 * Release: layer off, then Alt up. Bound via &del_at on Edit Delete.
-		 * One-param (dummy) so hold-tap can be #binding-cells = <2> (macro 1 + kp 1).
+		 * Release: layer off, then Alt up. Bound as base-layer combo of Esc
+		 * + Copy/Paste (pos 1+3). One-param (dummy) for combo binding cells.
 		 * Layer is hardcoded — do not forward the param into &mo (ZMK param leak). */
 		alt_tab_hold: alt_tab_hold {
 			compatible = "zmk,behavior-macro-one-param";
@@ -186,15 +186,14 @@
 			tapping-term-ms = <350>;
 		};
 
-		/* Tap = Delete; hold = Alt + LAYER_ALTTAB until release.
-		 * hold-tap requires #binding-cells = <2> (const in ZMK). */
-		del_at: del-alt-tab {
-			compatible = "zmk,behavior-hold-tap";
-			display-name = "Del / Alt+Tab (hold)";
-			#binding-cells = <2>;
-			flavor = "tap-preferred";
-			tapping-term-ms = <200>;
-			bindings = <&alt_tab_hold>, <&kp>;
+		/* pos0: tap = Enter; hold = Media; 2× = Undo.
+		 * Tap-dance outside hold-tap — same reason as ltlk/snlk. */
+		entlk: entlk {
+			compatible = "zmk,behavior-tap-dance";
+			display-name = "Enter / media / undo (tap/hold/double-tap)";
+			#binding-cells = <0>;
+			tapping-term-ms = <350>;
+			bindings = <&ltmkp LAYER_MEDIA ENTER>, <&bst_undo>;
 		};
 	};
 };

@@ -2,8 +2,9 @@ parse_config:
   # Tap = center, hold (h) = orange, shifted/2× (s) = blue.
   # Words + MDI glyphs (glyph_tap_size below). No bold / ALL CAPS.
   raw_binding_map:
-    "&snlk": {t: "$$mdi:close$$", h: "snipe", s: "2× snipe"}
+    "&snlk": {t: "$$mdi:close$$", h: "snipe", s: "2× reopen"}
     "&ltlk": {t: "$$esc-sign$$", h: "scroll", s: "2× scroll"}
+    "&entlk": {t: "$$mdi:keyboard-return$$", h: "media", s: "2× undo"}
     "&ltmkp 6 0x70028": {t: "$$mdi:keyboard-return$$", h: "media"}
     "&ltmkp 6 ENTER": {t: "$$mdi:keyboard-return$$", h: "media"}
     "&cdch 1 0": {t: "$$mdi:content-copy$$", h: "edit", s: "2× paste"}
@@ -25,13 +26,6 @@ parse_config:
     "&kp PSCRN": "$$prtsc-sign$$"
     "&kp BSPC": "$$mdi:keyboard-backspace$$"
     "&kp DEL": "$$del-sign$$"
-    "&del_at 0 DEL": {t: "$$del-sign$$", h: "alt"}
-    "&del_at 0 0x70004C": {t: "$$del-sign$$", h: "alt"}
-    "&del_at DEL": {t: "$$del-sign$$", h: "alt"}
-    "&del_at 0x70004C": {t: "$$del-sign$$", h: "alt"}
-    "&del_at 7 DEL": {t: "$$del-sign$$", h: "alt"}
-    "&del_at 7 0x70004C": {t: "$$del-sign$$", h: "alt"}
-    "&del_at LAYER_ALTTAB DEL": {t: "$$del-sign$$", h: "alt"}
     "&kp SPACE": "␣"
     "&mui_or_dgl": {t: "ble adv", s: "2× dongle"}
     "&bst_tog ZBS_TOG": "swap\nlayout"

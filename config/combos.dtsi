@@ -1,9 +1,14 @@
 /*
- * Combos for entering the "concentrated use" layers without spending a button.
+ * Combos for sticky / hold layers without spending a dedicated button.
  *
- * Excel is used in bursts, so it's a toggle-lock reached by pressing the two
- * top buttons (positions 0 and 1) together; tap the Back key on the layer
- * (&to LAYER_DEFAULT) to leave. LAYER_EXCEL must be defined before include.
+ * Excel: top two buttons (pos 0+1) toggle-lock; leave with Back
+ * (&to LAYER_DEFAULT) on that layer.
+ * Snipe: lower two buttons (pos 6+7) toggle-lock (momentary snipe stays on
+ * hold of Close / &snlk).
+ * Alt+Tab: Esc + Copy/Paste (pos 1+3) hold — Alt down + LAYER_ALTTAB until
+ * release (left encoder Tab / Shift+Tab).
+ *
+ * LAYER_EXCEL / LAYER_SNIPE / LAYER_ALTTAB must be defined before include.
  */
 
 / {
@@ -14,6 +19,19 @@
 			timeout-ms = <50>;
 			key-positions = <0 1>;
 			bindings = <&tog LAYER_EXCEL>;
+		};
+
+		combo_snipe {
+			timeout-ms = <50>;
+			key-positions = <6 7>;
+			bindings = <&tog LAYER_SNIPE>;
+		};
+
+		combo_alttab {
+			timeout-ms = <50>;
+			key-positions = <1 3>;
+			layers = <LAYER_DEFAULT>;
+			bindings = <&alt_tab_hold 0>;
 		};
 	};
 };

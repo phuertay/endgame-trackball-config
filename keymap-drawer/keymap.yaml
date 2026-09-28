@@ -4,6 +4,7 @@ layers:
   default:
   - t: $$mdi:keyboard-return$$
     h: media
+    s: 2× undo
   - t: $$esc-sign$$
     h: scroll
     s: 2× scroll
@@ -15,7 +16,7 @@ layers:
   - right clk
   - t: $$mdi:close$$
     h: snipe
-    s: 2× snipe
+    s: 2× reopen
   - t: back
     h: system
     s: 2× reload
@@ -25,15 +26,12 @@ layers:
   - tab
   edit:
   - $$mdi:keyboard-backspace$$
-  - t: $$del-sign$$
-    h: alt
+  - $$del-sign$$
   - $$mdi:content-cut$$
   - ''
   - $$excel-paste-values$$
   - $$prtsc-sign$$
-  - 'reopen
-
-    tab'
+  - ␣
   - $$mdi:undo$$
   - app
   - tab
@@ -137,4 +135,20 @@ combos:
   k:
     t: excel
     h: tog
+  d: false
+- p:
+  - 6
+  - 7
+  k:
+    t: snipe
+    h: tog
+  d: false
+- p:
+  - 1
+  - 3
+  k:
+    t: alt+tab
+    h: hold
+  l:
+  - default
   d: false
