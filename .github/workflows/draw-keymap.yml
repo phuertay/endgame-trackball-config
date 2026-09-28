@@ -58,6 +58,9 @@ jobs:
               positions = frozenset(combo.get("p") or [])
               label = COMBO_LABELS.get(positions, {"t": "combo", "h": "tog"})
               combo["k"] = dict(label)
+              # Parse keeps display-name case; layers dict is lowercased below.
+              if combo.get("l"):
+                  combo["l"] = [name.lower() for name in combo["l"]]
           # Sentence-case layer titles on the diagram (not ALL CAPS).
           data["layers"] = {name.lower(): keys for name, keys in data["layers"].items()}
           p.write_text(yaml.dump(data, sort_keys=False, allow_unicode=True))

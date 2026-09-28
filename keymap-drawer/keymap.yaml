@@ -149,4 +149,6 @@ combos:
   k:
     t: alt+tab
     h: hold
+  l:
+  - default
   d: false
