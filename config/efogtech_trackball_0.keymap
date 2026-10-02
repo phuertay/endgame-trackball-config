@@ -42,9 +42,9 @@
 			    &mkp LCLK                 &mkp RCLK
 			    &snlk                     &syslk
 
-			    // left = Alt+Shift+Esc / Alt+Esc; right = browser tabs
-			    &kp LA(LS(ESC))           &kp RC(PG_UP)
-			    &kp LA(ESC)               &kp RC(PG_DN)
+			    // left = Alt+Shift+Esc / Alt+Esc (timed macros); right = browser tabs
+			    &altsesc                  &kp RC(PG_UP)
+			    &altesc                   &kp RC(PG_DN)
 		    >;
 		};
 
@@ -60,8 +60,8 @@
 			    &pv            &kp PSCRN
 			    &kp SPACE      &bst_undo
 
-			    &kp LA(LS(ESC)) &kp RC(PG_UP)
-			    &kp LA(ESC)     &kp RC(PG_DN)
+			    &altsesc &kp RC(PG_UP)
+			    &altesc  &kp RC(PG_DN)
 		    >;
 		};
 
@@ -118,8 +118,8 @@
 			    &mkp LCLK    &ptv
 			    &qat6        &to LAYER_DEFAULT
 
-			    &kp LA(LS(ESC)) &kp RC(PG_UP)
-			    &kp LA(ESC)     &kp RC(PG_DN)
+			    &altsesc &kp RC(PG_UP)
+			    &altesc  &kp RC(PG_DN)
 		    >;
 		};
 
