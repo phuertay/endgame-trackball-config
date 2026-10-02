@@ -42,6 +42,11 @@
 #define MACRO_WAIT_ENTER 400
 #define MACRO_HOLD_MS    12
 #define MACRO_GAP_MS     50
+/* Left-encoder Alt+Esc / Alt+Shift+Esc: arm Alt alone, then tap Esc.
+ * Stock &kp LA(ESC) pressed both in one report and flaked over ESB.
+ * wait-ms = gap after Alt down (and after Esc up); tap-ms = Esc hold. */
+#define ALTESC_WAIT_MS   50
+#define ALTESC_TAP_MS    40
 
 / {
 	macros {
@@ -145,6 +150,32 @@
 			wait-ms = <50>;
 			tap-ms = <10>;
 			bindings = <&kp LALT &kp LS(N0)>;
+		};
+
+		/* Left encoder window cycle (Z-order). Each detent is a full chord:
+		 * Alt down → wait → Esc (or Shift+Esc) tap → Alt up. Directions are
+		 * inverses after the window opens, unlike Alt+Tab's MRU list. */
+		altesc: altesc {
+			compatible = "zmk,behavior-macro";
+			display-name = "Alt+Esc (app next)";
+			#binding-cells = <0>;
+			wait-ms = <ALTESC_WAIT_MS>;
+			tap-ms = <ALTESC_TAP_MS>;
+			bindings
+				= <&macro_press &kp LALT>
+				, <&macro_tap &kp ESC>
+				, <&macro_release &kp LALT>;
+		};
+		altsesc: altsesc {
+			compatible = "zmk,behavior-macro";
+			display-name = "Alt+Shift+Esc (app prev)";
+			#binding-cells = <0>;
+			wait-ms = <ALTESC_WAIT_MS>;
+			tap-ms = <ALTESC_TAP_MS>;
+			bindings
+				= <&macro_press &kp LALT>
+				, <&macro_tap &kp LS(ESC)>
+				, <&macro_release &kp LALT>;
 		};
 
 		/* Hold: Alt down + momentary Alt+Tab layer (left encoder → Tab / Shift+Tab).

@@ -13,8 +13,8 @@ parse_config:
     "&mkp LCLK": "left clk"
     "&mkp RCLK": "right clk"
     "&syslk": {t: "back", h: "system", s: "2× reload"}
-    "&kp LA(ESC)": "app"
-    "&kp LA(LS(ESC))": "app"
+    "&altesc": "app"
+    "&altsesc": "app"
     "&bst_copy": "$$mdi:content-copy$$"
     "&bst_paste": "$$mdi:content-paste$$"
     "&bst_cut": "$$mdi:content-cut$$"
