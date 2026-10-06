@@ -3,8 +3,8 @@
  *
  * Scroll (pos1 / &ltlk):
  *   tap         -> Escape
- *   hold        -> momentary LAYER_SCROLL
- *   double-tap  -> lock/unlock LAYER_SCROLL
+ *   hold        -> momentary LAYER_SCROLL (free axes; no clamper)
+ *   double-tap  -> lock/unlock LAYER_SCROLL_LOCK (clamper + axis lock)
  *
  * Snipe (pos6 / &snlk):
  *   tap         -> Close (MB5)
@@ -29,9 +29,9 @@
  *
  * Bound in the keymap as `&ltlk` (scroll), `&snlk` (snipe), and `&syslk`
  * (back / system / reload). All are 0-cell (the layer + tap key are baked in
- * below). LAYER_SCROLL / LAYER_SNIPE / LAYER_SYSTEM must be defined (in the
- * keymap) before this file is included. `&unclose` is defined in
- * edit_extras.dtsi (phandle resolves after the full tree is built).
+ * below). LAYER_SCROLL / LAYER_SCROLL_LOCK / LAYER_SNIPE / LAYER_SYSTEM must
+ * be defined (in the keymap) before this file is included. `&unclose` is
+ * defined in edit_extras.dtsi (phandle resolves after the full tree is built).
  */
 
 / {
@@ -62,7 +62,8 @@
 			#binding-cells = <0>;
 			// Was 200 ms — too short to reliably double-tap lock.
 			tapping-term-ms = <350>;
-			bindings = <&lk_ht LAYER_SCROLL ESC>, <&tog LAYER_SCROLL>;
+			// Hold = free-axis momentary scroll; 2× = sticky scroll with axis clamp.
+			bindings = <&lk_ht LAYER_SCROLL ESC>, <&tog LAYER_SCROLL_LOCK>;
 		};
 
 		/* pos6: hold = snipe; tap = Close (MB5); 2× = reopen tab.

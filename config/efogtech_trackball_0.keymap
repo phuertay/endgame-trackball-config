@@ -16,6 +16,7 @@
 #define LAYER_EXCEL        5
 #define LAYER_MEDIA        6
 #define LAYER_ALTTAB       7
+#define LAYER_SCROLL_LOCK  8
 #endif
 
 #include "clipboard_layouts.dtsi"
@@ -79,13 +80,14 @@
 		    >;
 		};
 
+		// Momentary scroll (hold &ltlk): free X+Y — no axis clamper / lock.
 		scroll_layer {
 			display-name = "Scroll";
 			DECLARE_ENCODERS;
 			bindings = <
 			    // pos1 stays &trans so default &ltlk (incl. 2× scroll lock/unlock) flows through
 			    &trans     &trans
-			    &axlk      &kp RCTRL
+			    &trans     &kp RCTRL
 			    &trans     &trans
 			    &trans     &to LAYER_DEFAULT
 
@@ -154,6 +156,22 @@
 			    &kp TAB     &trans
 		    >;
 		};
+
+		// Sticky scroll (2× &ltlk): axis clamper + hard axis lock (&axlk).
+		// Declared last so LAYER_SCROLL_LOCK == 8 matches keymap order.
+		scroll_lock_layer {
+			display-name = "Scroll Lock";
+			DECLARE_ENCODERS;
+			bindings = <
+			    &trans     &trans
+			    &axlk      &kp RCTRL
+			    &trans     &trans
+			    &trans     &to LAYER_DEFAULT
+
+			    &kp LEFT   &kp UP
+			    &kp RIGHT  &kp DOWN
+		    >;
+		};
 	};
 
 	trackball {
@@ -161,8 +179,18 @@
 						   <&zip_pointer_accel>, <&zip_scroll_accel>, <&zip_rotate_pointer>,
 		                   <&esb_ip>, <&zip_ble_report_rate_limit>;
 
+		// Hold scroll: free axes (no clamper / axis-lock).
 		scroll {
 			layers = <LAYER_SCROLL>;
+			input-processors = <&zip_bistable_scroll_xy_scaler>,
+							   <&zip_xy_to_scroll_mapper>, <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
+							   <&zip_dragscroll_accel>, <&zip_rotate_scroll>,
+							   <&esb_ip>, <&zip_ble_report_rate_limit>;
+		};
+
+		// Double-tap scroll lock: clamp to dominant axis + hard Y/X lock.
+		scroll_lock {
+			layers = <LAYER_SCROLL_LOCK>;
 			input-processors = <&zip_bistable_scroll_xy_scaler>, <&zip_axis_clamper>,
 							   <&zip_axis_lock>,
 							   <&zip_xy_to_scroll_mapper>, <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,

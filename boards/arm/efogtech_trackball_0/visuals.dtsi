@@ -9,6 +9,7 @@
 #define LAYER_EXCEL        5
 #define LAYER_MEDIA        6
 #define LAYER_ALTTAB       7
+#define LAYER_SCROLL_LOCK  8
 #endif
 
 / {
@@ -63,6 +64,13 @@
 		layer_scroll {
 			event-type = "layer";
 			layer-index = <LAYER_SCROLL>;
+			colors = [00 00 00];
+			persistent;
+		};
+
+		layer_scroll_lock {
+			event-type = "layer";
+			layer-index = <LAYER_SCROLL_LOCK>;
 			colors = [00 00 00];
 			persistent;
 		};

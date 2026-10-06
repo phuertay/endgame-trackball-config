@@ -59,9 +59,7 @@ layers:
   scroll:
   - ''
   - ''
-  - t: axis
-    h: hold
-    s: 2× free
+  - ''
   - zoom
   - ''
   - ''
@@ -128,6 +126,21 @@ layers:
   - ''
   - $$tab-sign$$
   - ''
+  scroll lock:
+  - ''
+  - ''
+  - t: axis
+    h: hold
+    s: 2× free
+  - zoom
+  - ''
+  - ''
+  - ''
+  - $$mdi:home$$
+  - $$mdi:arrow-left$$
+  - $$mdi:arrow-up$$
+  - $$mdi:arrow-right$$
+  - $$mdi:arrow-down$$
 combos:
 - p:
   - 0
