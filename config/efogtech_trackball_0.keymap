@@ -174,16 +174,15 @@
 		};
 	};
 
+	// Layer overrides replace (do not append) this base chain — every override
+	// must re-list &zip_bistable_twist_scaler or mixer twist goes unscaled.
 	trackball {
 		input-processors = <&zip_bistable_twist_scaler>,
 						   <&zip_pointer_accel>, <&zip_scroll_accel>, <&zip_rotate_pointer>,
 		                   <&esb_ip>, <&zip_ble_report_rate_limit>;
 
 		// Hold scroll: free axes (no clamper / axis-lock).
-		// Twist scaler must come before xy→scroll: layer overrides replace the
-		// base chain, so without it mixer WHEEL/HWHEEL pass through unscaled
-		// (~15× faster than base). Place it first so only native twist is
-		// scaled; XY dragscroll keeps zip_bistable_scroll_xy_scaler (3/4).
+		// Twist scaler first (native WHEEL only); then XY dragscroll scaler.
 		scroll {
 			layers = <LAYER_SCROLL>;
 			input-processors = <&zip_bistable_twist_scaler>,
@@ -204,9 +203,12 @@
 							   <&esb_ip>, <&zip_ble_report_rate_limit>;
 		};
 
+		// Snipe: slow XY pointer; twist keeps base 1/15 + scroll accel.
 		snipe {
 			layers = <LAYER_SNIPE>;
-			input-processors = <&zip_bistable_snipe_scaler>, <&zip_rotate_pointer>,
+			input-processors = <&zip_bistable_twist_scaler>,
+							   <&zip_bistable_snipe_scaler>,
+							   <&zip_scroll_accel>, <&zip_rotate_pointer>,
 							   <&esb_ip>, <&zip_ble_report_rate_limit>;
 		};
 	};
