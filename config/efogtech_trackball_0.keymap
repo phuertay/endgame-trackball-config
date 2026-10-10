@@ -180,9 +180,14 @@
 		                   <&esb_ip>, <&zip_ble_report_rate_limit>;
 
 		// Hold scroll: free axes (no clamper / axis-lock).
+		// Twist scaler must come before xy→scroll: layer overrides replace the
+		// base chain, so without it mixer WHEEL/HWHEEL pass through unscaled
+		// (~15× faster than base). Place it first so only native twist is
+		// scaled; XY dragscroll keeps zip_bistable_scroll_xy_scaler (3/4).
 		scroll {
 			layers = <LAYER_SCROLL>;
-			input-processors = <&zip_bistable_scroll_xy_scaler>,
+			input-processors = <&zip_bistable_twist_scaler>,
+							   <&zip_bistable_scroll_xy_scaler>,
 							   <&zip_xy_to_scroll_mapper>, <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
 							   <&zip_dragscroll_accel>, <&zip_rotate_scroll>,
 							   <&esb_ip>, <&zip_ble_report_rate_limit>;
@@ -191,7 +196,8 @@
 		// Double-tap scroll lock: clamp to dominant axis + hard Y/X lock.
 		scroll_lock {
 			layers = <LAYER_SCROLL_LOCK>;
-			input-processors = <&zip_bistable_scroll_xy_scaler>, <&zip_axis_clamper>,
+			input-processors = <&zip_bistable_twist_scaler>,
+							   <&zip_bistable_scroll_xy_scaler>, <&zip_axis_clamper>,
 							   <&zip_axis_lock>,
 							   <&zip_xy_to_scroll_mapper>, <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
 							   <&zip_dragscroll_accel>, <&zip_rotate_scroll>,
