@@ -174,15 +174,19 @@
 		};
 	};
 
+	// Layer overrides replace (do not append) this base chain — every override
+	// must re-list &zip_bistable_twist_scaler or mixer twist goes unscaled.
 	trackball {
 		input-processors = <&zip_bistable_twist_scaler>,
 						   <&zip_pointer_accel>, <&zip_scroll_accel>, <&zip_rotate_pointer>,
 		                   <&esb_ip>, <&zip_ble_report_rate_limit>;
 
 		// Hold scroll: free axes (no clamper / axis-lock).
+		// Twist scaler first (native WHEEL only); then XY dragscroll scaler.
 		scroll {
 			layers = <LAYER_SCROLL>;
-			input-processors = <&zip_bistable_scroll_xy_scaler>,
+			input-processors = <&zip_bistable_twist_scaler>,
+							   <&zip_bistable_scroll_xy_scaler>,
 							   <&zip_xy_to_scroll_mapper>, <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
 							   <&zip_dragscroll_accel>, <&zip_rotate_scroll>,
 							   <&esb_ip>, <&zip_ble_report_rate_limit>;
@@ -191,16 +195,20 @@
 		// Double-tap scroll lock: clamp to dominant axis + hard Y/X lock.
 		scroll_lock {
 			layers = <LAYER_SCROLL_LOCK>;
-			input-processors = <&zip_bistable_scroll_xy_scaler>, <&zip_axis_clamper>,
+			input-processors = <&zip_bistable_twist_scaler>,
+							   <&zip_bistable_scroll_xy_scaler>, <&zip_axis_clamper>,
 							   <&zip_axis_lock>,
 							   <&zip_xy_to_scroll_mapper>, <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
 							   <&zip_dragscroll_accel>, <&zip_rotate_scroll>,
 							   <&esb_ip>, <&zip_ble_report_rate_limit>;
 		};
 
+		// Snipe: slow XY pointer; twist keeps base 1/15 + scroll accel.
 		snipe {
 			layers = <LAYER_SNIPE>;
-			input-processors = <&zip_bistable_snipe_scaler>, <&zip_rotate_pointer>,
+			input-processors = <&zip_bistable_twist_scaler>,
+							   <&zip_bistable_snipe_scaler>,
+							   <&zip_scroll_accel>, <&zip_rotate_pointer>,
 							   <&esb_ip>, <&zip_ble_report_rate_limit>;
 		};
 	};
