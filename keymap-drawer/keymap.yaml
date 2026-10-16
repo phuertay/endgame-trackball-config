@@ -37,6 +37,37 @@ layers:
   - tab
   - app
   - tab
+  media:
+  - ''
+  - ''
+  - $$mdi:skip-previous$$
+  - $$mdi:skip-next$$
+  - ''
+  - ''
+  - $$mdi:play-pause$$
+  - $$mdi:home$$
+  - $$mdi:volume-plus$$
+  - tab
+  - $$mdi:volume-minus$$
+  - tab
+  excel:
+  - $$excel-paste-format$$
+  - $$excel-paste-formulas$$
+  - 'rev
+
+    transpose'
+  - t: $$mdi:content-copy$$
+    s: 2× paste
+  - left clk
+  - 'transpose
+
+    values'
+  - $$excel-copy-picture$$
+  - $$mdi:home$$
+  - app
+  - tab
+  - app
+  - tab
   system:
   - t: ble adv
     s: 2× dongle
@@ -56,6 +87,21 @@ layers:
   - scrl +
   - sens -
   - scrl -
+  scroll lock:
+  - ''
+  - ''
+  - t: axis
+    h: hold
+    s: 2× free
+  - zoom
+  - ''
+  - ''
+  - ''
+  - $$mdi:home$$
+  - $$mdi:arrow-left$$
+  - $$mdi:arrow-up$$
+  - $$mdi:arrow-right$$
+  - $$mdi:arrow-down$$
   scroll:
   - ''
   - ''
@@ -82,37 +128,6 @@ layers:
   - $$mdi:arrow-up$$
   - $$mdi:arrow-right$$
   - $$mdi:arrow-down$$
-  excel:
-  - $$excel-paste-format$$
-  - $$excel-paste-formulas$$
-  - 'rev
-
-    transpose'
-  - t: $$mdi:content-copy$$
-    s: 2× paste
-  - left clk
-  - 'transpose
-
-    values'
-  - $$excel-copy-picture$$
-  - $$mdi:home$$
-  - app
-  - tab
-  - app
-  - tab
-  media:
-  - ''
-  - ''
-  - $$mdi:skip-previous$$
-  - $$mdi:skip-next$$
-  - ''
-  - ''
-  - $$mdi:play-pause$$
-  - $$mdi:home$$
-  - $$mdi:volume-plus$$
-  - tab
-  - $$mdi:volume-minus$$
-  - tab
   alt+tab:
   - ''
   - ''
@@ -126,21 +141,6 @@ layers:
   - ''
   - $$tab-sign$$
   - ''
-  scroll lock:
-  - ''
-  - ''
-  - t: axis
-    h: hold
-    s: 2× free
-  - zoom
-  - ''
-  - ''
-  - ''
-  - $$mdi:home$$
-  - $$mdi:arrow-left$$
-  - $$mdi:arrow-up$$
-  - $$mdi:arrow-right$$
-  - $$mdi:arrow-down$$
 combos:
 - p:
   - 0

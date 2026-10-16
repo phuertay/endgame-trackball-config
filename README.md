@@ -12,6 +12,6 @@ The `firmware.zip` contains two files:
 
 The diagram above is generated from the keymap by [keymap-drawer](https://github.com/caksoylar/keymap-drawer) and refreshed automatically by the `Draw keymap` GitHub Action whenever the keymap changes. It uses a compact draw-only layout (shorter side keys, larger type) defined in `keymap-drawer/draw-layout.dtsi` — firmware geometry is unchanged. Labels live in `keymap_drawer.config.yaml`.
 
-Sources: [keymap.svg](keymap-drawer/keymap.svg) · [keymap.pdf](keymap-drawer/keymap.pdf)
+Sources: [keymap.svg](keymap-drawer/keymap.svg) (page 1) · [keymap-page2.svg](keymap-drawer/keymap-page2.svg) (page 2) · [keymap.pdf](keymap-drawer/keymap.pdf)
 
-Each GitHub release also includes a single-page `keymap-layout.pdf` of the same diagram.
+Layers are ordered by approximate complexity: page 1 is default → edit → media → excel → system → scroll lock; page 2 is scroll → snipe → alt+tab. Each GitHub release also includes a two-page US Letter `keymap-layout.pdf` of the same diagram.
