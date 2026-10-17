@@ -59,13 +59,10 @@ jobs:
             python3 keymap-drawer/postprocess_svg.py $letter_flag "$out"
           }
 
-          # Both pages landscape Letter. Page 1 is 3×2; page 2 is the
-          # scroll|snipe + centered alt+tab pyramid.
-          sed 's/^\(  n_columns:\) 2$/\1 3/' keymap_drawer.config.yaml \
-            > /tmp/keymap_drawer.page1.yaml
-
+          # Both pages landscape Letter. Page 1 keeps a natural 2×3 grid
+          # (no aspect-stretch gutters). Page 2 is the scroll|snipe pyramid.
           draw keymap-drawer/keymap.svg \
-            /tmp/keymap_drawer.page1.yaml --letter-landscape \
+            keymap_drawer.config.yaml "" \
             default edit media excel system "scroll lock"
           draw keymap-drawer/keymap-page2.svg \
             keymap_drawer.config.yaml --letter-landscape \

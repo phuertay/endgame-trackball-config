@@ -239,8 +239,11 @@ def _fit_letter_aspect(
             by_y[float(m.group(2))] = by_y.get(float(m.group(2)), 0) + 1
         row_counts = [by_y[y] for y in ys]
         full_grid = bool(row_counts) and len(set(row_counts)) == 1 and row_counts[0] >= 2
+        # Cap per-row gutter growth — dumping most of a Letter-aspect pad into
+        # a single 2-row gap makes the page look hollow.
+        _MAX_EXTRA_GAP = 100.0
         if n_gaps and full_grid:
-            gap_extra = extra * 0.72
+            gap_extra = min(extra * 0.55, _MAX_EXTRA_GAP * n_gaps)
             pad_extra = extra - gap_extra
             per_gap = gap_extra / n_gaps
         else:
