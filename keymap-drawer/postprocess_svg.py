@@ -228,13 +228,18 @@ def _fit_letter_aspect(
     y_to_row = {y: i for i, y in enumerate(ys)}
 
     if current > aspect + 0.005:
-        # Too wide for portrait Letter — grow height to the Letter aspect.
+        # Too wide for the target Letter orientation — grow height.
         target_h = board_w / aspect
         extra = target_h - board_h
         n_gaps = max(len(ys) - 1, 0)
-        # 3+ rows (page 1): breathe between rows. 2 rows (page 2): keep the
-        # pair tight and pad top/bottom so we don't open a huge void.
-        if n_gaps >= 2:
+        # Full rectangular grids (e.g. 3×2 page 1): breathe between rows.
+        # Orphan pyramids (page 2): keep the pair tight and pad top/bottom.
+        by_y: dict[float, int] = {}
+        for m in _LAYER_RE.finditer(svg):
+            by_y[float(m.group(2))] = by_y.get(float(m.group(2)), 0) + 1
+        row_counts = [by_y[y] for y in ys]
+        full_grid = bool(row_counts) and len(set(row_counts)) == 1 and row_counts[0] >= 2
+        if n_gaps and full_grid:
             gap_extra = extra * 0.72
             pad_extra = extra - gap_extra
             per_gap = gap_extra / n_gaps

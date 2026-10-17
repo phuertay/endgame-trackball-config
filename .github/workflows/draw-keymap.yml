@@ -59,20 +59,22 @@ jobs:
             python3 keymap-drawer/postprocess_svg.py $letter_flag "$out"
           }
 
-          # Page 1: portrait 2×3 padded to Letter aspect.
-          # Page 2: landscape pyramid (scroll|snipe, centered alt+tab).
+          # Both pages landscape Letter. Page 1 is 3×2; page 2 is the
+          # scroll|snipe + centered alt+tab pyramid.
+          sed 's/^\(  n_columns:\) 2$/\1 3/' keymap_drawer.config.yaml \
+            > /tmp/keymap_drawer.page1.yaml
+
           draw keymap-drawer/keymap.svg \
-            keymap_drawer.config.yaml --letter \
+            /tmp/keymap_drawer.page1.yaml --letter-landscape \
             default edit media excel system "scroll lock"
           draw keymap-drawer/keymap-page2.svg \
             keymap_drawer.config.yaml --letter-landscape \
             scroll snipe "alt+tab"
 
-          # Page 1 portrait Letter, page 2 landscape Letter.
           python3 keymap-drawer/make_letter_pdf.py \
             keymap-drawer/keymap.svg \
             keymap-drawer/keymap-page2.svg \
-            --orientation portrait \
+            --orientation landscape \
             --orientation landscape \
             -o keymap-drawer/keymap.pdf
 
