@@ -10,6 +10,8 @@ on:
       - ".github/workflows/draw-keymap.yml"
       - "keymap-drawer/draw-layout.dtsi"
       - "keymap-drawer/postprocess_svg.py"
+      - "keymap-drawer/prepare_keymap_yaml.py"
+      - "keymap-drawer/make_letter_pdf.py"
       - "keymap-drawer/render_previews.py"
   workflow_dispatch:
 
@@ -30,51 +32,76 @@ jobs:
       - name: Install deps
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends librsvg2-bin fonts-dejavu-core
-          python -m pip install keymap-drawer
+          sudo apt-get install -y --no-install-recommends \
+            librsvg2-bin fonts-dejavu-core poppler-utils
+          python -m pip install keymap-drawer pyyaml pillow
 
       - name: Parse and draw keymap
         run: |
+          set -euo pipefail
           mkdir -p keymap-drawer
           keymap -c keymap_drawer.config.yaml parse \
             -z config/efogtech_trackball_0.keymap \
             > keymap-drawer/keymap.yaml
-          # Drop combo dendrons — the arcs read as strikethrough on key labels.
-          # Label by key-positions (parse alone does not give friendly names).
-          python3 - <<'PY'
-          from pathlib import Path
-          import yaml
+          # Combo labels, sentence-case titles, complexity layer order.
+          python3 keymap-drawer/prepare_keymap_yaml.py keymap-drawer/keymap.yaml
 
-          COMBO_LABELS = {
-              frozenset({0, 1}): {"t": "excel", "h": "tog"},
-              frozenset({6, 7}): {"t": "snipe", "h": "tog"},
-              frozenset({1, 3}): {"t": "alt+tab", "h": "hold"},
+          draw() {
+            local out="$1"; shift
+            local cfg="$1"; shift
+            local letter_flag="$1"; shift
+            keymap -c "$cfg" draw \
+              -d keymap-drawer/draw-layout.dtsi \
+              -l draw_layout \
+              keymap-drawer/keymap.yaml \
+              -s "$@" \
+              -o "$out"
+            python3 keymap-drawer/postprocess_svg.py $letter_flag "$out"
           }
 
-          p = Path("keymap-drawer/keymap.yaml")
-          data = yaml.safe_load(p.read_text())
-          for combo in data.get("combos") or []:
-              combo["d"] = False
-              positions = frozenset(combo.get("p") or [])
-              label = COMBO_LABELS.get(positions, {"t": "combo", "h": "tog"})
-              combo["k"] = dict(label)
-              # Parse keeps display-name case; layers dict is lowercased below.
-              if combo.get("l"):
-                  combo["l"] = [name.lower() for name in combo["l"]]
-          # Sentence-case layer titles on the diagram (not ALL CAPS).
-          data["layers"] = {name.lower(): keys for name, keys in data["layers"].items()}
-          p.write_text(yaml.dump(data, sort_keys=False, allow_unicode=True))
+          # Both pages landscape Letter. Page 1 keeps a natural 2×3 grid
+          # (no aspect-stretch gutters). Page 2 is the scroll|snipe pyramid.
+          draw keymap-drawer/keymap.svg \
+            keymap_drawer.config.yaml "" \
+            default edit media excel system "scroll lock"
+          draw keymap-drawer/keymap-page2.svg \
+            keymap_drawer.config.yaml --letter-landscape \
+            scroll snipe "alt+tab"
+
+          python3 keymap-drawer/make_letter_pdf.py \
+            keymap-drawer/keymap.svg \
+            keymap-drawer/keymap-page2.svg \
+            --orientation landscape \
+            --orientation landscape \
+            -o keymap-drawer/keymap.pdf
+
+          # README landing image: both pages stacked (SVG sanitizer is unreliable).
+          python3 - <<'PY'
+          import subprocess
+          from pathlib import Path
+          from PIL import Image
+
+          pages = []
+          for src in ("keymap-drawer/keymap.svg", "keymap-drawer/keymap-page2.svg"):
+              tmp = Path(src).with_suffix(".readme-tmp.png")
+              subprocess.check_call(
+                  ["rsvg-convert", "-f", "png", "-b", "white", "-w", "1400",
+                   src, "-o", str(tmp)]
+              )
+              pages.append(Image.open(tmp).convert("RGB"))
+              tmp.unlink()
+
+          gap = 24
+          w = max(im.width for im in pages)
+          h = sum(im.height for im in pages) + gap * (len(pages) - 1)
+          out = Image.new("RGB", (w, h), (255, 255, 255))
+          y = 0
+          for im in pages:
+              out.paste(im, ((w - im.width) // 2, y))
+              y += im.height + gap
+          out.save("keymap-drawer/keymap.png")
+          print(f"keymap.png {out.size[0]}x{out.size[1]}")
           PY
-          keymap -c keymap_drawer.config.yaml draw \
-            -d keymap-drawer/draw-layout.dtsi \
-            -l draw_layout \
-            keymap-drawer/keymap.yaml \
-            > keymap-drawer/keymap.svg
-          python3 keymap-drawer/postprocess_svg.py keymap-drawer/keymap.svg
-          # librsvg — CairoSVG mis-renders fonts as huge glyphs
-          rsvg-convert -f pdf -b white -o keymap-drawer/keymap.pdf keymap-drawer/keymap.svg
-          # PNG for GitHub README landing page (SVG sanitizer is unreliable)
-          rsvg-convert -f png -b white -w 1400 -o keymap-drawer/keymap.png keymap-drawer/keymap.svg
 
       - name: Upload diagram artifacts
         uses: actions/upload-artifact@v4
@@ -82,6 +109,7 @@ jobs:
           name: keymap-diagram
           path: |
             keymap-drawer/keymap.svg
+            keymap-drawer/keymap-page2.svg
             keymap-drawer/keymap.pdf
             keymap-drawer/keymap.png
 
@@ -89,4 +117,9 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-update keymap diagram"
-          file_pattern: "keymap-drawer/keymap.svg keymap-drawer/keymap.yaml keymap-drawer/keymap.pdf keymap-drawer/keymap.png"
+          file_pattern: >-
+            keymap-drawer/keymap.svg
+            keymap-drawer/keymap-page2.svg
+            keymap-drawer/keymap.yaml
+            keymap-drawer/keymap.pdf
+            keymap-drawer/keymap.png
