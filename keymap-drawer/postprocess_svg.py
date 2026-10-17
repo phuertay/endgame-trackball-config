@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import re
 import sys
 from pathlib import Path
@@ -10,6 +11,15 @@ from pathlib import Path
 # Extra vertical space between layer rows so H-dividers clear encoders.
 # keymap-drawer packs rows flush (key bottoms ≈ next layer top).
 _ROW_GAP = 40.0
+
+# US Letter usable aspect (width/height) after make_letter_pdf margins.
+_LETTER_MARGIN_IN = 0.35
+_LETTER_PORTRAIT_ASPECT = (8.5 - 2 * _LETTER_MARGIN_IN) / (
+    11.0 - 2 * _LETTER_MARGIN_IN
+)
+_LETTER_LANDSCAPE_ASPECT = (11.0 - 2 * _LETTER_MARGIN_IN) / (
+    8.5 - 2 * _LETTER_MARGIN_IN
+)
 
 _LAYER_RE = re.compile(
     r'<g transform="translate\(([\d.]+),\s*([\d.]+)\)" class="layer-([^"]+)">'
@@ -134,6 +144,133 @@ def _expand_row_gaps(svg: str) -> tuple[str, float]:
     return svg, added
 
 
+def _svg_size(svg: str) -> tuple[float, float]:
+    m = re.search(r'<svg[^>]*\bwidth="([\d.]+)"[^>]*\bheight="([\d.]+)"', svg)
+    if not m:
+        raise ValueError("svg missing width/height")
+    return float(m.group(1)), float(m.group(2))
+
+
+def _grow_svg_size(svg: str, new_w: float | None = None, new_h: float | None = None) -> str:
+    def grow(m: re.Match[str]) -> str:
+        tag = m.group(0)
+        if new_w is not None:
+            tag = re.sub(
+                r'\bwidth="([\d.]+)"',
+                f'width="{new_w:g}"',
+                tag,
+                count=1,
+            )
+        if new_h is not None:
+            tag = re.sub(
+                r'\bheight="([\d.]+)"',
+                f'height="{new_h:g}"',
+                tag,
+                count=1,
+            )
+
+        def vb(mm: re.Match[str]) -> str:
+            x, y, w, h = mm.groups()
+            w2 = f"{new_w:g}" if new_w is not None else w
+            h2 = f"{new_h:g}" if new_h is not None else h
+            return f'viewBox="{x} {y} {w2} {h2}"'
+
+        tag = re.sub(
+            r'\bviewBox="([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)"',
+            vb,
+            tag,
+            count=1,
+        )
+        return tag
+
+    return re.sub(r"<svg\b[^>]*>", grow, svg, count=1)
+
+
+def _center_orphan_row(svg: str) -> str:
+    """Center a final single-layer row under a two-column row above it."""
+    board_w, _board_h = _svg_size(svg)
+    matches = list(_LAYER_RE.finditer(svg))
+    if len(matches) < 3:
+        return svg
+
+    by_y: dict[float, list[re.Match[str]]] = {}
+    for m in matches:
+        by_y.setdefault(float(m.group(2)), []).append(m)
+    ys = sorted(by_y)
+    if len(ys) < 2 or len(by_y[ys[-1]]) != 1:
+        return svg
+    if len(by_y[ys[-2]]) < 2:
+        return svg
+
+    xs = sorted({float(m.group(1)) for m in by_y[ys[-2]]})
+    pitch = xs[1] - xs[0]
+    new_x = (board_w - pitch) / 2
+    orphan = by_y[ys[-1]][0]
+    old = orphan.group(0)
+    repl = (
+        f'<g transform="translate({new_x:g}, {orphan.group(2)})" '
+        f'class="layer-{orphan.group(3)}">'
+    )
+    return svg.replace(old, repl, 1)
+
+
+def _fit_letter_aspect(
+    svg: str, aspect: float = _LETTER_PORTRAIT_ASPECT
+) -> str:
+    """Pad row gaps / sides so the canvas matches US Letter usable aspect."""
+    svg = _center_orphan_row(svg)
+    board_w, board_h = _svg_size(svg)
+    if board_w <= 0 or board_h <= 0:
+        return svg
+
+    current = board_w / board_h
+    ys = sorted({float(m.group(2)) for m in _LAYER_RE.finditer(svg)})
+    y_to_row = {y: i for i, y in enumerate(ys)}
+
+    if current > aspect + 0.005:
+        # Too wide for portrait Letter — grow height to the Letter aspect.
+        target_h = board_w / aspect
+        extra = target_h - board_h
+        n_gaps = max(len(ys) - 1, 0)
+        # 3+ rows (page 1): breathe between rows. 2 rows (page 2): keep the
+        # pair tight and pad top/bottom so we don't open a huge void.
+        if n_gaps >= 2:
+            gap_extra = extra * 0.72
+            pad_extra = extra - gap_extra
+            per_gap = gap_extra / n_gaps
+        else:
+            per_gap = 0.0
+            pad_extra = extra
+        top_pad = pad_extra / 2
+
+        def shift_layer(m: re.Match[str]) -> str:
+            x, y, name = m.group(1), float(m.group(2)), m.group(3)
+            new_y = y + top_pad + per_gap * y_to_row[y]
+            return f'<g transform="translate({x}, {new_y:g})" class="layer-{name}">'
+
+        svg = _LAYER_RE.sub(shift_layer, svg)
+        svg = _grow_svg_size(svg, new_h=target_h)
+
+        def shift_footer(m: re.Match[str]) -> str:
+            x, y = m.group(1), float(m.group(2))
+            # Keep footer near the content block, not the page bottom.
+            content_shift = top_pad + per_gap * max(len(ys) - 1, 0)
+            return f'<text x="{x}" y="{y + content_shift:g}" class="footer">'
+
+        svg = re.sub(
+            r'<text x="([^"]+)" y="([\d.]+)" class="footer">',
+            shift_footer,
+            svg,
+            count=1,
+        )
+        return svg
+
+    # Too-narrow canvases (e.g. a 1-column page) are left alone so
+    # make_letter_pdf can scale them up to Letter height — padding here
+    # would only shrink the boards on the printed page.
+    return svg
+
+
 def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
     """H/V lines in gutters between layer cards — never through keycaps."""
     margin = 24.0
@@ -141,17 +278,18 @@ def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
     if not layers:
         return []
 
-    xs = sorted({lx for _n, lx, _ly, _c in layers})
     ys = sorted({ly for _n, _lx, ly, _c in layers})
 
-    content_right: dict[float, float] = {x: x for x in xs}
+    content_right: dict[float, float] = {}
     content_bottom: dict[float, float] = {y: y for y in ys}
-    for _name, lx, ly, chunk in layers:
+    rows: dict[float, list[tuple[str, float, str]]] = {y: [] for y in ys}
+    for name, lx, ly, chunk in layers:
+        rows[ly].append((name, lx, chunk))
         keys = _key_bounds(chunk)
         if not keys:
             continue
         content_right[lx] = max(
-            content_right[lx], lx + max(k["right"] for k in keys)
+            content_right.get(lx, lx), lx + max(k["right"] for k in keys)
         )
         content_bottom[ly] = max(
             content_bottom[ly], ly + max(k["bottom"] for k in keys)
@@ -173,13 +311,24 @@ def _divider_lines(svg: str, board_w: float, board_h: float) -> list[str]:
                 f'x2="{board_w - margin}" y2="{y}"/>'
             )
 
-    # Vertical: midpoint of gutter between left-column content and right column.
-    if len(xs) >= 2:
-        x = round((content_right[xs[0]] + xs[1]) / 2, 1)
-        lines.append(
-            f'<line class="layer-divider-v" x1="{x}" y1="{margin}" '
-            f'x2="{x}" y2="{board_h - margin}"/>'
-        )
+    # Vertical: only through rows that actually have two columns.
+    # Ignore centered orphan x positions so the gutter stays between col 0/1.
+    two_col_ys = [y for y in ys if len({lx for _n, lx, _c in rows[y]}) >= 2]
+    if two_col_ys:
+        col_xs = sorted({lx for y in two_col_ys for _n, lx, _c in rows[y]})
+        if len(col_xs) >= 2:
+            x = round(
+                (content_right.get(col_xs[0], col_xs[0]) + col_xs[1]) / 2, 1
+            )
+            y0 = min(two_col_ys)
+            y1 = max(two_col_ys)
+            top = max(margin, y0)
+            bottom = min(board_h - margin, content_bottom[y1])
+            if bottom > top:
+                lines.append(
+                    f'<line class="layer-divider-v" x1="{x}" y1="{top}" '
+                    f'x2="{x}" y2="{bottom}"/>'
+                )
 
     lines.append("</g>")
     return lines
@@ -217,7 +366,13 @@ def _nudge_bt_close(svg: str, x: float = _BT_CLOSE_X) -> str:
     return _BT_CLOSE_RE.sub(rf'\1x="{x:g}"', svg)
 
 
-def postprocess(svg: str) -> str:
+def postprocess(
+    svg: str,
+    *,
+    letter: bool = False,
+    letter_landscape: bool = False,
+    center_orphan: bool = False,
+) -> str:
     # Strip leftover frames/dividers so re-runs stay idempotent.
     svg = re.sub(r'\n?<rect class="layer-frame"[^/]*/>', "", svg)
     svg = re.sub(
@@ -226,6 +381,7 @@ def postprocess(svg: str) -> str:
         svg,
         flags=re.DOTALL,
     )
+    svg = re.sub(r'\n?<rect id="page-bg"[^/]*/>', "", svg)
     svg = _fix_glyphs(svg)
     svg = _scale_prtsc_uses(svg)
     svg = _nudge_bt_close(svg)
@@ -236,19 +392,21 @@ def postprocess(svg: str) -> str:
     # raw draw output. Callers regenerate SVG before postprocess.
 
     svg, _added = _expand_row_gaps(svg)
+    if letter_landscape:
+        svg = _fit_letter_aspect(svg, aspect=_LETTER_LANDSCAPE_ASPECT)
+    elif letter:
+        svg = _fit_letter_aspect(svg, aspect=_LETTER_PORTRAIT_ASPECT)
+    elif center_orphan:
+        svg = _center_orphan_row(svg)
 
-    if 'id="page-bg"' not in svg:
-        svg = re.sub(
-            r"(<svg\b[^>]*>)",
-            r'\1\n<rect id="page-bg" width="100%" height="100%" fill="#ffffff"/>',
-            svg,
-            count=1,
-        )
+    svg = re.sub(
+        r"(<svg\b[^>]*>)",
+        r'\1\n<rect id="page-bg" width="100%" height="100%" fill="#ffffff"/>',
+        svg,
+        count=1,
+    )
 
-    size = re.search(r'<svg[^>]*width="([\d.]+)"[^>]*height="([\d.]+)"', svg)
-    board_w = float(size.group(1)) if size else 1000.0
-    board_h = float(size.group(2)) if size else 1000.0
-
+    board_w, board_h = _svg_size(svg)
     dividers = _divider_lines(svg, board_w, board_h)
     if not dividers:
         return svg
@@ -262,8 +420,34 @@ def postprocess(svg: str) -> str:
 
 
 def main() -> None:
-    path = Path(sys.argv[1] if len(sys.argv) > 1 else "keymap-drawer/keymap.svg")
-    path.write_text(postprocess(path.read_text(encoding="utf-8")), encoding="utf-8")
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("svg", nargs="?", default="keymap-drawer/keymap.svg")
+    ap.add_argument(
+        "--letter",
+        action="store_true",
+        help="pad canvas to portrait US Letter usable aspect",
+    )
+    ap.add_argument(
+        "--letter-landscape",
+        action="store_true",
+        help="pad canvas to landscape US Letter usable aspect",
+    )
+    ap.add_argument(
+        "--center-orphan",
+        action="store_true",
+        help="center a final single-layer row under a two-column row",
+    )
+    args = ap.parse_args()
+    path = Path(args.svg)
+    path.write_text(
+        postprocess(
+            path.read_text(encoding="utf-8"),
+            letter=args.letter,
+            letter_landscape=args.letter_landscape,
+            center_orphan=args.center_orphan,
+        ),
+        encoding="utf-8",
+    )
 
 
 if __name__ == "__main__":

@@ -10,9 +10,10 @@ import sys
 import tempfile
 from pathlib import Path
 
-LETTER_W_IN = 8.5
-LETTER_H_IN = 11.0
-MARGIN_IN = 0.4
+# Keep margin in sync with postprocess_svg._LETTER_MARGIN_IN
+MARGIN_IN = 0.35
+PORTRAIT = (8.5, 11.0)
+LANDSCAPE = (11.0, 8.5)
 
 
 def _svg_size(svg: Path) -> tuple[float, float]:
@@ -23,23 +24,44 @@ def _svg_size(svg: Path) -> tuple[float, float]:
     return float(m.group(1)), float(m.group(2))
 
 
-def _fit_letter(w_px: float, h_px: float) -> tuple[float, float, float, float]:
+def _pick_orientation(w_px: float, h_px: float) -> tuple[float, float]:
+    """Prefer the Letter orientation that wastes less margin."""
+    content = w_px / h_px
+    portrait_aspect = PORTRAIT[0] / PORTRAIT[1]
+    landscape_aspect = LANDSCAPE[0] / LANDSCAPE[1]
+    # Closer aspect ratio → less letterboxing.
+    if abs(content - landscape_aspect) < abs(content - portrait_aspect):
+        return LANDSCAPE
+    return PORTRAIT
+
+
+def _fit_page(
+    w_px: float, h_px: float, page_w: float, page_h: float
+) -> tuple[float, float, float, float]:
     """Return image width/height and left/top offsets in inches."""
-    usable_w = LETTER_W_IN - 2 * MARGIN_IN
-    usable_h = LETTER_H_IN - 2 * MARGIN_IN
+    usable_w = page_w - 2 * MARGIN_IN
+    usable_h = page_h - 2 * MARGIN_IN
     img_w = usable_w
     img_h = usable_w * (h_px / w_px)
     if img_h > usable_h:
         img_h = usable_h
         img_w = usable_h * (w_px / h_px)
-    left = (LETTER_W_IN - img_w) / 2
-    top = (LETTER_H_IN - img_h) / 2
+    left = (page_w - img_w) / 2
+    top = (page_h - img_h) / 2
     return img_w, img_h, left, top
 
 
-def svg_to_letter_pdf(svg: Path, pdf: Path) -> None:
+def svg_to_letter_pdf(
+    svg: Path, pdf: Path, orientation: str = "auto"
+) -> tuple[float, float]:
     w_px, h_px = _svg_size(svg)
-    img_w, img_h, left, top = _fit_letter(w_px, h_px)
+    if orientation == "landscape":
+        page_w, page_h = LANDSCAPE
+    elif orientation == "portrait":
+        page_w, page_h = PORTRAIT
+    else:
+        page_w, page_h = _pick_orientation(w_px, h_px)
+    img_w, img_h, left, top = _fit_page(w_px, h_px, page_w, page_h)
     subprocess.check_call(
         [
             "rsvg-convert",
@@ -48,9 +70,9 @@ def svg_to_letter_pdf(svg: Path, pdf: Path) -> None:
             "-b",
             "white",
             "--page-width",
-            f"{LETTER_W_IN}in",
+            f"{page_w}in",
             "--page-height",
-            f"{LETTER_H_IN}in",
+            f"{page_h}in",
             "-w",
             f"{img_w}in",
             "--left",
@@ -62,6 +84,7 @@ def svg_to_letter_pdf(svg: Path, pdf: Path) -> None:
             str(pdf),
         ]
     )
+    return page_w, page_h
 
 
 def merge_pdfs(pages: list[Path], out: Path) -> None:
@@ -75,14 +98,24 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("svgs", nargs="+", type=Path, help="SVG page(s) in order")
     ap.add_argument("-o", "--output", type=Path, required=True)
+    ap.add_argument(
+        "--orientation",
+        action="append",
+        choices=("auto", "portrait", "landscape"),
+        help="per-page orientation (repeat for each SVG; default auto)",
+    )
     args = ap.parse_args()
+    orients = args.orientation or []
+    while len(orients) < len(args.svgs):
+        orients.append("auto")
 
     with tempfile.TemporaryDirectory() as tmp:
         tmp_path = Path(tmp)
         page_pdfs: list[Path] = []
-        for i, svg in enumerate(args.svgs, start=1):
+        for i, (svg, orient) in enumerate(zip(args.svgs, orients), start=1):
             pdf = tmp_path / f"page{i}.pdf"
-            svg_to_letter_pdf(svg, pdf)
+            page_w, page_h = svg_to_letter_pdf(svg, pdf, orient)
+            print(f"  {svg.name}: {page_w:g}×{page_h:g}in ({orient})")
             page_pdfs.append(pdf)
         merge_pdfs(page_pdfs, args.output)
     print(f"wrote {args.output} ({len(args.svgs)} letter page(s))")

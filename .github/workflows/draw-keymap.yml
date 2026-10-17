@@ -48,25 +48,32 @@ jobs:
 
           draw() {
             local out="$1"; shift
-            keymap -c keymap_drawer.config.yaml draw \
+            local cfg="$1"; shift
+            local letter_flag="$1"; shift
+            keymap -c "$cfg" draw \
               -d keymap-drawer/draw-layout.dtsi \
               -l draw_layout \
               keymap-drawer/keymap.yaml \
               -s "$@" \
               -o "$out"
-            python3 keymap-drawer/postprocess_svg.py "$out"
+            python3 keymap-drawer/postprocess_svg.py $letter_flag "$out"
           }
 
-          # Page 1: everyday layers. Page 2: scroll / snipe / alt+tab.
+          # Page 1: portrait 2×3 padded to Letter aspect.
+          # Page 2: landscape pyramid (scroll|snipe, centered alt+tab).
           draw keymap-drawer/keymap.svg \
+            keymap_drawer.config.yaml --letter \
             default edit media excel system "scroll lock"
           draw keymap-drawer/keymap-page2.svg \
+            keymap_drawer.config.yaml --letter-landscape \
             scroll snipe "alt+tab"
 
-          # Two-page US Letter PDF (centered, with margins).
+          # Page 1 portrait Letter, page 2 landscape Letter.
           python3 keymap-drawer/make_letter_pdf.py \
             keymap-drawer/keymap.svg \
             keymap-drawer/keymap-page2.svg \
+            --orientation portrait \
+            --orientation landscape \
             -o keymap-drawer/keymap.pdf
 
           # README landing image: both pages stacked (SVG sanitizer is unreliable).
